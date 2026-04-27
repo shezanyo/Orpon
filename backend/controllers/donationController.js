@@ -2,6 +2,11 @@ const pool = require("../config/db");
 const { v4: uuidv4 } = require("uuid");
 const { generateHash } = require("../services/hashService");
 
+/*
+-----------------------------------
+CREATE DONATION
+-----------------------------------
+*/
 const createDonation = async (req, res) => {
     try {
         const {
@@ -10,14 +15,12 @@ const createDonation = async (req, res) => {
             privacy_type
         } = req.body;
 
-        // Validation
         if (!amount || !privacy_type) {
             return res.status(400).json({
                 message: "Amount and privacy type required"
             });
         }
 
-        // Determine display name
         let display_name = donor_name || "Anonymous";
 
         if (privacy_type === "anonymous") {
@@ -28,7 +31,6 @@ const createDonation = async (req, res) => {
             display_name = "Donor-" + Math.floor(Math.random() * 9999);
         }
 
-        // Get latest transaction
         const [lastDonation] = await pool.query(`
             SELECT current_hash
             FROM donations
@@ -42,11 +44,9 @@ const createDonation = async (req, res) => {
             previous_hash = lastDonation[0].current_hash;
         }
 
-        // Generate ID + timestamp
         const id = uuidv4();
         const timestamp = new Date();
 
-        // Generate current hash
         const current_hash = generateHash(
             amount,
             display_name,
@@ -54,7 +54,6 @@ const createDonation = async (req, res) => {
             previous_hash
         );
 
-        // Insert into DB
         await pool.query(`
             INSERT INTO donations (
                 id,
@@ -94,6 +93,42 @@ const createDonation = async (req, res) => {
     }
 };
 
+/*
+-----------------------------------
+GET ALL TRANSACTIONS
+-----------------------------------
+*/
+const getAllTransactions = async (req, res) => {
+    try {
+        const [transactions] = await pool.query(`
+            SELECT
+                id,
+                display_name,
+                privacy_type,
+                amount,
+                created_at,
+                previous_hash,
+                current_hash
+            FROM donations
+            ORDER BY created_at DESC
+        `);
+
+        return res.status(200).json({
+            success: true,
+            total: transactions.length,
+            transactions
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        return res.status(500).json({
+            message: "Server Error"
+        });
+    }
+};
+
 module.exports = {
-    createDonation
+    createDonation,
+    getAllTransactions
 };
