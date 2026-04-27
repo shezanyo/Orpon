@@ -58,3 +58,40 @@ body {
     font-weight: bold;
     color: green;
 }
+.ledger-container {
+    width: 95%;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.ledger-container h1 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.ledger-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.ledger-table th,
+.ledger-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.ledger-table th {
+    background: #2563eb;
+    color: white;
+}
+
+.ledger-table td {
+    word-break: break-word;
+    max-width: 250px;
+}
