@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const DonatePage = () => {
+    const { campaignId } = useParams();
+
     const [formData, setFormData] = useState({
         donor_name: "",
         amount: "",
@@ -9,6 +12,7 @@ const DonatePage = () => {
     });
 
     const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         setFormData({
@@ -20,15 +24,33 @@ const DonatePage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // ✅ VALIDATION
+        if (!campaignId) {
+            setMessage("❌ Invalid campaign link");
+            return;
+        }
+
+        if (!formData.amount || formData.amount <= 0) {
+            setMessage("❌ Enter a valid amount");
+            return;
+        }
+
+        setLoading(true);
+        setMessage("");
+
         try {
-            const response = await axios.post(
+            const res = await axios.post(
                 "http://localhost:5000/api/donate",
-                formData
+                {
+                    ...formData,
+                    amount: Number(formData.amount),
+                    campaign_id: campaignId
+                }
             );
 
-            setMessage("Donation Successful!");
-            console.log(response.data);
+            setMessage("✅ Donation Successful!");
 
+            // reset
             setFormData({
                 donor_name: "",
                 amount: "",
@@ -36,21 +58,30 @@ const DonatePage = () => {
             });
 
         } catch (error) {
-            console.error(error);
-            setMessage("Donation Failed");
+            setMessage(
+                error.response?.data?.message ||
+                "❌ Donation Failed"
+            );
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
         <div className="donation-container">
-            <h1>Donation Form</h1>
+            <h1>Donate to Campaign</h1>
+
+            {/* Optional debug / info */}
+            <p style={{ fontSize: "12px", color: "gray" }}>
+                Campaign ID: {campaignId}
+            </p>
 
             <form onSubmit={handleSubmit} className="donation-form">
 
                 <input
                     type="text"
                     name="donor_name"
-                    placeholder="Enter Your Name"
+                    placeholder="Your Name (optional)"
                     value={formData.donor_name}
                     onChange={handleChange}
                 />
@@ -58,9 +89,10 @@ const DonatePage = () => {
                 <input
                     type="number"
                     name="amount"
-                    placeholder="Enter Donation Amount"
+                    placeholder="Donation Amount"
                     value={formData.amount}
                     onChange={handleChange}
+                    min="1"
                     required
                 />
 
@@ -69,26 +101,28 @@ const DonatePage = () => {
                     value={formData.privacy_type}
                     onChange={handleChange}
                 >
-                    <option value="public">
-                        Public Name
-                    </option>
-
-                    <option value="anonymous">
-                        Anonymous
-                    </option>
-
-                    <option value="pseudonym">
-                        Pseudonym
-                    </option>
+                    <option value="public">Public Name</option>
+                    <option value="anonymous">Anonymous</option>
+                    <option value="pseudonym">Pseudonym</option>
                 </select>
 
-                <button type="submit">
-                    Donate Now
+                <button
+                    type="submit"
+                    disabled={loading}
+                >
+                    {loading ? "Processing..." : "Donate Now"}
                 </button>
             </form>
 
             {message && (
-                <p className="message">
+                <p
+                    className="message"
+                    style={{
+                        color: message.includes("❌")
+                            ? "red"
+                            : "green"
+                    }}
+                >
                     {message}
                 </p>
             )}
