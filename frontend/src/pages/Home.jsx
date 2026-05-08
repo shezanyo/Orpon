@@ -1,167 +1,122 @@
-import {
-  ArrowRight,
-  Blocks,
-  FileCheck2,
-  HandHeart,
-  Hash,
-  PencilLine,
-  Share2,
-} from "lucide-react";
-import { Link } from "react-router-dom";
-import { Button } from "../components/ui/button";
-import { Card } from "../components/ui/card";
-import { campaigns } from "../data/mockData";
+import { useState, useEffect } from "react";
+import CampaignCard from "../components/CampaignCard";
+import { fmt } from "../utils/format";
 
-const money = (value) => `\u09f3${value.toLocaleString("en-BD")}`;
-const statCards = ["\u09f32.5 Crore Raised", "12,400 Donors", "340 Campaigns"];
+export default function Home({ nav, campaigns, openCampaign, setShowLogin, isLoggedIn }) {
+  const [count1, setCount1] = useState(0);
+  const [count2, setCount2] = useState(0);
+  const [count3, setCount3] = useState(0);
 
-export default function Home() {
+  useEffect(() => {
+    const animate = (setter, target, duration) => {
+      const step = target / (duration / 16);
+      let current = 0;
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        setter(Math.round(current));
+        if (current >= target) clearInterval(timer);
+      }, 16);
+    };
+    setTimeout(() => {
+      animate(setCount1, 12400000, 2000);
+      animate(setCount2, 4280, 2200);
+      animate(setCount3, 186, 1800);
+    }, 400);
+  }, []);
+
   return (
-    <div className="space-y-12 pb-3">
-      <section className="relative overflow-hidden rounded-3xl border border-primary/10 bg-gradient-to-br from-white via-green-50 to-green-100 p-6 shadow-soft sm:p-10">
-        <div className="max-w-2xl">
-          <h1 className="text-3xl font-extrabold leading-tight text-slate-900 sm:text-5xl">
-            আপনার সাহায্য পরিবর্তন আনে
-          </h1>
-          <p className="mt-4 text-sm text-slate-600 sm:text-base">
-            Transparent, verifiable donations for causes that matter in Bangladesh
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link to="/dashboard">
-              <Button size="lg">Start a Campaign</Button>
-            </Link>
-            <Link to="/explore">
-              <Button size="lg" variant="outline">
-                Explore Campaigns
-              </Button>
-            </Link>
-          </div>
+    <div>
+      {/* HERO */}
+      <section style={{ padding: "80px 5% 100px", maxWidth: 1200, margin: "0 auto", textAlign: "center", animation: "fadeUp 0.7s ease both" }}>
+        <div style={{ display: "inline-block", background: "#1B433211", color: "#1B4332", padding: "6px 18px", borderRadius: 99, fontSize: 13, fontWeight: 600, marginBottom: 24, letterSpacing: "0.05em" }}>
+          🇧🇩 Bangladesh's Transparent Donation Platform
+        </div>
+        <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 700, lineHeight: 1.1, color: "#1A1A2E", marginBottom: 24, letterSpacing: "-0.02em" }}>
+          Give with <em style={{ color: "#1B4332", fontStyle: "italic" }}>trust.</em>
+          <br />
+          Change lives with <em style={{ color: "#D4A017", fontStyle: "italic" }}>proof.</em>
+        </h1>
+        <p style={{ fontSize: 18, color: "#555", maxWidth: 560, margin: "0 auto 40px", lineHeight: 1.7, fontWeight: 300 }}>
+          Every taka tracked. Every story verified. Orpon makes charitable giving transparent, simple, and impactful — for every Bangladeshi.
+        </p>
+        <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+          <button onClick={() => nav("campaigns")} style={{ background: "#1B4332", color: "#fff", border: "none", padding: "16px 36px", borderRadius: 14, fontSize: 16, fontWeight: 600, cursor: "pointer" }}>
+            Browse Campaigns →
+          </button>
+          <button onClick={() => isLoggedIn ? nav("create") : setShowLogin(true)} style={{ background: "transparent", color: "#1B4332", border: "2px solid #1B433233", padding: "16px 36px", borderRadius: 14, fontSize: 16, fontWeight: 600, cursor: "pointer" }}>
+            Start a Campaign
+          </button>
         </div>
 
-        <div className="mt-7 grid gap-3 sm:grid-cols-3">
-          {statCards.map((stat) => (
-            <Card key={stat} className="rounded-xl border-0 bg-white/90 p-4">
-              <p className="text-sm font-semibold text-primary">{stat}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section id="how-it-works">
-        <h2 className="text-2xl font-bold text-slate-900">How It Works</h2>
-        <div className="mt-5 grid gap-4 md:grid-cols-3">
+        {/* Stats */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 2, maxWidth: 640, margin: "64px auto 0", background: "#1B4332", borderRadius: 20, overflow: "hidden" }}>
           {[
-            {
-              title: "Create a Campaign",
-              icon: PencilLine,
-              text: "Start your fundraiser with a clear goal and story.",
-            },
-            {
-              title: "Share your unique link or QR code",
-              icon: Share2,
-              text: "Spread your campaign across social channels instantly.",
-            },
-            {
-              title: "Receive transparent donations",
-              icon: HandHeart,
-              text: "Track every contribution with verifiable transparency.",
-            },
-          ].map((step, index) => (
-            <Card key={step.title} className="rounded-2xl">
-              <step.icon className="text-primary" size={22} />
-              <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-accent">
-                Step {index + 1}
-              </p>
-              <h3 className="mt-1 font-semibold text-slate-900">{step.title}</h3>
-              <p className="mt-2 text-sm text-slate-600">{step.text}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section>
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-slate-900">Featured Campaigns</h2>
-          <Link to="/explore" className="inline-flex items-center text-sm font-medium text-primary">
-            See all <ArrowRight size={16} className="ml-1" />
-          </Link>
-        </div>
-        <div className="grid gap-4 md:grid-cols-3">
-          {campaigns.slice(0, 3).map((campaign) => {
-            const funded = Math.round((campaign.raisedAmount / campaign.targetAmount) * 100);
-            return (
-              <Card key={campaign.id} className="overflow-hidden rounded-2xl p-0">
-                <div className="flex h-36 items-center justify-center bg-gradient-to-br from-green-100 to-emerald-200 text-sm font-semibold text-primary">
-                  {campaign.imageLabel}
-                </div>
-                <div className="p-5">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
-                      {campaign.category}
-                    </span>
-                    <span className="text-xs text-slate-500">{campaign.location}</span>
-                  </div>
-                  <h3 className="mt-3 font-semibold text-slate-900">{campaign.title}</h3>
-                  <div className="mt-3 h-2 rounded-full bg-slate-200">
-                    <div className="h-2 rounded-full bg-primary" style={{ width: `${funded}%` }} />
-                  </div>
-                  <p className="mt-2 text-xs text-slate-600">
-                    {funded}% funded • {money(campaign.raisedAmount)} raised of{" "}
-                    {money(campaign.targetAmount)} goal
-                  </p>
-                  <div className="mt-3 flex items-center justify-between">
-                    <span className="text-xs text-slate-500">{campaign.daysLeft} days left</span>
-                    <Link to={`/donate/${campaign.id}`}>
-                      <Button size="default">Donate Now</Button>
-                    </Link>
-                  </div>
-                </div>
-              </Card>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
-        <h2 className="text-2xl font-bold text-slate-900">Why trust Orpon?</h2>
-        <div className="mt-5 grid gap-4 md:grid-cols-3">
-          {[
-            {
-              title: "Hash-chain verified records",
-              desc: "Each transaction is cryptographically connected for integrity.",
-              icon: Hash,
-            },
-            {
-              title: "Blockchain anchored",
-              desc: "Donation snapshots are anchored for tamper-resistant proof.",
-              icon: Blocks,
-            },
-            {
-              title: "Public audit trail",
-              desc: "Everyone can verify donation flow and campaign transparency.",
-              icon: FileCheck2,
-            },
-          ].map((item) => (
-            <div key={item.title} className="rounded-xl bg-slate-50 p-4">
-              <item.icon className="text-primary" size={20} />
-              <h3 className="mt-3 font-semibold text-slate-900">{item.title}</h3>
-              <p className="mt-1 text-sm text-slate-600">{item.desc}</p>
+            { val: "৳" + (count1 / 1000000).toFixed(1) + "Cr+", label: "Raised" },
+            { val: count2.toLocaleString() + "+", label: "Donors" },
+            { val: count3 + "+", label: "Campaigns" },
+          ].map((s, i) => (
+            <div key={i} style={{ padding: "28px 20px", textAlign: "center", background: i === 1 ? "#D4A017" : "#1B4332" }}>
+              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 700, color: "#fff", lineHeight: 1 }}>{s.val}</div>
+              <div style={{ color: i === 1 ? "#fff9" : "#95D5B2", fontSize: 13, marginTop: 6 }}>{s.label}</div>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="rounded-2xl bg-primary p-6 text-white shadow-soft sm:p-8">
-        <h2 className="text-2xl font-bold">Ready to make a difference?</h2>
-        <p className="mt-2 text-sm text-white/90">
-          Launch your fundraiser and share hope with complete transparency.
-        </p>
-        <div className="mt-4">
-          <Link to="/dashboard">
-            <Button variant="secondary" size="lg">
-              Start Campaign
-            </Button>
-            </Link>
+      {/* FEATURED CAMPAIGNS */}
+      <section style={{ padding: "0 5% 80px", maxWidth: 1200, margin: "0 auto" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 32 }}>
+          <div>
+            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 38, fontWeight: 700, color: "#1A1A2E", letterSpacing: "-0.02em" }}>
+              Urgent campaigns
+            </h2>
+            <p style={{ color: "#888", fontSize: 14, marginTop: 4 }}>Verified, transparent, and time-sensitive</p>
+          </div>
+          <button onClick={() => nav("campaigns")} style={{ background: "none", border: "1px solid #EDE9E0", padding: "10px 20px", borderRadius: 10, fontSize: 14, color: "#555", cursor: "pointer" }}>
+            See all →
+          </button>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 24 }}>
+          {campaigns.slice(0, 3).map(c => <CampaignCard key={c.id} c={c} openCampaign={openCampaign} />)}
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section style={{ background: "#1B4332", padding: "80px 5%", textAlign: "center" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 42, fontWeight: 700, color: "#fff", marginBottom: 12 }}>How Orpon works</h2>
+          <p style={{ color: "#95D5B2", marginBottom: 56, fontSize: 15 }}>Simple for donors. Powerful for organizers.</p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 32 }}>
+            {[
+              { step: "01", icon: "✍️", title: "Create a campaign", desc: "Sign up and post your campaign in minutes. Add your story, goal, and bank details." },
+              { step: "02", icon: "🔗", title: "Share your link", desc: "Each campaign gets a unique link and QR code. Share on WhatsApp, Facebook, anywhere." },
+              { step: "03", icon: "💳", title: "Receive donations", desc: "Anyone can donate — no account needed. bKash, Nagad, card, all supported." },
+              { step: "04", icon: "📊", title: "Full transparency", desc: "Every transaction is logged and publicly visible. Donors can verify their contribution." },
+            ].map(s => (
+              <div key={s.step} style={{ background: "#ffffff0d", border: "1px solid #ffffff1a", borderRadius: 20, padding: "32px 24px", textAlign: "left" }}>
+                <div style={{ fontSize: 36, marginBottom: 16 }}>{s.icon}</div>
+                <div style={{ color: "#D4A017", fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 10 }}>STEP {s.step}</div>
+                <h3 style={{ color: "#fff", fontSize: 18, fontWeight: 600, marginBottom: 10 }}>{s.title}</h3>
+                <p style={{ color: "#95D5B2", fontSize: 14, lineHeight: 1.6 }}>{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section style={{ padding: "80px 5%", textAlign: "center", background: "#F8F6F0" }}>
+        <div style={{ background: "linear-gradient(135deg, #D4A01711 0%, #1B433211 100%)", border: "1px solid #EDE9E0", borderRadius: 28, padding: "64px 40px", maxWidth: 700, margin: "0 auto" }}>
+          <div style={{ fontSize: 48, marginBottom: 20 }}>🤲</div>
+          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 38, fontWeight: 700, color: "#1A1A2E", marginBottom: 16 }}>
+            Start giving today
+          </h2>
+          <p style={{ color: "#666", fontSize: 16, lineHeight: 1.7, marginBottom: 32 }}>
+            No account needed to donate. Just find a cause you care about and give — it's that simple.
+          </p>
+          <button onClick={() => nav("campaigns")} style={{ background: "#1B4332", color: "#fff", border: "none", padding: "16px 40px", borderRadius: 14, fontSize: 16, fontWeight: 600, cursor: "pointer" }}>
+            Find a cause →
+          </button>
         </div>
       </section>
     </div>
