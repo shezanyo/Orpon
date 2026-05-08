@@ -1,107 +1,50 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import CampaignCard from "../components/CampaignCard";
-import { Input } from "../components/ui/input";
-import { campaigns } from "../data/mockData";
+import { CATEGORIES } from "../data/mockData";
 
-const categories = [
-  "All",
-  "Medical",
-  "Education",
-  "Disaster Relief",
-  "Animal Welfare",
-  "Community",
-  "Other",
-];
-
-export default function Explore() {
+export default function Explore({ campaigns, openCampaign }) {
+  const [filter, setFilter] = useState("All");
   const [search, setSearch] = useState("");
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [sortBy, setSortBy] = useState("Newest");
 
-  const filteredCampaigns = useMemo(() => {
-    let result = [...campaigns];
-
-    if (activeCategory !== "All") {
-      result = result.filter((campaign) => campaign.category === activeCategory);
-    }
-
-    const query = search.trim().toLowerCase();
-    if (query) {
-      result = result.filter((campaign) =>
-        [campaign.title, campaign.organizer, campaign.location, campaign.category]
-          .join(" ")
-          .toLowerCase()
-          .includes(query),
-      );
-    }
-
-    if (sortBy === "Newest") {
-      result.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-    } else if (sortBy === "Most Funded") {
-      result.sort((a, b) => b.raisedAmount / b.targetAmount - a.raisedAmount / a.targetAmount);
-    } else if (sortBy === "Ending Soon") {
-      result.sort((a, b) => a.daysLeft - b.daysLeft);
-    }
-
-    return result;
-  }, [activeCategory, search, sortBy]);
+  const filtered = campaigns.filter(c => {
+    const matchCat = filter === "All" || c.category === filter;
+    const matchSearch = c.title.toLowerCase().includes(search.toLowerCase()) || c.organizer.toLowerCase().includes(search.toLowerCase());
+    return matchCat && matchSearch;
+  });
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold text-slate-900">Explore Campaigns</h1>
-      <p className="mt-1 text-sm text-slate-600">Browse and donate without login.</p>
+    <div style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 5% 80px" }}>
+      <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 48, fontWeight: 700, color: "#1A1A2E", marginBottom: 8, animation: "fadeUp 0.5s ease both" }}>
+        All Campaigns
+      </h1>
+      <p style={{ color: "#888", marginBottom: 36, animation: "fadeUp 0.5s 0.1s ease both" }}>
+        {campaigns.length} active campaigns · Anyone can donate, no login required
+      </p>
 
-      <div className="mt-5">
-        <Input
+      <div style={{ display: "flex", gap: 12, marginBottom: 40, flexWrap: "wrap", animation: "fadeUp 0.5s 0.15s ease both" }}>
+        <input
           value={search}
-          onChange={(event) => setSearch(event.target.value)}
-          placeholder="Search campaigns by title, category, organizer or location"
+          onChange={e => setSearch(e.target.value)}
+          placeholder="Search campaigns..."
+          style={{ padding: "12px 18px", borderRadius: 12, border: "1px solid #EDE9E0", fontSize: 14, background: "#fff", outline: "none", width: 260 }}
         />
-      </div>
-
-      <div className="mt-4 flex flex-wrap items-center gap-2">
-        {categories.map((category) => (
-          <button
-            key={category}
-            type="button"
-            onClick={() => setActiveCategory(category)}
-            className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${
-              activeCategory === category
-                ? "bg-primary text-white"
-                : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-            }`}
-          >
-            {category}
+        {CATEGORIES.map(cat => (
+          <button key={cat} onClick={() => setFilter(cat)} style={{ background: filter === cat ? "#1B4332" : "#fff", color: filter === cat ? "#fff" : "#555", border: "1px solid " + (filter === cat ? "#1B4332" : "#EDE9E0"), padding: "10px 18px", borderRadius: 10, fontSize: 13, fontWeight: 500, cursor: "pointer", transition: "all 0.2s" }}>
+            {cat}
           </button>
         ))}
+      </div>
 
-        <div className="ml-auto flex items-center gap-2">
-          <label htmlFor="sortBy" className="text-sm font-medium text-slate-600">
-            Sort by
-          </label>
-          <select
-            id="sortBy"
-            value={sortBy}
-            onChange={(event) => setSortBy(event.target.value)}
-            className="h-10 rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-          >
-            <option>Newest</option>
-            <option>Most Funded</option>
-            <option>Ending Soon</option>
-          </select>
+      {filtered.length === 0 ? (
+        <div style={{ textAlign: "center", padding: "80px 0", color: "#888" }}>No campaigns found. Try a different search.</div>
+      ) : (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 24 }}>
+          {filtered.map((c, i) => (
+            <div key={c.id} style={{ animation: `fadeUp 0.5s ${i * 0.07}s ease both` }}>
+              <CampaignCard c={c} openCampaign={openCampaign} />
+            </div>
+          ))}
         </div>
-      </div>
-
-      <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {filteredCampaigns.map((campaign) => (
-          <CampaignCard key={campaign.id} campaign={campaign} />
-        ))}
-      </div>
-
-      {filteredCampaigns.length === 0 && (
-        <p className="mt-8 text-center text-sm text-slate-500">
-          No campaigns found. Try changing your search or filters.
-        </p>
       )}
     </div>
   );
