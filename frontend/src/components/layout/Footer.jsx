@@ -5,7 +5,13 @@ export default function Footer() {
         <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 40, marginBottom: 48 }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-              <div style={{ width: 36, height: 36, background: "#1B4332", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", color: "#D4A017", fontFamily: "'Cormorant Garamond', serif", fontWeight: 700, fontSize: 20 }}>অ</div>
+              <div>
+                <img
+                  src="/orpon-icon.svg"
+                  alt="logo"
+                  style={{ width: 42, height: 42 }}
+                />
+              </div>
               <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 24, fontWeight: 700, color: "#fff" }}>Orpon</span>
             </div>
             <p style={{ fontSize: 14, lineHeight: 1.7, maxWidth: 260 }}>

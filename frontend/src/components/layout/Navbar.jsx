@@ -20,8 +20,12 @@ export default function Navbar({ page, nav, isLoggedIn, setShowLogin, setIsLogge
       transition: "all 0.3s ease",
     }}>
       <div onClick={() => nav("home")} style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 10 }}>
-        <div style={{ width: 36, height: 36, background: "#1B4332", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", color: "#D4A017", fontFamily: "'Cormorant Garamond', serif", fontWeight: 700, fontSize: 20 }}>
-          অ
+        <div>
+          <img
+            src="/orpon-icon.svg"
+            alt="logo"
+            style={{ width: 42, height: 42 }}
+          />
         </div>
         <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 24, fontWeight: 700, color: "#1B4332", letterSpacing: "-0.02em" }}>
           Orpon
