@@ -1,16 +1,97 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
-  @apply bg-slate-50 text-slate-900 antialiased;
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
 }
 
-.orpon-container {
-  @apply min-h-screen flex flex-col;
+.donation-container {
+    width: 400px;
+    margin: 80px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    text-align: center;
 }
 
-.orpon-main {
-  @apply flex-1 w-full max-w-5xl mx-auto px-4 py-6 sm:px-6 lg:px-8;
+.donation-container h1 {
+    margin-bottom: 20px;
+    color: #222;
+}
+
+.donation-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.donation-form input,
+.donation-form select {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.donation-form button {
+    padding: 14px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.donation-form button:hover {
+    background: #1d4ed8;
+}
+
+.message {
+    margin-top: 20px;
+    font-weight: bold;
+    color: green;
+}
+.ledger-container {
+    width: 95%;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.ledger-container h1 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.ledger-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.ledger-table th,
+.ledger-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.ledger-table th {
+    background: #2563eb;
+    color: white;
+}
+
+.ledger-table td {
+    word-break: break-word;
+    max-width: 250px;
 }

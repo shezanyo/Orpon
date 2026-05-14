@@ -1,21 +1,28 @@
-import { Navigate } from "react-router-dom";
-import { Card } from "../components/ui/card";
-import { useAuth } from "../context/AuthContext";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../utils/auth";
 
-export default function Dashboard() {
-  const { isAuthenticated, user } = useAuth();
+const Dashboard = () => {
+    const navigate = useNavigate();
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
+    const handleLogout = () => {
+        logout();
+        navigate("/login");
+    };
 
-  return (
-    <Card>
-      <h1 className="text-2xl font-bold">Dashboard</h1>
-      <p className="mt-2 text-sm text-slate-600">Welcome back, {user?.email}.</p>
-      <p className="mt-3 text-sm text-slate-600">
-        This protected area is where campaign creators manage campaigns and transparency settings.
-      </p>
-    </Card>
-  );
-}
+    return (
+        <div className="dashboard">
+            <h1>Dashboard</h1>
+
+            <button onClick={() => navigate("/create-campaign")}>
+                Create Campaign
+            </button>
+
+            <button onClick={handleLogout}>
+                Logout
+            </button>
+        </div>
+    );
+};
+
+export default Dashboard;
