@@ -1,18 +1,54 @@
 import { useState } from "react";
+import { loginUser, registerUser } from "../utils/api";
 
 export default function LoginModal({ loginTab, setLoginTab, setShowLogin, setIsLoggedIn }) {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = () => {
-    if (!email) return;
+  const handleSubmit = async () => {
+    setError("");
+    
+    if (!email || !pass) {
+      setError("Email and password are required");
+      return;
+    }
+
+    if (loginTab === "signup" && !name) {
+      setError("Full name is required for signup");
+      return;
+    }
+
     setLoading(true);
-    setTimeout(() => {
+
+    try {
+      let response;
+
+      if (loginTab === "login") {
+        response = await loginUser(email, pass);
+      } else {
+        response = await registerUser(name, email, pass);
+      }
+
+      // Store token in localStorage
+      if (response.token) {
+        localStorage.setItem("authToken", response.token);
+      }
+
       setIsLoggedIn(true);
       setShowLogin(false);
-    }, 1200);
+      
+      // Reset form
+      setEmail("");
+      setPass("");
+      setName("");
+    } catch (err) {
+      setError(err.message || "An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -33,13 +69,18 @@ export default function LoginModal({ loginTab, setLoginTab, setShowLogin, setIsL
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          {error && (
+            <div style={{ padding: "10px 12px", background: "#fee", border: "1px solid #fcc", borderRadius: 8, fontSize: 13, color: "#c33", textAlign: "center" }}>
+              {error}
+            </div>
+          )}
           {loginTab === "signup" && (
             <input value={name} onChange={e => setName(e.target.value)} placeholder="Your full name" style={{ padding: "13px 14px", border: "1px solid #EDE9E0", borderRadius: 12, fontSize: 14, outline: "none" }} />
           )}
           <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email address" type="email" style={{ padding: "13px 14px", border: "1px solid #EDE9E0", borderRadius: 12, fontSize: 14, outline: "none" }} />
           <input value={pass} onChange={e => setPass(e.target.value)} placeholder="Password" type="password" style={{ padding: "13px 14px", border: "1px solid #EDE9E0", borderRadius: 12, fontSize: 14, outline: "none" }} />
-          <button onClick={handleSubmit} style={{ background: "#1B4332", color: "#fff", border: "none", padding: "14px 0", borderRadius: 12, fontSize: 15, fontWeight: 700, cursor: "pointer", marginTop: 4 }}>
-            {loading ? "⏳ Logging in..." : loginTab === "login" ? "Log in" : "Create account"}
+          <button onClick={handleSubmit} disabled={loading} style={{ background: loading ? "#999" : "#1B4332", color: "#fff", border: "none", padding: "14px 0", borderRadius: 12, fontSize: 15, fontWeight: 700, cursor: loading ? "not-allowed" : "pointer", marginTop: 4 }}>
+            {loading ? "⏳ " + (loginTab === "login" ? "Logging in..." : "Creating account...") : loginTab === "login" ? "Log in" : "Create account"}
           </button>
         </div>
 
