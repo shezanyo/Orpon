@@ -6,7 +6,42 @@ import Explore from "./pages/Explore";
 import CampaignDetail from "./pages/CampaignDetail";
 import CreateCampaign from "./pages/CreateCampaign";
 import LoginModal from "./pages/Login";
-import { CAMPAIGNS } from "./data/mockData";
+import { CAMPAIGNS, CAMPAIGN_COLORS, CAMPAIGN_EMOJIS } from "./data/mockData";
+import { getCampaigns } from "./utils/api";
+import { slugify } from "./utils/format";
+
+const normalizeCampaign = (campaign) => {
+  const title = campaign.title || "Untitled campaign";
+  const story = campaign.story || campaign.description || "";
+  const category =
+    campaign.category ||
+    (story.toLowerCase().includes("school") || story.toLowerCase().includes("education")
+      ? "Education"
+      : story.toLowerCase().includes("heart") || story.toLowerCase().includes("medical") || story.toLowerCase().includes("hospital")
+        ? "Medical"
+        : story.toLowerCase().includes("flood") || story.toLowerCase().includes("relief") || story.toLowerCase().includes("disaster")
+          ? "Disaster Relief"
+          : story.toLowerCase().includes("water")
+            ? "Community"
+            : "Community");
+
+  return {
+    id: String(campaign.id ?? Date.now()),
+    slug: campaign.slug || `${slugify(title)}-${String(campaign.id || Date.now()).slice(0, 8)}`,
+    title,
+    organizer: campaign.organizer || "Community Organizer",
+    orgVerified: Boolean(campaign.orgVerified ?? false),
+    category,
+    description: campaign.description || story,
+    story,
+    raised: Number(campaign.raised ?? campaign.current_amount ?? campaign.collected_amount ?? 0),
+    goal: Number(campaign.goal ?? campaign.target_amount ?? 0),
+    donors: Number(campaign.donors ?? campaign.donation_count ?? 0),
+    daysLeft: Number(campaign.daysLeft ?? campaign.days_left ?? 30),
+    color: campaign.color || CAMPAIGN_COLORS[category] || "#1B4332",
+    emoji: campaign.emoji || CAMPAIGN_EMOJIS[category] || "🤲",
+  };
+};
 
 export default function App() {
   const [page, setPage] = useState("home");
@@ -21,6 +56,20 @@ export default function App() {
     link.rel = "stylesheet";
     link.href = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap";
     document.head.appendChild(link);
+
+    const loadCampaigns = async () => {
+      try {
+        const response = await getCampaigns();
+        if (response?.success && Array.isArray(response.campaigns)) {
+          setCampaigns(response.campaigns.map(normalizeCampaign));
+        }
+      } catch (error) {
+        console.error("Unable to load campaigns from backend", error);
+      }
+    };
+
+    loadCampaigns();
+
     return () => document.head.removeChild(link);
   }, []);
 
