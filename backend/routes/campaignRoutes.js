@@ -5,8 +5,11 @@ const authMiddleware =
 require("../middleware/authMiddleware");
 
 const {
-    createCampaign
+    createCampaign,
+    getCampaigns
 } = require("../controllers/campaignController");
+
+router.get("/campaigns", getCampaigns);
 
 router.post(
     "/campaign/create",

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import QRCodeSVG from "../components/ui/QRCodeSVG";
-import { CATEGORIES, CAMPAIGN_COLORS, CAMPAIGN_EMOJIS } from "../data/mockData";
-import { fmt, slugify } from "../utils/format";
+import { CATEGORIES } from "../data/mockData";
+import { createCampaign } from "../utils/api";
+import { fmt } from "../utils/format";
 
 export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampaigns }) {
   const [formStep, setFormStep] = useState(1);
@@ -12,6 +13,8 @@ export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampa
   const [duration, setDuration] = useState("30");
   const [submitted, setSubmitted] = useState(false);
   const [slug, setSlug] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   if (!isLoggedIn) {
     return (
@@ -26,26 +29,47 @@ export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampa
     );
   }
 
-  const handleSubmit = () => {
-    const newSlug = slugify(title) + "-" + Date.now().toString(36);
-    setCampaigns(prev => [{
-      id: String(Date.now()),
-      slug: newSlug,
-      title,
-      category,
-      organizer: "You",
-      orgVerified: false,
-      description: story.slice(0, 120) + "...",
-      story,
-      raised: 0,
-      goal: parseInt(goal),
-      donors: 0,
-      daysLeft: parseInt(duration),
-      color: CAMPAIGN_COLORS[category] || "#1B4332",
-      emoji: CAMPAIGN_EMOJIS[category] || "🤲",
-    }, ...prev]);
-    setSlug(newSlug);
-    setSubmitted(true);
+  const handleSubmit = async () => {
+    setError("");
+    setLoading(true);
+
+    try {
+      const response = await createCampaign({
+        title,
+        story,
+        description: story,
+        category,
+        target_amount: Number(goal),
+        days_left: Number(duration),
+        organizer_name: "You",
+        is_verified: false,
+      });
+
+      const newCampaign = response?.campaign || {
+        id: String(Date.now()),
+        slug: `campaign-${Date.now().toString(36)}`,
+        title,
+        organizer: "You",
+        orgVerified: false,
+        category,
+        description: story,
+        story,
+        raised: 0,
+        goal: Number(goal),
+        donors: 0,
+        daysLeft: Number(duration),
+        color: "#1B4332",
+        emoji: "🤲",
+      };
+
+      setCampaigns(prev => [newCampaign, ...prev]);
+      setSlug(newCampaign.slug);
+      setSubmitted(true);
+    } catch (err) {
+      setError(err.message || "Unable to create campaign right now.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -136,14 +160,20 @@ export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampa
         )}
       </div>
 
+      {error && (
+        <div style={{ marginTop: 16, padding: "12px 14px", background: "#fee", border: "1px solid #fcc", color: "#c33", borderRadius: 12, fontSize: 13 }}>
+          {error}
+        </div>
+      )}
+
       <div style={{ display: "flex", gap: 12, marginTop: 24 }}>
         {formStep > 1 && (
           <button onClick={() => setFormStep(s => s - 1)} style={{ flex: 1, background: "#fff", border: "1px solid #EDE9E0", padding: "14px 0", borderRadius: 12, fontSize: 15, fontWeight: 600, cursor: "pointer", color: "#555" }}>
             ← Back
           </button>
         )}
-        <button onClick={() => formStep < 3 ? setFormStep(s => s + 1) : handleSubmit()} disabled={formStep === 1 && !title} style={{ flex: 2, background: formStep === 1 && !title ? "#EDE9E0" : "#1B4332", color: formStep === 1 && !title ? "#aaa" : "#fff", border: "none", padding: "14px 0", borderRadius: 12, fontSize: 15, fontWeight: 700, cursor: formStep === 1 && !title ? "not-allowed" : "pointer" }}>
-          {formStep < 3 ? "Continue →" : "🚀 Launch Campaign"}
+        <button onClick={() => formStep < 3 ? setFormStep(s => s + 1) : handleSubmit()} disabled={loading || (formStep === 1 && !title)} style={{ flex: 2, background: loading || (formStep === 1 && !title) ? "#EDE9E0" : "#1B4332", color: loading || (formStep === 1 && !title) ? "#aaa" : "#fff", border: "none", padding: "14px 0", borderRadius: 12, fontSize: 15, fontWeight: 700, cursor: loading || (formStep === 1 && !title) ? "not-allowed" : "pointer" }}>
+          {loading ? "⏳ Creating..." : formStep < 3 ? "Continue →" : "🚀 Launch Campaign"}
         </button>
       </div>
     </div>
