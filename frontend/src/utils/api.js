@@ -12,7 +12,6 @@ export const apiCall = async (endpoint, method = "GET", data = null) => {
     "Content-Type": "application/json",
   };
 
-  // Add auth token if it exists
   const token = localStorage.getItem("authToken");
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
@@ -41,37 +40,26 @@ export const apiCall = async (endpoint, method = "GET", data = null) => {
   }
 };
 
-/**
- * Login user
- * @param {string} email
- * @param {string} password
- * @returns {Promise<object>}
- */
 export const loginUser = (email, password) => {
   return apiCall("/login", "POST", { email, password });
 };
 
-/**
- * Register user
- * @param {string} full_name
- * @param {string} email
- * @param {string} password
- * @returns {Promise<object>}
- */
 export const registerUser = (full_name, email, password) => {
   return apiCall("/register", "POST", { full_name, email, password });
 };
 
-/**
- * Logout user
- */
+export const getCampaigns = () => {
+  return apiCall("/campaigns");
+};
+
+export const createCampaign = (payload) => {
+  return apiCall("/campaign/create", "POST", payload);
+};
+
 export const logoutUser = () => {
   localStorage.removeItem("authToken");
 };
 
-/**
- * Get stored auth token
- */
 export const getAuthToken = () => {
   return localStorage.getItem("authToken");
 };
