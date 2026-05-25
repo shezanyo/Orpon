@@ -13,6 +13,7 @@ CREATE TABLE donations (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     previous_hash TEXT NOT NULL,
     current_hash TEXT NOT NULL,
+    campaign_id VARCHAR(100) NOT NULL,
     batch_id INT DEFAULT 0
 );
 
