@@ -2,42 +2,19 @@ const pool = require("../config/db");
 const { v4: uuidv4 } = require("uuid");
 const { generateHash } = require("../services/hashService");
 
-/*
------------------------------------
-CREATE DONATION (UPDATED)
------------------------------------
-*/
-const createDonation = async (req, res) => {
+const createDonationRecord = async ({ donor_name, amount, privacy_type, campaign_id }) => {
     const connection = await pool.getConnection();
 
     try {
-        const {
-            donor_name,
-            amount,
-            privacy_type,
-            campaign_id
-        } = req.body;
-
-        // ✅ VALIDATION
-        if (!amount || !privacy_type || !campaign_id) {
-            return res.status(400).json({
-                message: "Amount, privacy_type, and campaign_id are required"
-            });
-        }
-
-        // ✅ CHECK CAMPAIGN EXISTS
         const [campaign] = await connection.query(
             `SELECT * FROM campaigns WHERE id = ?`,
             [campaign_id]
         );
 
         if (campaign.length === 0) {
-            return res.status(404).json({
-                message: "Campaign not found"
-            });
+            throw new Error("Campaign not found");
         }
 
-        // ✅ DISPLAY NAME LOGIC
         let display_name = donor_name || "Anonymous";
 
         if (privacy_type === "anonymous") {
@@ -48,7 +25,6 @@ const createDonation = async (req, res) => {
             display_name = "Donor-" + Math.floor(Math.random() * 9999);
         }
 
-        // ✅ GET LAST HASH
         const [lastDonation] = await connection.query(`
             SELECT current_hash
             FROM donations
@@ -62,21 +38,18 @@ const createDonation = async (req, res) => {
             previous_hash = lastDonation[0].current_hash;
         }
 
-        // ✅ CREATE NEW HASH
         const id = uuidv4();
         const timestamp = new Date();
-
+        const timestampStr = timestamp.toISOString();
         const current_hash = generateHash(
             amount,
             display_name,
-            timestamp,
+            timestampStr,
             previous_hash
         );
 
-        // ✅ START TRANSACTION (IMPORTANT)
         await connection.beginTransaction();
 
-        // ✅ INSERT DONATION
         await connection.query(`
             INSERT INTO donations (
                 id,
@@ -102,36 +75,72 @@ const createDonation = async (req, res) => {
             campaign_id
         ]);
 
-        // ✅ UPDATE CAMPAIGN COLLECTED AMOUNT
         await connection.query(`
             UPDATE campaigns
-            SET collected_amount = collected_amount + ?
+            SET raised_amount = raised_amount + ?,
+                donor_count = donor_count + 1
             WHERE id = ?
         `, [
             amount,
             campaign_id
         ]);
 
-        // ✅ COMMIT
         await connection.commit();
+
+        return {
+            success: true,
+            id,
+            current_hash
+        };
+    } catch (error) {
+        await connection.rollback();
+        console.error("Donation database transaction failed:", error);
+        throw error;
+    } finally {
+        connection.release();
+    }
+};
+
+const createDonation = async (req, res) => {
+    try {
+        const {
+            donor_name,
+            amount,
+            privacy_type,
+            campaign_id
+        } = req.body;
+
+        if (!amount || !privacy_type || !campaign_id) {
+            return res.status(400).json({
+                message: "Amount, privacy_type, and campaign_id are required"
+            });
+        }
+
+        const donation = await createDonationRecord({
+            donor_name,
+            amount,
+            privacy_type,
+            campaign_id
+        });
 
         return res.status(201).json({
             success: true,
             message: "Donation successful",
-            donation_url: `/donation/${id}`,
-            current_hash
+            donation_url: `/donation/${donation.id}`,
+            current_hash: donation.current_hash
         });
-
     } catch (error) {
-        await connection.rollback();
         console.error(error);
+
+        if (error.message === "Campaign not found") {
+            return res.status(404).json({
+                message: "Campaign not found"
+            });
+        }
 
         return res.status(500).json({
             message: "Server Error"
         });
-
-    } finally {
-        connection.release();
     }
 };
 
@@ -176,5 +185,6 @@ const getAllTransactions = async (req, res) => {
 
 module.exports = {
     createDonation,
+    createDonationRecord,
     getAllTransactions
 };
