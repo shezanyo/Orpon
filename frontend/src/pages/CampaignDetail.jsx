@@ -1,14 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ProgressBar from "../components/ui/ProgressBar";
 import QRCodeSVG from "../components/ui/QRCodeSVG";
 import { fmt, pct } from "../utils/format";
 
 export default function CampaignDetail({ c, nav }) {
-  const [step, setStep] = useState(1);
+  const navigate = useNavigate();
   const [amount, setAmount] = useState("");
-  const [name, setName] = useState("");
-  const [method, setMethod] = useState("bKash");
-  const [anon, setAnon] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showQR, setShowQR] = useState(false);
 
@@ -22,8 +20,8 @@ export default function CampaignDetail({ c, nav }) {
   };
 
   const handleDonate = () => {
-    if (step === 3) { setStep(4); return; }
-    setStep(s => s + 1);
+    if (!amount || parseFloat(amount) <= 0) return;
+    navigate(`/donate/${c.id}?amount=${amount}`);
   };
 
   return (
@@ -92,83 +90,23 @@ export default function CampaignDetail({ c, nav }) {
 
         {/* RIGHT: Donate panel */}
         <div style={{ background: "#fff", border: "1px solid #EDE9E0", borderRadius: 24, padding: 28, position: "sticky", top: 80, animation: "fadeUp 0.5s 0.15s ease both", boxShadow: "0 8px 40px rgba(0,0,0,0.08)" }}>
-          {step === 4 ? (
-            <div style={{ textAlign: "center", padding: "20px 0" }}>
-              <div style={{ fontSize: 56, marginBottom: 16 }}>🎉</div>
-              <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 700, marginBottom: 10, color: "#1B4332" }}>Donation received!</h3>
-              <p style={{ color: "#555", fontSize: 14, lineHeight: 1.7, marginBottom: 24 }}>
-                Thank you{!anon && name ? `, ${name}` : ""}! Your <strong style={{ color: "#1B4332" }}>৳{parseInt(amount || 0).toLocaleString()}</strong> has been received.
-              </p>
-              <div style={{ background: "#ECFDF5", border: "1px solid #6EE7B7", borderRadius: 12, padding: "12px 16px", fontSize: 13, color: "#065F46", marginBottom: 20 }}>
-                📋 Transaction ID: <strong>ORN-{Date.now().toString(36).toUpperCase()}</strong>
-              </div>
-              <button onClick={() => { setStep(1); setAmount(""); setName(""); }} style={{ background: "#1B4332", color: "#fff", border: "none", padding: "12px 24px", borderRadius: 12, fontSize: 14, fontWeight: 600, cursor: "pointer", width: "100%" }}>
-                Donate again
+          <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 22, fontWeight: 700, marginBottom: 4, color: "#1A1A2E" }}>Make a donation</h3>
+          <p style={{ color: "#888", fontSize: 13, marginBottom: 22 }}>No account needed · Secure & verified</p>
+
+          <p style={{ fontSize: 13, fontWeight: 600, marginBottom: 12, color: "#555" }}>Select amount (BDT)</p>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 12 }}>
+            {[100, 250, 500, 1000, 2500, 5000].map(a => (
+              <button key={a} onClick={() => setAmount(String(a))} style={{ background: amount === String(a) ? "#1B4332" : "#F8F6F0", color: amount === String(a) ? "#fff" : "#1A1A2E", border: "1px solid " + (amount === String(a) ? "#1B4332" : "#EDE9E0"), padding: "12px 0", borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: "pointer" }}>
+                ৳{a.toLocaleString()}
               </button>
-            </div>
-          ) : (
-            <>
-              <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 22, fontWeight: 700, marginBottom: 4, color: "#1A1A2E" }}>Make a donation</h3>
-              <p style={{ color: "#888", fontSize: 13, marginBottom: 22 }}>No account needed · Secure & verified</p>
+            ))}
+          </div>
+          <input value={amount} onChange={e => setAmount(e.target.value.replace(/\D/g, ""))} placeholder="Or enter custom amount" style={{ width: "100%", padding: "12px 14px", border: "1px solid #EDE9E0", borderRadius: 10, fontSize: 14, outline: "none", marginBottom: 20 }} />
 
-              <div style={{ display: "flex", gap: 6, marginBottom: 24 }}>
-                {["Amount", "Details", "Confirm"].map((label, i) => (
-                  <div key={i} style={{ flex: 1, height: 4, borderRadius: 99, background: step > i + 1 ? "#1B4332" : step === i + 1 ? "#D4A017" : "#EDE9E0", transition: "background 0.3s" }} />
-                ))}
-              </div>
-
-              {(step === 1 || step === 2) && (
-                <>
-                  <p style={{ fontSize: 13, fontWeight: 600, marginBottom: 12, color: "#555" }}>Select amount (BDT)</p>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 12 }}>
-                    {[100, 250, 500, 1000, 2500, 5000].map(a => (
-                      <button key={a} onClick={() => { setAmount(String(a)); setStep(2); }} style={{ background: amount === String(a) ? "#1B4332" : "#F8F6F0", color: amount === String(a) ? "#fff" : "#1A1A2E", border: "1px solid " + (amount === String(a) ? "#1B4332" : "#EDE9E0"), padding: "12px 0", borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: "pointer" }}>
-                        ৳{a.toLocaleString()}
-                      </button>
-                    ))}
-                  </div>
-                  <input value={amount} onChange={e => { setAmount(e.target.value.replace(/\D/g, "")); setStep(2); }} placeholder="Or enter custom amount" style={{ width: "100%", padding: "12px 14px", border: "1px solid #EDE9E0", borderRadius: 10, fontSize: 14, outline: "none", marginBottom: 16 }} />
-                </>
-              )}
-
-              {step === 3 && (
-                <>
-                  <div style={{ marginBottom: 14 }}>
-                    <label style={{ fontSize: 13, fontWeight: 600, color: "#555", display: "block", marginBottom: 6 }}>Your name (optional)</label>
-                    <input value={name} onChange={e => setName(e.target.value)} placeholder={anon ? "Anonymous" : "e.g. Rahim Uddin"} disabled={anon} style={{ width: "100%", padding: "12px 14px", border: "1px solid #EDE9E0", borderRadius: 10, fontSize: 14, outline: "none", background: anon ? "#F8F6F0" : "#fff" }} />
-                  </div>
-                  <label style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14, cursor: "pointer", fontSize: 14, color: "#555" }}>
-                    <input type="checkbox" checked={anon} onChange={() => setAnon(!anon)} />
-                    Donate anonymously
-                  </label>
-                  <div style={{ marginBottom: 14 }}>
-                    <label style={{ fontSize: 13, fontWeight: 600, color: "#555", display: "block", marginBottom: 6 }}>Payment method</label>
-                    <div style={{ display: "flex", gap: 8 }}>
-                      {["bKash", "Nagad", "Card"].map(m => (
-                        <button key={m} onClick={() => setMethod(m)} style={{ flex: 1, padding: "10px 0", border: "1px solid " + (method === m ? "#1B4332" : "#EDE9E0"), borderRadius: 10, background: method === m ? "#1B433211" : "#fff", color: method === m ? "#1B4332" : "#555", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
-                          {m}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                  <div style={{ background: "#F8F6F0", borderRadius: 12, padding: "12px 14px", marginBottom: 16, fontSize: 14 }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", color: "#555" }}><span>Donation</span><span>{fmt(parseInt(amount || 0))}</span></div>
-                    <div style={{ display: "flex", justifyContent: "space-between", color: "#555", margin: "6px 0" }}><span>Platform fee</span><span>৳0 (free)</span></div>
-                    <div style={{ height: 1, background: "#EDE9E0", margin: "8px 0" }} />
-                    <div style={{ display: "flex", justifyContent: "space-between", fontWeight: 700, color: "#1A1A2E" }}><span>Total</span><span>{fmt(parseInt(amount || 0))}</span></div>
-                  </div>
-                </>
-              )}
-
-              <button onClick={handleDonate} disabled={step >= 2 && !amount} style={{ width: "100%", background: step >= 2 && !amount ? "#EDE9E0" : "#1B4332", color: step >= 2 && !amount ? "#aaa" : "#fff", border: "none", padding: "15px 0", borderRadius: 12, fontSize: 15, fontWeight: 700, cursor: step >= 2 && !amount ? "not-allowed" : "pointer" }}>
-                {step === 1 ? (amount ? `Donate ${fmt(parseInt(amount))} →` : "Select an amount") :
-                 step === 2 ? (amount ? `Continue with ${fmt(parseInt(amount))} →` : "Enter an amount") :
-                 `Confirm ${fmt(parseInt(amount || 0))} via ${method} →`}
-              </button>
-              {step > 1 && <button onClick={() => setStep(s => s - 1)} style={{ width: "100%", background: "none", border: "none", color: "#888", fontSize: 13, cursor: "pointer", marginTop: 8 }}>← Back</button>}
-              <p style={{ textAlign: "center", color: "#aaa", fontSize: 11, marginTop: 16 }}>🔒 Secured by Orpon · Every taka is tracked</p>
-            </>
-          )}
+          <button onClick={handleDonate} disabled={!amount} style={{ width: "100%", background: !amount ? "#EDE9E0" : "#1B4332", color: !amount ? "#aaa" : "#fff", border: "none", padding: "15px 0", borderRadius: 12, fontSize: 15, fontWeight: 700, cursor: !amount ? "not-allowed" : "pointer" }}>
+            {amount ? `Proceed to Donate ${fmt(parseInt(amount))} →` : "Select an amount"}
+          </button>
+          <p style={{ textAlign: "center", color: "#aaa", fontSize: 11, marginTop: 16 }}>🔒 Secured by Orpon · Every taka is tracked</p>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api";
+export const API_URL = "http://localhost:5000/api";
 
 /**
  * Make an authenticated API request
@@ -62,4 +62,24 @@ export const logoutUser = () => {
 
 export const getAuthToken = () => {
   return localStorage.getItem("authToken");
+};
+
+export const initiateBkashPayment = (payload) => {
+  return apiCall("/payment/bkash/initiate", "POST", payload);
+};
+
+export const initiateCardPayment = (payload) => {
+  return apiCall("/payment/card/initiate", "POST", payload);
+};
+
+export const initiateNagadPayment = (payload) => {
+  return apiCall("/payment/nagad/initiate", "POST", payload);
+};
+
+export const initiateDirectDonation = (payload) => {
+  return apiCall("/donate", "POST", payload);
+};
+
+export const getTransactions = () => {
+  return apiCall("/transactions");
 };

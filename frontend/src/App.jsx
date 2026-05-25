@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Home from "./pages/Home";
@@ -6,6 +7,11 @@ import Explore from "./pages/Explore";
 import CampaignDetail from "./pages/CampaignDetail";
 import CreateCampaign from "./pages/CreateCampaign";
 import LoginModal from "./pages/Login";
+import Donate from "./pages/Donate";
+import NagadSandbox from "./pages/NagadSandbox";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentFail from "./pages/PaymentFail";
+import PaymentCancel from "./pages/PaymentCancel";
 import { CAMPAIGNS, CAMPAIGN_COLORS, CAMPAIGN_EMOJIS } from "./data/mockData";
 import { getCampaigns } from "./utils/api";
 import { slugify } from "./utils/format";
@@ -105,10 +111,21 @@ export default function App() {
         setIsLoggedIn={setIsLoggedIn}
       />
 
-      {page === "home" && <Home nav={nav} campaigns={campaigns} openCampaign={openCampaign} setShowLogin={setShowLogin} isLoggedIn={isLoggedIn} />}
-      {page === "campaigns" && <Explore campaigns={campaigns} openCampaign={openCampaign} />}
-      {page === "detail" && activeCampaign && <CampaignDetail c={activeCampaign} nav={nav} />}
-      {page === "create" && <CreateCampaign nav={nav} isLoggedIn={isLoggedIn} setShowLogin={setShowLogin} setCampaigns={setCampaigns} />}
+      <Routes>
+        <Route path="/" element={
+          <>
+            {page === "home" && <Home nav={nav} campaigns={campaigns} openCampaign={openCampaign} setShowLogin={setShowLogin} isLoggedIn={isLoggedIn} />}
+            {page === "campaigns" && <Explore campaigns={campaigns} openCampaign={openCampaign} />}
+            {page === "detail" && activeCampaign && <CampaignDetail c={activeCampaign} nav={nav} />}
+            {page === "create" && <CreateCampaign nav={nav} isLoggedIn={isLoggedIn} setShowLogin={setShowLogin} setCampaigns={setCampaigns} />}
+          </>
+        } />
+        <Route path="/donate/:id" element={<Donate />} />
+        <Route path="/donate/nagad-sandbox" element={<NagadSandbox />} />
+        <Route path="/payment/success" element={<PaymentSuccess />} />
+        <Route path="/payment/fail" element={<PaymentFail />} />
+        <Route path="/payment/cancel" element={<PaymentCancel />} />
+      </Routes>
 
       {showLogin && <LoginModal loginTab={loginTab} setLoginTab={setLoginTab} setShowLogin={setShowLogin} setIsLoggedIn={setIsLoggedIn} />}
 
