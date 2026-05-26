@@ -280,8 +280,7 @@ export default function Donate() {
                     transition: "all 0.2s"
                   }}
                 >
-                  <span style={{ fontSize: 10, position: "absolute", top: 2, left: "50%", transform: "translateX(-50%)", opacity: 0.6 }}>bKash</span>
-                  <div style={{ marginTop: 6 }}>৳ sandbox</div>
+                  bKash
                 </button>
 
                 {/* Nagad */}
@@ -302,8 +301,7 @@ export default function Donate() {
                     transition: "all 0.2s"
                   }}
                 >
-                  <span style={{ fontSize: 10, position: "absolute", top: 2, left: "50%", transform: "translateX(-50%)", opacity: 0.6 }}>Nagad</span>
-                  <div style={{ marginTop: 6 }}>৳ sandbox</div>
+                  Nagad
                 </button>
 
                 {/* Card Payments */}
