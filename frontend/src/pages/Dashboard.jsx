@@ -3,9 +3,9 @@ import { Card } from "../components/ui/card";
 import { useAuth } from "../context/AuthContext";
 
 export default function Dashboard() {
-  const { isAuthenticated, user } = useAuth();
+  const { isLoggedIn, user } = useAuth();
 
-  if (!isAuthenticated) {
+  if (!isLoggedIn) {
     return <Navigate to="/login" replace />;
   }
 
