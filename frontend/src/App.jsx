@@ -15,6 +15,7 @@ import PaymentCancel from "./pages/PaymentCancel";
 import { CAMPAIGNS, CAMPAIGN_COLORS, CAMPAIGN_EMOJIS } from "./data/mockData";
 import { getCampaigns } from "./utils/api";
 import { slugify } from "./utils/format";
+import { useAuth } from "./context/AuthContext";
 
 const normalizeCampaign = (campaign) => {
   const title = campaign.title || "Untitled campaign";
@@ -52,10 +53,10 @@ const normalizeCampaign = (campaign) => {
 export default function App() {
   const [page, setPage] = useState("home");
   const [activeCampaign, setActiveCampaign] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [loginTab, setLoginTab] = useState("login");
   const [campaigns, setCampaigns] = useState(CAMPAIGNS);
+  const { isLoggedIn } = useAuth();
 
   useEffect(() => {
     const link = document.createElement("link");
@@ -106,9 +107,7 @@ export default function App() {
       <Navbar
         page={page}
         nav={nav}
-        isLoggedIn={isLoggedIn}
         setShowLogin={setShowLogin}
-        setIsLoggedIn={setIsLoggedIn}
       />
 
       <Routes>
@@ -127,7 +126,7 @@ export default function App() {
         <Route path="/payment/cancel" element={<PaymentCancel />} />
       </Routes>
 
-      {showLogin && <LoginModal loginTab={loginTab} setLoginTab={setLoginTab} setShowLogin={setShowLogin} setIsLoggedIn={setIsLoggedIn} />}
+      {showLogin && <LoginModal loginTab={loginTab} setLoginTab={setLoginTab} setShowLogin={setShowLogin} />}
 
       <Footer />
     </div>
