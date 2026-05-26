@@ -44,8 +44,12 @@ export const loginUser = (email, password) => {
   return apiCall("/login", "POST", { email, password });
 };
 
-export const registerUser = (full_name, email, password) => {
-  return apiCall("/register", "POST", { full_name, email, password });
+export const registerUser = (full_name, email, password, phone, nid, address) => {
+  return apiCall("/register", "POST", { full_name, email, password, phone, nid, address });
+};
+
+export const getMe = () => {
+  return apiCall("/me", "GET");
 };
 
 export const getCampaigns = () => {

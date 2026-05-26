@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { useAuth } from "../../context/AuthContext";
 
-export default function Navbar({ page, nav, isLoggedIn, setShowLogin, setIsLoggedIn }) {
+export default function Navbar({ page, nav, setShowLogin }) {
   const [scrolled, setScrolled] = useState(false);
+  const { isLoggedIn, logout } = useAuth();
 
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 30);
@@ -44,7 +46,7 @@ export default function Navbar({ page, nav, isLoggedIn, setShowLogin, setIsLogge
             <button onClick={() => nav("create")} style={{ background: "#D4A017", border: "none", padding: "9px 18px", fontSize: 14, fontWeight: 600, color: "#fff", borderRadius: 10, marginLeft: 8, cursor: "pointer" }}>
               + Start a Campaign
             </button>
-            <button onClick={() => setIsLoggedIn(false)} style={{ background: "none", border: "1px solid #EDE9E0", padding: "8px 14px", fontSize: 13, color: "#888", borderRadius: 10, cursor: "pointer" }}>
+            <button onClick={logout} style={{ background: "none", border: "1px solid #EDE9E0", padding: "8px 14px", fontSize: 13, color: "#888", borderRadius: 10, cursor: "pointer" }}>
               Log out
             </button>
           </>
