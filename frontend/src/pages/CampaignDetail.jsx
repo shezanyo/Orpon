@@ -1,14 +1,65 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "../components/ui/ProgressBar";
 import QRCodeSVG from "../components/ui/QRCodeSVG";
 import { fmt, pct } from "../utils/format";
+import { getTransactions } from "../utils/api";
+import { Loader2 } from "lucide-react";
+
+const formatDate = (dateStr) => {
+  if (!dateStr) return "";
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return dateStr;
+  return d.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true
+  });
+};
 
 export default function CampaignDetail({ c, nav }) {
   const navigate = useNavigate();
   const [amount, setAmount] = useState("");
   const [copied, setCopied] = useState(false);
   const [showQR, setShowQR] = useState(false);
+  const [transactions, setTransactions] = useState([]);
+  const [loadingTx, setLoadingTx] = useState(true);
+  const [errorTx, setErrorTx] = useState("");
+
+  useEffect(() => {
+    let active = true;
+    const fetchTxs = async () => {
+      try {
+        setLoadingTx(true);
+        const data = await getTransactions();
+        if (active) {
+          if (data?.success && Array.isArray(data.transactions)) {
+            const campaignTxs = data.transactions.filter(
+              t => String(t.campaign_id) === String(c.id)
+            );
+            setTransactions(campaignTxs);
+          } else {
+            setErrorTx("Failed to load transactions.");
+          }
+        }
+      } catch (err) {
+        console.error("Error fetching transactions:", err);
+        if (active) {
+          setErrorTx("Failed to fetch transactions.");
+        }
+      } finally {
+        if (active) {
+          setLoadingTx(false);
+        }
+      }
+    };
+    fetchTxs();
+    return () => {
+      active = false;
+    };
+  }, [c.id]);
 
   const shareUrl = `https://orpon.com.bd/campaign/${c.slug}`;
   const p = pct(c.raised, c.goal);
@@ -56,6 +107,84 @@ export default function CampaignDetail({ c, nav }) {
               <span><strong style={{ color: "#1A1A2E", fontSize: 18 }}>{p}%</strong> funded</span>
               <span><strong style={{ color: "#1A1A2E", fontSize: 18 }}>{c.donors}</strong> donors</span>
               <span><strong style={{ color: "#1A1A2E", fontSize: 18 }}>{c.daysLeft}</strong> days left</span>
+            </div>
+
+            {/* Divider */}
+            <div style={{ height: 1, background: "#EDE9E0", margin: "20px 0" }} />
+
+            {/* Recent Transactions Section */}
+            <div>
+              <h4 style={{ fontSize: 14, fontWeight: 700, color: "#1A1A2E", marginBottom: 12, display: "flex", alignItems: "center", gap: 6 }}>
+                📊 Recent Transactions
+              </h4>
+              {loadingTx ? (
+                <div style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "16px 0", color: "#888", gap: 8 }}>
+                  <Loader2 className="animate-spin" style={{ width: 16, height: 16, color: c.color }} />
+                  <span style={{ fontSize: 13 }}>Loading recent transactions...</span>
+                </div>
+              ) : errorTx ? (
+                <div style={{ textAlign: "center", padding: "16px 0", color: "#EF4444", fontSize: 13 }}>
+                  {errorTx}
+                </div>
+              ) : transactions.length === 0 ? (
+                <div style={{ textAlign: "center", padding: "16px 0", color: "#888", fontSize: 13 }}>
+                  No recent donations. Be the first to support!
+                </div>
+              ) : (
+                <div style={{ overflowX: "auto", maxHeight: 220, overflowY: "auto" }}>
+                  <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12, textAlign: "left" }}>
+                    <thead>
+                      <tr style={{ borderBottom: "1px solid #EDE9E0", color: "#888" }}>
+                        <th style={{ padding: "8px 4px", fontWeight: 600 }}>Donor</th>
+                        <th style={{ padding: "8px 4px", fontWeight: 600 }}>Amount</th>
+                        <th style={{ padding: "8px 4px", fontWeight: 600 }}>Method</th>
+                        <th style={{ padding: "8px 4px", fontWeight: 600 }}>Status</th>
+                        <th style={{ padding: "8px 4px", fontWeight: 600 }}>Date/Time</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {transactions.map(t => (
+                        <tr key={t.id} style={{ borderBottom: "1px solid #F5F3ED", color: "#444" }}>
+                          <td style={{ padding: "8px 4px", fontWeight: 500, color: "#1A1A2E" }}>
+                            {t.display_name || "Anonymous"}
+                          </td>
+                          <td style={{ padding: "8px 4px", fontWeight: 600, color: c.color }}>
+                            {fmt(parseFloat(t.amount || 0))}
+                          </td>
+                          <td style={{ padding: "8px 4px" }}>
+                            <span style={{
+                              background: t.payment_method === "bKash" ? "#E2136E15" : t.payment_method === "Nagad" ? "#F5822015" : t.payment_method === "Card" ? "#1E3A8A15" : "#F8F6F0",
+                              color: t.payment_method === "bKash" ? "#E2136E" : t.payment_method === "Nagad" ? "#F58220" : t.payment_method === "Card" ? "#1E3A8A" : "#555",
+                              padding: "2px 6px",
+                              borderRadius: 6,
+                              fontSize: 10,
+                              fontWeight: 700,
+                              whiteSpace: "nowrap"
+                            }}>
+                              {t.payment_method || "Direct"}
+                            </span>
+                          </td>
+                          <td style={{ padding: "8px 4px" }}>
+                            <span style={{
+                              background: t.status === "Completed" ? "#ECFDF5" : "#FEF2F2",
+                              color: t.status === "Completed" ? "#065F46" : "#991B1B",
+                              padding: "2px 6px",
+                              borderRadius: 6,
+                              fontSize: 10,
+                              fontWeight: 700
+                            }}>
+                              {t.status || "Completed"}
+                            </span>
+                          </td>
+                          <td style={{ padding: "8px 4px", color: "#666", whiteSpace: "nowrap" }}>
+                            {formatDate(t.created_at)}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
           </div>
 
