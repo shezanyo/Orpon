@@ -2,7 +2,7 @@ const pool = require("../config/db");
 const { v4: uuidv4 } = require("uuid");
 const { generateHash } = require("../services/hashService");
 
-const createDonationRecord = async ({ donor_name, amount, privacy_type, campaign_id }) => {
+const createDonationRecord = async ({ donor_name, amount, privacy_type, campaign_id, payment_method = "Direct", status = "Completed" }) => {
     const connection = await pool.getConnection();
 
     try {
@@ -60,9 +60,11 @@ const createDonationRecord = async ({ donor_name, amount, privacy_type, campaign
                 created_at,
                 previous_hash,
                 current_hash,
-                campaign_id
+                campaign_id,
+                payment_method,
+                status
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `, [
             id,
             donor_name,
@@ -72,7 +74,9 @@ const createDonationRecord = async ({ donor_name, amount, privacy_type, campaign
             timestamp,
             previous_hash,
             current_hash,
-            campaign_id
+            campaign_id,
+            payment_method,
+            status
         ]);
 
         await connection.query(`
@@ -107,7 +111,8 @@ const createDonation = async (req, res) => {
             donor_name,
             amount,
             privacy_type,
-            campaign_id
+            campaign_id,
+            payment_method
         } = req.body;
 
         if (!amount || !privacy_type || !campaign_id) {
@@ -120,7 +125,9 @@ const createDonation = async (req, res) => {
             donor_name,
             amount,
             privacy_type,
-            campaign_id
+            campaign_id,
+            payment_method: payment_method || "Direct",
+            status: "Completed"
         });
 
         return res.status(201).json({
@@ -161,6 +168,8 @@ const getAllTransactions = async (req, res) => {
                 d.previous_hash,
                 d.current_hash,
                 d.campaign_id,
+                d.payment_method,
+                d.status,
                 c.title AS campaign_title
             FROM donations d
             LEFT JOIN campaigns c
