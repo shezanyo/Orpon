@@ -17,10 +17,10 @@ Traditional donation platforms often lack:
 
 Orpon solves these issues by introducing:
 - Public donation ledger
-- Anonymous donations
+- Anonymous and pseudonymous donations
 - Transaction verification
 - Hash-chain integrity system
-- Blockchain-ready architecture
+- Blockchain-ready architecture with automated batch-ready transaction flows
 
 ---
 
@@ -41,11 +41,11 @@ Frontend (React + Vite)
         ↓
 Backend API (Node.js + Express)
         ↓
-MySQL Database
+MySQL Database (Integrity Verification Check)
         ↓
-SHA-256 Hash Chain
+SHA-256 Hash Chain (Genesis to Current Block)
         ↓
-Blockchain Anchoring (Future Implementation)
+Blockchain Anchoring (Polygon Testnet Sandbox Ready)
 ```
 
 ---
@@ -53,32 +53,31 @@ Blockchain Anchoring (Future Implementation)
 # 🛠️ Tech Stack
 
 ## Frontend
-- React.js
+- React.js (v19)
 - Vite
-- React Router DOM
+- React Router DOM (v6)
 - Tailwind CSS
-- Lucide React
-- QRCode React
+- Lucide React (Icons)
+- QRCode SVG (For link sharing)
 
 ## Backend
 - Node.js
 - Express.js
-
-## Database
-- MySQL
+- MySQL (with automated schema migrations)
 
 ## Security & Integrity
-- SHA-256 Hashing
-- Hash Chain Verification
+- SHA-256 Cryptographic Hashing
+- Cryptographic Hash Chain Validation
+- Privacy Preserving Pseudonym Generation
 
-## Payment Gateway
-- bKash
-- Nagad
-- Card Payment Gateway
+## Payment Gateway Sandbox Integrations
+- **bKash**: Official Tokenized Checkout Sandbox API (with token grant/create/execute endpoints)
+- **Nagad**: Local Interactive Checkout Simulator (OTP/PIN verification validation)
+- **Card Payments (SSLCommerz)**: Official SSLCommerz Sandbox Hosted Gateway (with Validator API check)
 
 ## Future Blockchain Integration
-- Polygon Testnet (Planned)
-- ethers.js (Planned)
+- Polygon Amoy Testnet (Planned)
+- ethers.js (v6)
 
 ---
 
@@ -88,11 +87,13 @@ Blockchain Anchoring (Future Implementation)
 Users who make donations and verify transparency.
 
 ### Features:
-- Make donations
-- Donate anonymously
-- View public ledger
+- Browse active campaigns
+- Make donations configuration
+- Choose privacy tier (Public name, Anonymous, or Pseudonym)
+- Pay securely using bKash, Nagad, or Cards
+- View public transaction ledger
+- View recent transactions directly on the campaign page
 - Verify transaction integrity
-- Access donation tracking links
 
 ---
 
@@ -111,21 +112,32 @@ Administrators who manage transparency verification and monitor system activitie
 # ✨ Core Features
 
 ## ✅ Anonymous Donations
-Users can donate while hiding their identity.
+Users can donate while protecting their identity.
 
 ### Privacy Options:
-- Public Name
-- Anonymous
-- Pseudonym
+- **Public Name**: Shows the donor's full name.
+- **Anonymous**: Real name is hidden; display name shows as `Anonymous`.
+- **Pseudonym**: Real name is hidden; system dynamically generates a randomized pseudonym (e.g., `Donor-4821`).
 
 ---
 
 ## ✅ Public Transaction Ledger
 A publicly accessible ledger displaying:
-- Donation amount
+- Donation BDT amount
 - Timestamp
-- Transaction hash
+- Payment gateway method
+- Cryptographic transaction hash
 - Verification status
+
+---
+
+## ✅ Campaign "Recent Transactions" Panel
+A live, responsive transactions table embedded directly inside the Campaign Progress Card displaying:
+- **Donor Name** (respecting privacy choices)
+- **BDT Amount**
+- **Payment Method** (with styled gateway badges)
+- **Transaction Status** (`Completed`)
+- **Date/Time** (formatted in local time)
 
 ---
 
@@ -133,7 +145,7 @@ A publicly accessible ledger displaying:
 Allows admins and users to verify whether transaction records were modified.
 
 ### Verification Process:
-1. Recalculate hash chain
+1. Recalculate hash chain recursively from genesis block to current block
 2. Compare transaction hashes
 3. Validate chain integrity
 4. Display verification result
@@ -153,11 +165,11 @@ Example:
 ## ✅ Hash Chain System
 Each transaction is linked to the previous transaction using SHA-256 hashing.
 
-### Example:
+### Formula:
 ```text
 hash = SHA256(
   amount +
-  donor +
+  display_name +
   timestamp +
   previous_hash
 )
@@ -165,17 +177,7 @@ hash = SHA256(
 
 If one transaction changes:
 - All following hashes become invalid
-- Tampering becomes detectable
-
----
-
-## ✅ Batch Anchoring (Planned)
-The system is designed for future blockchain integration.
-
-### Planned Workflow:
-- Group transactions into batches
-- Store final batch hash on blockchain
-- Enable immutable verification
+- Tampering becomes immediately detectable
 
 ---
 
@@ -187,22 +189,24 @@ orpon/
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
-│   │   ├── pages/
-│   │   ├── routes/
-│   │   ├── context/
-│   │   └── utils/
+│   │   │   ├── layout/       # Navbar and Footer
+│   │   │   └── ui/           # Custom reusable UI elements
+│   │   ├── pages/            # Page templates (CampaignDetail, Donate, etc.)
+│   │   ├── utils/            # format.js, api.js
+│   │   ├── context/          # AuthContext
+│   │   └── App.jsx
 │   │
 │   ├── public/
 │   └── package.json
 │
 ├── backend/
-│   ├── controllers/
-│   ├── routes/
-│   ├── services/
-│   ├── middleware/
-│   ├── utils/
-│   ├── database/
-│   └── app.js
+│   ├── config/               # Database and blockchain configs
+│   ├── controllers/          # Business logic controllers
+│   ├── routes/               # API endpoint routing
+│   ├── services/             # Helper services (hashing, etc.)
+│   ├── middleware/           # Authentication middlewares
+│   ├── server.js             # API entrypoint
+│   └── package.json
 │
 └── README.md
 ```
@@ -211,17 +215,21 @@ orpon/
 
 # 🗄️ Database Design
 
-## transactions table
+## donations table
 
-| Column | Description |
-|---|---|
-| id | Unique transaction ID |
-| amount | Donation amount |
-| donor_name | Donor identity |
-| is_anonymous | Privacy status |
-| previous_hash | Previous transaction hash |
-| current_hash | Current transaction hash |
-| created_at | Timestamp |
+| Column | Type | Description |
+|---|---|---|
+| id | VARCHAR(100) | Unique transaction ID (UUID) |
+| donor_name | VARCHAR(255) | Actual donor identity |
+| privacy_type | ENUM | Privacy tier (`public`, `anonymous`, `pseudonym`) |
+| display_name | VARCHAR(255) | Name shown on public ledger |
+| amount | DECIMAL(12,2) | Donation amount in BDT |
+| created_at | TIMESTAMP | Creation date/time |
+| previous_hash | TEXT | Cryptographic hash of the previous transaction |
+| current_hash | TEXT | Cryptographic hash of the current transaction |
+| campaign_id | VARCHAR(100) | Link to target campaign |
+| payment_method | VARCHAR(50) | Payment gateway used (`bKash`, `Nagad`, `Card`, `Direct`) |
+| status | VARCHAR(50) | Execution status (`Completed`) |
 
 ---
 
@@ -232,30 +240,7 @@ orpon/
 - Tamper detection
 - Append-only transaction logic
 - Environment variable protection
-- Secure payment processing
-
----
-
-# 🌍 Public Transparency System
-
-Orpon emphasizes public accountability by:
-- exposing transaction history
-- enabling verification
-- providing transparent donation tracking
-
-This increases donor trust and organizational credibility.
-
----
-
-# 💳 Payment Integration
-
-## Supported Payment Methods
-- bKash
-- Nagad
-- Card Payment
-
-### Current Status
-Sandbox/testing integration planned.
+- Secure payment processing with server-side validation callbacks
 
 ---
 
@@ -269,7 +254,48 @@ git clone https://github.com/your-username/orpon.git
 
 ---
 
-## 2️⃣ Frontend Setup
+## 2️⃣ Backend Setup & Environment Configuration
+
+Create a `.env` file inside the `backend` directory.
+
+```env
+PORT=5000
+
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_mysql_password
+DB_NAME=donation_system
+
+JWT_SECRET=your_secret_key
+
+# Payment Gateways Config
+FRONTEND_URL=http://localhost:5173
+BACKEND_URL=http://localhost:5000
+
+# bKash Sandbox Keys
+BKASH_USERNAME=your_bkash_username
+BKASH_PASSWORD=your_bkash_password
+BKASH_APP_KEY=your_bkash_app_key
+BKASH_APP_SECRET=your_bkash_app_secret
+BKASH_BASE_URL=https://tokenized.sandbox.bka.sh/v1.2.0-beta
+
+# SSLCommerz Sandbox Keys
+SSLCOMMERZ_STORE_ID=your_sslcommerz_store_id
+SSLCOMMERZ_STORE_PASSWORD=your_sslcommerz_store_password
+SSLCOMMERZ_BASE_URL=https://sandbox.sslcommerz.com
+```
+
+Start the backend:
+```bash
+cd backend
+npm install
+npm run dev
+```
+*(The backend will automatically detect columns and execute database migrations on start).*
+
+---
+
+## 3️⃣ Frontend Setup
 
 ```bash
 cd frontend
@@ -277,32 +303,7 @@ npm install
 npm run dev
 ```
 
----
-
-## 3️⃣ Backend Setup
-
-```bash
-cd backend
-npm install
-npm run dev
-```
-
----
-
-## 4️⃣ Configure Environment Variables
-
-Create `.env` file inside backend directory.
-
-```env
-PORT=5000
-
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=your_password
-DB_NAME=orpon
-
-JWT_SECRET=your_secret_key
-```
+The application will be accessible at `http://localhost:5173`.
 
 ---
 
@@ -312,48 +313,14 @@ JWT_SECRET=your_secret_key
 
 | Method | Endpoint | Description |
 |---|---|---|
-| POST | /api/donate | Create donation |
-| GET | /api/transactions | Get all transactions |
-| GET | /api/transaction/:id | Get single transaction |
-| GET | /api/verify | Verify hash chain |
-
----
-
-# 🧪 Verification Workflow
-
-```text
-1. User makes donation
-2. System generates hash
-3. Hash linked to previous transaction
-4. Data stored in MySQL
-5. Verification recalculates hashes
-6. System returns VALID or INVALID
-```
-
----
-
-# 📊 Future Improvements
-
-## Planned Features
-- Full blockchain anchoring
-- Smart contract integration
-- Real-time analytics
-- Multi-language support
-- Mobile application
-- AI fraud detection
-- QR donation verification
-
----
-
-# ☁️ Deployment
-
-## Planned Hosting
-- Azure Cloud
-
-Possible deployment:
-- Frontend → Azure Static Web Apps
-- Backend → Azure App Service
-- Database → Azure MySQL
+| POST | /api/donate | Create direct/manual donation |
+| GET | /api/transactions | Get all public transactions |
+| POST | /api/payment/bkash/initiate | Initiate bKash payment session |
+| GET | /api/payment/bkash/callback | Verify bKash checkout success/fail |
+| POST | /api/payment/card/initiate | Initiate SSLCommerz Card session |
+| POST | /api/payment/card/success | Verify SSLCommerz success callback |
+| POST | /api/payment/nagad/initiate | Initiate Nagad verification session |
+| POST | /api/payment/nagad/callback | Verify simulated Nagad OTP & PIN |
 
 ---
 
@@ -363,31 +330,14 @@ This project was developed for academic and educational purposes to explore:
 - Full-stack web development
 - Cryptographic integrity systems
 - Transparent donation platforms
+- Payment gateway sandbox integrations
 - Blockchain-ready architecture
-
----
-
-# 🤝 Contribution
-
-Contributions, ideas, and improvements are welcome.
-
-### Steps:
-1. Fork repository
-2. Create feature branch
-3. Commit changes
-4. Open pull request
 
 ---
 
 # 📜 License
 
 This project is open-source and available under the MIT License.
-
----
-
-# 👨‍💻 Authors
-
-Developed by Team Orpon
 
 ---
 
