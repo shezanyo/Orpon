@@ -166,8 +166,8 @@ export default function CampaignDetail({ c, nav }) {
                           </td>
                           <td style={{ padding: "8px 4px" }}>
                             <span style={{
-                              background: t.status === "Completed" ? "#ECFDF5" : "#FEF2F2",
-                              color: t.status === "Completed" ? "#065F46" : "#991B1B",
+                              background: t.status === "Completed" ? "#ECFDF5" : t.status === "Pending" ? "#FFFBEB" : "#FEF2F2",
+                              color: t.status === "Completed" ? "#065F46" : t.status === "Pending" ? "#B45309" : "#991B1B",
                               padding: "2px 6px",
                               borderRadius: 6,
                               fontSize: 10,

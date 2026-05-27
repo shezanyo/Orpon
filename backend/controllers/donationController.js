@@ -2,7 +2,7 @@ const pool = require("../config/db");
 const { v4: uuidv4 } = require("uuid");
 const { generateHash } = require("../services/hashService");
 
-const createDonationRecord = async ({ donor_name, amount, privacy_type, campaign_id, payment_method = "Direct", status = "Completed" }) => {
+const createPendingDonationRecord = async ({ donor_name, amount, privacy_type, campaign_id, payment_method }) => {
     const connection = await pool.getConnection();
 
     try {
@@ -25,30 +25,8 @@ const createDonationRecord = async ({ donor_name, amount, privacy_type, campaign
             display_name = "Donor-" + Math.floor(Math.random() * 9999);
         }
 
-        const [lastDonation] = await connection.query(`
-            SELECT current_hash
-            FROM donations
-            ORDER BY created_at DESC
-            LIMIT 1
-        `);
-
-        let previous_hash = "GENESIS";
-
-        if (lastDonation.length > 0) {
-            previous_hash = lastDonation[0].current_hash;
-        }
-
         const id = uuidv4();
         const timestamp = new Date();
-        const timestampStr = timestamp.toISOString();
-        const current_hash = generateHash(
-            amount,
-            display_name,
-            timestampStr,
-            previous_hash
-        );
-
-        await connection.beginTransaction();
 
         await connection.query(`
             INSERT INTO donations (
@@ -72,22 +50,87 @@ const createDonationRecord = async ({ donor_name, amount, privacy_type, campaign
             display_name,
             amount,
             timestamp,
-            previous_hash,
-            current_hash,
+            "PENDING",
+            "PENDING",
             campaign_id,
             payment_method,
-            status
+            "Pending"
         ]);
 
+        return {
+            success: true,
+            id
+        };
+    } catch (error) {
+        console.error("Failed to create pending donation record:", error);
+        throw error;
+    } finally {
+        connection.release();
+    }
+};
+
+const completeDonationRecord = async (id) => {
+    const connection = await pool.getConnection();
+
+    try {
+        await connection.beginTransaction();
+
+        // 1. Fetch pending record and lock it for update
+        const [donations] = await connection.query(`
+            SELECT * FROM donations WHERE id = ? FOR UPDATE
+        `, [id]);
+
+        if (donations.length === 0) {
+            throw new Error("Donation record not found");
+        }
+
+        const donation = donations[0];
+        if (donation.status === "Completed") {
+            await connection.rollback();
+            return { success: true, id, current_hash: donation.current_hash };
+        }
+
+        // 2. Fetch last completed donation's hash for linking
+        const [lastDonation] = await connection.query(`
+            SELECT current_hash
+            FROM donations
+            WHERE status = 'Completed'
+            ORDER BY created_at DESC
+            LIMIT 1
+        `);
+
+        let previous_hash = "GENESIS";
+        if (lastDonation.length > 0) {
+            previous_hash = lastDonation[0].current_hash;
+        }
+
+        // 3. Compute cryptographic hash
+        const timestamp = new Date();
+        const timestampStr = timestamp.toISOString();
+        const current_hash = generateHash(
+            donation.amount,
+            donation.display_name,
+            timestampStr,
+            previous_hash
+        );
+
+        // 4. Update the donation record
+        await connection.query(`
+            UPDATE donations
+            SET status = 'Completed',
+                created_at = ?,
+                previous_hash = ?,
+                current_hash = ?
+            WHERE id = ?
+        `, [timestamp, previous_hash, current_hash, id]);
+
+        // 5. Increment campaign statistics
         await connection.query(`
             UPDATE campaigns
             SET raised_amount = raised_amount + ?,
                 donor_count = donor_count + 1
             WHERE id = ?
-        `, [
-            amount,
-            campaign_id
-        ]);
+        `, [donation.amount, donation.campaign_id]);
 
         await connection.commit();
 
@@ -98,11 +141,57 @@ const createDonationRecord = async ({ donor_name, amount, privacy_type, campaign
         };
     } catch (error) {
         await connection.rollback();
-        console.error("Donation database transaction failed:", error);
+        console.error("Failed to complete donation record:", error);
         throw error;
     } finally {
         connection.release();
     }
+};
+
+const failDonationRecord = async (id) => {
+    const connection = await pool.getConnection();
+    try {
+        await connection.query(`
+            UPDATE donations
+            SET status = 'Failed'
+            WHERE id = ? AND status = 'Pending'
+        `, [id]);
+        return { success: true };
+    } catch (error) {
+        console.error("Failed to update status to Failed:", error);
+        throw error;
+    } finally {
+        connection.release();
+    }
+};
+
+const cancelDonationRecord = async (id) => {
+    const connection = await pool.getConnection();
+    try {
+        await connection.query(`
+            UPDATE donations
+            SET status = 'Cancelled'
+            WHERE id = ? AND status = 'Pending'
+        `, [id]);
+        return { success: true };
+    } catch (error) {
+        console.error("Failed to update status to Cancelled:", error);
+        throw error;
+    } finally {
+        connection.release();
+    }
+};
+
+const createDonationRecord = async ({ donor_name, amount, privacy_type, campaign_id, payment_method = "Direct", status = "Completed" }) => {
+    const pending = await createPendingDonationRecord({ donor_name, amount, privacy_type, campaign_id, payment_method });
+    if (status === "Completed") {
+        return await completeDonationRecord(pending.id);
+    } else if (status === "Failed") {
+        await failDonationRecord(pending.id);
+    } else if (status === "Cancelled") {
+        await cancelDonationRecord(pending.id);
+    }
+    return { success: true, id: pending.id };
 };
 
 const createDonation = async (req, res) => {
@@ -121,14 +210,15 @@ const createDonation = async (req, res) => {
             });
         }
 
-        const donation = await createDonationRecord({
+        const pending = await createPendingDonationRecord({
             donor_name,
-            amount,
+            amount: parseFloat(amount),
             privacy_type,
             campaign_id,
-            payment_method: payment_method || "Direct",
-            status: "Completed"
+            payment_method: payment_method || "Direct"
         });
+
+        const donation = await completeDonationRecord(pending.id);
 
         return res.status(201).json({
             success: true,
@@ -195,5 +285,9 @@ const getAllTransactions = async (req, res) => {
 module.exports = {
     createDonation,
     createDonationRecord,
+    createPendingDonationRecord,
+    completeDonationRecord,
+    failDonationRecord,
+    cancelDonationRecord,
     getAllTransactions
 };
