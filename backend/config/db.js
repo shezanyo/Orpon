@@ -31,6 +31,20 @@ const runMigrations = async () => {
             console.log("Adding address column to users...");
             await pool.query("ALTER TABLE users ADD COLUMN address TEXT NULL");
         }
+
+        // Migration for donations table columns
+        const [donationColumns] = await pool.query("SHOW COLUMNS FROM donations");
+        const donationColumnNames = donationColumns.map(c => c.Field);
+
+        if (!donationColumnNames.includes("payment_method")) {
+            console.log("Adding payment_method column to donations...");
+            await pool.query("ALTER TABLE donations ADD COLUMN payment_method VARCHAR(50) DEFAULT 'Direct'");
+        }
+        if (!donationColumnNames.includes("status")) {
+            console.log("Adding status column to donations...");
+            await pool.query("ALTER TABLE donations ADD COLUMN status VARCHAR(50) DEFAULT 'Completed'");
+        }
+
         console.log("Database migrations checked & completed successfully!");
     } catch (err) {
         console.error("Database migrations error:", err);
