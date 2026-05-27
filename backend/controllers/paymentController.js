@@ -139,7 +139,9 @@ const bkashCallback = async (req, res) => {
             donor_name: pending.donor_name,
             amount: pending.amount,
             privacy_type: pending.privacy_type,
-            campaign_id: pending.campaign_id
+            campaign_id: pending.campaign_id,
+            payment_method: "bKash",
+            status: "Completed"
         });
 
         // C. Redirect user to the frontend success page
@@ -263,7 +265,9 @@ const cardSuccess = async (req, res) => {
             donor_name: pending.donor_name,
             amount: pending.amount,
             privacy_type: pending.privacy_type,
-            campaign_id: pending.campaign_id
+            campaign_id: pending.campaign_id,
+            payment_method: "Card",
+            status: "Completed"
         });
 
         return res.redirect(`${process.env.FRONTEND_URL}/payment/success?donationId=${donation.id}&amount=${pending.amount}`);
@@ -362,7 +366,9 @@ const verifyNagadPayment = async (req, res) => {
             donor_name: pending.donor_name,
             amount: pending.amount,
             privacy_type: pending.privacy_type,
-            campaign_id: pending.campaign_id
+            campaign_id: pending.campaign_id,
+            payment_method: "Nagad",
+            status: "Completed"
         });
 
         return res.status(200).json({
