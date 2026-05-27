@@ -1,5 +1,10 @@
 const { v4: uuidv4 } = require("uuid");
-const { createDonationRecord } = require("./donationController");
+const { 
+    createPendingDonationRecord,
+    completeDonationRecord,
+    failDonationRecord,
+    cancelDonationRecord
+} = require("./donationController");
 
 // In-memory map to store pending transaction metadata across callbacks
 const pendingPayments = new Map();
@@ -22,7 +27,16 @@ const initiateBkash = async (req, res) => {
             return res.status(400).json({ message: "Campaign ID is required" });
         }
 
-        // A. Obtain bKash Auth Token
+        // A. Create pending donation record in MySQL database
+        const pendingDonation = await createPendingDonationRecord({
+            donor_name,
+            amount: parseFloat(amount),
+            privacy_type: privacy_type || "public",
+            campaign_id,
+            payment_method: "bKash"
+        });
+
+        // B. Obtain bKash Auth Token
         const tokenResponse = await fetch(`${process.env.BKASH_BASE_URL}/tokenized/checkout/token/grant`, {
             method: "POST",
             headers: {
@@ -39,12 +53,13 @@ const initiateBkash = async (req, res) => {
         const tokenData = await tokenResponse.json();
         if (!tokenResponse.ok || !tokenData.id_token) {
             console.error("bKash token grant failure:", tokenData);
+            await failDonationRecord(pendingDonation.id);
             return res.status(502).json({ message: "Failed to authenticate with bKash Sandbox" });
         }
 
         const idToken = tokenData.id_token;
 
-        // B. Create bKash Payment
+        // C. Create bKash Payment
         const createPaymentResponse = await fetch(`${process.env.BKASH_BASE_URL}/tokenized/checkout/create`, {
             method: "POST",
             headers: {
@@ -66,19 +81,18 @@ const initiateBkash = async (req, res) => {
         const paymentData = await createPaymentResponse.json();
         if (!createPaymentResponse.ok || !paymentData.paymentID) {
             console.error("bKash payment creation failure:", paymentData);
+            await failDonationRecord(pendingDonation.id);
             return res.status(502).json({ message: "Failed to create payment session with bKash" });
         }
 
-        // C. Store metadata against the paymentID for retrieval on success callback
+        // D. Store metadata against the paymentID for retrieval on success callback
         pendingPayments.set(paymentData.paymentID, {
+            donationId: pendingDonation.id,
             amount: parseFloat(amount),
-            campaign_id,
-            donor_name,
-            privacy_type: privacy_type || "public",
             idToken // Preserve token for payment execute step
         });
 
-        // D. Return the redirection URL to the client
+        // E. Return the redirection URL to the client
         return res.status(200).json({
             success: true,
             redirectUrl: paymentData.bkashURL
@@ -109,10 +123,12 @@ const bkashCallback = async (req, res) => {
         pendingPayments.delete(paymentID);
 
         if (status === "cancel") {
+            await cancelDonationRecord(pending.donationId);
             return res.redirect(`${process.env.FRONTEND_URL}/payment/cancel`);
         }
 
         if (status !== "success") {
+            await failDonationRecord(pending.donationId);
             return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=Payment+cancelled+or+failed`);
         }
 
@@ -131,18 +147,12 @@ const bkashCallback = async (req, res) => {
 
         if (!executeResponse.ok || executeData.transactionStatus !== "Completed") {
             console.error("bKash payment execution failure:", executeData);
+            await failDonationRecord(pending.donationId);
             return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=Failed+to+execute+bKash+payment`);
         }
 
         // B. Payment executed successfully. Persist the donation in the database.
-        const donation = await createDonationRecord({
-            donor_name: pending.donor_name,
-            amount: pending.amount,
-            privacy_type: pending.privacy_type,
-            campaign_id: pending.campaign_id,
-            payment_method: "bKash",
-            status: "Completed"
-        });
+        const donation = await completeDonationRecord(pending.donationId);
 
         // C. Redirect user to the frontend success page
         return res.redirect(`${process.env.FRONTEND_URL}/payment/success?donationId=${donation.id}&amount=${pending.amount}`);
@@ -170,14 +180,21 @@ const initiateCard = async (req, res) => {
             return res.status(400).json({ message: "Campaign ID is required" });
         }
 
-        const transactionId = `ORN-${uuidv4()}`;
-
-        // Store metadata in memory keyed by transaction ID
-        pendingPayments.set(transactionId, {
-            amount: parseFloat(amount),
-            campaign_id,
+        // A. Create pending donation record
+        const pendingDonation = await createPendingDonationRecord({
             donor_name,
-            privacy_type: privacy_type || "public"
+            amount: parseFloat(amount),
+            privacy_type: privacy_type || "public",
+            campaign_id,
+            payment_method: "Card"
+        });
+
+        const transactionId = pendingDonation.id;
+
+        // B. Store metadata in memory keyed by transaction ID
+        pendingPayments.set(transactionId, {
+            donationId: pendingDonation.id,
+            amount: parseFloat(amount)
         });
 
         // Set up SSLCommerz payload
@@ -219,6 +236,7 @@ const initiateCard = async (req, res) => {
 
         if (!sslResponse.ok || sslData.status !== "SUCCESS" || !sslData.GatewayPageURL) {
             console.error("SSLCommerz creation failure:", sslData);
+            await failDonationRecord(pendingDonation.id);
             return res.status(502).json({ message: "Failed to connect to SSLCommerz Sandbox" });
         }
 
@@ -257,18 +275,12 @@ const cardSuccess = async (req, res) => {
 
         if (!valResponse.ok || (valData.status !== "VALID" && valData.status !== "VALIDATED")) {
             console.error("SSLCommerz validation failure:", valData);
+            await failDonationRecord(pending.donationId);
             return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=Payment+verification+failed`);
         }
 
         // B. Persist donation inside our secure MySQL db & block chain ledger
-        const donation = await createDonationRecord({
-            donor_name: pending.donor_name,
-            amount: pending.amount,
-            privacy_type: pending.privacy_type,
-            campaign_id: pending.campaign_id,
-            payment_method: "Card",
-            status: "Completed"
-        });
+        const donation = await completeDonationRecord(pending.donationId);
 
         return res.redirect(`${process.env.FRONTEND_URL}/payment/success?donationId=${donation.id}&amount=${pending.amount}`);
     } catch (error) {
@@ -282,7 +294,11 @@ const cardSuccess = async (req, res) => {
  */
 const cardFail = async (req, res) => {
     const { tran_id } = req.body;
-    pendingPayments.delete(tran_id);
+    const pending = pendingPayments.get(tran_id);
+    if (pending) {
+        await failDonationRecord(pending.donationId);
+        pendingPayments.delete(tran_id);
+    }
     return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=Card+payment+failed`);
 };
 
@@ -291,7 +307,11 @@ const cardFail = async (req, res) => {
  */
 const cardCancel = async (req, res) => {
     const { tran_id } = req.body;
-    pendingPayments.delete(tran_id);
+    const pending = pendingPayments.get(tran_id);
+    if (pending) {
+        await cancelDonationRecord(pending.donationId);
+        pendingPayments.delete(tran_id);
+    }
     return res.redirect(`${process.env.FRONTEND_URL}/payment/cancel`);
 };
 
@@ -313,14 +333,21 @@ const initiateNagad = async (req, res) => {
             return res.status(400).json({ message: "Campaign ID is required" });
         }
 
-        const sessionId = `NGD-${uuidv4()}`;
-
-        // Cache transaction metadata in memory
-        pendingPayments.set(sessionId, {
-            amount: parseFloat(amount),
-            campaign_id,
+        // A. Create pending donation record
+        const pendingDonation = await createPendingDonationRecord({
             donor_name,
-            privacy_type: privacy_type || "public"
+            amount: parseFloat(amount),
+            privacy_type: privacy_type || "public",
+            campaign_id,
+            payment_method: "Nagad"
+        });
+
+        const sessionId = `NGD-${pendingDonation.id}`;
+
+        // B. Cache transaction metadata in memory
+        pendingPayments.set(sessionId, {
+            donationId: pendingDonation.id,
+            amount: parseFloat(amount)
         });
 
         // Return URL to frontend simulated Nagad checkout page
@@ -351,25 +378,18 @@ const verifyNagadPayment = async (req, res) => {
         }
 
         // Validate Sandbox OTP and PIN
-        if (otp !== "123456") {
-            return res.status(400).json({ message: "Invalid OTP. Use sandbox OTP: 123456" });
-        }
-        if (pin !== "12121") {
-            return res.status(400).json({ message: "Invalid PIN. Use sandbox PIN: 12121" });
+        if (otp !== "123456" || pin !== "12121") {
+            // Update status to Failed on verification credential error
+            await failDonationRecord(pending.donationId);
+            pendingPayments.delete(sessionId);
+            return res.status(400).json({ message: "Invalid credentials. Sandbox OTP: 123456, Sandbox PIN: 12121" });
         }
 
         // Delete pending payment to prevent replay attacks
         pendingPayments.delete(sessionId);
 
         // Complete database insertion and ledger update
-        const donation = await createDonationRecord({
-            donor_name: pending.donor_name,
-            amount: pending.amount,
-            privacy_type: pending.privacy_type,
-            campaign_id: pending.campaign_id,
-            payment_method: "Nagad",
-            status: "Completed"
-        });
+        const donation = await completeDonationRecord(pending.donationId);
 
         return res.status(200).json({
             success: true,
@@ -383,6 +403,30 @@ const verifyNagadPayment = async (req, res) => {
     }
 };
 
+/**
+ * Handle Nagad payment cancellation callback
+ */
+const cancelNagad = async (req, res) => {
+    try {
+        const { sessionId } = req.body;
+
+        if (!sessionId) {
+            return res.status(400).json({ message: "Session ID is required" });
+        }
+
+        const pending = pendingPayments.get(sessionId);
+        if (pending) {
+            await cancelDonationRecord(pending.donationId);
+            pendingPayments.delete(sessionId);
+        }
+
+        return res.status(200).json({ success: true });
+    } catch (error) {
+        console.error("Nagad cancel exception:", error);
+        return res.status(500).json({ message: "Server error cancelling Nagad payment session" });
+    }
+};
+
 module.exports = {
     initiateBkash,
     bkashCallback,
@@ -391,5 +435,6 @@ module.exports = {
     cardFail,
     cardCancel,
     initiateNagad,
-    verifyNagadPayment
+    verifyNagadPayment,
+    cancelNagad
 };

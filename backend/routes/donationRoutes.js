@@ -14,7 +14,8 @@ const {
     cardFail,
     cardCancel,
     initiateNagad,
-    verifyNagadPayment
+    verifyNagadPayment,
+    cancelNagad
 } = require("../controllers/paymentController");
 
 /*
@@ -46,5 +47,6 @@ Nagad Sandbox routes
 */
 router.post("/payment/nagad/initiate", initiateNagad);
 router.post("/payment/nagad/callback", verifyNagadPayment);
+router.post("/payment/nagad/cancel", cancelNagad);
 
 module.exports = router;
