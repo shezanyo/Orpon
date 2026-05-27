@@ -13,6 +13,23 @@ export default function NagadSandbox() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const handleCancel = async () => {
+    try {
+      setLoading(true);
+      await fetch(`${API_URL}/payment/nagad/cancel`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ sessionId })
+      });
+    } catch (err) {
+      console.error("Failed to cancel Nagad session on backend:", err);
+    } finally {
+      window.location.href = "/payment/cancel";
+    }
+  };
+
   const handleMobileSubmit = (e) => {
     e.preventDefault();
     if (!mobileNumber.match(/^01[3-9]\d{8}$/)) {
@@ -138,7 +155,7 @@ export default function NagadSandbox() {
                   </div>
 
                   <div style={{ display: "flex", gap: 10 }}>
-                    <button type="button" onClick={() => window.location.href = "/payment/cancel"} style={{ flex: 1, padding: "12px", background: "#E5E7EB", border: "none", borderRadius: 6, color: "#4B5563", fontSize: 14, fontWeight: 700, cursor: "pointer" }}>
+                    <button type="button" onClick={handleCancel} style={{ flex: 1, padding: "12px", background: "#E5E7EB", border: "none", borderRadius: 6, color: "#4B5563", fontSize: 14, fontWeight: 700, cursor: "pointer" }}>
                       Cancel
                     </button>
                     <button type="submit" style={{ flex: 1, padding: "12px", background: "#F58220", border: "none", borderRadius: 6, color: "#fff", fontSize: 14, fontWeight: 700, cursor: "pointer" }}>
