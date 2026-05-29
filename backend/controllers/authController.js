@@ -97,6 +97,7 @@ const registerUser = async (req, res) => {
                 nid,
                 address
             )
+            OUTPUT INSERTED.id
             VALUES (?, ?, ?, ?, ?, ?)
         `, [
             full_name,
@@ -138,7 +139,7 @@ const registerUser = async (req, res) => {
     } catch (error) {
         console.error("Register Error:", error);
         // Catch duplicate keys in race conditions
-        if (error.code === "ER_DUP_ENTRY") {
+        if (error.number === 2627 || error.number === 2601) {
             let msg = "A user with this email, phone, or NID already exists.";
             if (error.message.includes("email")) msg = "Email is already registered.";
             else if (error.message.includes("phone")) msg = "Phone number is already registered.";

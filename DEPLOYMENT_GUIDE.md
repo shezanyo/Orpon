@@ -12,7 +12,7 @@
 2. [🌿 Create the Experimental Branch](#2-create-the-experimental-branch)
 3. [🔧 Code Changes Needed Before Deploying](#3-code-changes-needed-before-deploying)
 4. [☁️ Azure Setup – Create Resources](#4-azure-setup--create-resources)
-5. [🗄️ Set Up the MySQL Database](#5-set-up-the-mysql-database)
+5. [🗄️ Set Up the Azure SQL Database](#5-set-up-the-azure-sql-database)
 6. [🖥️ Deploy Backend to Azure App Service](#6-deploy-backend-to-azure-app-service)
 7. [🌐 Deploy Frontend to Azure Static Web Apps](#7-deploy-frontend-to-azure-static-web-apps)
 8. [✅ Verify Everything Works](#8-verify-everything-works)
@@ -71,11 +71,13 @@ PORT=5000
 BACKEND_URL=http://localhost:5000
 FRONTEND_URL=http://localhost:5173
 
-# MySQL
+# Azure SQL / MSSQL
 DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=
+DB_PORT=1433
+DB_USER=your_sql_user
+DB_PASSWORD=your_password
 DB_NAME=donation_system
+DB_TRUST_CERT=true # use false for Azure SQL
 
 # Redis (optional – app falls back to in-memory if not set)
 USE_REDIS=false
@@ -194,62 +196,130 @@ az group create \
 
 ---
 
-## 5. Set Up the MySQL Database
+## 5. Set Up the Azure SQL Database
 
-### 5.1 – Create Azure Database for MySQL (Flexible Server)
+### 5.1 – Create Azure SQL logical server
 
 ```bash
-az mysql flexible-server create \
+az sql server create \
   --resource-group OrponRG \
-  --name orpon-db-server \
-  --admin-user orponadmin \
-  --admin-password 'YourStrongPassword123!' \
+  --name orpon-sql-server \
   --location southeastasia \
-  --sku-name Standard_B1ms \
-  --storage-size 20 \
-  --version 8.0.21 \
-  --public-access 0.0.0.0
+  --admin-user orponadmin \
+  --admin-password 'YourStrongPassword123!'
 ```
 
 > [!IMPORTANT]
 > - Replace `YourStrongPassword123!` with your own strong password (must include uppercase, lowercase, number, and special character).
-> - `Standard_B1ms` is the cheapest burstable tier (~$6/month, covered by student credits).
-> - `--public-access 0.0.0.0` means "allow all Azure services + my current IP". This is fine for sandbox testing.
+> - Azure SQL uses port `1433` by default.
+> - Use `orpon-sql-server.database.windows.net` as the DB host.
 
-### 5.2 – Create the database
+### 5.2 – Configure server firewall
 
 ```bash
-az mysql flexible-server db create \
+az sql server firewall-rule create \
   --resource-group OrponRG \
-  --server-name orpon-db-server \
-  --database-name donation_system
+  --server orpon-sql-server \
+  --name AllowAzureIps \
+  --start-ip-address 0.0.0.0 \
+  --end-ip-address 0.0.0.0
 ```
 
-### 5.3 – Create the tables
+> This allows Azure services to connect to the database. For local CLI access, add your current IP instead of `0.0.0.0`.
 
-Connect using MySQL Workbench or command line:
+### 5.3 – Create the database
 
 ```bash
-mysql -h orpon-db-server.mysql.database.azure.com \
-      -u orponadmin \
-      -p \
-      --ssl-mode=REQUIRED \
-      donation_system
+az sql db create \
+  --resource-group OrponRG \
+  --server orpon-sql-server \
+  --name donation_system \
+  --service-objective Basic
 ```
 
-Then run whatever SQL schema your project uses to create the `users`, `campaigns`, `donations` tables, etc. The backend's auto-migration in `config/db.js` will add missing columns, but you need the base tables created first.
+### 5.4 – Create the tables
 
-> [!TIP]
-> If you already have a local MySQL dump, export it and import to Azure:
-> ```bash
-> # Export from local
-> mysqldump -u root donation_system > orpon_schema.sql
->
-> # Import to Azure
-> mysql -h orpon-db-server.mysql.database.azure.com \
->       -u orponadmin -p --ssl-mode=REQUIRED \
->       donation_system < orpon_schema.sql
-> ```
+Connect using Azure Data Studio, SQL Server Management Studio, or `sqlcmd`:
+
+```bash
+sqlcmd -S orpon-sql-server.database.windows.net -U orponadmin -P 'YourStrongPassword123!' -d donation_system
+```
+
+Once connected, run the full schema below to create the base tables required by the backend.
+
+```sql
+CREATE TABLE IF NOT EXISTS users (
+    id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    full_name NVARCHAR(255) NOT NULL,
+    email NVARCHAR(255) NOT NULL UNIQUE,
+    password NVARCHAR(255) NOT NULL,
+    phone NVARCHAR(20) NULL UNIQUE,
+    nid NVARCHAR(20) NULL UNIQUE,
+    address NVARCHAR(MAX) NULL
+);
+
+CREATE TABLE IF NOT EXISTS campaigns (
+    id NVARCHAR(36) PRIMARY KEY,
+    user_id UNIQUEIDENTIFIER NOT NULL,
+    title NVARCHAR(255) NOT NULL,
+    description NVARCHAR(MAX) NULL,
+    story NVARCHAR(MAX) NULL,
+    category NVARCHAR(100) NOT NULL,
+    target_amount DECIMAL(18,2) NOT NULL,
+    raised_amount DECIMAL(18,2) NOT NULL DEFAULT 0,
+    donor_count INT NOT NULL DEFAULT 0,
+    days_left INT NOT NULL DEFAULT 30,
+    slug NVARCHAR(255) NOT NULL UNIQUE,
+    organizer_name NVARCHAR(255) NOT NULL,
+    is_verified BIT NOT NULL DEFAULT 0,
+    color NVARCHAR(50) NULL,
+    emoji NVARCHAR(50) NULL,
+    CONSTRAINT FK_Campaigns_Users FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS donations (
+    id NVARCHAR(36) PRIMARY KEY,
+    donor_name NVARCHAR(255) NULL,
+    privacy_type NVARCHAR(20) NOT NULL,
+    display_name NVARCHAR(255) NOT NULL,
+    amount DECIMAL(18,2) NOT NULL,
+    created_at DATETIME2 NOT NULL,
+    previous_hash NVARCHAR(255) NOT NULL,
+    current_hash NVARCHAR(255) NOT NULL,
+    campaign_id NVARCHAR(36) NOT NULL,
+    payment_method NVARCHAR(50) NOT NULL DEFAULT 'Direct',
+    status NVARCHAR(50) NOT NULL DEFAULT 'Completed',
+    CONSTRAINT FK_Donations_Campaigns FOREIGN KEY (campaign_id) REFERENCES campaigns(id)
+);
+```
+
+> Note: The backend registration flow inserts into `users` without specifying an `id`, so the `users.id` column must be auto-generated. The `UNIQUEIDENTIFIER DEFAULT NEWID()` definition above provides that behavior.
+
+If you already have a local SQL Server schema file, you can run it directly in Azure Data Studio or with `sqlcmd`:
+
+```bash
+sqlcmd -S orpon-sql-server.database.windows.net -U orponadmin -P 'YourStrongPassword123!' -d donation_system -i /path/to/your/schema.sql
+```
+
+### 5.4.1 – Validate the schema
+
+After creating the tables, verify them with:
+
+```sql
+SELECT TABLE_NAME, COLUMN_NAME, DATA_TYPE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME IN ('users', 'campaigns', 'donations')
+ORDER BY TABLE_NAME, ORDINAL_POSITION;
+```
+
+If the tables already exist and are missing the optional fields used by the current backend, the app will add them automatically on startup via `backend/config/db.js`:
+- `users.phone`
+- `users.nid`
+- `users.address`
+- `donations.payment_method`
+- `donations.status`
+
+If you prefer a faster setup, paste the full SQL block above into Azure Data Studio or SSMS and execute it in the `donation_system` database.
 
 ---
 
@@ -300,10 +370,12 @@ az webapp config appsettings set \
     PORT=8080 \
     BACKEND_URL=https://orpon-backend-api.azurewebsites.net \
     FRONTEND_URL=https://your-frontend-url.azurestaticapps.net \
-    DB_HOST=orpon-db-server.mysql.database.azure.com \
+    DB_HOST=orpon-sql-server.database.windows.net \
+    DB_PORT=1433 \
     DB_USER=orponadmin \
     DB_PASSWORD='YourStrongPassword123!' \
     DB_NAME=donation_system \
+    DB_TRUST_CERT=false \
     JWT_SECRET='a-very-long-random-secret-string-change-this' \
     USE_REDIS=false \
     BKASH_USERNAME=sandboxTokenizedUser02 \
@@ -316,9 +388,6 @@ az webapp config appsettings set \
     SSLCOMMERZ_BASE_URL=https://sandbox.sslcommerz.com
 ```
 
-> [!IMPORTANT]
-> - `USE_REDIS=false` → the app will use the in-memory Map fallback. No Redis resource needed for sandbox testing (saves money).
-> - All the `BKASH_*` and `SSLCOMMERZ_*` values are the **sandbox** keys. They will work for testing.
 > - You'll update `FRONTEND_URL` after deploying the frontend in step 7.
 
 ### 6.4 – Deploy the backend code
@@ -442,18 +511,16 @@ This ensures payment callbacks redirect to the correct frontend domain.
 |------|-----|-----------------|
 | Backend is alive | Visit `https://orpon-backend-api.azurewebsites.net/api/campaigns` | JSON response (empty array or campaign data) |
 | Frontend loads | Visit your Static Web App URL | The Orpon UI appears |
-| User registration | Register a new user on the frontend | Success message, user stored in Azure MySQL |
+| User registration | Register a new user on the frontend | Success message, user stored in Azure SQL |
 | Create campaign | Create a test campaign | Campaign appears in the list |
 | bKash sandbox payment | Click donate → bKash → complete sandbox flow | Redirected to bKash sandbox checkout, then back to your success page |
 | SSLCommerz sandbox | Click donate → Card → complete sandbox flow | Redirected to SSLCommerz sandbox, then back to success |
-| Transaction appears in DB | Check the `donations` table in Azure MySQL | Row with status `Completed` and blockchain hash |
+| Transaction appears in DB | Check the `donations` table in Azure SQL | Row with status `Completed` and blockchain hash |
 
 ### Quick DB check from terminal
 
 ```bash
-mysql -h orpon-db-server.mysql.database.azure.com \
-      -u orponadmin -p --ssl-mode=REQUIRED \
-      -e "SELECT id, donor_name, amount, status, payment_method FROM donation_system.donations ORDER BY id DESC LIMIT 5;"
+sqlcmd -S orpon-sql-server.database.windows.net -U orponadmin -P 'YourStrongPassword123!' -d donation_system -Q "SELECT TOP 5 id, donor_name, amount, status, payment_method FROM donations ORDER BY id DESC;"
 ```
 
 ---
@@ -552,16 +619,15 @@ Azure for Students gives you **$100 in credits** (valid for 12 months). Here's w
 | Resource | SKU | Monthly Cost |
 |----------|-----|--------------|
 | App Service (backend) | B1 Linux | ~$13 (from credits) |
-| MySQL Flexible Server | Standard_B1ms | ~$6 (from credits) |
+| Azure SQL Database | Basic | ~$5 (from credits) |
 | Static Web App (frontend) | Free tier | **$0** |
 | Redis | *Not used (in-memory fallback)* | **$0** |
-| **Total** | | **~$19/month from credits** |
+| **Total** | | **~$18/month from credits** |
 
 > [!TIP]
 > Your $100 lasts approximately **5 months** with this setup. When credits are running low, you can:
 > - Switch the App Service to **F1 (Free)** tier (limited to 60 min CPU/day)
-> - Stop the MySQL server when not using it: `az mysql flexible-server stop --resource-group OrponRG --name orpon-db-server`
-> - Delete everything when done experimenting: `az group delete --name OrponRG --yes`
+> - Delete the Azure SQL resources when not using them: `az group delete --name OrponRG --yes`
 
 ---
 
@@ -570,14 +636,14 @@ Azure for Students gives you **$100 in credits** (valid for 12 months). Here's w
 | Problem | Cause | Fix |
 |---------|-------|-----|
 | **Backend shows "Application Error"** | App crashed on startup | Run `az webapp log tail --resource-group OrponRG --name orpon-backend-api` and look for the error |
-| **Cannot connect to MySQL** | Firewall blocking | Go to Azure Portal → MySQL server → Networking → check **"Allow public access from any Azure service"** is ON |
-| **`ECONNREFUSED` in logs** | Wrong `DB_HOST` value | Verify the host is `orpon-db-server.mysql.database.azure.com` (the full FQDN, not just the server name) |
+| **Cannot connect to Azure SQL** | Firewall blocking | Go to Azure Portal → SQL server → Networking → check **"Allow public access from any Azure service"** is ON |
+| **`ECONNREFUSED` in logs** | Wrong `DB_HOST` value | Verify the host is `orpon-sql-server.database.windows.net` (the full FQDN, not just the server name) |
 | **Frontend shows blank page** | `VITE_API_URL` not set at build time | Rebuild with the env var: `VITE_API_URL=https://... npm run build` |
 | **CORS error in browser console** | Backend doesn't allow frontend origin | The current `server.js` uses `cors()` which allows everything – should work. If issues persist, check the `FRONTEND_URL` setting |
 | **bKash sandbox returns 401** | Sandbox credentials expired or wrong | Verify credentials at [bKash sandbox portal](https://developer.bka.sh/) |
 | **Payment callback goes to `localhost`** | `BACKEND_URL` still set to localhost | Update: `az webapp config appsettings set ... --settings BACKEND_URL=https://orpon-backend-api.azurewebsites.net` |
 | **Static Web App build fails** | GitHub Actions workflow wrong | Check the `.github/workflows/` YAML – ensure `app_location: "/frontend"` and `output_location: "dist"` |
-| **MySQL connection drops after idle** | Connection pool timeout | The `waitForConnections: true` in `db.js` handles this, but you can add `enableKeepAlive: true` to the pool config |
+| **SQL connection drops after idle** | Connection pool timeout | The `waitForConnections: true` in `db.js` handles this, but you can add `enableKeepAlive: true` to the pool config |
 
 ---
 
@@ -598,14 +664,14 @@ git push -u origin experimental-deploy
 # 2. Azure resources
 az login
 az group create --name OrponRG --location southeastasia
-az mysql flexible-server create --resource-group OrponRG --name orpon-db-server --admin-user orponadmin --admin-password 'YourStrongPassword123!' --location southeastasia --sku-name Standard_B1ms --storage-size 20 --version 8.0.21 --public-access 0.0.0.0
-az mysql flexible-server db create --resource-group OrponRG --server-name orpon-db-server --database-name donation_system
+az sql server create --resource-group OrponRG --name orpon-sql-server --location southeastasia --admin-user orponadmin --admin-password 'YourStrongPassword123!'
+az sql db create --resource-group OrponRG --server orpon-sql-server --name donation_system --service-objective Basic
 az appservice plan create --name OrponPlan --resource-group OrponRG --sku B1 --is-linux
 az webapp create --resource-group OrponRG --plan OrponPlan --name orpon-backend-api --runtime "NODE|20-lts"
 
 # 3. Deploy backend
 az webapp config set --resource-group OrponRG --name orpon-backend-api --startup-file "node server.js"
-az webapp config appsettings set --resource-group OrponRG --name orpon-backend-api --settings PORT=8080 DB_HOST=orpon-db-server.mysql.database.azure.com DB_USER=orponadmin DB_PASSWORD='YourStrongPassword123!' DB_NAME=donation_system BACKEND_URL=https://orpon-backend-api.azurewebsites.net FRONTEND_URL=https://your-frontend-url JWT_SECRET=change-this USE_REDIS=false BKASH_USERNAME=sandboxTokenizedUser02 BKASH_PASSWORD='sandboxTokenizedUser02@12345' BKASH_APP_KEY=4f6o0cjiki2rfm34kfdadl1eqq BKASH_APP_SECRET=2is7hdktrekvrbljjh44ll3d9l1dtjo4pasmjvs5vl5qr3fug4b BKASH_BASE_URL=https://tokenized.sandbox.bka.sh/v1.2.0-beta SSLCOMMERZ_STORE_ID=testbox SSLCOMMERZ_STORE_PASSWORD=qwerty SSLCOMMERZ_BASE_URL=https://sandbox.sslcommerz.com
+az webapp config appsettings set --resource-group OrponRG --name orpon-backend-api --settings PORT=8080 DB_HOST=orpon-sql-server.database.windows.net DB_PORT=1433 DB_USER=orponadmin DB_PASSWORD='YourStrongPassword123!' DB_NAME=donation_system DB_TRUST_CERT=false BACKEND_URL=https://orpon-backend-api.azurewebsites.net FRONTEND_URL=https://your-frontend-url JWT_SECRET=change-this USE_REDIS=false BKASH_USERNAME=sandboxTokenizedUser02 BKASH_PASSWORD='YourStrongPassword02@12345' BKASH_APP_KEY=4f6o0cjiki2rfm34kfdadl1eqq BKASH_APP_SECRET=2is7hdktrekvrbljjh44ll3d9l1dtjo4pasmjvs5vl5qr3fug4b BKASH_BASE_URL=https://tokenized.sandbox.bka.sh/v1.2.0-beta SSLCOMMERZ_STORE_ID=testbox SSLCOMMERZ_STORE_PASSWORD=qwerty SSLCOMMERZ_BASE_URL=https://sandbox.sslcommerz.com
 az webapp deployment source config --resource-group OrponRG --name orpon-backend-api --repo-url https://github.com/shezanyo/Orpon.git --branch experimental-deploy --manual-integration
 az webapp config appsettings set --resource-group OrponRG --name orpon-backend-api --settings PROJECT=backend
 

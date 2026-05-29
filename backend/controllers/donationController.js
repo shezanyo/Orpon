@@ -77,7 +77,7 @@ const completeDonationRecord = async (id) => {
 
         // 1. Fetch pending record and lock it for update
         const [donations] = await connection.query(`
-            SELECT * FROM donations WHERE id = ? FOR UPDATE
+            SELECT * FROM donations WITH (UPDLOCK, ROWLOCK) WHERE id = ?
         `, [id]);
 
         if (donations.length === 0) {
@@ -92,11 +92,10 @@ const completeDonationRecord = async (id) => {
 
         // 2. Fetch last completed donation's hash for linking
         const [lastDonation] = await connection.query(`
-            SELECT current_hash
+            SELECT TOP 1 current_hash
             FROM donations
             WHERE status = 'Completed'
             ORDER BY created_at DESC
-            LIMIT 1
         `);
 
         let previous_hash = "GENESIS";
