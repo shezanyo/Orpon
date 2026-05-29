@@ -5,9 +5,11 @@ const {
     failDonationRecord,
     cancelDonationRecord
 } = require("./donationController");
-
-// In-memory map to store pending transaction metadata across callbacks
-const pendingPayments = new Map();
+const {
+    setPendingPayment,
+    getPendingPayment,
+    deletePendingPayment
+} = require("../config/redis");
 
 // ==========================================
 // 1. BKASH SANDBOX INTEGRATION
@@ -86,7 +88,7 @@ const initiateBkash = async (req, res) => {
         }
 
         // D. Store metadata against the paymentID for retrieval on success callback
-        pendingPayments.set(paymentData.paymentID, {
+        await setPendingPayment(paymentData.paymentID, {
             donationId: pendingDonation.id,
             amount: parseFloat(amount),
             idToken // Preserve token for payment execute step
@@ -114,13 +116,13 @@ const bkashCallback = async (req, res) => {
             return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=No+payment+session+found`);
         }
 
-        const pending = pendingPayments.get(paymentID);
+        const pending = await getPendingPayment(paymentID);
         if (!pending) {
             return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=Transaction+not+found+or+expired`);
         }
 
         // Clean up session immediately to avoid double execution
-        pendingPayments.delete(paymentID);
+        await deletePendingPayment(paymentID);
 
         if (status === "cancel") {
             await cancelDonationRecord(pending.donationId);
@@ -191,8 +193,8 @@ const initiateCard = async (req, res) => {
 
         const transactionId = pendingDonation.id;
 
-        // B. Store metadata in memory keyed by transaction ID
-        pendingPayments.set(transactionId, {
+        // B. Store metadata in cache keyed by transaction ID
+        await setPendingPayment(transactionId, {
             donationId: pendingDonation.id,
             amount: parseFloat(amount)
         });
@@ -261,12 +263,12 @@ const cardSuccess = async (req, res) => {
             return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=SSLCommerz+reported+invalid+status`);
         }
 
-        const pending = pendingPayments.get(tran_id);
+        const pending = await getPendingPayment(tran_id);
         if (!pending) {
             return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=Transaction+session+expired`);
         }
 
-        pendingPayments.delete(tran_id);
+        await deletePendingPayment(tran_id);
 
         // A. Validate payment transaction via SSLCommerz Validator API
         const valUrl = `${process.env.SSLCOMMERZ_BASE_URL}/validator/api/valid.php?val_id=${val_id}&store_id=${process.env.SSLCOMMERZ_STORE_ID}&store_passwd=${process.env.SSLCOMMERZ_STORE_PASSWORD}&format=json`;
@@ -294,10 +296,10 @@ const cardSuccess = async (req, res) => {
  */
 const cardFail = async (req, res) => {
     const { tran_id } = req.body;
-    const pending = pendingPayments.get(tran_id);
+    const pending = await getPendingPayment(tran_id);
     if (pending) {
         await failDonationRecord(pending.donationId);
-        pendingPayments.delete(tran_id);
+        await deletePendingPayment(tran_id);
     }
     return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=Card+payment+failed`);
 };
@@ -307,10 +309,10 @@ const cardFail = async (req, res) => {
  */
 const cardCancel = async (req, res) => {
     const { tran_id } = req.body;
-    const pending = pendingPayments.get(tran_id);
+    const pending = await getPendingPayment(tran_id);
     if (pending) {
         await cancelDonationRecord(pending.donationId);
-        pendingPayments.delete(tran_id);
+        await deletePendingPayment(tran_id);
     }
     return res.redirect(`${process.env.FRONTEND_URL}/payment/cancel`);
 };
@@ -344,8 +346,8 @@ const initiateNagad = async (req, res) => {
 
         const sessionId = `NGD-${pendingDonation.id}`;
 
-        // B. Cache transaction metadata in memory
-        pendingPayments.set(sessionId, {
+        // B. Cache transaction metadata in Redis/Memory
+        await setPendingPayment(sessionId, {
             donationId: pendingDonation.id,
             amount: parseFloat(amount)
         });
@@ -372,7 +374,7 @@ const verifyNagadPayment = async (req, res) => {
             return res.status(400).json({ message: "Session ID is required" });
         }
 
-        const pending = pendingPayments.get(sessionId);
+        const pending = await getPendingPayment(sessionId);
         if (!pending) {
             return res.status(400).json({ message: "Payment session has expired or is invalid" });
         }
@@ -381,12 +383,12 @@ const verifyNagadPayment = async (req, res) => {
         if (otp !== "123456" || pin !== "12121") {
             // Update status to Failed on verification credential error
             await failDonationRecord(pending.donationId);
-            pendingPayments.delete(sessionId);
+            await deletePendingPayment(sessionId);
             return res.status(400).json({ message: "Invalid credentials. Sandbox OTP: 123456, Sandbox PIN: 12121" });
         }
 
         // Delete pending payment to prevent replay attacks
-        pendingPayments.delete(sessionId);
+        await deletePendingPayment(sessionId);
 
         // Complete database insertion and ledger update
         const donation = await completeDonationRecord(pending.donationId);
@@ -414,10 +416,10 @@ const cancelNagad = async (req, res) => {
             return res.status(400).json({ message: "Session ID is required" });
         }
 
-        const pending = pendingPayments.get(sessionId);
+        const pending = await getPendingPayment(sessionId);
         if (pending) {
             await cancelDonationRecord(pending.donationId);
-            pendingPayments.delete(sessionId);
+            await deletePendingPayment(sessionId);
         }
 
         return res.status(200).json({ success: true });
