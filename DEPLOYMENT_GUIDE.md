@@ -234,7 +234,7 @@ az sql db create \
   --resource-group OrponRG \
   --server orpon-sql-server \
   --name donation_system \
-  --service-objective Basic
+  --edition Free
 ```
 
 ### 5.4 – Create the tables
@@ -328,19 +328,22 @@ If you prefer a faster setup, paste the full SQL block above into Azure Data Stu
 ### 6.1 – Create an App Service Plan + Web App
 
 ```bash
-# Create plan (B1 = Basic tier, covered by student credits)
+# Create plan (F1 = Free tier for Azure for Students)
+# NOTE: the Free tier may have limits (CPU/minutes/day). If your subscription
+# doesn't allow Linux Free plans, omit --is-linux to create a Windows F1 plan.
 az appservice plan create \
   --name OrponPlan \
   --resource-group OrponRG \
-  --sku B1 \
+  --sku F1 \
   --is-linux
 
-# Create the web app (Node 20)
+# Create the web app (Node 24 LTS recommended)
+# Azure supports `NODE|24-lts` and `NODE|22-lts`; use `NODE|24-lts` unless you need 22.
 az webapp create \
   --resource-group OrponRG \
   --plan OrponPlan \
   --name orpon-backend-api \
-  --runtime "NODE|20-lts"
+  --runtime "NODE|24-lts"
 ```
 
 > [!NOTE]
@@ -618,7 +621,7 @@ Azure for Students gives you **$100 in credits** (valid for 12 months). Here's w
 
 | Resource | SKU | Monthly Cost |
 |----------|-----|--------------|
-| App Service (backend) | B1 Linux | ~$13 (from credits) |
+| App Service (backend) | F1 (Free) | $0 (limited quota) |
 | Azure SQL Database | Basic | ~$5 (from credits) |
 | Static Web App (frontend) | Free tier | **$0** |
 | Redis | *Not used (in-memory fallback)* | **$0** |
@@ -666,8 +669,8 @@ az login
 az group create --name OrponRG --location southeastasia
 az sql server create --resource-group OrponRG --name orpon-sql-server --location southeastasia --admin-user orponadmin --admin-password 'YourStrongPassword123!'
 az sql db create --resource-group OrponRG --server orpon-sql-server --name donation_system --service-objective Basic
-az appservice plan create --name OrponPlan --resource-group OrponRG --sku B1 --is-linux
-az webapp create --resource-group OrponRG --plan OrponPlan --name orpon-backend-api --runtime "NODE|20-lts"
+az appservice plan create --name OrponPlan --resource-group OrponRG --sku F1 --is-linux
+az webapp create --resource-group OrponRG --plan OrponPlan --name orpon-backend-api --runtime "NODE|24-lts"
 
 # 3. Deploy backend
 az webapp config set --resource-group OrponRG --name orpon-backend-api --startup-file "node server.js"
