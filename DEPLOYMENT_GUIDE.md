@@ -19,6 +19,7 @@
 9. [🔄 How to Update Code After Deployment](#9-how-to-update-code-after-deployment)
 10. [💰 Cost Management – Stay Free](#10-cost-management--stay-free)
 11. [🔧 Troubleshooting](#11-troubleshooting)
+12. [📋 Post-Deployment Audit & Environment Fixes (June 2026)](#12-post-deployment-audit--environment-fixes-june-2026)
 
 ---
 
@@ -691,3 +692,45 @@ az webapp deployment source sync --resource-group OrponRG --name orpon-backend-a
 
 > [!NOTE]
 > **Redis is intentionally skipped** for this sandbox deployment to save costs. The app automatically uses an in-memory `Map` fallback. When you're ready for production, you can add Azure Cache for Redis and set `USE_REDIS=true`.
+
+---
+
+## 12. 📋 Post-Deployment Audit & Environment Fixes (June 2026)
+
+During the June 2026 deployment cycle, we performed an audit and successfully completed the deployment of the backend to the Azure App Service. Below is a comprehensive record of the issues identified, the precise fixes applied, and the updated verification checklist.
+
+### 12.1 – Environment Variable Adjustments & Mismatches Resolved
+
+We found a critical mismatch between what the backend code expects and what was configured in Azure App Settings:
+- **`DB_HOST` Alignment:** The backend database initialization script (`backend/config/db.js`) was configured to read `process.env.DB_HOST`. However, the App Service had it set as `DB_SERVER`. This mismatch caused the container to exit immediately on startup with a `TypeError: The "config.server" property is required and must be of type string` crash.
+  - **Resolution:** Configured `DB_HOST=orpon-sql-server.database.windows.net` in the App Settings.
+- **`JWT_SECRET` Initialization:** The required secret for encoding JWT tokens was missing in the Azure App Service configuration.
+  - **Resolution:** Added a secure 32-byte hex generated key for `JWT_SECRET` to the environment.
+- **Redundant Config Cleanup:** Removed the duplicate `DB_SERVER` entry to keep our environment variables clean and avoid confusion.
+
+### 12.2 – Added Kudu Build Automation
+
+To ensure that the Node.js application correctly installs its nested packages and runs pre-start steps on Azure Linux environment:
+- **Setting:** Configured `SCM_DO_BUILD_DURING_DEPLOYMENT=true`. This tells Azure Kudu to execute `npm install` and resolve all required libraries during the deployment sync sequence.
+
+### 12.3 – Added Health Endpoint `/api/health`
+
+To verify container liveliness without needing authenticated routes, we added a lightweight, public health check route to the backend:
+- **File Modified:** [backend/server.js](file:///home/shezan/Projects/Orpon/backend/server.js#L19-L21)
+- **Path:** `GET https://orpon-backend-api-sea.azurewebsites.net/api/health`
+- **Output Sample:**
+  ```json
+  {
+    "status": "ok",
+    "timestamp": "2026-06-02T12:11:04.726Z"
+  }
+  ```
+
+### 12.4 – Final Verified API Endpoints
+
+Once the deployment sync finished, we verified that the server is responding correctly:
+- **Liveliness Check:** `/api/health` returns `200 OK` with status `ok`.
+- **Database Query Capability:** `/api/campaigns` successfully talks to Azure SQL and returns `200 OK` with `{"success":true,"campaigns":[]}`.
+- **Authentication Route Access:** `/api/me` returns `401 Unauthorized` (indicating the JWT middleware is fully active and intercepting invalid requests).
+- **Validation Constraints:** `POST /api/register` correctly processes payload rules and returns `400 Bad Request` on empty submissions.
+
