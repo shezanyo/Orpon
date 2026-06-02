@@ -470,7 +470,7 @@ This creates a `dist/` folder with the compiled static files.
    - **Subscription:** Azure for Students
    - **Resource Group:** OrponRG
    - **Name:** `orpon-frontend`
-   - **Region:** Southeast Asia (closest to Bangladesh)
+   - **Region:** East Asia (closest supported region for Static Web Apps near Bangladesh)
    - **Source:** GitHub
    - **Organization:** shezanyo
    - **Repository:** Orpon
@@ -482,7 +482,7 @@ This creates a `dist/` folder with the compiled static files.
 5. Click **Review + Create** → **Create**
 
 > [!NOTE]
-> Azure will automatically create a GitHub Actions workflow file in your repo. Every time you push to `experimental-deploy`, the frontend will rebuild and redeploy automatically! 🎉
+> Azure Static Web Apps has limited region selections and does not support `Southeast Asia` directly. Choosing **East Asia** (Hong Kong) is the closest available alternative. Meanwhile, the backend API and Azure SQL are deployed in **Southeast Asia** (Singapore).
 
 ### 7.3 – Set the backend URL as an environment variable
 
@@ -490,17 +490,17 @@ In Azure Portal → **orpon-frontend** Static Web App → **Configuration** → 
 
 | Name | Value |
 |------|-------|
-| `VITE_API_URL` | `https://orpon-backend-api.azurewebsites.net/api` |
+| `VITE_API_URL` | `https://orpon-backend-api-sea.azurewebsites.net/api` |
 
 ### 7.4 – Update the backend's FRONTEND_URL
 
-Now that you know the frontend URL (e.g., `https://blue-sand-xxxxxxxx.southeastasia.5.azurestaticapps.net`):
+Now that you know the frontend URL (e.g., `https://blue-sand-xxxxxxxx.eastasia.5.azurestaticapps.net`):
 
 ```bash
 az webapp config appsettings set \
   --resource-group OrponRG \
-  --name orpon-backend-api \
-  --settings FRONTEND_URL=https://blue-sand-xxxxxxxx.southeastasia.5.azurestaticapps.net
+  --name orpon-backend-api-sea \
+  --settings FRONTEND_URL=https://blue-sand-xxxxxxxx.eastasia.5.azurestaticapps.net
 ```
 
 This ensures payment callbacks redirect to the correct frontend domain.
