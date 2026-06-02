@@ -1,0 +1,275 @@
+2026-05-31T18:46:50.1226878Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-05-31T18:46:52.9047651Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-05-31T18:46:52.9085150Z Container start method called.
+2026-05-31T18:46:52.9148544Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.6:13209/appsvc/node:24-lts_20260504.4.tuxprod for orpon-backend-api., DetailsLevel: INFO
+2026-05-31T18:46:52.9150545Z Establishing network.
+2026-05-31T18:46:52.9154605Z Pulling image: appsvc/node:24-lts_20260504.4.tuxprod.
+2026-05-31T18:47:39.7008223Z Image appsvc/node:24-lts_20260504.4.tuxprod is pulled from registry 10.1.0.6:13209
+2026-05-31T18:47:39.7092588Z Container is starting.
+2026-05-31T18:47:39.7104953Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for orpon-backend-api., DetailsLevel: INFO
+2026-05-31T18:47:39.7107251Z Establishing user namespace if not established already.
+2026-05-31T18:47:39.7108602Z Establishing network if not established already.
+2026-05-31T18:47:39.7109700Z Mounting volumes.
+2026-05-31T18:47:39.7173171Z Nested mountpoint 
+2026-05-31T18:47:39.7358148Z Nested mountpoint volatile/logs
+2026-05-31T18:47:39.7403513Z Nested mountpoint 
+2026-05-31T18:47:39.7732468Z Nested mountpoint 
+2026-05-31T18:47:39.7742349Z Nested mountpoint 
+2026-05-31T18:47:39.8774888Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for orpon-backend-api. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-31T18:47:39.8776810Z Creating container.
+2026-05-31T18:47:39.8781202Z Creating pipes for streaming container io.
+2026-05-31T18:47:39.8789870Z Creating stdout named pipe at /podr/container/pipe/95dda16a126c_orpon-backend-api/stdout_201b3dbb648d47f491717253afc96ac2.
+2026-05-31T18:47:39.8883014Z Successfully created stdout named pipe at: /podr/container/pipe/95dda16a126c_orpon-backend-api/stdout_201b3dbb648d47f491717253afc96ac2.
+2026-05-31T18:47:39.8925545Z Opening named pipe /podr/container/pipe/95dda16a126c_orpon-backend-api/stdout_201b3dbb648d47f491717253afc96ac2 for reading in non-blocking mode.
+2026-05-31T18:47:39.8927699Z Successfully opened named pipe: /podr/container/pipe/95dda16a126c_orpon-backend-api/stdout_201b3dbb648d47f491717253afc96ac2.
+2026-05-31T18:47:39.8943179Z Successfully removed non-blocking flag from /podr/container/pipe/95dda16a126c_orpon-backend-api/stdout_201b3dbb648d47f491717253afc96ac2.
+2026-05-31T18:47:39.8959431Z Creating stderr named pipe at /podr/container/pipe/95dda16a126c_orpon-backend-api/stderr_227b46f312ba4c62a2c2b23a76f74615.
+2026-05-31T18:47:39.8966055Z Successfully created stderr named pipe at: /podr/container/pipe/95dda16a126c_orpon-backend-api/stderr_227b46f312ba4c62a2c2b23a76f74615.
+2026-05-31T18:47:39.8971721Z Opening named pipe /podr/container/pipe/95dda16a126c_orpon-backend-api/stderr_227b46f312ba4c62a2c2b23a76f74615 for reading in non-blocking mode.
+2026-05-31T18:47:39.8975954Z Successfully opened named pipe: /podr/container/pipe/95dda16a126c_orpon-backend-api/stderr_227b46f312ba4c62a2c2b23a76f74615.
+2026-05-31T18:47:39.8977753Z Successfully removed non-blocking flag from /podr/container/pipe/95dda16a126c_orpon-backend-api/stderr_227b46f312ba4c62a2c2b23a76f74615.
+2026-05-31T18:47:39.9006072Z Creating container with image: appsvc/node:24-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:24-lts_20260504.4.tuxprod
+2026-05-31T18:47:40.6199194Z Starting container: 95dda16a126c_orpon-backend-api.
+2026-05-31T18:47:40.7153827Z Starting watchers and probes.
+2026-05-31T18:47:40.7384265Z Starting metrics collection.
+2026-05-31T18:47:40.7439271Z Container is running.
+2026-05-31T18:47:40.7440283Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container orpon-backend-api successfully created and is running., DetailsLevel: INFO
+2026-05-31T18:47:40.8710005Z Container start method finished after 47961 ms.
+2026-05-31T18:47:40.8714099Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container orpon-backend-api successfully created and is running., DetailsLevel: INFO
+2026-05-31T18:47:40.8896970Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-31T18:47:55.0949745Z Container has finished running with exit code: 1.
+2026-05-31T18:47:55.0987466Z Container is terminating. Grace period: 5 seconds.
+2026-05-31T18:47:55.1114042Z Stop and delete container. Retry count = 0
+2026-05-31T18:47:55.1124926Z Stopping container: 95dda16a126c_orpon-backend-api.
+2026-05-31T18:47:55.2077180Z Deleting container: 95dda16a126c_orpon-backend-api. Retry count = 0
+2026-05-31T18:47:55.3507066Z Container spec TerminationMessagePolicy  path 
+2026-05-31T18:47:55.3552503Z Container is terminated. Total time elapsed: 255 ms.
+2026-05-31T18:47:55.3554657Z Site container: orpon-backend-api terminated during site startup.
+2026-05-31T18:47:55.3576265Z State: Stopping, Action: CancellingStartup, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:47:55.3793287Z Site startup probe failed after 14.47332 seconds.
+2026-05-31T18:47:55.4558025Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:47:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:47:55.4656760Z Failed to start site. Revert by stopping site.
+2026-05-31T18:47:55.4708956Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:47:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:47:55.4754691Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:47:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:47:55.4767326Z Site: orpon-backend-api stopped.
+2026-05-31T18:47:55.4830666Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:47:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:47:55.6281263Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:47:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:47:55.9022353Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:47:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/31/2026 18:47:55 (UTC), DetailsLevel: ERR
+2026-05-31T18:47:56.0948014Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:47:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/31/2026 18:47:55 (UTC), DetailsLevel: ERR
+2026-05-31T18:48:15.8643733Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:47:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/31/2026 18:47:55 (UTC), DetailsLevel: ERR
+2026-05-31T18:48:16.7828596Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:47:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/31/2026 18:47:55 (UTC), DetailsLevel: ERR
+2026-05-31T18:48:16.7830814Z Container start method called.
+2026-05-31T18:48:16.7831703Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:47:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.6:13209/appsvc/node:24-lts_20260504.4.tuxprod for orpon-backend-api., DetailsLevel: INFO
+2026-05-31T18:48:16.7834098Z Establishing network.
+2026-05-31T18:48:16.7836336Z Pulling image: appsvc/node:24-lts_20260504.4.tuxprod.
+2026-05-31T18:48:17.2366369Z Container is starting.
+2026-05-31T18:48:17.2373364Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:47:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for orpon-backend-api., DetailsLevel: INFO
+2026-05-31T18:48:17.2379037Z Establishing user namespace if not established already.
+2026-05-31T18:48:17.2383197Z Establishing network if not established already.
+2026-05-31T18:48:17.2387498Z Mounting volumes.
+2026-05-31T18:48:17.2392734Z Nested mountpoint 
+2026-05-31T18:48:17.2496550Z Nested mountpoint volatile/logs
+2026-05-31T18:48:17.2534293Z Nested mountpoint 
+2026-05-31T18:48:17.2541703Z Nested mountpoint 
+2026-05-31T18:48:17.2595644Z Nested mountpoint 
+2026-05-31T18:48:17.4698971Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:47:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for orpon-backend-api. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-31T18:48:17.4700375Z Creating container.
+2026-05-31T18:48:17.4701619Z Creating pipes for streaming container io.
+2026-05-31T18:48:17.4702967Z Creating stdout named pipe at /podr/container/pipe/aa54a30fd8ff_orpon-backend-api/stdout_10c2cb380bf94aa6b313f1853d27ed9a.
+2026-05-31T18:48:17.4745198Z Successfully created stdout named pipe at: /podr/container/pipe/aa54a30fd8ff_orpon-backend-api/stdout_10c2cb380bf94aa6b313f1853d27ed9a.
+2026-05-31T18:48:17.4747198Z Opening named pipe /podr/container/pipe/aa54a30fd8ff_orpon-backend-api/stdout_10c2cb380bf94aa6b313f1853d27ed9a for reading in non-blocking mode.
+2026-05-31T18:48:17.4750673Z Successfully opened named pipe: /podr/container/pipe/aa54a30fd8ff_orpon-backend-api/stdout_10c2cb380bf94aa6b313f1853d27ed9a.
+2026-05-31T18:48:17.4752695Z Successfully removed non-blocking flag from /podr/container/pipe/aa54a30fd8ff_orpon-backend-api/stdout_10c2cb380bf94aa6b313f1853d27ed9a.
+2026-05-31T18:48:17.4756123Z Creating stderr named pipe at /podr/container/pipe/aa54a30fd8ff_orpon-backend-api/stderr_d3af8b75ce5247f6bdd636a2ef23e3af.
+2026-05-31T18:48:17.4758491Z Successfully created stderr named pipe at: /podr/container/pipe/aa54a30fd8ff_orpon-backend-api/stderr_d3af8b75ce5247f6bdd636a2ef23e3af.
+2026-05-31T18:48:17.4760287Z Opening named pipe /podr/container/pipe/aa54a30fd8ff_orpon-backend-api/stderr_d3af8b75ce5247f6bdd636a2ef23e3af for reading in non-blocking mode.
+2026-05-31T18:48:17.4762221Z Successfully opened named pipe: /podr/container/pipe/aa54a30fd8ff_orpon-backend-api/stderr_d3af8b75ce5247f6bdd636a2ef23e3af.
+2026-05-31T18:48:17.4779794Z Successfully removed non-blocking flag from /podr/container/pipe/aa54a30fd8ff_orpon-backend-api/stderr_d3af8b75ce5247f6bdd636a2ef23e3af.
+2026-05-31T18:48:17.4793108Z Creating container with image: appsvc/node:24-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:24-lts_20260504.4.tuxprod
+2026-05-31T18:48:18.5435224Z Starting container: aa54a30fd8ff_orpon-backend-api.
+2026-05-31T18:48:18.5704465Z Starting watchers and probes.
+2026-05-31T18:48:18.5707726Z Starting metrics collection.
+2026-05-31T18:48:18.5709817Z Container is running.
+2026-05-31T18:48:18.5711479Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:47:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api successfully created and is running., DetailsLevel: INFO
+2026-05-31T18:48:18.5962052Z Container start method finished after 1812 ms.
+2026-05-31T18:48:18.6009378Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:47:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api successfully created and is running., DetailsLevel: INFO
+2026-05-31T18:48:18.6039104Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:47:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-31T18:48:39.3922437Z Container has finished running with exit code: 1.
+2026-05-31T18:48:39.3925888Z Container is terminating. Grace period: 5 seconds.
+2026-05-31T18:48:39.3975281Z Stop and delete container. Retry count = 0
+2026-05-31T18:48:39.3980809Z Stopping container: aa54a30fd8ff_orpon-backend-api.
+2026-05-31T18:48:39.7083765Z Deleting container: aa54a30fd8ff_orpon-backend-api. Retry count = 0
+2026-05-31T18:48:40.5228171Z Container spec TerminationMessagePolicy  path 
+2026-05-31T18:48:40.5570804Z Container is terminated. Total time elapsed: 1159 ms.
+2026-05-31T18:48:40.5573558Z Site container: orpon-backend-api terminated during site startup.
+2026-05-31T18:48:40.5798728Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:47:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:48:40.5814678Z Site startup probe failed after 21.9751423 seconds.
+2026-05-31T18:48:40.6953319Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:48:40.7020574Z Failed to start site. Revert by stopping site.
+2026-05-31T18:48:40.7080792Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:48:40.7085863Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:48:40.7086099Z Site: orpon-backend-api stopped.
+2026-05-31T18:48:40.7172989Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:48:40.8860400Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:48:41.0389753Z Site: orpon-backend-api will be blocked for 1 minutes till 05/31/2026 18:49:41
+2026-05-31T18:48:41.0397520Z State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: orpon-backend-api will be blocked for 1 minutes till 05/31/2026 18:49:41, DetailsLevel: WARN
+2026-05-31T18:48:41.0693828Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/31/2026 18:48:41 (UTC), DetailsLevel: WARN
+2026-05-31T18:48:41.3184837Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/31/2026 18:48:41 (UTC), DetailsLevel: WARN
+2026-05-31T18:48:46.4497918Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:49:41, DetailsLevel: WARN
+2026-05-31T18:48:46.4498945Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:48:51.5143917Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:49:41, DetailsLevel: WARN
+2026-05-31T18:48:51.5144219Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:48:56.5809460Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:49:41, DetailsLevel: WARN
+2026-05-31T18:48:56.5809883Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:49:01.8157478Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:49:41, DetailsLevel: WARN
+2026-05-31T18:49:01.8159190Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:49:07.2453907Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:49:41, DetailsLevel: WARN
+2026-05-31T18:49:07.2454275Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:49:12.7300591Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:49:41, DetailsLevel: WARN
+2026-05-31T18:49:12.7300893Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:49:17.8558637Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:49:41, DetailsLevel: WARN
+2026-05-31T18:49:17.8611850Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:49:22.9860084Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:49:41, DetailsLevel: WARN
+2026-05-31T18:49:22.9860411Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:49:28.2016413Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:49:41, DetailsLevel: WARN
+2026-05-31T18:49:28.2020507Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:49:34.0497516Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:49:41, DetailsLevel: WARN
+2026-05-31T18:49:34.0498107Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:49:39.5120151Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:49:41, DetailsLevel: WARN
+2026-05-31T18:49:39.5120559Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:49:41.0494099Z Site: orpon-backend-api is unblocked.
+2026-05-31T18:49:44.5997041Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:49:41, DetailsLevel: WARN
+2026-05-31T18:49:46.1092697Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:49:41, DetailsLevel: WARN
+2026-05-31T18:49:46.1097336Z Container start method called.
+2026-05-31T18:49:46.1099642Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.6:13209/appsvc/node:24-lts_20260504.4.tuxprod for orpon-backend-api., DetailsLevel: INFO
+2026-05-31T18:49:46.1102059Z Establishing network.
+2026-05-31T18:49:46.1111964Z Pulling image: appsvc/node:24-lts_20260504.4.tuxprod.
+2026-05-31T18:49:46.3120099Z Container is starting.
+2026-05-31T18:49:46.3133691Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for orpon-backend-api., DetailsLevel: INFO
+2026-05-31T18:49:46.3135850Z Establishing user namespace if not established already.
+2026-05-31T18:49:46.3138951Z Establishing network if not established already.
+2026-05-31T18:49:46.3152116Z Mounting volumes.
+2026-05-31T18:49:46.3159126Z Nested mountpoint 
+2026-05-31T18:49:46.3187332Z Nested mountpoint volatile/logs
+2026-05-31T18:49:46.3224384Z Nested mountpoint 
+2026-05-31T18:49:46.3253774Z Nested mountpoint 
+2026-05-31T18:49:46.3276128Z Nested mountpoint 
+2026-05-31T18:49:46.8476597Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for orpon-backend-api. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-31T18:49:46.8478066Z Creating container.
+2026-05-31T18:49:46.8479240Z Creating pipes for streaming container io.
+2026-05-31T18:49:46.8480578Z Creating stdout named pipe at /podr/container/pipe/f47ac50d1eda_orpon-backend-api/stdout_af28bf8cb6424af49e92876cb6573a10.
+2026-05-31T18:49:46.8528414Z Successfully created stdout named pipe at: /podr/container/pipe/f47ac50d1eda_orpon-backend-api/stdout_af28bf8cb6424af49e92876cb6573a10.
+2026-05-31T18:49:46.8529913Z Opening named pipe /podr/container/pipe/f47ac50d1eda_orpon-backend-api/stdout_af28bf8cb6424af49e92876cb6573a10 for reading in non-blocking mode.
+2026-05-31T18:49:46.8532149Z Successfully opened named pipe: /podr/container/pipe/f47ac50d1eda_orpon-backend-api/stdout_af28bf8cb6424af49e92876cb6573a10.
+2026-05-31T18:49:46.8539135Z Successfully removed non-blocking flag from /podr/container/pipe/f47ac50d1eda_orpon-backend-api/stdout_af28bf8cb6424af49e92876cb6573a10.
+2026-05-31T18:49:46.8544380Z Creating stderr named pipe at /podr/container/pipe/f47ac50d1eda_orpon-backend-api/stderr_bc4233e4320b47848c62fb88a0d4aa4a.
+2026-05-31T18:49:46.8546258Z Successfully created stderr named pipe at: /podr/container/pipe/f47ac50d1eda_orpon-backend-api/stderr_bc4233e4320b47848c62fb88a0d4aa4a.
+2026-05-31T18:49:46.8548814Z Opening named pipe /podr/container/pipe/f47ac50d1eda_orpon-backend-api/stderr_bc4233e4320b47848c62fb88a0d4aa4a for reading in non-blocking mode.
+2026-05-31T18:49:46.8550327Z Successfully opened named pipe: /podr/container/pipe/f47ac50d1eda_orpon-backend-api/stderr_bc4233e4320b47848c62fb88a0d4aa4a.
+2026-05-31T18:49:46.8551845Z Successfully removed non-blocking flag from /podr/container/pipe/f47ac50d1eda_orpon-backend-api/stderr_bc4233e4320b47848c62fb88a0d4aa4a.
+2026-05-31T18:49:46.8565525Z Creating container with image: appsvc/node:24-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:24-lts_20260504.4.tuxprod
+2026-05-31T18:49:48.3949502Z Starting container: f47ac50d1eda_orpon-backend-api.
+2026-05-31T18:49:48.5591487Z Starting watchers and probes.
+2026-05-31T18:49:48.5629910Z Starting metrics collection.
+2026-05-31T18:49:48.5634796Z Container is running.
+2026-05-31T18:49:48.5702495Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api successfully created and is running., DetailsLevel: INFO
+2026-05-31T18:49:48.6002848Z Container start method finished after 2490 ms.
+2026-05-31T18:49:48.6337020Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api successfully created and is running., DetailsLevel: INFO
+2026-05-31T18:49:48.6337851Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-31T18:50:07.1302152Z Container has finished running with exit code: 1.
+2026-05-31T18:50:07.1389731Z Container is terminating. Grace period: 5 seconds.
+2026-05-31T18:50:07.1508654Z Stop and delete container. Retry count = 0
+2026-05-31T18:50:07.1510552Z Stopping container: f47ac50d1eda_orpon-backend-api.
+2026-05-31T18:50:07.2214989Z Deleting container: f47ac50d1eda_orpon-backend-api. Retry count = 0
+2026-05-31T18:50:07.7001372Z Container spec TerminationMessagePolicy  path 
+2026-05-31T18:50:07.7114207Z Container is terminated. Total time elapsed: 561 ms.
+2026-05-31T18:50:07.7116262Z Site container: orpon-backend-api terminated during site startup.
+2026-05-31T18:50:07.7365500Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:48:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:50:07.7579454Z Site startup probe failed after 19.1237065 seconds.
+2026-05-31T18:50:07.9277454Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:50:07.9599573Z Failed to start site. Revert by stopping site.
+2026-05-31T18:50:07.9607252Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:50:07.9611313Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:50:07.9611538Z Site: orpon-backend-api stopped.
+2026-05-31T18:50:07.9676015Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:50:08.1222808Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:50:08.2824410Z Site: orpon-backend-api will be blocked for 1 minutes till 05/31/2026 18:51:08
+2026-05-31T18:50:08.2829701Z State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: orpon-backend-api will be blocked for 1 minutes till 05/31/2026 18:51:08, DetailsLevel: WARN
+2026-05-31T18:50:08.2833529Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/31/2026 18:50:08 (UTC), DetailsLevel: WARN
+2026-05-31T18:50:08.6471351Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/31/2026 18:50:08 (UTC), DetailsLevel: WARN
+2026-05-31T18:50:13.7524437Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:51:08, DetailsLevel: WARN
+2026-05-31T18:50:13.7525067Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:50:18.8632962Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:51:08, DetailsLevel: WARN
+2026-05-31T18:50:18.8633285Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:50:23.9822332Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:51:08, DetailsLevel: WARN
+2026-05-31T18:50:23.9823624Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:50:29.0445036Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:51:08, DetailsLevel: WARN
+2026-05-31T18:50:29.0445348Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:50:34.7996604Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:51:08, DetailsLevel: WARN
+2026-05-31T18:50:34.7996942Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:50:39.8513139Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:51:08, DetailsLevel: WARN
+2026-05-31T18:50:39.8513488Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:50:44.9616139Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:51:08, DetailsLevel: WARN
+2026-05-31T18:50:44.9616381Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:50:50.0367312Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:51:08, DetailsLevel: WARN
+2026-05-31T18:50:50.0367920Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:50:55.1177227Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:51:08, DetailsLevel: WARN
+2026-05-31T18:50:55.1177512Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:51:00.2104455Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:51:08, DetailsLevel: WARN
+2026-05-31T18:51:00.2104769Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:51:05.2823229Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:51:08, DetailsLevel: WARN
+2026-05-31T18:51:05.2823572Z Start site prohibitted because the site is being blocked.
+2026-05-31T18:51:08.2840790Z Site: orpon-backend-api is unblocked.
+2026-05-31T18:51:10.3610325Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:51:08, DetailsLevel: WARN
+2026-05-31T18:51:11.8153404Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/31/2026 18:51:08, DetailsLevel: WARN
+2026-05-31T18:51:11.8156061Z Container start method called.
+2026-05-31T18:51:11.8156634Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.6:13209/appsvc/node:24-lts_20260504.4.tuxprod for orpon-backend-api., DetailsLevel: INFO
+2026-05-31T18:51:11.8158307Z Establishing network.
+2026-05-31T18:51:11.8161176Z Pulling image: appsvc/node:24-lts_20260504.4.tuxprod.
+2026-05-31T18:51:13.2580973Z Container is starting.
+2026-05-31T18:51:13.2582287Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for orpon-backend-api., DetailsLevel: INFO
+2026-05-31T18:51:13.2583857Z Establishing user namespace if not established already.
+2026-05-31T18:51:13.2584856Z Establishing network if not established already.
+2026-05-31T18:51:13.2586642Z Mounting volumes.
+2026-05-31T18:51:13.2588697Z Nested mountpoint 
+2026-05-31T18:51:13.2651585Z Nested mountpoint volatile/logs
+2026-05-31T18:51:13.2689272Z Nested mountpoint 
+2026-05-31T18:51:13.2700945Z Nested mountpoint 
+2026-05-31T18:51:13.2719174Z Nested mountpoint 
+2026-05-31T18:51:13.4157712Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for orpon-backend-api. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-31T18:51:13.4159254Z Creating container.
+2026-05-31T18:51:13.4160401Z Creating pipes for streaming container io.
+2026-05-31T18:51:13.4162323Z Creating stdout named pipe at /podr/container/pipe/b987f422bb61_orpon-backend-api/stdout_06d36abddcf641a58dc7a308e0568fe3.
+2026-05-31T18:51:13.4407738Z Successfully created stdout named pipe at: /podr/container/pipe/b987f422bb61_orpon-backend-api/stdout_06d36abddcf641a58dc7a308e0568fe3.
+2026-05-31T18:51:13.4415273Z Opening named pipe /podr/container/pipe/b987f422bb61_orpon-backend-api/stdout_06d36abddcf641a58dc7a308e0568fe3 for reading in non-blocking mode.
+2026-05-31T18:51:13.4417155Z Successfully opened named pipe: /podr/container/pipe/b987f422bb61_orpon-backend-api/stdout_06d36abddcf641a58dc7a308e0568fe3.
+2026-05-31T18:51:13.4419550Z Successfully removed non-blocking flag from /podr/container/pipe/b987f422bb61_orpon-backend-api/stdout_06d36abddcf641a58dc7a308e0568fe3.
+2026-05-31T18:51:13.4421119Z Creating stderr named pipe at /podr/container/pipe/b987f422bb61_orpon-backend-api/stderr_3ef92687ea7740268a6f36fcfdecb12a.
+2026-05-31T18:51:13.4424800Z Successfully created stderr named pipe at: /podr/container/pipe/b987f422bb61_orpon-backend-api/stderr_3ef92687ea7740268a6f36fcfdecb12a.
+2026-05-31T18:51:13.4427857Z Opening named pipe /podr/container/pipe/b987f422bb61_orpon-backend-api/stderr_3ef92687ea7740268a6f36fcfdecb12a for reading in non-blocking mode.
+2026-05-31T18:51:13.4433153Z Successfully opened named pipe: /podr/container/pipe/b987f422bb61_orpon-backend-api/stderr_3ef92687ea7740268a6f36fcfdecb12a.
+2026-05-31T18:51:13.4441601Z Successfully removed non-blocking flag from /podr/container/pipe/b987f422bb61_orpon-backend-api/stderr_3ef92687ea7740268a6f36fcfdecb12a.
+2026-05-31T18:51:13.4457833Z Creating container with image: appsvc/node:24-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:24-lts_20260504.4.tuxprod
+2026-05-31T18:51:13.8034786Z Starting container: b987f422bb61_orpon-backend-api.
+2026-05-31T18:51:13.8266481Z Starting watchers and probes.
+2026-05-31T18:51:13.8269051Z Starting metrics collection.
+2026-05-31T18:51:13.8290507Z Container is running.
+2026-05-31T18:51:13.8291893Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api successfully created and is running., DetailsLevel: INFO
+2026-05-31T18:51:13.8721571Z Container start method finished after 2056 ms.
+2026-05-31T18:51:13.8725194Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api successfully created and is running., DetailsLevel: INFO
+2026-05-31T18:51:13.8726413Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-31T18:51:30.2249565Z Container has finished running with exit code: 1.
+2026-05-31T18:51:30.2253964Z Container is terminating. Grace period: 5 seconds.
+2026-05-31T18:51:30.2258544Z Stop and delete container. Retry count = 0
+2026-05-31T18:51:30.2260317Z Stopping container: b987f422bb61_orpon-backend-api.
+2026-05-31T18:51:30.2650055Z Deleting container: b987f422bb61_orpon-backend-api. Retry count = 0
+2026-05-31T18:51:30.3746211Z Container spec TerminationMessagePolicy  path 
+2026-05-31T18:51:30.3793829Z Container is terminated. Total time elapsed: 153 ms.
+2026-05-31T18:51:30.3795666Z Site container: orpon-backend-api terminated during site startup.
+2026-05-31T18:51:30.3799005Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:50:07, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:51:30.3914573Z Site startup probe failed after 16.4999349 seconds.
+2026-05-31T18:51:30.4634231Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:51:30, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:51:30.4699981Z Failed to start site. Revert by stopping site.
+2026-05-31T18:51:30.4701082Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:51:30, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:51:30.4703740Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/31/2026 18:51:30, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-31T18:51:30.4703963Z Site: orpon-backend-api stopped.
