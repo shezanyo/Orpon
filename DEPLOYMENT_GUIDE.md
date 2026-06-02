@@ -134,7 +134,19 @@ Currently `frontend/src/utils/api.js` has a **hardcoded** `localhost` URL. We ne
 + export const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 ```
 
-> **How it works:** In development it falls back to `localhost`. On Azure, you'll set `VITE_API_URL` at build time.
+> **How it works:** In development it falls back to `localhost`. On Azure or any deployed frontend, you should set `VITE_API_URL` at build time.
+>
+> For local development, you can create `frontend/.env` or use the example file:
+>
+> ```text
+> VITE_API_URL=http://localhost:5000/api
+> ```
+>
+> For production builds, set the backend URL before building:
+>
+> ```bash
+> VITE_API_URL=https://your-backend-domain.com/api npm run build
+> ```
 
 ### 3.2 – Make the backend port dynamic
 
@@ -159,6 +171,13 @@ git add -A
 git commit -m "feat: prepare for Azure deployment (dynamic URLs, gitignore)"
 git push origin experimental-deploy
 ```
+
+### 3.4 – What was fixed in this deployment
+
+- `frontend/src/utils/api.js` now reads `VITE_API_URL` at build time and falls back to `window.location.origin` for local development.
+- `.github/workflows/azure-static-web-apps-thankful-sea-0f5fbd000.yml` now injects `VITE_API_URL=https://orpon-backend-api-sea.azurewebsites.net/api` into the build step.
+- `staticwebapp.config.json` was added to support SPA routing on Azure Static Web Apps.
+- `frontend/.env.example` is kept as documentation for developers and should not be deleted.
 
 ---
 
@@ -349,7 +368,7 @@ az webapp create \
 
 > [!NOTE]
 > The name `orpon-backend-api` must be **globally unique** across all of Azure. If it's taken, try something like `orpon-backend-shezan`.
-> Your app will be available at: `https://orpon-backend-api.azurewebsites.net`
+> Your app will be available at: `https://orpon-backend-api-sea.azurewebsites.net`
 
 ### 6.2 – Set the startup command
 
@@ -372,8 +391,8 @@ az webapp config appsettings set \
   --name orpon-backend-api \
   --settings \
     PORT=8080 \
-    BACKEND_URL=https://orpon-backend-api.azurewebsites.net \
-    FRONTEND_URL=https://your-frontend-url.azurestaticapps.net \
+    BACKEND_URL=https://orpon-backend-api-sea.azurewebsites.net \
+    FRONTEND_URL=https://thankful-sea-0f5fbd000.7.azurestaticapps.net \
     DB_HOST=orpon-sql-server.database.windows.net \
     DB_PORT=1433 \
     DB_USER=orponadmin \
@@ -457,7 +476,7 @@ Azure Static Web Apps is **free** and perfect for a React/Vite SPA.
 cd ~/Projects/Orpon/frontend
 
 # Set the backend URL for the build
-VITE_API_URL=https://orpon-backend-api.azurewebsites.net/api npm run build
+VITE_API_URL=https://orpon-backend-api-sea.azurewebsites.net/api npm run build
 ```
 
 This creates a `dist/` folder with the compiled static files.
@@ -494,13 +513,13 @@ In Azure Portal → **orpon-frontend** Static Web App → **Configuration** → 
 
 ### 7.4 – Update the backend's FRONTEND_URL
 
-Now that you know the frontend URL (e.g., `https://blue-sand-xxxxxxxx.eastasia.5.azurestaticapps.net`):
+Now that you know the frontend URL:
 
 ```bash
 az webapp config appsettings set \
   --resource-group OrponRG \
   --name orpon-backend-api-sea \
-  --settings FRONTEND_URL=https://blue-sand-xxxxxxxx.eastasia.5.azurestaticapps.net
+  --settings FRONTEND_URL=https://thankful-sea-0f5fbd000.7.azurestaticapps.net
 ```
 
 This ensures payment callbacks redirect to the correct frontend domain.
@@ -513,7 +532,7 @@ This ensures payment callbacks redirect to the correct frontend domain.
 
 | Test | How | Expected Result |
 |------|-----|-----------------|
-| Backend is alive | Visit `https://orpon-backend-api.azurewebsites.net/api/campaigns` | JSON response (empty array or campaign data) |
+| Backend is alive | Visit `https://orpon-backend-api-sea.azurewebsites.net/api/campaigns` | JSON response (empty array or campaign data) |
 | Frontend loads | Visit your Static Web App URL | The Orpon UI appears |
 | User registration | Register a new user on the frontend | Success message, user stored in Azure SQL |
 | Create campaign | Create a test campaign | Campaign appears in the list |
@@ -534,49 +553,77 @@ sqlcmd -S orpon-sql-server.database.windows.net -U orponadmin -P 'YourStrongPass
 ### Frontend (automatic via GitHub Actions)
 
 ```bash
-# 1. Make your changes locally
+# 1. Make your frontend changes locally
 cd ~/Projects/Orpon/frontend
 # ... edit files ...
 
-# 2. Commit and push to the experimental branch
-git add -A
-git commit -m "fix: updated donation form styling"
-git push origin experimental-deploy
-
-# 3. Done! Azure Static Web Apps will automatically:
-#    - Detect the push
-#    - Rebuild the frontend
-#    - Deploy it
-#    Check progress in GitHub → Actions tab
+# 2. Test locally with the deployed backend
+VITE_API_URL=https://orpon-backend-api-sea.azurewebsites.net/api npm run dev
 ```
 
-### Backend (manual sync or redeploy)
+Open the app in the browser and verify signup/login, campaigns, and donations work.
 
-**If you used GitHub deployment (Option A in step 6.4):**
+If you want to test the production build locally:
 
 ```bash
-# 1. Make your changes
+cd ~/Projects/Orpon/frontend
+VITE_API_URL=https://orpon-backend-api-sea.azurewebsites.net/api npm run build
+npm run preview
+```
+
+Then, push the frontend changes:
+
+```bash
+cd ~/Projects/Orpon/frontend
+git add -A
+git commit -m "fix: <describe frontend change>"
+git push origin experimental-deploy
+```
+
+Azure Static Web Apps will automatically rebuild and deploy the frontend.
+
+### Backend (GitHub deployment or ZIP redeploy)
+
+#### Test backend locally before pushing
+
+```bash
 cd ~/Projects/Orpon/backend
+npm install
+# Create a local .env with your development values
+# Use localhost or Azure SQL values as needed
+npm start
+```
+
+Then verify the backend endpoints with curl, Postman, or browser:
+
+```bash
+curl http://localhost:5000/api/health
+curl -X POST http://localhost:5000/api/register \
+  -H "Content-Type: application/json" \
+  -d '{"full_name":"Test","email":"test@example.com","password":"TestPass123!","phone":"01700000000","nid":"1234567890"}'
+```
+
+#### If you use GitHub deployment (Option A in step 6.4)
+
+```bash
+cd ~/Projects/Orpon/backend
+# Make backend changes
 # ... edit files ...
 
-# 2. Commit and push
 git add -A
-git commit -m "fix: improved error handling in paymentController"
+git commit -m "fix: <describe backend change>"
 git push origin experimental-deploy
 
-# 3. Tell Azure to re-pull the latest code
 az webapp deployment source sync \
   --resource-group OrponRG \
   --name orpon-backend-api
 ```
 
-**If you used ZIP deployment (Option B):**
+#### If you use ZIP deployment (Option B)
 
 ```bash
-# 1. Make changes, then re-zip and redeploy
 cd ~/Projects/Orpon/backend
 zip -r ../backend.zip . -x "node_modules/*" ".env"
-
 az webapp deployment source config-zip \
   --resource-group OrponRG \
   --name orpon-backend-api \
@@ -645,7 +692,7 @@ Azure for Students gives you **$100 in credits** (valid for 12 months). Here's w
 | **Frontend shows blank page** | `VITE_API_URL` not set at build time | Rebuild with the env var: `VITE_API_URL=https://... npm run build` |
 | **CORS error in browser console** | Backend doesn't allow frontend origin | The current `server.js` uses `cors()` which allows everything – should work. If issues persist, check the `FRONTEND_URL` setting |
 | **bKash sandbox returns 401** | Sandbox credentials expired or wrong | Verify credentials at [bKash sandbox portal](https://developer.bka.sh/) |
-| **Payment callback goes to `localhost`** | `BACKEND_URL` still set to localhost | Update: `az webapp config appsettings set ... --settings BACKEND_URL=https://orpon-backend-api.azurewebsites.net` |
+| **Payment callback goes to `localhost`** | `BACKEND_URL` still set to localhost | Update: `az webapp config appsettings set ... --settings BACKEND_URL=https://orpon-backend-api-sea.azurewebsites.net` |
 | **Static Web App build fails** | GitHub Actions workflow wrong | Check the `.github/workflows/` YAML – ensure `app_location: "/frontend"` and `output_location: "dist"` |
 | **SQL connection drops after idle** | Connection pool timeout | The `waitForConnections: true` in `db.js` handles this, but you can add `enableKeepAlive: true` to the pool config |
 
@@ -675,7 +722,7 @@ az webapp create --resource-group OrponRG --plan OrponPlan --name orpon-backend-
 
 # 3. Deploy backend
 az webapp config set --resource-group OrponRG --name orpon-backend-api --startup-file "node server.js"
-az webapp config appsettings set --resource-group OrponRG --name orpon-backend-api --settings PORT=8080 DB_HOST=orpon-sql-server.database.windows.net DB_PORT=1433 DB_USER=orponadmin DB_PASSWORD='YourStrongPassword123!' DB_NAME=donation_system DB_TRUST_CERT=false BACKEND_URL=https://orpon-backend-api.azurewebsites.net FRONTEND_URL=https://your-frontend-url JWT_SECRET=change-this USE_REDIS=false BKASH_USERNAME=sandboxTokenizedUser02 BKASH_PASSWORD='YourStrongPassword02@12345' BKASH_APP_KEY=4f6o0cjiki2rfm34kfdadl1eqq BKASH_APP_SECRET=2is7hdktrekvrbljjh44ll3d9l1dtjo4pasmjvs5vl5qr3fug4b BKASH_BASE_URL=https://tokenized.sandbox.bka.sh/v1.2.0-beta SSLCOMMERZ_STORE_ID=testbox SSLCOMMERZ_STORE_PASSWORD=qwerty SSLCOMMERZ_BASE_URL=https://sandbox.sslcommerz.com
+az webapp config appsettings set --resource-group OrponRG --name orpon-backend-api --settings PORT=8080 DB_HOST=orpon-sql-server.database.windows.net DB_PORT=1433 DB_USER=orponadmin DB_PASSWORD='YourStrongPassword123!' DB_NAME=donation_system DB_TRUST_CERT=false BACKEND_URL=https://orpon-backend-api-sea.azurewebsites.net FRONTEND_URL=https://thankful-sea-0f5fbd000.7.azurestaticapps.net JWT_SECRET=change-this USE_REDIS=false BKASH_USERNAME=sandboxTokenizedUser02 BKASH_PASSWORD='YourStrongPassword02@12345' BKASH_APP_KEY=4f6o0cjiki2rfm34kfdadl1eqq BKASH_APP_SECRET=2is7hdktrekvrbljjh44ll3d9l1dtjo4pasmjvs5vl5qr4b BKASH_BASE_URL=https://tokenized.sandbox.bka.sh/v1.2.0-beta SSLCOMMERZ_STORE_ID=testbox SSLCOMMERZ_STORE_PASSWORD=qwerty SSLCOMMERZ_BASE_URL=https://sandbox.sslcommerz.com
 az webapp deployment source config --resource-group OrponRG --name orpon-backend-api --repo-url https://github.com/shezanyo/Orpon.git --branch experimental-deploy --manual-integration
 az webapp config appsettings set --resource-group OrponRG --name orpon-backend-api --settings PROJECT=backend
 
