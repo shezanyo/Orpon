@@ -1,0 +1,8 @@
+<step title="Incoming Request" date="2026-06-01T07:45:50.112" instance="761fac" url="/api/deployments/latest?deployer=GitHub&amp;time=2026-06-01_07-45-39Z" method="GET" type="request" pid="851,1,5" Host="orpon-backend-api.scm.azurewebsites.net" User-Agent="Azure-WebSites-Controller/108.0.7.45" Authorization="Bas..." x-ms-request-id="ee477e84-14b7-4f0e-9043-0878e14e0e94" X-ARR-LOG-ID="ee477e84-14b7-4f0e-9043-0878e14e0e94" CLIENT-IP="20.43.132.130:18178" X-SITE-DEPLOYMENT-ID="orpon-backend-api" WAS-DEFAULT-HOSTNAME="orpon-backend-api.scm.azurewebsites.net" X-MS-PLATFORM-INTERNAL="True" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/deployments/latest?deployer=GitHub&amp;time=2026-06-01_07-45-39Z" X-Client-IP="20.43.132.130" X-Client-Port="18178" >
+  <step title="DeploymentService.GetResult" date="2026-06-01T07:45:50.120" >
+    <step title="DeploymentService.GetLatestDeployment" date="2026-06-01T07:45:50.123" >
+      <step title="DeploymentManager.GetResults" date="2026-06-01T07:45:50.128" /><!-- duration: 202ms -->
+    </step><!-- duration: 211ms -->
+  </step><!-- duration: 219ms -->
+  <step title="Outgoing response" date="2026-06-01T07:45:50.343" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 5ms -->
+</step><!-- duration: 242ms -->

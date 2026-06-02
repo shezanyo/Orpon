@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<deployment>
+  <id>ac5171bb8bc80c22668adbf2f920f31701f2e157</id>
+  <author>shezanyo</author>
+  <deployer>GitHub</deployer>
+  <authorEmail>coolalimiad@gmail.com</authorEmail>
+  <message>feat: prepare for Azure deployment 1</message>
+  <progress></progress>
+  <status>Failed</status>
+  <statusText></statusText>
+  <lastSuccessEndTime />
+  <receivedTime>2026-05-30T20:08:21.7648327Z</receivedTime>
+  <startTime>2026-05-30T20:08:23.0470784Z</startTime>
+  <endTime>2026-05-30T20:08:53.2018437Z</endTime>
+  <complete>True</complete>
+  <is_temp>False</is_temp>
+  <is_readonly>False</is_readonly>
+  <containerId>20aba82e1428</containerId>
+  <buildSummary />
+</deployment>
