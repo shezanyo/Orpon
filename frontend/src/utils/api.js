@@ -1,4 +1,8 @@
-export const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const defaultOrigin = typeof window !== "undefined" ? window.location.origin : "http://localhost:5000";
+
+// Use VITE_API_URL when set in the build environment. Otherwise fall back to
+// the current frontend origin and assume the backend is mounted at /api.
+export const API_URL = import.meta.env.VITE_API_URL || `${defaultOrigin}/api`;
 
 /**
  * Make an authenticated API request
