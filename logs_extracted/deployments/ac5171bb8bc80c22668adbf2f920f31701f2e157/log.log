@@ -1,0 +1,88 @@
+2026-05-30T20:08:21.8958851Z,Updating submodules.,bf3a98d2-28d5-49df-8e9f-034365d028be,0
+2026-05-30T20:08:23.0052409Z,Preparing deployment for commit id 'ac5171bb8b'.,f22b8298-a9f6-4ce3-ba8c-74c823246739,0
+2026-05-30T20:08:23.2409291Z,PreDeployment: context.CleanOutputPath False,5ca8de0f-8a45-411d-a0df-e78ebd2f81e5,0
+2026-05-30T20:08:23.3439919Z,PreDeployment: context.OutputPath /home/site/wwwroot,cf27bab1-5a69-4f12-964e-1b4acc32711c,0
+2026-05-30T20:08:23.4991850Z,Repository path is /home/site/repository,21d92e2b-245f-4753-b7e6-925dd6e5958c,0
+2026-05-30T20:08:23.5948948Z,Running oryx build...,03f3f605-b460-49bf-921b-18f6c551401e,0
+	2026-05-30T20:08:23.6033813Z,Command: oryx build /home/site/repository -o /home/site/wwwroot --platform nodejs --platform-version 24 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8debe8733bf9db1 -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log,,0
+	2026-05-30T20:08:24.3500601Z,Operation performed by Microsoft Oryx&comma; https://github.com/Microsoft/Oryx,,0
+	2026-05-30T20:08:24.3605566Z,You can report issues at https://github.com/Microsoft/Oryx/issues,,0
+	2026-05-30T20:08:24.3655356Z,,,0
+	2026-05-30T20:08:24.3705294Z,Oryx Version: 0.2.20260420.1+83c04e9ee1882dc90d279b63348824daedbd3c96&comma; Commit: 83c04e9ee1882dc90d279b63348824daedbd3c96&comma; ReleaseTagName: 20260420.1,,0
+	2026-05-30T20:08:24.3836285Z,,,0
+	2026-05-30T20:08:24.3957588Z,Build Operation ID: 58935974cbc4af9f,,0
+	2026-05-30T20:08:24.4026130Z,Repository Commit : ac5171bb8bc80c22668adbf2f920f31701f2e157,,0
+	2026-05-30T20:08:24.4111843Z,OS Type           : noble,,0
+	2026-05-30T20:08:24.4200364Z,Image Type        : githubactions,,0
+	2026-05-30T20:08:24.4305364Z,,,0
+	2026-05-30T20:08:24.4384945Z,Primary SDK Storage URL: https://oryx-cdn.microsoft.io,,0
+	2026-05-30T20:08:24.4457678Z,Backup SDK Storage URL: ,,0
+	2026-05-30T20:08:24.4553178Z,ACR SDK Registry URL: (not set),,0
+	2026-05-30T20:08:24.4628391Z,SDK provider status:,,0
+	2026-05-30T20:08:24.4734136Z,  External ACR SDK provider: Enabled,,0
+	2026-05-30T20:08:24.4798960Z,  External SDK provider: Enabled,,0
+	2026-05-30T20:08:24.4873136Z,  Direct ACR SDK provider: Disabled,,0
+	2026-05-30T20:08:24.5015176Z,  Blob SDK provider: Enabled,,0
+	2026-05-30T20:08:24.5131162Z,External ACR SDK provider is enabled. Only using user-specified platform: nodejs,,0
+	2026-05-30T20:08:24.5244287Z,Detecting platforms...,,0
+	2026-05-30T20:08:26.4315343Z,External ACR provider resolved version '24.15.0' for nodejs.,,0
+	2026-05-30T20:08:26.4401891Z,Version resolved using external ACR SDK provider.,,0
+	2026-05-30T20:08:26.4612216Z,Detected following platforms:,,0
+	2026-05-30T20:08:26.4719561Z,  nodejs: 24.15.0,,0
+	2026-05-30T20:08:26.4789433Z,Requesting SDK from ACR via external provider: nodejs 24.15.0 (noble),,0
+	2026-05-30T20:08:27.4784001Z,Successfully pulled SDK from ACR via external provider: nodejs 24.15.0,,0
+	2026-05-30T20:08:27.5570976Z,SDK for 'nodejs' version '24.15.0' fetched via external ACR provider.,,0
+	2026-05-30T20:08:27.5728528Z,Version '24.15.0' of platform 'nodejs' is not installed. Generating script to install it...,,0
+	2026-05-30T20:08:27.6083092Z,,,0
+	2026-05-30T20:08:27.6386638Z,Using intermediate directory '/tmp/8debe8733bf9db1'.,,0
+	2026-05-30T20:08:27.6494409Z,,,0
+	2026-05-30T20:08:27.6557493Z,Copying files to the intermediate directory...,,0
+	2026-05-30T20:08:29.2327168Z,skipping non-regular file "backend/node_modules/.bin/node-gyp-build",,0
+	2026-05-30T20:08:29.2528357Z,skipping non-regular file "backend/node_modules/.bin/node-gyp-build-optional",,0
+	2026-05-30T20:08:29.2693962Z,skipping non-regular file "backend/node_modules/.bin/node-gyp-build-test",,0
+	2026-05-30T20:08:29.2831036Z,skipping non-regular file "backend/node_modules/.bin/nodemon",,0
+	2026-05-30T20:08:29.2957710Z,skipping non-regular file "backend/node_modules/.bin/nodetouch",,0
+	2026-05-30T20:08:29.3170212Z,skipping non-regular file "backend/node_modules/.bin/semver",,0
+	2026-05-30T20:08:29.3298613Z,skipping non-regular file "backend/node_modules/.bin/uuid",,0
+	2026-05-30T20:08:44.2268093Z,Copying files to intermediate directory done in 17 sec(s).,,0
+	2026-05-30T20:08:44.2493352Z,,,0
+	2026-05-30T20:08:44.2588790Z,Source directory     : /tmp/8debe8733bf9db1,,0
+	2026-05-30T20:08:44.2647339Z,Destination directory: /home/site/wwwroot,,0
+	2026-05-30T20:08:44.2729661Z,,,0
+	2026-05-30T20:08:44.2816094Z,Installing platform...,,0
+	2026-05-30T20:08:44.2896706Z,,,0
+	2026-05-30T20:08:44.3002417Z,Downloading and extracting 'nodejs' version '24.15.0' to '/tmp/oryx/platforms/nodejs/24.15.0'...,,0
+	2026-05-30T20:08:44.3086617Z,Detected image debian flavor: noble.,,0
+	2026-05-30T20:08:44.3208346Z,SDK binary download was skipped. Looking for cached tarball...,,0
+	2026-05-30T20:08:44.3299254Z,Found tarball at /var/OryxAcrSdks/nodejs/nodejs-noble-24.15.0.tar.gz,,0
+	2026-05-30T20:08:48.1157485Z,Successfully extracted nodejs version 24.15.0 from cached tarball.,,0
+	2026-05-30T20:08:48.1617818Z,,,0
+	2026-05-30T20:08:48.2040027Z,Platform installation done in 4 sec(s).,,0
+	2026-05-30T20:08:48.3554063Z,Running build script snippets...,,0
+	2026-05-30T20:08:48.3656908Z,Removing existing manifest file,,0
+	2026-05-30T20:08:48.3731445Z,Creating directory for command manifest file if it does not exist,,0
+	2026-05-30T20:08:48.5208411Z,Creating a manifest file...,,0
+	2026-05-30T20:08:48.5576641Z,Node Build Command Manifest file created.,,0
+	2026-05-30T20:08:48.5660005Z,,,0
+	2026-05-30T20:08:48.5711340Z,Using Node version:,,0
+	2026-05-30T20:08:48.6544969Z,v24.15.0,,0
+	2026-05-30T20:08:48.7567284Z,,,0
+	2026-05-30T20:08:48.7682550Z,Using Npm version:,,0
+	2026-05-30T20:08:49.5976225Z,11.12.1,,0
+	2026-05-30T20:08:49.6429811Z,,,0
+	2026-05-30T20:08:49.6513516Z,Running 'npm install'...,,0
+	2026-05-30T20:08:49.6577956Z,,,0
+	2026-05-30T20:08:50.4161173Z,npm error Tracker "idealTree" already exists,,1
+	2026-05-30T20:08:50.4215046Z,npm error A complete log of this run can be found in: /home/.npm/_logs/2026-05-30T20_08_49_767Z-debug-0.log,,1
+	2026-05-30T20:08:52.3115409Z,npm error Tracker "idealTree" already exists\nnpm error A complete log of this run can be found in: /home/.npm/_logs/2026-05-30T20_08_49_767Z-debug-0.log\n/bin/bash -c "oryx build /home/site/repository -o /home/site/wwwroot --platform nodejs --platform-version 24 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8debe8733bf9db1 -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log ; exit $PIPESTATUS ",,2
+2026-05-30T20:08:52.3961992Z,,36958b52-d9ba-454b-9f6b-46c2525cb3b4,0
+2026-05-30T20:08:52.4786821Z,Generating summary of Oryx build,d6d25850-0ad7-4a3c-b834-db594a322472,0
+2026-05-30T20:08:52.5974653Z,Parsing the build logs,1473d254-3c11-48b1-8a21-b1e1480a0271,0
+2026-05-30T20:08:52.6779256Z,Found 0 issue(s),ac1ecc69-0965-45d5-8261-5f0f0bed4496,0
+2026-05-30T20:08:52.7538042Z,,a66cbe68-378e-4ce4-8778-b3eacd68af89,0
+2026-05-30T20:08:52.8344611Z,Build Summary :,738b5241-50c8-493b-bff1-5cf5373275fb,0
+2026-05-30T20:08:52.9236705Z,===============,3555378d-f014-4c15-8025-4b25209cb941,0
+2026-05-30T20:08:53.0052576Z,Errors (0),4277cf00-4586-4b39-bed7-b9c05aad34e2,0
+2026-05-30T20:08:53.1089348Z,Warnings (0),4970a928-f7cd-42f6-8978-e529afc72c87,0
+2026-05-30T20:08:53.1979876Z,,faf08de6-e13f-4624-b0d5-7d35c671287f,0
+2026-05-30T20:08:53.4339036Z,Deployment Failed. deployer = GitHub deploymentPath = ,064c4124-9905-4957-a201-c8f0e2af472e,0
