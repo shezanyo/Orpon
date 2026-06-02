@@ -1,0 +1,28 @@
+2026-06-01T07:54:34.7490525Z    _____                               
+2026-06-01T07:54:34.7491001Z   /  _  \ __________ _________   ____  
+2026-06-01T07:54:34.7491039Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-06-01T07:54:34.7491066Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-06-01T07:54:34.7491092Z \____|__  /_____ \____/ |__|    \___  >
+2026-06-01T07:54:34.7491118Z         \/      \/                  \/ 
+2026-06-01T07:54:34.7491143Z A P P   S E R V I C E   O N   L I N U X
+2026-06-01T07:54:34.7491167Z 
+2026-06-01T07:54:34.7491195Z Documentation    : http://aka.ms/webapp-linux
+2026-06-01T07:54:34.7491223Z NodeJS quickstart: https://aka.ms/node-qs
+2026-06-01T07:54:34.7491323Z NodeJS Version   : v24.15.0
+2026-06-01T07:54:34.7491350Z Instance Name    : 10-30-0-66
+2026-06-01T07:54:34.7491380Z Instance Id      : 761fac585fe31e563800843ac2523cd720778a0ceebfef3ec96fdd2d0e72e339
+2026-06-01T07:54:34.7491405Z 
+2026-06-01T07:54:34.7491431Z Note: Any data outside '/home' is not persisted
+2026-06-01T07:54:39.5229110Z  * Starting OpenBSD Secure Shell server sshd
+2026-06-01T07:54:39.6059752Z    ...done.
+2026-06-01T07:54:39.6686171Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-06-01T07:54:39.7936799Z Updating certificates in /etc/ssl/certs...
+2026-06-01T07:54:53.6675082Z rehash: warning: skipping duplicate certificate in SSLcom-TLS-Root-2022-ECC.pem
+2026-06-01T07:54:53.6677417Z rehash: warning: skipping duplicate certificate in SSLcom-TLS-Root-2022-RSA.pem
+2026-06-01T07:54:54.5491597Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-06-01T07:54:54.8889048Z 4 added, 0 removed; done.
+2026-06-01T07:54:54.8890111Z Running hooks in /etc/ca-certificates/update.d...
+2026-06-01T07:54:54.8924281Z done.
+2026-06-01T07:54:55.0429140Z CA certificates copied and updated successfully.
+2026-06-01T07:54:55.9116849Z  * Starting periodic command scheduler cron
+2026-06-01T07:54:55.9208357Z    ...done.

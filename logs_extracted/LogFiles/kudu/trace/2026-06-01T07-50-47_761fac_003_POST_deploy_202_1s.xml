@@ -1,0 +1,15 @@
+<step title="Incoming Request" date="2026-06-01T07:50:47.955" instance="761fac" url="/deploy?scmType=ExternalGit&amp;isAsync=true" method="POST" type="request" pid="851,1,5" Host="orpon-backend-api.scm.azurewebsites.net" User-Agent="Azure-WebSites-Controller/108.0.7.45" Authorization="Bas..." Expect="100-continue" Content-Length="77" x-ms-request-id="ff14890e-2b86-4489-a95f-ff1b00cfd430" X-ARR-LOG-ID="ff14890e-2b86-4489-a95f-ff1b00cfd430" CLIENT-IP="20.43.132.130:17601" X-SITE-DEPLOYMENT-ID="orpon-backend-api" WAS-DEFAULT-HOSTNAME="orpon-backend-api.scm.azurewebsites.net" X-MS-PLATFORM-INTERNAL="True" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/deploy?scmType=ExternalGit&amp;isAsync=true" X-Client-IP="20.43.132.130" X-Client-Port="17601" >
+  <step title="FetchHandler" date="2026-06-01T07:50:47.969" >
+    <step title="Executing external process" date="2026-06-01T07:50:48.006" type="process" path="git" arguments="rev-parse --git-dir" /><!-- duration: 25ms -->
+    <step title="Executing external process" date="2026-06-01T07:50:48.039" type="process" path="git" arguments="rev-parse --git-dir" /><!-- duration: 11ms -->
+    <step title="Executing external process" date="2026-06-01T07:50:48.056" type="process" path="git" arguments="log -n 1 experimental-deploy --" /><!-- duration: 82ms -->
+    <step title="Start deployment in the background" date="2026-06-01T07:50:48.144" >
+      <step title="Executing external process" date="2026-06-01T07:50:48.170" type="process" path="git" arguments="rev-parse --git-dir" /><!-- duration: 21ms -->
+      <step title="Executing external process" date="2026-06-01T07:50:48.196" type="process" path="git" arguments="rev-parse --git-dir" /><!-- duration: 11ms -->
+      <step title="Executing external process" date="2026-06-01T07:50:48.211" type="process" path="git" arguments="log -n 1 experimental-deploy --" /><!-- duration: 32ms -->
+      <step title="Acquiring Deployment Lock" date="2026-06-01T07:50:48.249" /><!-- duration: 5ms -->
+      <step title="Acquired Deployment Lock" date="2026-06-01T07:50:48.359" /><!-- duration: 8ms -->
+    </step><!-- duration: 318ms -->
+  </step><!-- duration: 499ms -->
+  <step title="Outgoing response" date="2026-06-01T07:50:48.473" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 4ms -->
+</step><!-- duration: 527ms -->
