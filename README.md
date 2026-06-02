@@ -34,6 +34,13 @@ Orpon solves these issues by introducing:
 
 ---
 
+# 🌍 Deployed Application
+
+- **Frontend:** https://thankful-sea-0f5fbd000.7.azurestaticapps.net/
+- **Backend API:** https://orpon-backend-api-sea.azurewebsites.net/api
+
+---
+
 # 🏗️ System Architecture
 
 ```text
