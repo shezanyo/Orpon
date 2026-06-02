@@ -470,7 +470,7 @@ This creates a `dist/` folder with the compiled static files.
    - **Subscription:** Azure for Students
    - **Resource Group:** OrponRG
    - **Name:** `orpon-frontend`
-   - **Region:** East Asia (closest to Bangladesh)
+   - **Region:** Southeast Asia (closest to Bangladesh)
    - **Source:** GitHub
    - **Organization:** shezanyo
    - **Repository:** Orpon
@@ -494,13 +494,13 @@ In Azure Portal → **orpon-frontend** Static Web App → **Configuration** → 
 
 ### 7.4 – Update the backend's FRONTEND_URL
 
-Now that you know the frontend URL (e.g., `https://blue-sand-xxxxxxxx.eastasia.5.azurestaticapps.net`):
+Now that you know the frontend URL (e.g., `https://blue-sand-xxxxxxxx.southeastasia.5.azurestaticapps.net`):
 
 ```bash
 az webapp config appsettings set \
   --resource-group OrponRG \
   --name orpon-backend-api \
-  --settings FRONTEND_URL=https://blue-sand-xxxxxxxx.eastasia.5.azurestaticapps.net
+  --settings FRONTEND_URL=https://blue-sand-xxxxxxxx.southeastasia.5.azurestaticapps.net
 ```
 
 This ensures payment callbacks redirect to the correct frontend domain.
