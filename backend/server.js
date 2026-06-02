@@ -3,11 +3,15 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 
+const { validateEnv } = require("./config/env");
 const authRoutes = require("./routes/authRoutes");
 const campaignRoutes =
 require("./routes/campaignRoutes");
 const donationRoutes =
 require("./routes/donationRoutes");
+
+// Validate required environment variables before starting
+validateEnv();
 
 const app = express();
 

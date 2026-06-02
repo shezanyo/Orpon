@@ -12,6 +12,45 @@ const {
 } = require("../config/redis");
 
 // ==========================================
+// UTILITY: URL Construction with Validation
+// ==========================================
+
+/**
+ * Get the frontend redirect URL with proper validation
+ * @param {string} path - The path to redirect to (e.g., "/donate/nagad-sandbox")
+ * @param {object} params - Query parameters as object
+ * @returns {string} Full redirect URL
+ * @throws {Error} If FRONTEND_URL is not configured
+ */
+const getRedirectUrl = (path, params = {}) => {
+  if (!process.env.FRONTEND_URL) {
+    throw new Error('FRONTEND_URL environment variable is not set. Payment redirects will fail. Check your Azure App Service Settings.');
+  }
+  
+  const baseUrl = process.env.FRONTEND_URL.replace(/\/$/, ''); // Remove trailing slash
+  const queryString = new URLSearchParams(params).toString();
+  const url = queryString ? `${baseUrl}${path}?${queryString}` : `${baseUrl}${path}`;
+  
+  console.log(`[Payment Redirect] ${url}`);
+  return url;
+};
+
+/**
+ * Get the backend callback URL with proper validation
+ * @param {string} path - The callback path (e.g., "/api/payment/nagad/callback")
+ * @returns {string} Full callback URL
+ * @throws {Error} If BACKEND_URL is not configured
+ */
+const getCallbackUrl = (path) => {
+  if (!process.env.BACKEND_URL) {
+    throw new Error('BACKEND_URL environment variable is not set. Payment callbacks will fail. Check your Azure App Service Settings.');
+  }
+  
+  const baseUrl = process.env.BACKEND_URL.replace(/\/$/, ''); // Remove trailing slash
+  return `${baseUrl}${path}`;
+};
+
+// ==========================================
 // 1. BKASH SANDBOX INTEGRATION
 // ==========================================
 
@@ -62,6 +101,7 @@ const initiateBkash = async (req, res) => {
         const idToken = tokenData.id_token;
 
         // C. Create bKash Payment
+        const callbackUrl = getCallbackUrl("/api/payment/bkash/callback");
         const createPaymentResponse = await fetch(`${process.env.BKASH_BASE_URL}/tokenized/checkout/create`, {
             method: "POST",
             headers: {
@@ -72,7 +112,7 @@ const initiateBkash = async (req, res) => {
             body: JSON.stringify({
                 mode: "0011",
                 payerReference: "01700000000",
-                callbackURL: `${process.env.BACKEND_URL}/api/payment/bkash/callback`,
+                callbackURL: callbackUrl,
                 amount: parseFloat(amount).toFixed(2),
                 currency: "BDT",
                 intent: "sale",
@@ -113,12 +153,14 @@ const bkashCallback = async (req, res) => {
         const { paymentID, status } = req.query;
 
         if (!paymentID) {
-            return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=No+payment+session+found`);
+            const failUrl = getRedirectUrl("/payment/fail", { message: "No payment session found" });
+            return res.redirect(failUrl);
         }
 
         const pending = await getPendingPayment(paymentID);
         if (!pending) {
-            return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=Transaction+not+found+or+expired`);
+            const failUrl = getRedirectUrl("/payment/fail", { message: "Transaction not found or expired" });
+            return res.redirect(failUrl);
         }
 
         // Clean up session immediately to avoid double execution
@@ -126,12 +168,14 @@ const bkashCallback = async (req, res) => {
 
         if (status === "cancel") {
             await cancelDonationRecord(pending.donationId);
-            return res.redirect(`${process.env.FRONTEND_URL}/payment/cancel`);
+            const cancelUrl = getRedirectUrl("/payment/cancel");
+            return res.redirect(cancelUrl);
         }
 
         if (status !== "success") {
             await failDonationRecord(pending.donationId);
-            return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=Payment+cancelled+or+failed`);
+            const failUrl = getRedirectUrl("/payment/fail", { message: "Payment cancelled or failed" });
+            return res.redirect(failUrl);
         }
 
         // A. Execute Payment on bKash Sandbox
@@ -150,17 +194,23 @@ const bkashCallback = async (req, res) => {
         if (!executeResponse.ok || executeData.transactionStatus !== "Completed") {
             console.error("bKash payment execution failure:", executeData);
             await failDonationRecord(pending.donationId);
-            return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=Failed+to+execute+bKash+payment`);
+            const failUrl = getRedirectUrl("/payment/fail", { message: "Failed to execute bKash payment" });
+            return res.redirect(failUrl);
         }
 
         // B. Payment executed successfully. Persist the donation in the database.
         const donation = await completeDonationRecord(pending.donationId);
 
         // C. Redirect user to the frontend success page
-        return res.redirect(`${process.env.FRONTEND_URL}/payment/success?donationId=${donation.id}&amount=${pending.amount}`);
+        const successUrl = getRedirectUrl("/payment/success", { 
+            donationId: donation.id, 
+            amount: pending.amount 
+        });
+        return res.redirect(successUrl);
     } catch (error) {
         console.error("bKash callback exception:", error);
-        return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=System+error+verifying+bKash+payment`);
+        const failUrl = getRedirectUrl("/payment/fail", { message: "System error verifying bKash payment" });
+        return res.redirect(failUrl);
     }
 };
 
@@ -200,15 +250,19 @@ const initiateCard = async (req, res) => {
         });
 
         // Set up SSLCommerz payload
+        const successUrl = getCallbackUrl("/api/payment/card/success");
+        const failUrl = getCallbackUrl("/api/payment/card/fail");
+        const cancelUrl = getCallbackUrl("/api/payment/card/cancel");
+
         const payload = new URLSearchParams({
             store_id: process.env.SSLCOMMERZ_STORE_ID,
             store_passwd: process.env.SSLCOMMERZ_STORE_PASSWORD,
             total_amount: parseFloat(amount).toFixed(2),
             currency: "BDT",
             tran_id: transactionId,
-            success_url: `${process.env.BACKEND_URL}/api/payment/card/success`,
-            fail_url: `${process.env.BACKEND_URL}/api/payment/card/fail`,
-            cancel_url: `${process.env.BACKEND_URL}/api/payment/card/cancel`,
+            success_url: successUrl,
+            fail_url: failUrl,
+            cancel_url: cancelUrl,
             cus_name: donor_name || "Anonymous",
             cus_email: "donor@orpon.com.bd",
             cus_add1: "Dhaka",
@@ -260,12 +314,14 @@ const cardSuccess = async (req, res) => {
         const { tran_id, val_id, status } = req.body;
 
         if (status !== "VALID" && status !== "VALIDATED") {
-            return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=SSLCommerz+reported+invalid+status`);
+            const failUrl = getRedirectUrl("/payment/fail", { message: "SSLCommerz reported invalid status" });
+            return res.redirect(failUrl);
         }
 
         const pending = await getPendingPayment(tran_id);
         if (!pending) {
-            return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=Transaction+session+expired`);
+            const failUrl = getRedirectUrl("/payment/fail", { message: "Transaction session expired" });
+            return res.redirect(failUrl);
         }
 
         await deletePendingPayment(tran_id);
@@ -278,16 +334,22 @@ const cardSuccess = async (req, res) => {
         if (!valResponse.ok || (valData.status !== "VALID" && valData.status !== "VALIDATED")) {
             console.error("SSLCommerz validation failure:", valData);
             await failDonationRecord(pending.donationId);
-            return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=Payment+verification+failed`);
+            const failUrl = getRedirectUrl("/payment/fail", { message: "Payment verification failed" });
+            return res.redirect(failUrl);
         }
 
         // B. Persist donation inside our secure MySQL db & block chain ledger
         const donation = await completeDonationRecord(pending.donationId);
 
-        return res.redirect(`${process.env.FRONTEND_URL}/payment/success?donationId=${donation.id}&amount=${pending.amount}`);
+        const successUrl = getRedirectUrl("/payment/success", { 
+            donationId: donation.id, 
+            amount: pending.amount 
+        });
+        return res.redirect(successUrl);
     } catch (error) {
         console.error("SSLCommerz success callback exception:", error);
-        return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=System+error+handling+card+callback`);
+        const failUrl = getRedirectUrl("/payment/fail", { message: "System error handling card callback" });
+        return res.redirect(failUrl);
     }
 };
 
@@ -301,7 +363,8 @@ const cardFail = async (req, res) => {
         await failDonationRecord(pending.donationId);
         await deletePendingPayment(tran_id);
     }
-    return res.redirect(`${process.env.FRONTEND_URL}/payment/fail?message=Card+payment+failed`);
+    const failUrl = getRedirectUrl("/payment/fail", { message: "Card payment failed" });
+    return res.redirect(failUrl);
 };
 
 /**
@@ -314,7 +377,8 @@ const cardCancel = async (req, res) => {
         await cancelDonationRecord(pending.donationId);
         await deletePendingPayment(tran_id);
     }
-    return res.redirect(`${process.env.FRONTEND_URL}/payment/cancel`);
+    const cancelUrl = getRedirectUrl("/payment/cancel");
+    return res.redirect(cancelUrl);
 };
 
 // ==========================================
@@ -353,9 +417,10 @@ const initiateNagad = async (req, res) => {
         });
 
         // Return URL to frontend simulated Nagad checkout page
+        const redirectUrl = getRedirectUrl("/donate/nagad-sandbox", { sessionId });
         return res.status(200).json({
             success: true,
-            redirectUrl: `${process.env.FRONTEND_URL}/donate/nagad-sandbox?sessionId=${sessionId}`
+            redirectUrl
         });
     } catch (error) {
         console.error("Nagad initiate exception:", error);
