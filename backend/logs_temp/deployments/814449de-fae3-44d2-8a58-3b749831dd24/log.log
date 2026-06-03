@@ -1,0 +1,102 @@
+2026-06-03T12:27:35.8489992Z,Updating submodules.,85dbe4ea-4b5d-464f-a584-579f5af7b6e1,0
+2026-06-03T12:27:37.0850219Z,Preparing deployment for commit id '814449de-f'.,530cd60b-50b8-4262-af2b-865cebd7c5d8,0
+2026-06-03T12:27:37.4853752Z,PreDeployment: context.CleanOutputPath False,4fd209b5-5c94-4ac5-a6d6-d72d1ab74280,0
+2026-06-03T12:27:37.6514216Z,PreDeployment: context.OutputPath /home/site/wwwroot,c577b793-1446-4fd9-8fb5-66112ec59e62,0
+2026-06-03T12:27:37.8248543Z,Repository path is /tmp/zipdeploy/extracted,e226b4c3-0ac1-4fcf-a66f-cdd398702459,0
+2026-06-03T12:27:37.9878666Z,Running oryx build...,6065664a-c02f-46cb-8e31-6c459d38052a,0
+	2026-06-03T12:27:38.0177921Z,Command: oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 22 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8dec16b7f320250 -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log,,0
+	2026-06-03T12:27:39.5173904Z,Operation performed by Microsoft Oryx&comma; https://github.com/Microsoft/Oryx,,0
+	2026-06-03T12:27:39.5742471Z,You can report issues at https://github.com/Microsoft/Oryx/issues,,0
+	2026-06-03T12:27:39.5959672Z,,,0
+	2026-06-03T12:27:39.6202413Z,Oryx Version: 0.2.20260420.1+83c04e9ee1882dc90d279b63348824daedbd3c96&comma; Commit: 83c04e9ee1882dc90d279b63348824daedbd3c96&comma; ReleaseTagName: 20260420.1,,0
+	2026-06-03T12:27:39.6582070Z,,,0
+	2026-06-03T12:27:39.7000421Z,Build Operation ID: b9306700740b29bb,,0
+	2026-06-03T12:27:39.7428533Z,Repository Commit : 814449de-fae3-44d2-8a58-3b749831dd24,,0
+	2026-06-03T12:27:39.7724131Z,OS Type           : bookworm,,0
+	2026-06-03T12:27:39.8369002Z,Image Type        : githubactions,,0
+	2026-06-03T12:27:39.8758124Z,,,0
+	2026-06-03T12:27:39.9124447Z,Primary SDK Storage URL: https://oryx-cdn.microsoft.io,,0
+	2026-06-03T12:27:39.9530342Z,Backup SDK Storage URL: ,,0
+	2026-06-03T12:27:39.9930144Z,ACR SDK Registry URL: (not set),,0
+	2026-06-03T12:27:40.0304204Z,SDK provider status:,,0
+	2026-06-03T12:27:40.0692291Z,  External ACR SDK provider: Enabled,,0
+	2026-06-03T12:27:40.1116272Z,  External SDK provider: Enabled,,0
+	2026-06-03T12:27:40.1552189Z,  Direct ACR SDK provider: Disabled,,0
+	2026-06-03T12:27:40.2160530Z,  Blob SDK provider: Enabled,,0
+	2026-06-03T12:27:40.2534113Z,External ACR SDK provider is enabled. Only using user-specified platform: nodejs,,0
+	2026-06-03T12:27:40.2856884Z,Detecting platforms...,,0
+	2026-06-03T12:27:40.8587658Z,External ACR provider resolved version '22.22.2' for nodejs.,,0
+	2026-06-03T12:27:40.9112255Z,Version resolved using external ACR SDK provider.,,0
+	2026-06-03T12:27:40.9629912Z,Detected following platforms:,,0
+	2026-06-03T12:27:40.9828841Z,  nodejs: 22.22.2,,0
+	2026-06-03T12:27:41.2651614Z,Detected the following frameworks: Express,,0
+	2026-06-03T12:27:41.5657686Z,,,0
+	2026-06-03T12:27:41.6307990Z,Using intermediate directory '/tmp/8dec16b7f320250'.,,0
+	2026-06-03T12:27:41.6544219Z,,,0
+	2026-06-03T12:27:41.6809727Z,Copying files to the intermediate directory...,,0
+	2026-06-03T12:27:41.8462411Z,Copying files to intermediate directory done in 0 sec(s).,,0
+	2026-06-03T12:27:41.8938044Z,,,0
+	2026-06-03T12:27:41.9511648Z,Source directory     : /tmp/8dec16b7f320250,,0
+	2026-06-03T12:27:42.0014484Z,Destination directory: /home/site/wwwroot,,0
+	2026-06-03T12:27:42.0392226Z,,,0
+	2026-06-03T12:27:42.2151169Z,Running build script snippets...,,0
+	2026-06-03T12:27:42.2488423Z,Removing existing manifest file,,0
+	2026-06-03T12:27:42.2849212Z,Creating directory for command manifest file if it does not exist,,0
+	2026-06-03T12:27:42.3081194Z,Creating a manifest file...,,0
+	2026-06-03T12:27:42.3261956Z,Node Build Command Manifest file created.,,0
+	2026-06-03T12:27:42.3493349Z,,,0
+	2026-06-03T12:27:42.3707797Z,Using Node version:,,0
+	2026-06-03T12:27:42.6396297Z,v22.22.2,,0
+	2026-06-03T12:27:42.6611977Z,,,0
+	2026-06-03T12:27:42.7121849Z,Using Npm version:,,0
+	2026-06-03T12:27:43.9372958Z,10.9.7,,0
+	2026-06-03T12:27:43.9950741Z,,,0
+	2026-06-03T12:27:44.0178254Z,Running 'npm install'...,,0
+	2026-06-03T12:27:44.0588009Z,,,0
+	2026-06-03T12:27:52.0453708Z,npm warn deprecated crypto@1.0.1: This package is no longer supported. It's now a built-in Node module. If you've depended on crypto&comma; you should switch to the one that's built-in.,,1
+	2026-06-03T12:27:55.4054713Z,npm warn deprecated uuid@8.3.2: uuid@10 and below is no longer supported.  For ESM codebases&comma; update to uuid@latest.  For CommonJS codebases&comma; use uuid@11 (but be aware this version will likely be deprecated in 2028).,,1
+	2026-06-03T12:28:00.1104993Z,,,0
+	2026-06-03T12:28:00.1479155Z,added 286 packages&comma; and audited 287 packages in 16s,,0
+	2026-06-03T12:28:00.2070016Z,,,0
+	2026-06-03T12:28:00.2281084Z,99 packages are looking for funding,,0
+	2026-06-03T12:28:00.2653722Z,  run `npm fund` for details,,0
+	2026-06-03T12:28:00.2960194Z,,,0
+	2026-06-03T12:28:00.3172856Z,9 moderate severity vulnerabilities,,0
+	2026-06-03T12:28:00.3318327Z,,,0
+	2026-06-03T12:28:00.3487408Z,To address issues that do not require attention&comma; run:,,0
+	2026-06-03T12:28:00.3765481Z,  npm audit fix,,0
+	2026-06-03T12:28:00.4000059Z,,,0
+	2026-06-03T12:28:00.4163424Z,To address all issues (including breaking changes)&comma; run:,,0
+	2026-06-03T12:28:00.4311759Z,  npm audit fix --force,,0
+	2026-06-03T12:28:00.4518156Z,,,0
+	2026-06-03T12:28:00.4681835Z,Run `npm audit` for details.,,0
+	2026-06-03T12:28:00.4868889Z,,,0
+	2026-06-03T12:28:00.5251232Z,Zipping existing node_modules folder...,,0
+	2026-06-03T12:28:07.0965285Z,Done in 7 sec(s).,,0
+	2026-06-03T12:28:07.1269064Z,Build script snippets done in 25 sec(s).,,0
+	2026-06-03T12:28:07.1401553Z,Preparing output...,,0
+	2026-06-03T12:28:07.1645886Z,Using standard output preparation...,,0
+	2026-06-03T12:28:07.1882925Z,,,0
+	2026-06-03T12:28:07.2021911Z,Copying files to destination directory '/home/site/wwwroot'...,,0
+	2026-06-03T12:28:07.8092621Z,Copying to destination directory done in 0 sec(s).,,0
+	2026-06-03T12:28:07.8545236Z,Total time for destination directory preparation done in 0 sec(s).,,0
+	2026-06-03T12:28:07.8928637Z,,,0
+	2026-06-03T12:28:07.9185750Z,Removing existing manifest file,,0
+	2026-06-03T12:28:07.9649916Z,Creating a manifest file...,,0
+	2026-06-03T12:28:07.9879932Z,Manifest file created.,,0
+	2026-06-03T12:28:08.0158072Z,Copying .ostype to manifest output directory.,,0
+	2026-06-03T12:28:08.0275653Z,,,0
+	2026-06-03T12:28:08.0454395Z,Total execution done in 26 sec(s).,,0
+2026-06-03T12:28:10.1094122Z,Running post deployment command(s)...,ddecefb7-32bf-42c4-aff6-4a888eaef51a,0
+2026-06-03T12:28:10.2693542Z,,f91cec16-03c7-4b0d-bd6e-7316d0602dd5,0
+2026-06-03T12:28:10.4109830Z,Generating summary of Oryx build,0c075d9e-1421-4f3c-9587-5f216ea0760f,0
+2026-06-03T12:28:10.5695898Z,Parsing the build logs,531d406c-f87b-427b-b74f-923a3cb24d8f,0
+2026-06-03T12:28:10.6998293Z,Found 0 issue(s),cc84caa5-a3b1-468b-899f-634ed113a1e4,0
+2026-06-03T12:28:10.8418574Z,,d344d1ae-17e8-4b97-9b8a-d203940ce6ca,0
+2026-06-03T12:28:10.9894486Z,Build Summary :,840e1fa9-903c-4197-a62c-dd38c8401fa6,0
+2026-06-03T12:28:11.1703649Z,===============,5da82176-0b8b-4a5d-9a3a-b4f45972f614,0
+2026-06-03T12:28:11.3081457Z,Errors (0),9cc2b229-17f7-4ff0-a51e-a228ee0eeb66,0
+2026-06-03T12:28:11.4678351Z,Warnings (0),5e625af3-1fc2-48c4-abe4-b1966bec29d5,0
+2026-06-03T12:28:11.6093773Z,,ba9f60a6-2017-4ba2-aa53-26d5bddf52d4,0
+2026-06-03T12:28:11.7753570Z,Triggering container recycle for OneDeploy by adding/updating restartTrigger.txt to the site root path,18846d00-b6e1-4f5a-8663-d447ae2a07a0,0
+2026-06-03T12:28:11.9517108Z,Deployment successful. deployer = OneDeploy deploymentPath = OneDeploy,fdb6af3a-c460-428f-8439-de2129dfe632,0
