@@ -16,6 +16,7 @@ import PaymentCancel from "./pages/PaymentCancel";
 import Profile from "./pages/Profile";
 import MyCampaigns from "./pages/MyCampaigns";
 import CampaignAnalytics from "./pages/CampaignAnalytics";
+import AdminDashboard from "./pages/AdminDashboard";
 import { CAMPAIGNS, CAMPAIGN_COLORS, CAMPAIGN_EMOJIS } from "./data/mockData";
 import { getCampaigns } from "./utils/api";
 import { slugify } from "./utils/format";
@@ -120,9 +121,13 @@ export default function App() {
   }, []);
 
   const nav = (p) => {
-    setPage(p);
     if (p !== "detail") setActiveCampaign(null);
-    navigate("/");
+    if (p === "admin") {
+      navigate("/admin");
+    } else {
+      setPage(p);
+      navigate("/");
+    }
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -164,6 +169,7 @@ export default function App() {
         <Route path="/donate/:id" element={<Donate />} />
         <Route path="/donate/nagad-sandbox" element={<NagadSandbox />} />
         <Route path="/campaign/:id" element={<CampaignDetailWrapper campaigns={campaigns} campaignsLoaded={campaignsLoaded} nav={nav} />} />
+        <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/payment/success" element={<PaymentSuccess />} />
         <Route path="/payment/fail" element={<PaymentFail />} />
         <Route path="/payment/cancel" element={<PaymentCancel />} />

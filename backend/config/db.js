@@ -154,6 +154,11 @@ const runMigrations = async () => {
             console.log("Adding address column to users...");
             await query("ALTER TABLE users ADD address NVARCHAR(MAX) NULL");
         }
+        if (!columnNames.includes("role")) {
+            console.log("Adding role column to users...");
+            await query("ALTER TABLE users ADD role NVARCHAR(50) DEFAULT 'user'");
+            await query("UPDATE users SET role = 'user' WHERE role IS NULL");
+        }
 
         // Migration for donations table columns
         const [donationColumns] = await query(
@@ -168,6 +173,22 @@ const runMigrations = async () => {
         if (!donationColumnNames.includes("status")) {
             console.log("Adding status column to donations...");
             await query("ALTER TABLE donations ADD status NVARCHAR(50) DEFAULT 'Completed'");
+        }
+
+        // Check and create system_logs table
+        const [tables] = await query(
+            "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'system_logs'"
+        );
+        if (tables.length === 0) {
+            console.log("Creating system_logs table...");
+            await query(`
+                CREATE TABLE system_logs (
+                    id INT IDENTITY(1,1) PRIMARY KEY,
+                    action NVARCHAR(255) NOT NULL,
+                    details NVARCHAR(MAX) NULL,
+                    created_at DATETIME2 DEFAULT GETDATE()
+                )
+            `);
         }
 
         console.log("Database migrations checked & completed successfully!");

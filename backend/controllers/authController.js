@@ -1,6 +1,7 @@
 const pool = require("../config/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { logAction } = require("./adminController");
 
 const registerUser = async (req, res) => {
     try {
@@ -110,7 +111,7 @@ const registerUser = async (req, res) => {
 
         const newUserId = result.insertId;
 
-        // 9. Generate Token (Auto-Login)
+                // 9. Generate Token (Auto-Login)
         const token = jwt.sign(
             {
                 id: newUserId,
@@ -121,6 +122,8 @@ const registerUser = async (req, res) => {
                 expiresIn: "7d"
             }
         );
+
+        await logAction("User Registration", `User ${full_name} (${email}) registered successfully.`);
 
         res.status(201).json({
             success: true,
@@ -201,6 +204,8 @@ const loginUser = async (req, res) => {
                 expiresIn: "7d"
             }
         );
+
+        await logAction("User Login", `User ${user.full_name} (${user.email}) logged in.`);
 
         res.status(200).json({
             success: true,
