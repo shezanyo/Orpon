@@ -54,6 +54,10 @@ const createCampaign = async (req, res) => {
         }
 
         const user_id = req.user.id;
+        const [userRows] = await pool.query("SELECT full_name FROM users WHERE id = ?", [user_id]);
+        const userFullName = userRows[0]?.full_name || "Community Organizer";
+        const finalOrganizerName = (organizer_name && organizer_name !== "You") ? organizer_name : userFullName;
+
         const id = uuidv4();
         const campaignCategory = category || DEFAULT_CATEGORY;
         const campaignDescription = description || story;
@@ -92,7 +96,7 @@ const createCampaign = async (req, res) => {
             0,
             Number(days_left || 30),
             campaignSlug,
-            organizer_name || "You",
+            finalOrganizerName,
             Boolean(is_verified ?? false) ? 1 : 0,
             campaignColor,
             campaignEmoji
@@ -107,7 +111,7 @@ const createCampaign = async (req, res) => {
                 user_id,
                 slug: campaignSlug,
                 title,
-                organizer: organizer_name || "You",
+                organizer: finalOrganizerName,
                 orgVerified: Boolean(is_verified ?? false),
                 category: campaignCategory,
                 description: campaignDescription,
