@@ -107,6 +107,12 @@ export default function CampaignAnalytics({ campaigns, campaignsLoaded, nav }) {
 
   const selectedCampaign = myCampaigns.find(c => String(c.id) === String(selectedCampaignId)) || myCampaigns[0];
 
+  const totalCollected = transactions.reduce((sum, tx) => sum + Number(tx.amount || 0), 0);
+  const totalDonations = transactions.length;
+  const averageDonation = totalDonations > 0 ? totalCollected / totalDonations : 0;
+  const goal = selectedCampaign ? Number(selectedCampaign.goal || 0) : 0;
+  const progressPct = goal > 0 ? Math.min(100, Math.round((totalCollected / goal) * 100)) : 0;
+
   const getMethodBadge = (method) => {
     let bg = "#F3F4F6";
     let color = "#374151";
@@ -168,10 +174,10 @@ export default function CampaignAnalytics({ campaigns, campaignsLoaded, nav }) {
       {/* Summary Cards */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20, marginBottom: 32 }}>
         {[
-          { label: "Total Collected", value: fmt(selectedCampaign.raised), sub: `${pct(selectedCampaign.raised, selectedCampaign.goal)}% of target goal`, color: "#1B4332" },
-          { label: "Target Goal", value: fmt(selectedCampaign.goal), sub: "Campaign fundraising goal", color: "#555" },
-          { label: "Total Donations", value: selectedCampaign.donors, sub: "Unique completed donations", color: "#555" },
-          { label: "Average Donation", value: selectedCampaign.donors > 0 ? fmt(selectedCampaign.raised / selectedCampaign.donors) : "৳0", sub: "Per donor average amount", color: "#555" }
+          { label: "Total Collected", value: fmt(totalCollected), sub: `${progressPct}% of target goal`, color: "#1B4332" },
+          { label: "Target Goal", value: fmt(goal), sub: "Campaign fundraising goal", color: "#555" },
+          { label: "Total Donations", value: totalDonations, sub: "Completed donations ledger", color: "#555" },
+          { label: "Average Donation", value: fmt(averageDonation), sub: "Per donation average amount", color: "#555" }
         ].map((card, idx) => (
           <div key={idx} style={{
             background: "#fff", borderRadius: 20, border: "1px solid #EDE9E0",
