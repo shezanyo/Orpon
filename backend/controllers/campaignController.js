@@ -1,5 +1,6 @@
 const pool = require("../config/db");
 const { v4: uuidv4 } = require("uuid");
+const { logAction } = require("./adminController");
 
 const DEFAULT_CATEGORY = "Community";
 const DEFAULT_COLOR = "#1B4332";
@@ -96,6 +97,8 @@ const createCampaign = async (req, res) => {
             campaignColor,
             campaignEmoji
         ]);
+
+        await logAction("Campaign Creation", `Campaign "${title}" created by User ID ${user_id}. Target goal: ${target_amount} BDT.`);
 
         res.status(201).json({
             success: true,
