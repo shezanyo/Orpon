@@ -16,7 +16,7 @@ module.exports = async (req, res, next) => {
         }
 
         const user = users[0];
-        if (user.role !== "admin") {
+        if (user.role !== "admin" && user.role !== "super_admin") {
             return res.status(403).json({ message: "Access denied. Admin role required." });
         }
 

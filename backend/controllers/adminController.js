@@ -167,11 +167,73 @@ const verifyIntegrity = async (req, res) => {
     }
 };
 
+// 6. Get list of users (for admin management)
+const getAdminUsers = async (req, res) => {
+    try {
+        const [users] = await pool.query(`
+            SELECT id, full_name, email, phone, nid, address, created_at, role
+            FROM users
+            ORDER BY created_at DESC
+        `);
+
+        res.status(200).json({
+            success: true,
+            users
+        });
+    } catch (error) {
+        console.error("getAdminUsers error:", error);
+        res.status(500).json({ message: "Server Error" });
+    }
+};
+
+// 7. Make a user admin by email
+const makeUserAdmin = async (req, res) => {
+    try {
+        const { email } = req.body;
+        const currentUserId = req.user.id;
+
+        if (!email) {
+            return res.status(400).json({ message: "Email is required" });
+        }
+
+        // Access check: only super_admin can perform this action
+        const [currentUser] = await pool.query("SELECT role, email FROM users WHERE id = ?", [currentUserId]);
+        if (currentUser.length === 0 || (currentUser[0].role !== "super_admin" && currentUser[0].email !== "admin@gmail.com")) {
+            return res.status(403).json({ message: "Access denied. Only the super admin can promote other users to admin." });
+        }
+
+        // Find target user
+        const [targetUsers] = await pool.query("SELECT id, full_name, role FROM users WHERE email = ?", [email.trim().toLowerCase()]);
+        if (targetUsers.length === 0) {
+            return res.status(404).json({ message: "User with this email not found." });
+        }
+
+        const targetUser = targetUsers[0];
+        if (targetUser.role === "admin" || targetUser.role === "super_admin") {
+            return res.status(400).json({ message: `User is already an ${targetUser.role}.` });
+        }
+
+        // Update role
+        await pool.query("UPDATE users SET role = 'admin' WHERE id = ?", [targetUser.id]);
+        await logAction("Make Admin", `User "${targetUser.full_name}" (${email}) promoted to Admin by super admin.`);
+
+        res.status(200).json({
+            success: true,
+            message: `User ${targetUser.full_name} (${email}) promoted to Admin successfully.`
+        });
+    } catch (error) {
+        console.error("makeUserAdmin error:", error);
+        res.status(500).json({ message: "Server Error" });
+    }
+};
+
 module.exports = {
     logAction,
     getAdminStats,
     getAdminCampaigns,
     getAdminDonations,
     getAdminLogs,
-    verifyIntegrity
+    verifyIntegrity,
+    getAdminUsers,
+    makeUserAdmin
 };

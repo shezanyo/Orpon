@@ -115,7 +115,7 @@ export default function Navbar({ page, nav, setShowLogin }) {
                       { label: "My Campaigns", key: "my-campaigns", icon: "📣" },
                       { label: "Campaign Analytics", key: "analytics", icon: "📊" }
                     ];
-                    if (user?.role === "admin") {
+                    if (user?.role === "admin" || user?.role === "super_admin") {
                       menuItems.push({ label: "Admin Panel", key: "admin", icon: "🛡️" });
                     }
                     return menuItems;
