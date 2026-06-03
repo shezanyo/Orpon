@@ -1,6 +1,7 @@
 const pool = require("../config/db");
 const { v4: uuidv4 } = require("uuid");
 const { generateHash } = require("../services/hashService");
+const { logAction } = require("./adminController");
 
 const createPendingDonationRecord = async ({ donor_name, amount, privacy_type, campaign_id, payment_method }) => {
     const connection = await pool.getConnection();
@@ -132,6 +133,9 @@ const completeDonationRecord = async (id) => {
         `, [donation.amount, donation.campaign_id]);
 
         await connection.commit();
+
+        // Write to system logs after successful transaction commit
+        await logAction("Donation Received", `Donation of ${donation.amount} BDT received via ${donation.payment_method} from ${donation.display_name} for Campaign ID ${donation.campaign_id}.`);
 
         return {
             success: true,
