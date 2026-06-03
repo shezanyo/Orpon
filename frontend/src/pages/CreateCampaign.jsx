@@ -3,8 +3,10 @@ import QRCodeSVG from "../components/ui/QRCodeSVG";
 import { CATEGORIES } from "../data/mockData";
 import { createCampaign } from "../utils/api";
 import { fmt } from "../utils/format";
+import { useAuth } from "../context/AuthContext";
 
 export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampaigns }) {
+  const { user } = useAuth();
   const [formStep, setFormStep] = useState(1);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Medical");
@@ -41,7 +43,7 @@ export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampa
         category,
         target_amount: Number(goal),
         days_left: Number(duration),
-        organizer_name: "You",
+        organizer_name: user?.full_name || "Community Organizer",
         is_verified: false,
       });
 
@@ -49,7 +51,7 @@ export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampa
         id: String(Date.now()),
         slug: `campaign-${Date.now().toString(36)}`,
         title,
-        organizer: "You",
+        organizer: user?.full_name || "Community Organizer",
         orgVerified: false,
         category,
         description: story,
