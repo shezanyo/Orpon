@@ -1,0 +1,640 @@
+2026-06-03T09:22:41.5289108+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-06-03T09:22:43.2911232+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-06-03T09:22:43.3410333+00:00 ContainerStatus: Container start method called.
+2026-06-03T09:22:43.3476976+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-03T09:22:43.3519276+00:00 ContainerStatus: Establishing network.
+2026-06-03T09:22:43.3539068+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-06-03T09:22:44.0870262+00:00 ContainerStatus: Image appsvc/node:22-lts_20260504.4.tuxprod is pulled from registry 10.1.0.5:13209
+2026-06-03T09:22:44.1026141+00:00 ContainerStatus: Container is starting.
+2026-06-03T09:22:44.1028000+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-03T09:22:44.1029354+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-06-03T09:22:44.1030340+00:00 ContainerStatus: Establishing network if not established already.
+2026-06-03T09:22:44.1031419+00:00 ContainerStatus: Mounting volumes.
+2026-06-03T09:22:44.1084820+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T09:22:44.1413203+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-06-03T09:22:44.1727580+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T09:22:44.1992624+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T09:22:44.2026160+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T09:22:44.3767384+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for orpon-backend-api-sea. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-06-03T09:22:44.3773156+00:00 ContainerStatus: Creating container.
+2026-06-03T09:22:44.3781863+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-06-03T09:22:44.3790329+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/f3bfe539929f_orpon-backend-api-sea/stdout_c6bc6529a1d243fa845ecb0417d1e421.
+2026-06-03T09:22:44.3803032+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/f3bfe539929f_orpon-backend-api-sea/stdout_c6bc6529a1d243fa845ecb0417d1e421.
+2026-06-03T09:22:44.3814361+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/f3bfe539929f_orpon-backend-api-sea/stdout_c6bc6529a1d243fa845ecb0417d1e421 for reading in non-blocking mode.
+2026-06-03T09:22:44.3816201+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/f3bfe539929f_orpon-backend-api-sea/stdout_c6bc6529a1d243fa845ecb0417d1e421.
+2026-06-03T09:22:44.3820616+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/f3bfe539929f_orpon-backend-api-sea/stdout_c6bc6529a1d243fa845ecb0417d1e421.
+2026-06-03T09:22:44.3844398+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/f3bfe539929f_orpon-backend-api-sea/stderr_d3c890409df74aac8873d81cad354262.
+2026-06-03T09:22:44.3848857+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/f3bfe539929f_orpon-backend-api-sea/stderr_d3c890409df74aac8873d81cad354262.
+2026-06-03T09:22:44.3852903+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/f3bfe539929f_orpon-backend-api-sea/stderr_d3c890409df74aac8873d81cad354262 for reading in non-blocking mode.
+2026-06-03T09:22:44.3859315+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/f3bfe539929f_orpon-backend-api-sea/stderr_d3c890409df74aac8873d81cad354262.
+2026-06-03T09:22:44.3861090+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/f3bfe539929f_orpon-backend-api-sea/stderr_d3c890409df74aac8873d81cad354262.
+2026-06-03T09:22:44.3885006+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.5:13209 and fully qualified image name: 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-06-03T09:22:45.6709470+00:00 ContainerStatus: Starting container: f3bfe539929f_orpon-backend-api-sea.
+2026-06-03T09:22:45.8267305+00:00 ContainerStatus: Starting watchers and probes.
+2026-06-03T09:22:45.8915169+00:00 ContainerStatus: Starting metrics collection.
+2026-06-03T09:22:45.9147461+00:00 ContainerStatus: Container is running.
+2026-06-03T09:22:45.9150310+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-03T09:22:46.0106620+00:00 ContainerStatus: Container start method finished after 2669 ms.
+2026-06-03T09:22:46.0169445+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-03T09:22:46.0374570+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-06-03T09:22:46.4352439+00:00 ContainerStream:    _____                               
+2026-06-03T09:22:46.4427082+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-06-03T09:22:46.4427591+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-06-03T09:22:46.4427662+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-06-03T09:22:46.4427716+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-06-03T09:22:46.4427766+00:00 ContainerStream:         \/      \/                  \/ 
+2026-06-03T09:22:46.4427868+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-06-03T09:22:46.4427913+00:00 ContainerStream: 
+2026-06-03T09:22:46.4427971+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-06-03T09:22:46.4428049+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-06-03T09:22:46.4428108+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-06-03T09:22:46.4428163+00:00 ContainerStream: Instance Name    : 10-30-0-14
+2026-06-03T09:22:46.4428251+00:00 ContainerStream: Instance Id      : cffa275333a302a4e96ca9dbb7bc4f4c4b650a3bd97ff27fc3abdafdda74e222
+2026-06-03T09:22:46.4428294+00:00 ContainerStream: 
+2026-06-03T09:22:46.4428349+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-06-03T09:22:48.0708985+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-06-03T09:22:48.0804997+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-06-03T09:22:48.1602335+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-06-03T09:22:57.6475210+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-06-03T09:22:57.6489268+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-06-03T09:22:57.7297511+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-06-03T09:22:57.7434440+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-06-03T09:22:57.7450990+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-06-03T09:22:57.7495375+00:00 ContainerStream: done.
+2026-06-03T09:22:57.7581018+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-06-03T09:22:57.8991341+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-06-03T09:22:57.9891496+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-06-03T09:22:57.9892227+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-06-03T09:22:57.9898812+00:00 ContainerStream: Build Operation ID: c6224fa6-4ba5-41cd-ac48-49528105b72f
+2026-06-03T09:22:58.3835142+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-06-03T09:22:58.4803976+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-06-03T09:22:58.6207278+00:00 ContainerStream: Running #!/bin/sh
+2026-06-03T09:22:58.6208197+00:00 ContainerStream: 
+2026-06-03T09:22:58.6208363+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-06-03T09:22:58.6208430+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-06-03T09:22:58.6208472+00:00 ContainerStream: 
+2026-06-03T09:22:58.6208521+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-06-03T09:22:58.6208696+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-06-03T09:22:58.6208763+00:00 ContainerStream: 		export PORT=8080
+2026-06-03T09:22:58.6208806+00:00 ContainerStream: fi
+2026-06-03T09:22:58.6208872+00:00 ContainerStream: 
+2026-06-03T09:22:58.6226023+00:00 ContainerStream: PATH="$PATH:/home/site/wwwroot" cd /home/site/wwwroot/backend && node server.js
+2026-06-03T09:22:59.2285934+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+2026-06-03T09:23:11.6131862+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+2026-06-03T09:23:11.6261239+00:00 ContainerStream: Checking database schema...
+2026-06-03T09:23:17.8530959+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+2026-06-03T09:23:17.8535927+00:00 ContainerStream: Redis not enabled. Operating in local memory fallback Map mode.
+2026-06-03T09:23:17.8632830+00:00 ContainerStream: Server running on port 8080
+2026-06-03T09:23:17.9674200+00:00 ContainerStream: Connected to Azure SQL Database successfully!
+2026-06-03T09:23:18.0609301+00:00 ContainerStream: Database migrations checked & completed successfully!
+2026-06-03T09:23:18.1753753+00:00 ContainerStatus: Site startup probe succeeded after 32.073252 seconds.
+2026-06-03T09:23:18.2988032+00:00 ContainerStatus: State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 32.073252 seconds., DetailsLevel: INFO
+2026-06-03T09:23:18.4969637+00:00 ContainerStatus: Site is running with deployment version: 68a75932fffd0cd3406ba138311736b2b5183084
+2026-06-03T09:23:18.4976248+00:00 ContainerStatus: Site started.
+2026-06-03T09:23:18.4980695+00:00 ContainerStatus: State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 06/03/2026 09:23:18 (UTC), DetailsLevel: INFO
+========== New Cold Start Attempt (2026-06-03T09:23:30.5801118+00:00) ==========
+2026-06-03T09:23:30.5801118+00:00 ContainerStream: bKash initiate exception: TypeError: Failed to parse URL from undefined/tokenized/checkout/token/grant
+2026-06-03T09:23:30.5801560+00:00 ContainerStream:     at node:internal/deps/undici/undici:14976:13
+2026-06-03T09:23:30.5801607+00:00 ContainerStream:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-06-03T09:23:30.5801643+00:00 ContainerStream:     at async initiateBkash (/home/site/wwwroot/backend/controllers/paymentController.js:42:31) {
+2026-06-03T09:23:30.5801673+00:00 ContainerStream:   [cause]: TypeError: Invalid URL
+2026-06-03T09:23:30.5801705+00:00 ContainerStream:       at new URL (node:internal/url:818:25)
+2026-06-03T09:23:30.5801737+00:00 ContainerStream:       at new Request (node:internal/deps/undici/undici:9804:25)
+2026-06-03T09:23:30.5801771+00:00 ContainerStream:       at fetch (node:internal/deps/undici/undici:10533:25)
+2026-06-03T09:23:30.5801800+00:00 ContainerStream:       at fetch (node:internal/deps/undici/undici:14974:10)
+2026-06-03T09:23:30.5801833+00:00 ContainerStream:       at fetch (node:internal/bootstrap/web/exposed-window-or-worker:75:12)
+2026-06-03T09:23:30.5825722+00:00 ContainerStream:       at initiateBkash (/home/site/wwwroot/backend/controllers/paymentController.js:42:37)
+2026-06-03T09:23:30.5825857+00:00 ContainerStream:       at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+2026-06-03T09:23:30.5825891+00:00 ContainerStream:     code: 'ERR_INVALID_URL',
+2026-06-03T09:23:30.5825922+00:00 ContainerStream:     input: 'undefined/tokenized/checkout/token/grant'
+2026-06-03T09:23:30.5825951+00:00 ContainerStream:   }
+2026-06-03T09:23:30.5825978+00:00 ContainerStream: }
+2026-06-03T09:31:14.7489889+00:00 ContainerStream: bKash initiate exception: TypeError: Failed to parse URL from undefined/tokenized/checkout/token/grant
+2026-06-03T09:31:14.7490542+00:00 ContainerStream:     at node:internal/deps/undici/undici:14976:13
+2026-06-03T09:31:14.7490594+00:00 ContainerStream:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-06-03T09:31:14.7490626+00:00 ContainerStream:     at async initiateBkash (/home/site/wwwroot/backend/controllers/paymentController.js:42:31) {
+2026-06-03T09:31:14.7490654+00:00 ContainerStream:   [cause]: TypeError: Invalid URL
+2026-06-03T09:31:14.7490683+00:00 ContainerStream:       at new URL (node:internal/url:818:25)
+2026-06-03T09:31:14.7490715+00:00 ContainerStream:       at new Request (node:internal/deps/undici/undici:9804:25)
+2026-06-03T09:31:14.7490744+00:00 ContainerStream:       at fetch (node:internal/deps/undici/undici:10533:25)
+2026-06-03T09:31:14.7490895+00:00 ContainerStream:       at fetch (node:internal/deps/undici/undici:14974:10)
+2026-06-03T09:31:14.7492780+00:00 ContainerStream:       at fetch (node:internal/bootstrap/web/exposed-window-or-worker:75:12)
+2026-06-03T09:31:14.7492852+00:00 ContainerStream:       at initiateBkash (/home/site/wwwroot/backend/controllers/paymentController.js:42:37)
+2026-06-03T09:31:14.7492915+00:00 ContainerStream:       at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+2026-06-03T09:31:14.7492941+00:00 ContainerStream:     code: 'ERR_INVALID_URL',
+2026-06-03T09:31:14.7492967+00:00 ContainerStream:     input: 'undefined/tokenized/checkout/token/grant'
+2026-06-03T09:31:14.7492992+00:00 ContainerStream:   }
+2026-06-03T09:31:14.7493019+00:00 ContainerStream: }
+2026-06-03T09:39:03.2458691+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-06-03T09:39:03.9884207+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-06-03T09:39:03.9887762+00:00 ContainerStatus: Container start method called.
+2026-06-03T09:39:03.9889013+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-03T09:39:03.9946721+00:00 ContainerStatus: Establishing network.
+2026-06-03T09:39:03.9948671+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-06-03T09:39:04.4809872+00:00 ContainerStatus: Container is starting.
+2026-06-03T09:39:04.4811115+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-03T09:39:04.4812657+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-06-03T09:39:04.4814452+00:00 ContainerStatus: Establishing network if not established already.
+2026-06-03T09:39:04.4859518+00:00 ContainerStatus: Mounting volumes.
+2026-06-03T09:39:04.4862291+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T09:39:04.4930328+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-06-03T09:39:04.5156452+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T09:39:04.5165715+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T09:39:04.5204035+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T09:39:04.6233275+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for orpon-backend-api-sea. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-06-03T09:39:04.6234678+00:00 ContainerStatus: Creating container.
+2026-06-03T09:39:04.6236027+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-06-03T09:39:04.6237331+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/faf1d4395e62_orpon-backend-api-sea/stdout_00d82ae1abe24c968d6ba30527ca0d0a.
+2026-06-03T09:39:04.6252495+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/faf1d4395e62_orpon-backend-api-sea/stdout_00d82ae1abe24c968d6ba30527ca0d0a.
+2026-06-03T09:39:04.6255709+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/faf1d4395e62_orpon-backend-api-sea/stdout_00d82ae1abe24c968d6ba30527ca0d0a for reading in non-blocking mode.
+2026-06-03T09:39:04.6258173+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/faf1d4395e62_orpon-backend-api-sea/stdout_00d82ae1abe24c968d6ba30527ca0d0a.
+2026-06-03T09:39:04.6259530+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/faf1d4395e62_orpon-backend-api-sea/stdout_00d82ae1abe24c968d6ba30527ca0d0a.
+2026-06-03T09:39:04.6261474+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/faf1d4395e62_orpon-backend-api-sea/stderr_17f7fa01e85c49ebb0db92805e010a38.
+2026-06-03T09:39:04.6263733+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/faf1d4395e62_orpon-backend-api-sea/stderr_17f7fa01e85c49ebb0db92805e010a38.
+2026-06-03T09:39:04.6265718+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/faf1d4395e62_orpon-backend-api-sea/stderr_17f7fa01e85c49ebb0db92805e010a38 for reading in non-blocking mode.
+2026-06-03T09:39:04.6267500+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/faf1d4395e62_orpon-backend-api-sea/stderr_17f7fa01e85c49ebb0db92805e010a38.
+2026-06-03T09:39:04.6270677+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/faf1d4395e62_orpon-backend-api-sea/stderr_17f7fa01e85c49ebb0db92805e010a38.
+2026-06-03T09:39:04.6272493+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.5:13209 and fully qualified image name: 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-06-03T09:39:05.1665324+00:00 ContainerStatus: Starting container: faf1d4395e62_orpon-backend-api-sea.
+2026-06-03T09:39:05.2276095+00:00 ContainerStatus: Starting watchers and probes.
+2026-06-03T09:39:05.2279521+00:00 ContainerStatus: Starting metrics collection.
+2026-06-03T09:39:05.2281879+00:00 ContainerStatus: Container is running.
+2026-06-03T09:39:05.2284335+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-03T09:39:05.2797309+00:00 ContainerStatus: Container start method finished after 1290 ms.
+2026-06-03T09:39:05.2845521+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-03T09:39:05.2845831+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-06-03T09:39:05.5690874+00:00 ContainerStream:    _____                               
+2026-06-03T09:39:05.5692814+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-06-03T09:39:05.5692891+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-06-03T09:39:05.5692919+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-06-03T09:39:05.5692946+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-06-03T09:39:05.5692980+00:00 ContainerStream:         \/      \/                  \/ 
+2026-06-03T09:39:05.5693031+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-06-03T09:39:05.5693060+00:00 ContainerStream: 
+2026-06-03T09:39:05.5693090+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-06-03T09:39:05.5693118+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-06-03T09:39:05.5693143+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-06-03T09:39:05.5693168+00:00 ContainerStream: Instance Name    : 10-30-0-14
+2026-06-03T09:39:05.5693204+00:00 ContainerStream: Instance Id      : cffa275333a302a4e96ca9dbb7bc4f4c4b650a3bd97ff27fc3abdafdda74e222
+2026-06-03T09:39:05.5693236+00:00 ContainerStream: 
+2026-06-03T09:39:05.5693262+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-06-03T09:39:07.1001248+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-06-03T09:39:07.1160774+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-06-03T09:39:07.1554384+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-06-03T09:39:16.1473340+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-06-03T09:39:16.1485218+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-06-03T09:39:16.2004541+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-06-03T09:39:16.2159295+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-06-03T09:39:16.2161282+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-06-03T09:39:16.2193630+00:00 ContainerStream: done.
+2026-06-03T09:39:16.2275316+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-06-03T09:39:16.3543716+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-06-03T09:39:16.4716921+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-06-03T09:39:16.4718866+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-06-03T09:39:16.4718941+00:00 ContainerStream: Build Operation ID: 2839dac6-34b7-455f-acc2-eb88c92635be
+2026-06-03T09:39:16.8401954+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-06-03T09:39:16.9362148+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-06-03T09:39:17.0467918+00:00 ContainerStream: Running #!/bin/sh
+2026-06-03T09:39:17.0468429+00:00 ContainerStream: 
+2026-06-03T09:39:17.0468485+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-06-03T09:39:17.0468534+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-06-03T09:39:17.0468570+00:00 ContainerStream: 
+2026-06-03T09:39:17.0468601+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-06-03T09:39:17.0468696+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-06-03T09:39:17.0468727+00:00 ContainerStream: 		export PORT=8080
+2026-06-03T09:39:17.0468759+00:00 ContainerStream: fi
+2026-06-03T09:39:17.0468790+00:00 ContainerStream: 
+2026-06-03T09:39:17.0468821+00:00 ContainerStream: PATH="$PATH:/home/site/wwwroot" cd /home/site/wwwroot/backend && node server.js
+2026-06-03T09:39:17.7672871+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+2026-06-03T09:39:23.9423035+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ override existing { override: true }
+2026-06-03T09:39:23.9560652+00:00 ContainerStream: Checking database schema...
+2026-06-03T09:39:29.2634152+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ enable debugging { debug: true }
+2026-06-03T09:39:29.2635011+00:00 ContainerStream: Redis not enabled. Operating in local memory fallback Map mode.
+2026-06-03T09:39:29.2747057+00:00 ContainerStream: Server running on port 8080
+2026-06-03T09:39:29.3830172+00:00 ContainerStatus: Site startup probe succeeded after 24.0980181 seconds.
+2026-06-03T09:39:29.4796551+00:00 ContainerStatus: State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 24.0980181 seconds., DetailsLevel: INFO
+2026-06-03T09:39:29.4927843+00:00 ContainerStream: Connected to Azure SQL Database successfully!
+2026-06-03T09:39:29.6399906+00:00 ContainerStream: Database migrations checked & completed successfully!
+2026-06-03T09:39:30.3801992+00:00 ContainerStatus: Site is running with deployment version: 68a75932fffd0cd3406ba138311736b2b5183084
+2026-06-03T09:39:30.3938772+00:00 ContainerStatus: Site started.
+2026-06-03T09:39:30.3963985+00:00 ContainerStatus: State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 06/03/2026 09:39:30 (UTC), DetailsLevel: INFO
+2026-06-03T09:39:30.3966916+00:00 ContainerStatus: Site is running with patch version NODE 22.22.2
+========== New Cold Start Attempt (2026-06-03T09:39:50.6493339+00:00) ==========
+2026-06-03T09:39:50.6493339+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 06/03/2026 09:23:18 (UTC), DetailsLevel: INFO
+2026-06-03T09:39:50.6726782+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 06/03/2026 09:23:18 (UTC), DetailsLevel: INFO
+2026-06-03T09:39:50.6754601+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-06-03T09:39:50.7074470+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-06-03T09:39:50.7075933+00:00 ContainerStatus: Stopping container: f3bfe539929f_orpon-backend-api-sea.
+2026-06-03T09:39:55.8582195+00:00 ContainerStatus: Deleting container: f3bfe539929f_orpon-backend-api-sea. Retry count = 0
+2026-06-03T09:39:56.1788055+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-06-03T09:39:56.1797076+00:00 ContainerStatus: Container is terminated. Total time elapsed: 5496 ms.
+2026-06-03T09:39:56.1871829+00:00 ContainerStatus: Site: orpon-backend-api-sea stopped.
+2026-06-03T09:42:54.4546748+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-06-03T09:42:55.8300743+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-06-03T09:42:55.8302455+00:00 ContainerStatus: Container start method called.
+2026-06-03T09:42:55.8302925+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-03T09:42:55.8303960+00:00 ContainerStatus: Establishing network.
+2026-06-03T09:42:55.8305096+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-06-03T09:42:55.9940953+00:00 ContainerStatus: Container is starting.
+2026-06-03T09:42:55.9942092+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-03T09:42:55.9943472+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-06-03T09:42:55.9946016+00:00 ContainerStatus: Establishing network if not established already.
+2026-06-03T09:42:55.9947570+00:00 ContainerStatus: Mounting volumes.
+2026-06-03T09:42:55.9972311+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T09:42:56.0056708+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-06-03T09:42:56.0103628+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T09:42:56.0155080+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T09:42:56.0174290+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T09:42:56.1236967+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for orpon-backend-api-sea. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-06-03T09:42:56.1242393+00:00 ContainerStatus: Creating container.
+2026-06-03T09:42:56.1247024+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-06-03T09:42:56.1251353+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/aa2f371ed61c_orpon-backend-api-sea/stdout_f8db7cc2d702415fbc3f1e437749568f.
+2026-06-03T09:42:56.1325097+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/aa2f371ed61c_orpon-backend-api-sea/stdout_f8db7cc2d702415fbc3f1e437749568f.
+2026-06-03T09:42:56.1326270+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/aa2f371ed61c_orpon-backend-api-sea/stdout_f8db7cc2d702415fbc3f1e437749568f for reading in non-blocking mode.
+2026-06-03T09:42:56.1327590+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/aa2f371ed61c_orpon-backend-api-sea/stdout_f8db7cc2d702415fbc3f1e437749568f.
+2026-06-03T09:42:56.1329473+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/aa2f371ed61c_orpon-backend-api-sea/stdout_f8db7cc2d702415fbc3f1e437749568f.
+2026-06-03T09:42:56.1331203+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/aa2f371ed61c_orpon-backend-api-sea/stderr_56527b9a9a7949439bc22e63f1872d1b.
+2026-06-03T09:42:56.1332875+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/aa2f371ed61c_orpon-backend-api-sea/stderr_56527b9a9a7949439bc22e63f1872d1b.
+2026-06-03T09:42:56.1333810+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/aa2f371ed61c_orpon-backend-api-sea/stderr_56527b9a9a7949439bc22e63f1872d1b for reading in non-blocking mode.
+2026-06-03T09:42:56.1334923+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/aa2f371ed61c_orpon-backend-api-sea/stderr_56527b9a9a7949439bc22e63f1872d1b.
+2026-06-03T09:42:56.1335985+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/aa2f371ed61c_orpon-backend-api-sea/stderr_56527b9a9a7949439bc22e63f1872d1b.
+2026-06-03T09:42:56.1337249+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.5:13209 and fully qualified image name: 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-06-03T09:42:56.5584341+00:00 ContainerStatus: Starting container: aa2f371ed61c_orpon-backend-api-sea.
+2026-06-03T09:42:56.5854104+00:00 ContainerStatus: Starting watchers and probes.
+2026-06-03T09:42:56.5873393+00:00 ContainerStatus: Starting metrics collection.
+2026-06-03T09:42:56.5883094+00:00 ContainerStatus: Container is running.
+2026-06-03T09:42:56.5893002+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-03T09:42:56.6526645+00:00 ContainerStatus: Container start method finished after 821 ms.
+2026-06-03T09:42:56.6561725+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-03T09:42:56.6562789+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-06-03T09:42:56.9128190+00:00 ContainerStream:    _____                               
+2026-06-03T09:42:56.9130233+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-06-03T09:42:56.9130319+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-06-03T09:42:56.9130355+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-06-03T09:42:56.9130387+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-06-03T09:42:56.9130431+00:00 ContainerStream:         \/      \/                  \/ 
+2026-06-03T09:42:56.9130466+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-06-03T09:42:56.9130494+00:00 ContainerStream: 
+2026-06-03T09:42:56.9130539+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-06-03T09:42:56.9130579+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-06-03T09:42:56.9130616+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-06-03T09:42:56.9130649+00:00 ContainerStream: Instance Name    : 10-30-0-14
+2026-06-03T09:42:56.9130689+00:00 ContainerStream: Instance Id      : cffa275333a302a4e96ca9dbb7bc4f4c4b650a3bd97ff27fc3abdafdda74e222
+2026-06-03T09:42:56.9130721+00:00 ContainerStream: 
+2026-06-03T09:42:56.9130753+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-06-03T09:42:58.8737237+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-06-03T09:42:58.8836369+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-06-03T09:42:58.9134247+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-06-03T09:43:05.8148887+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-06-03T09:43:05.8154050+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-06-03T09:43:05.8931293+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-06-03T09:43:05.9108225+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-06-03T09:43:05.9109187+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-06-03T09:43:05.9145890+00:00 ContainerStream: done.
+2026-06-03T09:43:05.9288015+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-06-03T09:43:06.5335601+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-06-03T09:43:06.6601616+00:00 ContainerStream: Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2026-06-03T09:43:06.6654808+00:00 ContainerStream: Build Operation ID: b0f448d7210b00d9
+2026-06-03T09:43:06.6760288+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-06-03T09:43:07.0402777+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-06-03T09:43:07.1511048+00:00 ContainerStream: Running #!/bin/sh
+2026-06-03T09:43:07.1511455+00:00 ContainerStream: 
+2026-06-03T09:43:07.1511513+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-06-03T09:43:07.1511560+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-06-03T09:43:07.1511592+00:00 ContainerStream: 
+2026-06-03T09:43:07.1511626+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-06-03T09:43:07.1511718+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-06-03T09:43:07.1511751+00:00 ContainerStream: 		export PORT=8080
+2026-06-03T09:43:07.1511783+00:00 ContainerStream: fi
+2026-06-03T09:43:07.1511813+00:00 ContainerStream: 
+2026-06-03T09:43:07.1511845+00:00 ContainerStream: echo Found tar.gz based node_modules.
+2026-06-03T09:43:07.1511879+00:00 ContainerStream: extractionCommand="tar -xzf node_modules.tar.gz -C /node_modules"
+2026-06-03T09:43:07.1511914+00:00 ContainerStream: echo "Removing existing modules directory from root..."
+2026-06-03T09:43:07.1511947+00:00 ContainerStream: rm -fr /node_modules
+2026-06-03T09:43:07.1511988+00:00 ContainerStream: mkdir -p /node_modules
+2026-06-03T09:43:07.1512020+00:00 ContainerStream: echo Extracting modules...
+2026-06-03T09:43:07.1512051+00:00 ContainerStream: $extractionCommand
+2026-06-03T09:43:07.1512421+00:00 ContainerStream: export NODE_PATH="/node_modules":$NODE_PATH
+2026-06-03T09:43:07.1512463+00:00 ContainerStream: export PATH=/node_modules/.bin:$PATH
+2026-06-03T09:43:07.1512497+00:00 ContainerStream: if [ -d node_modules ]; then
+2026-06-03T09:43:07.1512546+00:00 ContainerStream:     mv -f node_modules _del_node_modules || true
+2026-06-03T09:43:07.1512577+00:00 ContainerStream: fi
+2026-06-03T09:43:07.1512610+00:00 ContainerStream: 
+2026-06-03T09:43:07.1512640+00:00 ContainerStream: if [ -d /node_modules ]; then
+2026-06-03T09:43:07.1512671+00:00 ContainerStream:     ln -sfn /node_modules ./node_modules 
+2026-06-03T09:43:07.1512699+00:00 ContainerStream: fi
+2026-06-03T09:43:07.1512727+00:00 ContainerStream: 
+2026-06-03T09:43:07.1512755+00:00 ContainerStream: echo "Done."
+2026-06-03T09:43:07.1512797+00:00 ContainerStream: PATH="$PATH:/home/site/wwwroot" cd /home/site/wwwroot/backend && node server.js
+2026-06-03T09:43:07.1573997+00:00 ContainerStream: Found tar.gz based node_modules.
+2026-06-03T09:43:07.1574406+00:00 ContainerStream: Removing existing modules directory from root...
+2026-06-03T09:43:07.1652841+00:00 ContainerStream: Extracting modules...
+2026-06-03T09:43:07.1788486+00:00 ContainerStream: tar (child): node_modules.tar.gz: Cannot open: No such file or directory
+2026-06-03T09:43:07.1792645+00:00 ContainerStream: tar (child): Error is not recoverable: exiting now
+2026-06-03T09:43:07.1802667+00:00 ContainerStream: tar: Child returned status 2
+2026-06-03T09:43:07.1803012+00:00 ContainerStream: tar: Error is not recoverable: exiting now
+2026-06-03T09:43:07.2369227+00:00 ContainerStream: Done.
+2026-06-03T09:43:07.5899729+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+2026-06-03T09:43:13.7362464+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+2026-06-03T09:43:13.7542424+00:00 ContainerStream: Checking database schema...
+2026-06-03T09:43:17.9315994+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ override existing { override: true }
+2026-06-03T09:43:17.9323955+00:00 ContainerStream: Redis not enabled. Operating in local memory fallback Map mode.
+2026-06-03T09:43:17.9326497+00:00 ContainerStream: ✅ All required environment variables are set
+2026-06-03T09:43:17.9328466+00:00 ContainerStream: 
+2026-06-03T09:43:17.9328593+00:00 ContainerStream: 📍 Current Configuration:
+2026-06-03T09:43:17.9328643+00:00 ContainerStream:    Backend URL: https://orpon-backend-api-sea.azurewebsites.net
+2026-06-03T09:43:17.9329246+00:00 ContainerStream:    Frontend URL: https://thankful-sea-0f5fbd000.7.azurestaticapps.net
+2026-06-03T09:43:17.9333221+00:00 ContainerStream:    Database: orponadmin@orpon-sql-server.database.windows.net:1433/donation_system
+2026-06-03T09:43:17.9335251+00:00 ContainerStream:    JWT Secret: 1837190dd0...
+2026-06-03T09:43:17.9335341+00:00 ContainerStream:    Redis: DISABLED (using local memory)
+2026-06-03T09:43:17.9335400+00:00 ContainerStream: 
+2026-06-03T09:43:17.9400096+00:00 ContainerStream: Server running on port 8080
+2026-06-03T09:43:18.0226341+00:00 ContainerStream: Connected to Azure SQL Database successfully!
+2026-06-03T09:43:18.1161999+00:00 ContainerStream: Database migrations checked & completed successfully!
+2026-06-03T09:43:18.6864651+00:00 ContainerStatus: Site startup probe succeeded after 22.0263235 seconds.
+2026-06-03T09:43:18.7617187+00:00 ContainerStatus: State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 22.0263235 seconds., DetailsLevel: INFO
+2026-06-03T09:43:18.8862213+00:00 ContainerStatus: Site is running with deployment version: 8bfd13da-390c-446a-847e-46559db801ae
+2026-06-03T09:43:18.8867458+00:00 ContainerStatus: Site started.
+2026-06-03T09:43:18.8878776+00:00 ContainerStatus: State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 06/03/2026 09:43:18 (UTC), DetailsLevel: INFO
+2026-06-03T09:43:18.8893237+00:00 ContainerStatus: Site is running with patch version NODE 22.22.2
+========== New Cold Start Attempt (2026-06-03T09:43:39.0153613+00:00) ==========
+2026-06-03T09:43:39.0153613+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 06/03/2026 09:39:30 (UTC), DetailsLevel: INFO
+2026-06-03T09:43:39.0155041+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-06-03T09:43:39.0463525+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-06-03T09:43:39.0465671+00:00 ContainerStatus: Stopping container: faf1d4395e62_orpon-backend-api-sea.
+2026-06-03T09:43:44.2756347+00:00 ContainerStatus: Deleting container: faf1d4395e62_orpon-backend-api-sea. Retry count = 0
+2026-06-03T09:43:44.5026258+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-06-03T09:43:44.5029090+00:00 ContainerStatus: Container is terminated. Total time elapsed: 5486 ms.
+2026-06-03T09:43:44.5030357+00:00 ContainerStatus: Site: orpon-backend-api-sea stopped.
+2026-06-03T09:49:34.6449596+00:00 ContainerStream: [Payment Redirect] https://thankful-sea-0f5fbd000.7.azurestaticapps.net/donate/nagad-sandbox?sessionId=NGD-f8ea576a-9f62-4cae-bef6-489ed7cbc350
+2026-06-03T09:50:25.5913518+00:00 ContainerStream: bKash payment execution failure: { statusCode: '2056', statusMessage: 'Invalid Payment State' }
+2026-06-03T09:50:25.6417003+00:00 ContainerStream: [Payment Redirect] https://thankful-sea-0f5fbd000.7.azurestaticapps.net/payment/fail?message=Failed+to+execute+bKash+payment
+2026-06-03T10:08:22.7515463+00:00 ContainerStream: [Payment Redirect] https://thankful-sea-0f5fbd000.7.azurestaticapps.net/payment/fail?message=Payment+cancelled+or+failed
+2026-06-03T11:14:49.5948052+00:00 ContainerStream: [Payment Redirect] https://thankful-sea-0f5fbd000.7.azurestaticapps.net/payment/success?donationId=48521605-33ad-4463-8c22-7361e3865c72&amount=100
+2026-06-03T11:27:37.1048968+00:00 ContainerStream: [Payment Redirect] https://thankful-sea-0f5fbd000.7.azurestaticapps.net/payment/fail?message=Payment+cancelled+or+failed
+2026-06-03T11:28:10.6777482+00:00 ContainerStream: [Payment Redirect] https://thankful-sea-0f5fbd000.7.azurestaticapps.net/payment/fail?message=Payment+cancelled+or+failed
+2026-06-03T11:28:10.7581867+00:00 ContainerStream: [Payment Redirect] https://thankful-sea-0f5fbd000.7.azurestaticapps.net/payment/fail?message=Transaction+not+found+or+expired
+2026-06-03T11:28:43.4760402+00:00 ContainerStream: [Payment Redirect] https://thankful-sea-0f5fbd000.7.azurestaticapps.net/payment/fail?message=Payment+cancelled+or+failed
+2026-06-03T11:29:50.0445706+00:00 ContainerStream: [Payment Redirect] https://thankful-sea-0f5fbd000.7.azurestaticapps.net/payment/success?donationId=014df814-8c3d-44e9-9793-ddd580806df8&amount=2500
+2026-06-03T12:07:06.1640747+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-06-03T12:07:07.4941809+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-06-03T12:07:07.4968193+00:00 ContainerStatus: Container start method called.
+2026-06-03T12:07:07.4995313+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-03T12:07:07.5003259+00:00 ContainerStatus: Establishing network.
+2026-06-03T12:07:07.5006119+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-06-03T12:07:08.0065500+00:00 ContainerStatus: Image appsvc/node:22-lts_20260504.4.tuxprod is pulled from registry 10.1.0.6:13209
+2026-06-03T12:07:08.0148622+00:00 ContainerStatus: Container is starting.
+2026-06-03T12:07:08.0160462+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-03T12:07:08.0168742+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-06-03T12:07:08.0170518+00:00 ContainerStatus: Establishing network if not established already.
+2026-06-03T12:07:08.0173125+00:00 ContainerStatus: Mounting volumes.
+2026-06-03T12:07:08.0360820+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T12:07:08.1587572+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-06-03T12:07:08.9752047+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T12:07:09.3368659+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T12:07:09.3729809+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T12:07:11.4205565+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for orpon-backend-api-sea. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-06-03T12:07:11.4208373+00:00 ContainerStatus: Creating container.
+2026-06-03T12:07:11.4727978+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-06-03T12:07:11.4730120+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/56bcd418b04c_orpon-backend-api-sea/stdout_14f457f406e4470291789803aa8bbfb4.
+2026-06-03T12:07:11.4845126+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/56bcd418b04c_orpon-backend-api-sea/stdout_14f457f406e4470291789803aa8bbfb4.
+2026-06-03T12:07:11.5934080+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/56bcd418b04c_orpon-backend-api-sea/stdout_14f457f406e4470291789803aa8bbfb4 for reading in non-blocking mode.
+2026-06-03T12:07:11.5939790+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/56bcd418b04c_orpon-backend-api-sea/stdout_14f457f406e4470291789803aa8bbfb4.
+2026-06-03T12:07:11.5941364+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/56bcd418b04c_orpon-backend-api-sea/stdout_14f457f406e4470291789803aa8bbfb4.
+2026-06-03T12:07:11.6071448+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/56bcd418b04c_orpon-backend-api-sea/stderr_a1c6df9b794e49b795de155dbd2b2a41.
+2026-06-03T12:07:11.6073990+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/56bcd418b04c_orpon-backend-api-sea/stderr_a1c6df9b794e49b795de155dbd2b2a41.
+2026-06-03T12:07:11.6075364+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/56bcd418b04c_orpon-backend-api-sea/stderr_a1c6df9b794e49b795de155dbd2b2a41 for reading in non-blocking mode.
+2026-06-03T12:07:11.6077040+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/56bcd418b04c_orpon-backend-api-sea/stderr_a1c6df9b794e49b795de155dbd2b2a41.
+2026-06-03T12:07:11.6859124+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/56bcd418b04c_orpon-backend-api-sea/stderr_a1c6df9b794e49b795de155dbd2b2a41.
+2026-06-03T12:07:11.7842081+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-06-03T12:07:15.8246307+00:00 ContainerStatus: Starting container: 56bcd418b04c_orpon-backend-api-sea.
+2026-06-03T12:07:16.4153549+00:00 ContainerStatus: Starting watchers and probes.
+2026-06-03T12:07:16.4589574+00:00 ContainerStatus: Starting metrics collection.
+2026-06-03T12:07:16.4922355+00:00 ContainerStatus: Container is running.
+2026-06-03T12:07:16.5076173+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-03T12:07:16.9070278+00:00 ContainerStatus: Container start method finished after 9385 ms.
+2026-06-03T12:07:16.9074445+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-03T12:07:16.9074715+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-06-03T12:07:18.3305192+00:00 ContainerStream:    _____                               
+2026-06-03T12:07:18.3644322+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-06-03T12:07:18.3644515+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-06-03T12:07:18.3644606+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-06-03T12:07:18.3644641+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-06-03T12:07:18.3644675+00:00 ContainerStream:         \/      \/                  \/ 
+2026-06-03T12:07:18.3644726+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-06-03T12:07:18.3644757+00:00 ContainerStream: 
+2026-06-03T12:07:18.3644798+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-06-03T12:07:18.3644834+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-06-03T12:07:18.3644889+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-06-03T12:07:18.3644923+00:00 ContainerStream: Instance Name    : 10-30-0-14
+2026-06-03T12:07:18.3644968+00:00 ContainerStream: Instance Id      : cffa275333a302a4e96ca9dbb7bc4f4c4b650a3bd97ff27fc3abdafdda74e222
+2026-06-03T12:07:18.3645001+00:00 ContainerStream: 
+2026-06-03T12:07:18.3645036+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-06-03T12:07:36.1809147+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-06-03T12:07:36.2074071+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-06-03T12:07:36.2385981+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-06-03T12:07:45.6107915+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-06-03T12:07:45.6115178+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-06-03T12:07:45.7024960+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-06-03T12:07:45.7385562+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-06-03T12:07:45.7386364+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-06-03T12:07:45.7432727+00:00 ContainerStream: done.
+2026-06-03T12:07:45.7701939+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-06-03T12:07:45.9271852+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-06-03T12:07:46.1028138+00:00 ContainerStream: Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2026-06-03T12:07:46.1071800+00:00 ContainerStream: Build Operation ID: aa021424c9ca300c
+2026-06-03T12:07:46.1103487+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-06-03T12:07:46.7102563+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-06-03T12:07:46.8327562+00:00 ContainerStream: Running #!/bin/sh
+2026-06-03T12:07:46.8328398+00:00 ContainerStream: 
+2026-06-03T12:07:46.8328455+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-06-03T12:07:46.8328567+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-06-03T12:07:46.8328601+00:00 ContainerStream: 
+2026-06-03T12:07:46.8328635+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-06-03T12:07:46.8328670+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-06-03T12:07:46.8328703+00:00 ContainerStream: 		export PORT=8080
+2026-06-03T12:07:46.8328734+00:00 ContainerStream: fi
+2026-06-03T12:07:46.8328765+00:00 ContainerStream: 
+2026-06-03T12:07:46.8328799+00:00 ContainerStream: echo Found tar.gz based node_modules.
+2026-06-03T12:07:46.8328840+00:00 ContainerStream: extractionCommand="tar -xzf node_modules.tar.gz -C /node_modules"
+2026-06-03T12:07:46.8328875+00:00 ContainerStream: echo "Removing existing modules directory from root..."
+2026-06-03T12:07:46.8328908+00:00 ContainerStream: rm -fr /node_modules
+2026-06-03T12:07:46.8328940+00:00 ContainerStream: mkdir -p /node_modules
+2026-06-03T12:07:46.8328972+00:00 ContainerStream: echo Extracting modules...
+2026-06-03T12:07:46.8329002+00:00 ContainerStream: $extractionCommand
+2026-06-03T12:07:46.8329064+00:00 ContainerStream: export NODE_PATH="/node_modules":$NODE_PATH
+2026-06-03T12:07:46.8329097+00:00 ContainerStream: export PATH=/node_modules/.bin:$PATH
+2026-06-03T12:07:46.8329129+00:00 ContainerStream: if [ -d node_modules ]; then
+2026-06-03T12:07:46.8329161+00:00 ContainerStream:     mv -f node_modules _del_node_modules || true
+2026-06-03T12:07:46.8329192+00:00 ContainerStream: fi
+2026-06-03T12:07:46.8329221+00:00 ContainerStream: 
+2026-06-03T12:07:46.8329253+00:00 ContainerStream: if [ -d /node_modules ]; then
+2026-06-03T12:07:46.8329294+00:00 ContainerStream:     ln -sfn /node_modules ./node_modules 
+2026-06-03T12:07:46.8329325+00:00 ContainerStream: fi
+2026-06-03T12:07:46.8329355+00:00 ContainerStream: 
+2026-06-03T12:07:46.8329385+00:00 ContainerStream: echo "Done."
+2026-06-03T12:07:46.8329418+00:00 ContainerStream: PATH="$PATH:/home/site/wwwroot" cd /home/site/wwwroot/backend && node server.js
+2026-06-03T12:07:46.8595104+00:00 ContainerStream: Found tar.gz based node_modules.
+2026-06-03T12:07:46.8595328+00:00 ContainerStream: Removing existing modules directory from root...
+2026-06-03T12:07:46.8804953+00:00 ContainerStream: Extracting modules...
+2026-06-03T12:07:46.9033177+00:00 ContainerStream: tar (child): node_modules.tar.gz: Cannot open: No such file or directory
+2026-06-03T12:07:46.9033591+00:00 ContainerStream: tar (child): Error is not recoverable: exiting now
+2026-06-03T12:07:46.9049147+00:00 ContainerStream: tar: Child returned status 2
+2026-06-03T12:07:46.9054742+00:00 ContainerStream: tar: Error is not recoverable: exiting now
+2026-06-03T12:07:46.9555577+00:00 ContainerStream: Done.
+2026-06-03T12:07:47.4152442+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ override existing { override: true }
+2026-06-03T12:07:53.6585293+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+2026-06-03T12:07:53.6690906+00:00 ContainerStream: Checking database schema...
+2026-06-03T12:07:57.6038452+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+2026-06-03T12:07:57.6039039+00:00 ContainerStream: Redis not enabled. Operating in local memory fallback Map mode.
+2026-06-03T12:07:57.6039095+00:00 ContainerStream: ✅ All required environment variables are set
+2026-06-03T12:07:57.6039132+00:00 ContainerStream: 
+2026-06-03T12:07:57.6039171+00:00 ContainerStream: 📍 Current Configuration:
+2026-06-03T12:07:57.6039266+00:00 ContainerStream:    Backend URL: https://orpon-backend-api-sea.azurewebsites.net
+2026-06-03T12:07:57.6039299+00:00 ContainerStream:    Frontend URL: https://thankful-sea-0f5fbd000.7.azurestaticapps.net
+2026-06-03T12:07:57.6039335+00:00 ContainerStream:    Database: orponadmin@orpon-sql-server.database.windows.net:1433/donation_system
+2026-06-03T12:07:57.6039367+00:00 ContainerStream:    JWT Secret: 1837190dd0...
+2026-06-03T12:07:57.6039400+00:00 ContainerStream:    Redis: DISABLED (using local memory)
+2026-06-03T12:07:57.6039431+00:00 ContainerStream: 
+2026-06-03T12:07:57.6104333+00:00 ContainerStream: Server running on port 8080
+2026-06-03T12:07:57.6989777+00:00 ContainerStream: Connected to Azure SQL Database successfully!
+2026-06-03T12:07:57.7670028+00:00 ContainerStream: Database migrations checked & completed successfully!
+2026-06-03T12:07:58.0535970+00:00 ContainerStatus: Site startup probe succeeded after 41.0338736 seconds.
+2026-06-03T12:07:58.1131299+00:00 ContainerStatus: State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 41.0338736 seconds., DetailsLevel: INFO
+2026-06-03T12:07:58.3086185+00:00 ContainerStatus: Site is running with deployment version: b4909ab7-584d-4e03-b5d1-bc431c902269
+2026-06-03T12:07:58.3088664+00:00 ContainerStatus: Site started.
+2026-06-03T12:07:58.3089513+00:00 ContainerStatus: State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 06/03/2026 12:07:58 (UTC), DetailsLevel: INFO
+2026-06-03T12:07:58.3136861+00:00 ContainerStatus: Site is running with patch version NODE 22.22.2
+========== New Cold Start Attempt (2026-06-03T12:08:18.4674006+00:00) ==========
+2026-06-03T12:08:18.4674006+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 06/03/2026 09:43:18 (UTC), DetailsLevel: INFO
+2026-06-03T12:08:18.4697598+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-06-03T12:08:18.5252319+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-06-03T12:08:18.5259227+00:00 ContainerStatus: Stopping container: aa2f371ed61c_orpon-backend-api-sea.
+2026-06-03T12:08:23.5629021+00:00 ContainerStatus: Deleting container: aa2f371ed61c_orpon-backend-api-sea. Retry count = 0
+2026-06-03T12:08:23.6574808+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-06-03T12:08:23.6595708+00:00 ContainerStatus: Container is terminated. Total time elapsed: 5188 ms.
+2026-06-03T12:08:23.6608219+00:00 ContainerStatus: Site: orpon-backend-api-sea stopped.
+2026-06-03T12:28:17.6645402+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-06-03T12:28:18.3202227+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-06-03T12:28:18.3203563+00:00 ContainerStatus: Container start method called.
+2026-06-03T12:28:18.3203994+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-03T12:28:18.3205181+00:00 ContainerStatus: Establishing network.
+2026-06-03T12:28:18.3206506+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-06-03T12:28:18.4990537+00:00 ContainerStatus: Container is starting.
+2026-06-03T12:28:18.4991806+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-03T12:28:18.4995003+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-06-03T12:28:18.4996803+00:00 ContainerStatus: Establishing network if not established already.
+2026-06-03T12:28:18.4999317+00:00 ContainerStatus: Mounting volumes.
+2026-06-03T12:28:18.5002781+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T12:28:18.5046577+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-06-03T12:28:18.5075839+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T12:28:18.5098548+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T12:28:18.5105651+00:00 ContainerStatus: Nested mountpoint 
+2026-06-03T12:28:18.6756830+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for orpon-backend-api-sea. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-06-03T12:28:18.6759438+00:00 ContainerStatus: Creating container.
+2026-06-03T12:28:18.6760930+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-06-03T12:28:18.6761942+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/affd2e8f6502_orpon-backend-api-sea/stdout_829d6410872b41fbbd747ede11c6ed63.
+2026-06-03T12:28:18.6795519+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/affd2e8f6502_orpon-backend-api-sea/stdout_829d6410872b41fbbd747ede11c6ed63.
+2026-06-03T12:28:18.6797063+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/affd2e8f6502_orpon-backend-api-sea/stdout_829d6410872b41fbbd747ede11c6ed63 for reading in non-blocking mode.
+2026-06-03T12:28:18.6799185+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/affd2e8f6502_orpon-backend-api-sea/stdout_829d6410872b41fbbd747ede11c6ed63.
+2026-06-03T12:28:18.6811818+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/affd2e8f6502_orpon-backend-api-sea/stdout_829d6410872b41fbbd747ede11c6ed63.
+2026-06-03T12:28:18.6816447+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/affd2e8f6502_orpon-backend-api-sea/stderr_c52294f25fb44a3b9d0597065bfc9fe6.
+2026-06-03T12:28:18.6820893+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/affd2e8f6502_orpon-backend-api-sea/stderr_c52294f25fb44a3b9d0597065bfc9fe6.
+2026-06-03T12:28:18.6822449+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/affd2e8f6502_orpon-backend-api-sea/stderr_c52294f25fb44a3b9d0597065bfc9fe6 for reading in non-blocking mode.
+2026-06-03T12:28:18.6823586+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/affd2e8f6502_orpon-backend-api-sea/stderr_c52294f25fb44a3b9d0597065bfc9fe6.
+2026-06-03T12:28:18.6882569+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/affd2e8f6502_orpon-backend-api-sea/stderr_c52294f25fb44a3b9d0597065bfc9fe6.
+2026-06-03T12:28:18.6896981+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.5:13209 and fully qualified image name: 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-06-03T12:28:19.0582066+00:00 ContainerStatus: Starting container: affd2e8f6502_orpon-backend-api-sea.
+2026-06-03T12:28:19.0825923+00:00 ContainerStatus: Starting watchers and probes.
+2026-06-03T12:28:19.0828525+00:00 ContainerStatus: Starting metrics collection.
+2026-06-03T12:28:19.0830193+00:00 ContainerStatus: Container is running.
+2026-06-03T12:28:19.0830814+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-03T12:28:19.1070139+00:00 ContainerStatus: Container start method finished after 785 ms.
+2026-06-03T12:28:19.1079893+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-03T12:28:19.1080289+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-06-03T12:28:19.3413958+00:00 ContainerStream:    _____                               
+2026-06-03T12:28:19.3431811+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-06-03T12:28:19.3431909+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-06-03T12:28:19.3431950+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-06-03T12:28:19.3431984+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-06-03T12:28:19.3432018+00:00 ContainerStream:         \/      \/                  \/ 
+2026-06-03T12:28:19.3432076+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-06-03T12:28:19.3432113+00:00 ContainerStream: 
+2026-06-03T12:28:19.3432151+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-06-03T12:28:19.3432185+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-06-03T12:28:19.3432223+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-06-03T12:28:19.3432258+00:00 ContainerStream: Instance Name    : 10-30-0-14
+2026-06-03T12:28:19.3432311+00:00 ContainerStream: Instance Id      : cffa275333a302a4e96ca9dbb7bc4f4c4b650a3bd97ff27fc3abdafdda74e222
+2026-06-03T12:28:19.3432349+00:00 ContainerStream: 
+2026-06-03T12:28:19.3435162+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-06-03T12:28:21.3259967+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-06-03T12:28:21.3405942+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-06-03T12:28:21.3659693+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-06-03T12:28:27.1979077+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-06-03T12:28:27.1990892+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-06-03T12:28:27.4469082+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-06-03T12:28:27.4600798+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-06-03T12:28:27.4606306+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-06-03T12:28:27.4667283+00:00 ContainerStream: done.
+2026-06-03T12:28:27.4873062+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-06-03T12:28:27.5988883+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-06-03T12:28:27.6825679+00:00 ContainerStream: Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2026-06-03T12:28:27.6866592+00:00 ContainerStream: Build Operation ID: b9306700740b29bb
+2026-06-03T12:28:27.6911424+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-06-03T12:28:28.0430118+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-06-03T12:28:28.1525639+00:00 ContainerStream: Running #!/bin/sh
+2026-06-03T12:28:28.1526376+00:00 ContainerStream: 
+2026-06-03T12:28:28.1526444+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-06-03T12:28:28.1526557+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-06-03T12:28:28.1526594+00:00 ContainerStream: 
+2026-06-03T12:28:28.1526631+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-06-03T12:28:28.1526664+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-06-03T12:28:28.1526699+00:00 ContainerStream: 		export PORT=8080
+2026-06-03T12:28:28.1526733+00:00 ContainerStream: fi
+2026-06-03T12:28:28.1526767+00:00 ContainerStream: 
+2026-06-03T12:28:28.1526803+00:00 ContainerStream: echo Found tar.gz based node_modules.
+2026-06-03T12:28:28.1526847+00:00 ContainerStream: extractionCommand="tar -xzf node_modules.tar.gz -C /node_modules"
+2026-06-03T12:28:28.1526884+00:00 ContainerStream: echo "Removing existing modules directory from root..."
+2026-06-03T12:28:28.1526919+00:00 ContainerStream: rm -fr /node_modules
+2026-06-03T12:28:28.1526954+00:00 ContainerStream: mkdir -p /node_modules
+2026-06-03T12:28:28.1526989+00:00 ContainerStream: echo Extracting modules...
+2026-06-03T12:28:28.1527023+00:00 ContainerStream: $extractionCommand
+2026-06-03T12:28:28.1527088+00:00 ContainerStream: export NODE_PATH="/node_modules":$NODE_PATH
+2026-06-03T12:28:28.1527125+00:00 ContainerStream: export PATH=/node_modules/.bin:$PATH
+2026-06-03T12:28:28.1527162+00:00 ContainerStream: if [ -d node_modules ]; then
+2026-06-03T12:28:28.1527197+00:00 ContainerStream:     mv -f node_modules _del_node_modules || true
+2026-06-03T12:28:28.1527229+00:00 ContainerStream: fi
+2026-06-03T12:28:28.1527520+00:00 ContainerStream: 
+2026-06-03T12:28:28.1527567+00:00 ContainerStream: if [ -d /node_modules ]; then
+2026-06-03T12:28:28.1527615+00:00 ContainerStream:     ln -sfn /node_modules ./node_modules 
+2026-06-03T12:28:28.1527649+00:00 ContainerStream: fi
+2026-06-03T12:28:28.1527679+00:00 ContainerStream: 
+2026-06-03T12:28:28.1527711+00:00 ContainerStream: echo "Done."
+2026-06-03T12:28:28.1527746+00:00 ContainerStream: PATH="$PATH:/home/site/wwwroot" cd /home/site/wwwroot/backend && node server.js
+2026-06-03T12:28:28.1571782+00:00 ContainerStream: Found tar.gz based node_modules.
+2026-06-03T12:28:28.1577752+00:00 ContainerStream: Removing existing modules directory from root...
+2026-06-03T12:28:28.1673451+00:00 ContainerStream: Extracting modules...
+2026-06-03T12:28:30.3610423+00:00 ContainerStream: Done.
+2026-06-03T12:28:30.7498323+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+2026-06-03T12:28:36.3758535+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ suppress logs { quiet: true }
+2026-06-03T12:28:36.4011405+00:00 ContainerStream: Checking database schema...
+2026-06-03T12:28:40.6720856+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+2026-06-03T12:28:40.6722842+00:00 ContainerStream: Redis not enabled. Operating in local memory fallback Map mode.
+2026-06-03T12:28:40.6764942+00:00 ContainerStream: ✅ All required environment variables are set
+2026-06-03T12:28:40.6765113+00:00 ContainerStream: 
+2026-06-03T12:28:40.6765174+00:00 ContainerStream: 📍 Current Configuration:
+2026-06-03T12:28:40.6765219+00:00 ContainerStream:    Backend URL: https://orpon-backend-api-sea.azurewebsites.net
+2026-06-03T12:28:40.6765262+00:00 ContainerStream:    Frontend URL: https://thankful-sea-0f5fbd000.7.azurestaticapps.net
+2026-06-03T12:28:40.6775380+00:00 ContainerStream:    Database: orponadmin@orpon-sql-server.database.windows.net:1433/donation_system
+2026-06-03T12:28:40.6775507+00:00 ContainerStream:    JWT Secret: 1837190dd0...
+2026-06-03T12:28:40.6775551+00:00 ContainerStream:    Redis: DISABLED (using local memory)
+2026-06-03T12:28:40.6775587+00:00 ContainerStream: 
+2026-06-03T12:28:40.6845514+00:00 ContainerStream: Server running on port 8080
+2026-06-03T12:28:40.7834370+00:00 ContainerStream: Connected to Azure SQL Database successfully!
+2026-06-03T12:28:40.8981288+00:00 ContainerStream: Database migrations checked & completed successfully!
+2026-06-03T12:28:41.1483966+00:00 ContainerStatus: Site startup probe succeeded after 22.0394195 seconds.
+2026-06-03T12:28:41.2988762+00:00 ContainerStatus: State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 22.0394195 seconds., DetailsLevel: INFO
+2026-06-03T12:28:41.5430349+00:00 ContainerStatus: Site is running with deployment version: 814449de-fae3-44d2-8a58-3b749831dd24
+2026-06-03T12:28:41.5433172+00:00 ContainerStatus: Site started.
+2026-06-03T12:28:41.5434674+00:00 ContainerStatus: State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 06/03/2026 12:28:41 (UTC), DetailsLevel: INFO
+2026-06-03T12:28:41.5448009+00:00 ContainerStatus: Site is running with patch version NODE 22.22.2

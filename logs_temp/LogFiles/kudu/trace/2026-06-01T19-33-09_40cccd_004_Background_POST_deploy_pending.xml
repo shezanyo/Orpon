@@ -1,0 +1,37 @@
+<step title="BackgroundTrace" date="2026-06-01T19:33:09.996" instance="40cccd" url="/deploy" method="POST" >
+  <step title="Creating temporary deployment - FetchDeploymentManager" date="2026-06-01T19:33:10.167" /><!-- duration: 5ms -->
+  <step title="Creating temporary deployment" date="2026-06-01T19:33:10.180" /><!-- duration: 100ms -->
+  <step title="Performing fetch based deployment" date="2026-06-01T19:33:10.506" >
+    <step title="Deployment timer started" date="2026-06-01T19:33:16.535" >
+      <step title="DeploymentManager.Deploy(id:b263aed1f762e95598b6c2a7eb9c6e907f11a345)" date="2026-06-01T19:33:16.668" >
+        <step title="Collecting changeset information" date="2026-06-01T19:33:16.709" /><!-- duration: 114ms -->
+        <step title="Updating submodules" date="2026-06-01T19:33:16.830" /><!-- duration: 1159ms -->
+        <step title="Determining deployment builder" date="2026-06-01T19:33:18.242" >
+          <step title="Specific project was specified: backend" date="2026-06-01T19:33:18.254" /><!-- duration: 4ms -->
+          <step title="Builder is OryxBuilder" date="2026-06-01T19:33:18.263" /><!-- duration: 5ms -->
+        </step><!-- duration: 31ms -->
+        <step title="PreDeployment: context.CleanOutputPath False" date="2026-06-01T19:33:18.336" >
+          <step title="PreDeployment: context.OutputPath /home/site/wwwroot" date="2026-06-01T19:33:18.468" >
+            <step title="Building" date="2026-06-01T19:33:18.635" >
+              <step title="Executing external process" date="2026-06-01T19:33:18.936" type="process" path="bash" arguments="-c &quot;oryx build /home/site/repository -o /home/site/wwwroot --platform nodejs --platform-version 22 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8dec014a1fd1ad2 -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log ; exit $PIPESTATUS &quot;" >
+                <step title="Cpu: rsync(1059,2.400s)+rsync(1058,0.590s)+rsync(1057,0.360s)+build.sh(913,0.030s)+oryx(893,2.950s)+tee(894,0.000s)+bash(892,0.000s)=total(6.330s)" date="2026-06-01T19:35:03.071" /><!-- duration: 2397ms -->
+                <step title="bash: no io activity for 60s, prev-cpu=-1.000s, current-cpu=6.330s" date="2026-06-01T19:35:05.487" /><!-- duration: 19ms -->
+                <step title="Cpu: rsync(1059,5.090s)+rsync(1058,1.020s)+rsync(1057,0.700s)+build.sh(913,0.030s)+oryx(893,3.130s)+tee(894,0.000s)+bash(892,0.000s)=total(9.970s)" date="2026-06-01T19:36:05.534" /><!-- duration: 11ms -->
+                <step title="bash: no io activity for 123s, prev-cpu=6.330s, current-cpu=9.970s" date="2026-06-01T19:36:05.555" /><!-- duration: 6ms -->
+                <step title="Cpu: rsync(1059,7.550s)+rsync(1058,1.520s)+rsync(1057,1.090s)+build.sh(913,0.030s)+oryx(893,3.240s)+tee(894,0.000s)+bash(892,0.000s)=total(13.430s)" date="2026-06-01T19:37:05.588" /><!-- duration: 14ms -->
+                <step title="bash: no io activity for 183s, prev-cpu=9.970s, current-cpu=13.430s" date="2026-06-01T19:37:05.610" /><!-- duration: 24ms -->
+              </step><!-- duration: 275587ms -->
+              <step title="Using GenericDeploymentLogParser" date="2026-06-01T19:37:54.996" /><!-- duration: 9ms -->
+              <step title="Triggering recycle (preview mode disabled)." date="2026-06-01T19:37:56.240" /><!-- duration: 8ms -->
+              <step title="Modified file to trigger a restart of the app container." date="2026-06-01T19:37:56.302" /><!-- duration: 4ms -->
+              <step title="Skip function trigger and logicapp sync because function is not enabled." date="2026-06-01T19:37:56.319" /><!-- duration: 8ms -->
+            </step><!-- duration: 278726ms -->
+          </step><!-- duration: 278899ms -->
+          <step title="Cleaning up temp files" date="2026-06-01T19:37:57.372" /><!-- duration: 1243ms -->
+          <step title="Cleaning up temp files" date="2026-06-01T19:37:58.624" /><!-- duration: 508ms -->
+          <step title="Reloading status file with latest updates" date="2026-06-01T19:37:59.165" >
+            <step title="WebHooksManager.PublishEventAsync: PostDeployment" date="2026-06-01T19:37:59.175" /><!-- duration: 70ms -->
+          </step><!-- duration: 83ms -->
+          <step title="Cleaning up temporary deployment - fetch deployment was successful" date="2026-06-01T19:37:59.257" /><!-- duration: 4ms -->
+        </step><!-- duration: 280982ms -->
+      </step><!-- duration: 282667ms -->

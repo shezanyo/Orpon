@@ -129,9 +129,29 @@ export default function AdminDashboard() {
     try {
       setVerifying(true);
       setIntegrityStatus("RUNNING");
+      console.log("[AdminDashboard] Starting integrity verification...");
+      
       const res = await verifyIntegrity();
+      console.log("[AdminDashboard] Verify integrity response:", res);
+      
+      // Check if response has the expected structure
+      if (!res) {
+        console.error("[AdminDashboard] ERROR: Empty response from verify endpoint");
+        setIntegrityStatus("INVALID");
+        return;
+      }
+
+      // Handle success response (both new and old formats)
       if (res.success) {
-        setIntegrityStatus(res.status); // VALID or INVALID
+        console.log(`[AdminDashboard] Verification successful. Status: ${res.status}, Valid: ${res.valid}`);
+        // Prefer the new 'valid' field, fall back to 'status' field
+        const resultStatus = res.valid === true ? "VALID" : (res.status === "VALID" ? "VALID" : "INVALID");
+        setIntegrityStatus(resultStatus);
+        
+        console.log(`[AdminDashboard] Setting integrity status to: ${resultStatus}`);
+        console.log(`[AdminDashboard] Message: ${res.message}`);
+        console.log(`[AdminDashboard] Blocks verified: ${res.blocksVerified}`);
+        
         // Refresh logs if currently on logs tab
         if (activeTab === "logs") {
           const logsRes = await getAdminLogs();
@@ -141,10 +161,14 @@ export default function AdminDashboard() {
         const statsRes = await getAdminStats();
         if (statsRes.success) setStats(statsRes.stats);
       } else {
+        // Handle error response
+        console.error("[AdminDashboard] Verification failed. Success: false");
+        console.error("[AdminDashboard] Error message:", res.message);
         setIntegrityStatus("INVALID");
       }
     } catch (err) {
-      console.error("Integrity verification failed:", err);
+      console.error("[AdminDashboard] Exception during integrity verification:", err);
+      console.error("[AdminDashboard] Error details:", err.message);
       setIntegrityStatus("INVALID");
     } finally {
       setVerifying(false);
