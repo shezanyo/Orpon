@@ -13,6 +13,9 @@ import NagadSandbox from "./pages/NagadSandbox";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentFail from "./pages/PaymentFail";
 import PaymentCancel from "./pages/PaymentCancel";
+import Profile from "./pages/Profile";
+import MyCampaigns from "./pages/MyCampaigns";
+import CampaignAnalytics from "./pages/CampaignAnalytics";
 import { CAMPAIGNS, CAMPAIGN_COLORS, CAMPAIGN_EMOJIS } from "./data/mockData";
 import { getCampaigns } from "./utils/api";
 import { slugify } from "./utils/format";
@@ -152,6 +155,9 @@ export default function App() {
             {page === "home" && <Home nav={nav} campaigns={campaigns} openCampaign={openCampaign} setShowLogin={setShowLogin} isLoggedIn={isLoggedIn} />}
             {page === "campaigns" && <Explore campaigns={campaigns} openCampaign={openCampaign} />}
             {page === "create" && <CreateCampaign nav={nav} isLoggedIn={isLoggedIn} setShowLogin={setShowLogin} setCampaigns={setCampaigns} />}
+            {page === "profile" && <Profile />}
+            {page === "my-campaigns" && <MyCampaigns campaigns={campaigns} campaignsLoaded={campaignsLoaded} openCampaign={openCampaign} nav={nav} />}
+            {page === "analytics" && <CampaignAnalytics campaigns={campaigns} campaignsLoaded={campaignsLoaded} nav={nav} />}
           </>
         } />
         <Route path="/donate/:id" element={<Donate />} />

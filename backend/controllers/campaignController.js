@@ -129,6 +129,7 @@ const getCampaigns = async (req, res) => {
         const [campaigns] = await pool.query(`
             SELECT
                 id,
+                user_id,
                 title,
                 description,
                 story,
@@ -147,6 +148,7 @@ const getCampaigns = async (req, res) => {
 
         const mappedCampaigns = campaigns.map((campaign) => ({
             id: campaign.id,
+            user_id: campaign.user_id,
             slug: campaign.slug || `${slugify(campaign.title)}-${String(campaign.id).slice(0, 8)}`,
             title: campaign.title,
             organizer: campaign.organizer || "Community Organizer",
