@@ -86,16 +86,6 @@ export default function CampaignDetail({ c, nav }) {
     };
   }, [c.id]);
 
-  // Lock body scroll when modal is open
-  useEffect(() => {
-    if (showAllDonors) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => { document.body.style.overflow = ""; };
-  }, [showAllDonors]);
-
   const shareUrl = `${window.location.origin}/campaign/${c.slug}`;
   const p = pct(c.raised, c.goal);
 
@@ -110,6 +100,86 @@ export default function CampaignDetail({ c, nav }) {
   };
 
   const completedTx = transactions.filter(t => t.status === "Completed");
+
+  if (showAllDonors) {
+    return (
+      <div style={{ maxWidth: 680, margin: "0 auto", padding: "30px 5% 80px", animation: "fadeUp 0.4s ease both" }}>
+        {/* Back Button */}
+        <button
+          onClick={() => {
+            setShowAllDonors(false);
+            window.scrollTo({ top: 0, behavior: "instant" });
+          }}
+          style={{ background: "none", border: "none", color: "#888", fontSize: 14, cursor: "pointer", marginBottom: 24, padding: 0, display: "inline-flex", alignItems: "center", gap: 6, transition: "all 0.2s" }}
+          onMouseEnter={e => { e.currentTarget.style.color = "#1A1A2E"; e.currentTarget.style.transform = "translateX(-3px)"; }}
+          onMouseLeave={e => { e.currentTarget.style.color = "#888"; e.currentTarget.style.transform = "translateX(0)"; }}
+        >
+          <ArrowLeft size={16} /> Back to fundraiser
+        </button>
+
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 24, borderBottom: "1px solid #EDE9E0", paddingBottom: 16 }}>
+          <div>
+            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 700, color: "#1A1A2E", margin: 0 }}>
+              Donors ({completedTx.length})
+            </h1>
+            <p style={{ fontSize: 14, color: "#888", margin: "4px 0 0 0" }}>
+              Total raised: <strong style={{ color: c.color }}>{fmt(completedTx.reduce((sum, t) => sum + parseFloat(t.amount || 0), 0))}</strong>
+            </p>
+          </div>
+        </div>
+
+        {completedTx.length === 0 ? (
+          <div style={{ textAlign: "center", padding: "40px 0", background: "#fff", borderRadius: 18, border: "1px solid #EDE9E0" }}>
+            <p style={{ color: "#888", fontSize: 15, margin: 0 }}>No donations yet for this fundraiser.</p>
+          </div>
+        ) : (
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {completedTx.map((t) => (
+              <div key={t.id} style={{
+                display: "flex", alignItems: "center", gap: 16,
+                padding: "16px 20px", background: "#fff", border: "1px solid #EDE9E0",
+                borderRadius: 16, transition: "all 0.15s ease",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.02)"
+              }}
+                onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 6px 16px rgba(0,0,0,0.04)"; e.currentTarget.style.borderColor = "#D3CCBE"; }}
+                onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.02)"; e.currentTarget.style.borderColor = "#EDE9E0"; }}
+              >
+                <div style={{
+                  width: 46, height: 46, borderRadius: "50%", background: getHashColor(t.display_name),
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontWeight: 700, fontSize: 14, color: "#fff", flexShrink: 0,
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.05)"
+                }}>
+                  {getInitials(t.display_name)}
+                </div>
+
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+                    <span style={{ fontSize: 15, fontWeight: 700, color: "#1A1A2E", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                      {t.display_name || "Anonymous"}
+                    </span>
+                    <span style={{ fontSize: 16, fontWeight: 700, color: c.color, flexShrink: 0, marginLeft: 8 }}>
+                      {fmt(parseFloat(t.amount || 0))}
+                    </span>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 13, color: "#888" }}>
+                    <span style={{
+                      padding: "2px 8px", borderRadius: 6, fontSize: 10, fontWeight: 700,
+                      background: t.payment_method === "bKash" ? "#E2136E12" : t.payment_method === "Nagad" ? "#F5822012" : t.payment_method === "Card" ? "#1E3A8A12" : "#F8F6F0",
+                      color: t.payment_method === "bKash" ? "#E2136E" : t.payment_method === "Nagad" ? "#F58220" : t.payment_method === "Card" ? "#1E3A8A" : "#888"
+                    }}>
+                      {t.payment_method || "Direct"}
+                    </span>
+                    <span>{formatDate(t.created_at)}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div style={{ maxWidth: 1100, margin: "0 auto", padding: "30px 5% 80px", animation: "fadeUp 0.5s ease both" }}>
@@ -302,7 +372,10 @@ export default function CampaignDetail({ c, nav }) {
 
                   {/* See all donors button */}
                   <button
-                    onClick={() => setShowAllDonors(true)}
+                    onClick={() => {
+                      setShowAllDonors(true);
+                      window.scrollTo({ top: 0, behavior: "instant" });
+                    }}
                     style={{
                       width: "100%", background: "#F8F6F0", color: "#1A1A2E", border: "1px solid #EDE9E0",
                       padding: "10px 0", borderRadius: 10, fontSize: 13, fontWeight: 700,
@@ -320,104 +393,6 @@ export default function CampaignDetail({ c, nav }) {
           </div>
         </div>
       </div>
-
-      {/* ===== ALL DONORS MODAL OVERLAY ===== */}
-      {showAllDonors && (
-        <div
-          style={{
-            position: "fixed", inset: 0, zIndex: 9999,
-            background: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            animation: "fadeUp 0.25s ease both", padding: 20
-          }}
-          onClick={(e) => { if (e.target === e.currentTarget) setShowAllDonors(false); }}
-        >
-          <div style={{
-            background: "#fff", borderRadius: 20, width: "100%", maxWidth: 520,
-            maxHeight: "80vh", display: "flex", flexDirection: "column",
-            boxShadow: "0 20px 60px rgba(0,0,0,0.15)", overflow: "hidden"
-          }}>
-            {/* Modal Header */}
-            <div style={{
-              padding: "20px 24px", borderBottom: "1px solid #EDE9E0",
-              display: "flex", justifyContent: "space-between", alignItems: "center", flexShrink: 0
-            }}>
-              <div>
-                <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 24, fontWeight: 700, color: "#1A1A2E", margin: 0 }}>
-                  All Donors ({completedTx.length})
-                </h2>
-                <p style={{ fontSize: 13, color: "#888", margin: "4px 0 0 0" }}>
-                  Total raised: {fmt(completedTx.reduce((sum, t) => sum + parseFloat(t.amount || 0), 0))}
-                </p>
-              </div>
-              <button
-                onClick={() => setShowAllDonors(false)}
-                style={{
-                  background: "#F8F6F0", border: "none", borderRadius: "50%",
-                  width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center",
-                  cursor: "pointer", color: "#555", transition: "all 0.2s"
-                }}
-                onMouseEnter={e => e.currentTarget.style.background = "#EDE9E0"}
-                onMouseLeave={e => e.currentTarget.style.background = "#F8F6F0"}
-              >
-                <X size={18} />
-              </button>
-            </div>
-
-            {/* Donor List */}
-            <div style={{ overflowY: "auto", padding: "16px 24px 24px", flex: 1 }}>
-              {completedTx.length === 0 ? (
-                <p style={{ textAlign: "center", color: "#888", padding: "30px 0", fontSize: 14 }}>
-                  No donations yet.
-                </p>
-              ) : (
-                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  {completedTx.map((t, idx) => (
-                    <div key={t.id} style={{
-                      display: "flex", alignItems: "center", gap: 14,
-                      padding: "14px 16px", background: "#fff", border: "1px solid #EDE9E0",
-                      borderRadius: 14, transition: "all 0.15s ease"
-                    }}
-                      onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.04)"; e.currentTarget.style.borderColor = "#D3CCBE"; }}
-                      onMouseLeave={e => { e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = "#EDE9E0"; }}
-                    >
-                      {/* Rank / Avatar */}
-                      <div style={{
-                        width: 42, height: 42, borderRadius: "50%", background: getHashColor(t.display_name),
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                        fontWeight: 700, fontSize: 13, color: "#fff", flexShrink: 0
-                      }}>
-                        {getInitials(t.display_name)}
-                      </div>
-
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 3 }}>
-                          <span style={{ fontSize: 14, fontWeight: 700, color: "#1A1A2E", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                            {t.display_name || "Anonymous"}
-                          </span>
-                          <span style={{ fontSize: 14, fontWeight: 700, color: c.color, flexShrink: 0, marginLeft: 8 }}>
-                            {fmt(parseFloat(t.amount || 0))}
-                          </span>
-                        </div>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 12, color: "#888" }}>
-                          <span style={{
-                            padding: "1px 6px", borderRadius: 5, fontSize: 9, fontWeight: 700,
-                            background: t.payment_method === "bKash" ? "#E2136E12" : t.payment_method === "Nagad" ? "#F5822012" : t.payment_method === "Card" ? "#1E3A8A12" : "#F8F6F0",
-                            color: t.payment_method === "bKash" ? "#E2136E" : t.payment_method === "Nagad" ? "#F58220" : t.payment_method === "Card" ? "#1E3A8A" : "#888"
-                          }}>
-                            {t.payment_method || "Direct"}
-                          </span>
-                          <span>{formatDate(t.created_at)}</span>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
