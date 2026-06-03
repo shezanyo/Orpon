@@ -1,0 +1,21 @@
+{
+  "routes": [
+    {
+      "route": "/api/*",
+      "methods": ["*"],
+      "allowUnauthenticated": true
+    },
+    {
+      "route": "/*",
+      "serve": "/index.html",
+      "statusCode": 200
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/api/*", "*.{svg,png,jpg,gif,ico,js,css}"]
+  },
+  "mimeTypes": {
+    ".json": "application/json"
+  }
+}
