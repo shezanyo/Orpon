@@ -135,7 +135,8 @@ const registerUser = async (req, res) => {
                 email,
                 phone: normalizedPhone,
                 nid,
-                address
+                address,
+                role: "user"
             }
         });
 
@@ -216,7 +217,8 @@ const loginUser = async (req, res) => {
                 email: user.email,
                 phone: user.phone,
                 nid: user.nid,
-                address: user.address
+                address: user.address,
+                role: user.role
             }
         });
 
@@ -231,7 +233,7 @@ const loginUser = async (req, res) => {
 const getMe = async (req, res) => {
     try {
         const [users] = await pool.query(`
-            SELECT id, full_name, email, phone, nid, address, created_at
+            SELECT id, full_name, email, phone, nid, address, created_at, role
             FROM users
             WHERE id = ?
         `, [req.user.id]);
