@@ -38,6 +38,7 @@ const normalizeCampaign = (campaign) => {
 
   return {
     id: String(campaign.id ?? Date.now()),
+    user_id: campaign.user_id,
     slug: campaign.slug || `${slugify(title)}-${String(campaign.id || Date.now()).slice(0, 8)}`,
     title,
     organizer: campaign.organizer || "Community Organizer",
