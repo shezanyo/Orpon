@@ -248,27 +248,7 @@ export default function CampaignDetail({ c, nav }) {
             ))}
           </div>
 
-          {/* Share */}
-          <div style={{ background: "#F8F6F0", border: "1px solid #EDE9E0", borderRadius: 18, padding: 24 }}>
-            <h3 style={{ fontSize: 15, fontWeight: 700, marginBottom: 14, color: "#1A1A2E", display: "flex", alignItems: "center", gap: 6 }}>
-              <Share2 size={16} style={{ color: c.color }} /> Share this fundraiser
-            </h3>
-            <div style={{ display: "flex", gap: 10, marginBottom: 14 }}>
-              <input readOnly value={shareUrl} style={{ flex: 1, padding: "10px 14px", border: "1px solid #EDE9E0", borderRadius: 10, fontSize: 13, background: "#fff", color: "#555", outline: "none" }} />
-              <button onClick={copyLink} style={{ background: copied ? "#2D6A4F" : "#1B4332", color: "#fff", border: "none", padding: "10px 18px", borderRadius: 10, fontSize: 13, fontWeight: 600, cursor: "pointer", minWidth: 90, transition: "all 0.2s" }}>
-                {copied ? "✓ Copied!" : "Copy link"}
-              </button>
-            </div>
-            <button onClick={() => setShowQR(!showQR)} style={{ background: "#fff", border: "1px solid #EDE9E0", padding: "8px 16px", borderRadius: 10, fontSize: 13, color: "#555", fontWeight: 600, cursor: "pointer" }}>
-              {showQR ? "Hide" : "Show"} QR Code
-            </button>
-            {showQR && (
-              <div style={{ marginTop: 16, display: "inline-flex", flexDirection: "column", alignItems: "center", gap: 8, background: "#fff", padding: 16, borderRadius: 14, border: "1px solid #EDE9E0" }}>
-                <QRCodeSVG value={shareUrl} size={140} />
-                <p style={{ fontSize: 11, color: "#888", margin: 0 }}>Scan to open campaign</p>
-              </div>
-            )}
-          </div>
+
         </div>
 
         {/* ===== RIGHT COLUMN: Sticky Donate Panel ===== */}
