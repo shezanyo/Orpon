@@ -101,6 +101,7 @@ const createCampaign = async (req, res) => {
             success: true,
             campaign: {
                 id,
+                user_id,
                 slug: campaignSlug,
                 title,
                 organizer: organizer_name || "You",
