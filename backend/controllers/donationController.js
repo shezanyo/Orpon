@@ -122,7 +122,7 @@ const completeDonationRecord = async (id) => {
                 previous_hash = ?,
                 current_hash = ?
             WHERE id = ?
-        `, [timestamp, previous_hash, current_hash, id]);
+        `, [timestampStr, previous_hash, current_hash, id]);
 
         // 5. Increment campaign statistics
         await connection.query(`
