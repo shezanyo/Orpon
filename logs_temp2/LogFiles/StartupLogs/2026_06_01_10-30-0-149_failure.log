@@ -1,0 +1,1245 @@
+2026-06-01T19:40:18.6488000+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-06-01T19:40:19.6127852+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-06-01T19:40:19.6154621+00:00 ContainerStatus: Container start method called.
+2026-06-01T19:40:19.6210714+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-01T19:40:19.6215642+00:00 ContainerStatus: Establishing network.
+2026-06-01T19:40:19.6221613+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-06-01T19:40:19.7478528+00:00 ContainerStatus: Container is starting.
+2026-06-01T19:40:19.7479720+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-01T19:40:19.7481115+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-06-01T19:40:19.7482924+00:00 ContainerStatus: Establishing network if not established already.
+2026-06-01T19:40:19.7484386+00:00 ContainerStatus: Mounting volumes.
+2026-06-01T19:40:19.7570099+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:40:19.7792284+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-06-01T19:40:19.8122735+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:40:19.8438464+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:40:19.8445908+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:40:20.4017582+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for orpon-backend-api-sea. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-06-01T19:40:20.4020533+00:00 ContainerStatus: Creating container.
+2026-06-01T19:40:20.4022075+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-06-01T19:40:20.4023434+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/e2cc9e091d70_orpon-backend-api-sea/stdout_cd57d5d4472044f88dcf6c05f19d9e8e.
+2026-06-01T19:40:20.6259375+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/e2cc9e091d70_orpon-backend-api-sea/stdout_cd57d5d4472044f88dcf6c05f19d9e8e.
+2026-06-01T19:40:20.6261059+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/e2cc9e091d70_orpon-backend-api-sea/stdout_cd57d5d4472044f88dcf6c05f19d9e8e for reading in non-blocking mode.
+2026-06-01T19:40:20.6262611+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/e2cc9e091d70_orpon-backend-api-sea/stdout_cd57d5d4472044f88dcf6c05f19d9e8e.
+2026-06-01T19:40:20.6264883+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/e2cc9e091d70_orpon-backend-api-sea/stdout_cd57d5d4472044f88dcf6c05f19d9e8e.
+2026-06-01T19:40:20.6266697+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/e2cc9e091d70_orpon-backend-api-sea/stderr_c292667f742547d2b465828bc27b90de.
+2026-06-01T19:40:20.6268481+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/e2cc9e091d70_orpon-backend-api-sea/stderr_c292667f742547d2b465828bc27b90de.
+2026-06-01T19:40:20.6270350+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/e2cc9e091d70_orpon-backend-api-sea/stderr_c292667f742547d2b465828bc27b90de for reading in non-blocking mode.
+2026-06-01T19:40:20.6271798+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/e2cc9e091d70_orpon-backend-api-sea/stderr_c292667f742547d2b465828bc27b90de.
+2026-06-01T19:40:20.6272895+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/e2cc9e091d70_orpon-backend-api-sea/stderr_c292667f742547d2b465828bc27b90de.
+2026-06-01T19:40:20.6318780+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-06-01T19:40:21.5084802+00:00 ContainerStatus: Starting container: e2cc9e091d70_orpon-backend-api-sea.
+2026-06-01T19:40:21.5523835+00:00 ContainerStatus: Starting watchers and probes.
+2026-06-01T19:40:21.5627847+00:00 ContainerStatus: Starting metrics collection.
+2026-06-01T19:40:21.5633426+00:00 ContainerStatus: Container is running.
+2026-06-01T19:40:21.5635744+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-01T19:40:21.6929613+00:00 ContainerStatus: Container start method finished after 2077 ms.
+2026-06-01T19:40:21.6934737+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-01T19:40:21.7130090+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-06-01T19:40:22.0743160+00:00 ContainerStream:    _____                               
+2026-06-01T19:40:22.0762444+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-06-01T19:40:22.0762585+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-06-01T19:40:22.0762633+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-06-01T19:40:22.0762672+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-06-01T19:40:22.0762724+00:00 ContainerStream:         \/      \/                  \/ 
+2026-06-01T19:40:22.0762785+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-06-01T19:40:22.0762820+00:00 ContainerStream: 
+2026-06-01T19:40:22.0762865+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-06-01T19:40:22.0762924+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-06-01T19:40:22.0762963+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-06-01T19:40:22.0763003+00:00 ContainerStream: Instance Name    : 10-30-0-149
+2026-06-01T19:40:22.0763072+00:00 ContainerStream: Instance Id      : 40cccdc4058002c7bb4a002ea17c753771e666b3099f0077ceb725e126cc1ecc
+2026-06-01T19:40:22.0763110+00:00 ContainerStream: 
+2026-06-01T19:40:22.0763149+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-06-01T19:40:24.4326212+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-06-01T19:40:24.4532105+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-06-01T19:40:24.5070502+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-06-01T19:40:34.4199848+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-06-01T19:40:34.4219024+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-06-01T19:40:34.9721041+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-06-01T19:40:35.0752820+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-06-01T19:40:35.0762004+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-06-01T19:40:35.0852449+00:00 ContainerStream: done.
+2026-06-01T19:40:35.1046581+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-06-01T19:40:35.5899315+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-06-01T19:40:37.9696061+00:00 ContainerStream: Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2026-06-01T19:40:37.9762462+00:00 ContainerStream: Build Operation ID: a11918bd77558fdd
+2026-06-01T19:40:39.7151142+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-06-01T19:40:39.8157646+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-06-01T19:40:39.9844517+00:00 ContainerStream: Running #!/bin/sh
+2026-06-01T19:40:39.9845018+00:00 ContainerStream: 
+2026-06-01T19:40:39.9845072+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-06-01T19:40:39.9845114+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-06-01T19:40:39.9845149+00:00 ContainerStream: 
+2026-06-01T19:40:39.9845207+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-06-01T19:40:39.9845246+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-06-01T19:40:39.9845286+00:00 ContainerStream: 		export PORT=8080
+2026-06-01T19:40:39.9845323+00:00 ContainerStream: fi
+2026-06-01T19:40:39.9845362+00:00 ContainerStream: 
+2026-06-01T19:40:39.9845399+00:00 ContainerStream: echo Found tar.gz based node_modules.
+2026-06-01T19:40:39.9845445+00:00 ContainerStream: extractionCommand="tar -xzf node_modules.tar.gz -C /node_modules"
+2026-06-01T19:40:39.9845495+00:00 ContainerStream: echo "Removing existing modules directory from root..."
+2026-06-01T19:40:39.9845532+00:00 ContainerStream: rm -fr /node_modules
+2026-06-01T19:40:39.9845566+00:00 ContainerStream: mkdir -p /node_modules
+2026-06-01T19:40:39.9845724+00:00 ContainerStream: echo Extracting modules...
+2026-06-01T19:40:39.9845756+00:00 ContainerStream: $extractionCommand
+2026-06-01T19:40:39.9845829+00:00 ContainerStream: export NODE_PATH="/node_modules":$NODE_PATH
+2026-06-01T19:40:39.9845866+00:00 ContainerStream: export PATH=/node_modules/.bin:$PATH
+2026-06-01T19:40:39.9845907+00:00 ContainerStream: if [ -d node_modules ]; then
+2026-06-01T19:40:39.9845939+00:00 ContainerStream:     mv -f node_modules _del_node_modules || true
+2026-06-01T19:40:39.9845971+00:00 ContainerStream: fi
+2026-06-01T19:40:39.9849097+00:00 ContainerStream: 
+2026-06-01T19:40:39.9849211+00:00 ContainerStream: if [ -d /node_modules ]; then
+2026-06-01T19:40:39.9849255+00:00 ContainerStream:     ln -sfn /node_modules ./node_modules 
+2026-06-01T19:40:39.9849294+00:00 ContainerStream: fi
+2026-06-01T19:40:39.9849369+00:00 ContainerStream: 
+2026-06-01T19:40:39.9849404+00:00 ContainerStream: echo "Done."
+2026-06-01T19:40:39.9849597+00:00 ContainerStream: npm start
+2026-06-01T19:40:39.9971710+00:00 ContainerStream: Found tar.gz based node_modules.
+2026-06-01T19:40:39.9999081+00:00 ContainerStream: Removing existing modules directory from root...
+2026-06-01T19:40:40.0442709+00:00 ContainerStream: Extracting modules...
+2026-06-01T19:40:40.0690250+00:00 ContainerStream: tar (child): node_modules.tar.gz: Cannot open: No such file or directory
+2026-06-01T19:40:40.0691415+00:00 ContainerStream: tar (child): Error is not recoverable: exiting now
+2026-06-01T19:40:40.0718079+00:00 ContainerStream: tar: Child returned status 2
+2026-06-01T19:40:40.0735997+00:00 ContainerStream: tar: Error is not recoverable: exiting now
+2026-06-01T19:40:40.1280491+00:00 ContainerStream: Done.
+2026-06-01T19:40:44.3963508+00:00 ContainerStream: npm info using npm@10.9.2
+2026-06-01T19:40:44.3978237+00:00 ContainerStream: npm info using node@v22.22.2
+2026-06-01T19:40:48.3264937+00:00 ContainerStream: 
+2026-06-01T19:40:48.3265323+00:00 ContainerStream: > orpon@1.0.0 start
+2026-06-01T19:40:48.3265384+00:00 ContainerStream: > node server.js
+2026-06-01T19:40:48.3265419+00:00 ContainerStream: 
+2026-06-01T19:40:49.3593127+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+2026-06-01T19:40:57.0880097+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+2026-06-01T19:40:57.0889616+00:00 ContainerStream: Checking database schema...
+2026-06-01T19:41:01.3695773+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+2026-06-01T19:41:01.3696552+00:00 ContainerStream: Redis not enabled. Operating in local memory fallback Map mode.
+2026-06-01T19:41:01.3768385+00:00 ContainerStream: Server running on port 8080
+2026-06-01T19:41:01.3781221+00:00 ContainerStream: Database connection failed: TypeError: The "config.server" property is required and must be of type string.
+2026-06-01T19:41:01.3781435+00:00 ContainerStream:     at new Connection (/home/site/wwwroot/backend/node_modules/tedious/lib/connection.js:275:13)
+2026-06-01T19:41:01.3781486+00:00 ContainerStream:     at /home/site/wwwroot/backend/node_modules/mssql/lib/tedious/connection-pool.js:78:19
+2026-06-01T19:41:01.3781524+00:00 ContainerStream:     at new Promise (<anonymous>)
+2026-06-01T19:41:01.3781564+00:00 ContainerStream:     at ConnectionPool._poolCreate (/home/site/wwwroot/backend/node_modules/mssql/lib/tedious/connection-pool.js:67:12)
+2026-06-01T19:41:01.3781605+00:00 ContainerStream:     at ConnectionPool._connect (/home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:446:10)
+2026-06-01T19:41:01.3781655+00:00 ContainerStream:     at /home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:418:19
+2026-06-01T19:41:01.3781693+00:00 ContainerStream:     at new Promise (<anonymous>)
+2026-06-01T19:41:01.3781734+00:00 ContainerStream:     at ConnectionPool.connect (/home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:417:12)
+2026-06-01T19:41:01.3781775+00:00 ContainerStream:     at Object.connect (/home/site/wwwroot/backend/node_modules/mssql/lib/global-connection.js:59:27)
+2026-06-01T19:41:01.3786280+00:00 ContainerStream:     at Object.<anonymous> (/home/site/wwwroot/backend/config/db.js:22:25)
+2026-06-01T19:41:01.4036764+00:00 ContainerStream: npm http fetch GET 200 https://registry.npmjs.org/npm 2002ms
+2026-06-01T19:41:01.4180609+00:00 ContainerStream: npm notice
+2026-06-01T19:41:01.4180966+00:00 ContainerStream: npm notice New major version of npm available! 10.9.2 -> 11.16.0
+2026-06-01T19:41:01.4181027+00:00 ContainerStream: npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.16.0
+2026-06-01T19:41:01.4181079+00:00 ContainerStream: npm notice To update run: npm install -g npm@11.16.0
+2026-06-01T19:41:01.4181122+00:00 ContainerStream: npm notice
+2026-06-01T19:41:01.5300234+00:00 ContainerStatus: Container has finished running with exit code: 1.
+2026-06-01T19:41:01.5311598+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-06-01T19:41:01.5376426+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-06-01T19:41:01.5390534+00:00 ContainerStatus: Stopping container: e2cc9e091d70_orpon-backend-api-sea.
+2026-06-01T19:41:01.6833250+00:00 ContainerStatus: Deleting container: e2cc9e091d70_orpon-backend-api-sea. Retry count = 0
+2026-06-01T19:41:02.4675056+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-06-01T19:41:02.4691993+00:00 ContainerStatus: Container is terminated. Total time elapsed: 935 ms.
+2026-06-01T19:41:02.4694335+00:00 ContainerStatus: Site container: orpon-backend-api-sea terminated during site startup.
+2026-06-01T19:41:02.4866399+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:41:02.5431871+00:00 ContainerStatus: Site startup probe failed after 40.801055 seconds.
+2026-06-01T19:41:02.6820626+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:41:02.6968800+00:00 ContainerStatus: Failed to start site. Revert by stopping site.
+2026-06-01T19:41:02.7006164+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:41:02.7103294+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:41:02.7109948+00:00 ContainerStatus: Site: orpon-backend-api-sea stopped.
+========== New Cold Start Attempt (2026-06-01T19:41:02.7186147+00:00) ==========
+2026-06-01T19:41:02.7186147+00:00 ContainerStatus: State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:41:02.8835640+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:41:02.9951989+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 06/01/2026 19:41:02 (UTC), DetailsLevel: ERR
+2026-06-01T19:41:03.4500311+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 06/01/2026 19:41:02 (UTC), DetailsLevel: ERR
+2026-06-01T19:41:12.5113118+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 06/01/2026 19:41:02 (UTC), DetailsLevel: ERR
+2026-06-01T19:41:13.0502409+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 06/01/2026 19:41:02 (UTC), DetailsLevel: ERR
+2026-06-01T19:41:13.0503797+00:00 ContainerStatus: Container start method called.
+2026-06-01T19:41:13.0504369+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-01T19:41:13.0505561+00:00 ContainerStatus: Establishing network.
+2026-06-01T19:41:13.0506802+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-06-01T19:41:13.2236499+00:00 ContainerStatus: Container is starting.
+2026-06-01T19:41:13.2237778+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-01T19:41:13.2239292+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-06-01T19:41:13.2241203+00:00 ContainerStatus: Establishing network if not established already.
+2026-06-01T19:41:13.2281545+00:00 ContainerStatus: Mounting volumes.
+2026-06-01T19:41:13.2314549+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:41:13.2369520+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-06-01T19:41:13.2406805+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:41:13.2473587+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:41:13.2550255+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:41:13.3970470+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for orpon-backend-api-sea. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-06-01T19:41:13.3972536+00:00 ContainerStatus: Creating container.
+2026-06-01T19:41:13.3973844+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-06-01T19:41:13.3993236+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/35a0905eb442_orpon-backend-api-sea/stdout_8bed6c37a9ca46f18094d834e84bd207.
+2026-06-01T19:41:13.4001569+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/35a0905eb442_orpon-backend-api-sea/stdout_8bed6c37a9ca46f18094d834e84bd207.
+2026-06-01T19:41:13.4003924+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/35a0905eb442_orpon-backend-api-sea/stdout_8bed6c37a9ca46f18094d834e84bd207 for reading in non-blocking mode.
+2026-06-01T19:41:13.4005597+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/35a0905eb442_orpon-backend-api-sea/stdout_8bed6c37a9ca46f18094d834e84bd207.
+2026-06-01T19:41:13.4006792+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/35a0905eb442_orpon-backend-api-sea/stdout_8bed6c37a9ca46f18094d834e84bd207.
+2026-06-01T19:41:13.4008603+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/35a0905eb442_orpon-backend-api-sea/stderr_a5703190129e4f20b3ce31c1ddfc73a7.
+2026-06-01T19:41:13.4010421+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/35a0905eb442_orpon-backend-api-sea/stderr_a5703190129e4f20b3ce31c1ddfc73a7.
+2026-06-01T19:41:13.4013023+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/35a0905eb442_orpon-backend-api-sea/stderr_a5703190129e4f20b3ce31c1ddfc73a7 for reading in non-blocking mode.
+2026-06-01T19:41:13.4014474+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/35a0905eb442_orpon-backend-api-sea/stderr_a5703190129e4f20b3ce31c1ddfc73a7.
+2026-06-01T19:41:13.4015718+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/35a0905eb442_orpon-backend-api-sea/stderr_a5703190129e4f20b3ce31c1ddfc73a7.
+2026-06-01T19:41:13.4022144+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-06-01T19:41:13.7520662+00:00 ContainerStatus: Starting container: 35a0905eb442_orpon-backend-api-sea.
+2026-06-01T19:41:13.7750796+00:00 ContainerStatus: Starting watchers and probes.
+2026-06-01T19:41:13.7792694+00:00 ContainerStatus: Starting metrics collection.
+2026-06-01T19:41:13.7806430+00:00 ContainerStatus: Container is running.
+2026-06-01T19:41:13.7814012+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-01T19:41:13.8171264+00:00 ContainerStatus: Container start method finished after 762 ms.
+2026-06-01T19:41:13.8203660+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-01T19:41:13.8206535+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-06-01T19:41:13.9613275+00:00 ContainerStream:    _____                               
+2026-06-01T19:41:13.9613624+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-06-01T19:41:13.9613716+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-06-01T19:41:13.9613746+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-06-01T19:41:13.9613773+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-06-01T19:41:13.9613799+00:00 ContainerStream:         \/      \/                  \/ 
+2026-06-01T19:41:13.9613824+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-06-01T19:41:13.9613849+00:00 ContainerStream: 
+2026-06-01T19:41:13.9613877+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-06-01T19:41:13.9613907+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-06-01T19:41:13.9613935+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-06-01T19:41:13.9613962+00:00 ContainerStream: Instance Name    : 10-30-0-149
+2026-06-01T19:41:13.9613995+00:00 ContainerStream: Instance Id      : 40cccdc4058002c7bb4a002ea17c753771e666b3099f0077ceb725e126cc1ecc
+2026-06-01T19:41:13.9614020+00:00 ContainerStream: 
+2026-06-01T19:41:13.9614069+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-06-01T19:41:15.8656664+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-06-01T19:41:15.8748514+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-06-01T19:41:15.9103523+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-06-01T19:41:24.6819900+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-06-01T19:41:24.6838390+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-06-01T19:41:24.7868896+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-06-01T19:41:24.8075557+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-06-01T19:41:24.8078423+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-06-01T19:41:24.8128694+00:00 ContainerStream: done.
+2026-06-01T19:41:24.8232855+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-06-01T19:41:24.9334550+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-06-01T19:41:25.0542549+00:00 ContainerStream: Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2026-06-01T19:41:25.0579396+00:00 ContainerStream: Build Operation ID: a11918bd77558fdd
+2026-06-01T19:41:25.5996781+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-06-01T19:41:25.7005993+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-06-01T19:41:25.8274534+00:00 ContainerStream: Running #!/bin/sh
+2026-06-01T19:41:25.8275722+00:00 ContainerStream: 
+2026-06-01T19:41:25.8275786+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-06-01T19:41:25.8277342+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-06-01T19:41:25.8277423+00:00 ContainerStream: 
+2026-06-01T19:41:25.8330720+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-06-01T19:41:25.8330774+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-06-01T19:41:25.8330804+00:00 ContainerStream: 		export PORT=8080
+2026-06-01T19:41:25.8330833+00:00 ContainerStream: fi
+2026-06-01T19:41:25.8330862+00:00 ContainerStream: 
+2026-06-01T19:41:25.8330930+00:00 ContainerStream: echo Found tar.gz based node_modules.
+2026-06-01T19:41:25.8331537+00:00 ContainerStream: extractionCommand="tar -xzf node_modules.tar.gz -C /node_modules"
+2026-06-01T19:41:25.8331703+00:00 ContainerStream: echo "Removing existing modules directory from root..."
+2026-06-01T19:41:25.8331733+00:00 ContainerStream: rm -fr /node_modules
+2026-06-01T19:41:25.8331762+00:00 ContainerStream: mkdir -p /node_modules
+2026-06-01T19:41:25.8331790+00:00 ContainerStream: echo Extracting modules...
+2026-06-01T19:41:25.8331818+00:00 ContainerStream: $extractionCommand
+2026-06-01T19:41:25.8331846+00:00 ContainerStream: export NODE_PATH="/node_modules":$NODE_PATH
+2026-06-01T19:41:25.8331873+00:00 ContainerStream: export PATH=/node_modules/.bin:$PATH
+2026-06-01T19:41:25.8331901+00:00 ContainerStream: if [ -d node_modules ]; then
+2026-06-01T19:41:25.8331929+00:00 ContainerStream:     mv -f node_modules _del_node_modules || true
+2026-06-01T19:41:25.8331955+00:00 ContainerStream: fi
+2026-06-01T19:41:25.8331996+00:00 ContainerStream: 
+2026-06-01T19:41:25.8332026+00:00 ContainerStream: if [ -d /node_modules ]; then
+2026-06-01T19:41:25.8332055+00:00 ContainerStream:     ln -sfn /node_modules ./node_modules 
+2026-06-01T19:41:25.8332947+00:00 ContainerStream: fi
+2026-06-01T19:41:25.8332982+00:00 ContainerStream: 
+2026-06-01T19:41:25.8333009+00:00 ContainerStream: echo "Done."
+2026-06-01T19:41:25.8333036+00:00 ContainerStream: npm start
+2026-06-01T19:41:25.8398088+00:00 ContainerStream: Found tar.gz based node_modules.
+2026-06-01T19:41:25.8398239+00:00 ContainerStream: Removing existing modules directory from root...
+2026-06-01T19:41:25.8725647+00:00 ContainerStream: Extracting modules...
+2026-06-01T19:41:25.8933101+00:00 ContainerStream: tar (child): node_modules.tar.gz: Cannot open: No such file or directory
+2026-06-01T19:41:25.8939789+00:00 ContainerStream: tar (child): Error is not recoverable: exiting now
+2026-06-01T19:41:25.8949796+00:00 ContainerStream: tar: Child returned status 2
+2026-06-01T19:41:25.8958064+00:00 ContainerStream: tar: Error is not recoverable: exiting now
+2026-06-01T19:41:25.9278927+00:00 ContainerStream: Done.
+2026-06-01T19:41:26.4458077+00:00 ContainerStream: npm info using npm@10.9.2
+2026-06-01T19:41:26.4458929+00:00 ContainerStream: npm info using node@v22.22.2
+2026-06-01T19:41:27.9450666+00:00 ContainerStream: 
+2026-06-01T19:41:27.9451302+00:00 ContainerStream: > orpon@1.0.0 start
+2026-06-01T19:41:27.9451355+00:00 ContainerStream: > node server.js
+2026-06-01T19:41:27.9451386+00:00 ContainerStream: 
+2026-06-01T19:41:28.1269512+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+2026-06-01T19:41:34.7440062+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+2026-06-01T19:41:34.7460164+00:00 ContainerStream: Checking database schema...
+2026-06-01T19:41:39.7150221+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ enable debugging { debug: true }
+2026-06-01T19:41:39.7151041+00:00 ContainerStream: Redis not enabled. Operating in local memory fallback Map mode.
+2026-06-01T19:41:39.7335309+00:00 ContainerStream: Server running on port 8080
+2026-06-01T19:41:39.7365609+00:00 ContainerStream: Database connection failed: TypeError: The "config.server" property is required and must be of type string.
+2026-06-01T19:41:39.7365848+00:00 ContainerStream:     at new Connection (/home/site/wwwroot/backend/node_modules/tedious/lib/connection.js:275:13)
+2026-06-01T19:41:39.7365887+00:00 ContainerStream:     at /home/site/wwwroot/backend/node_modules/mssql/lib/tedious/connection-pool.js:78:19
+2026-06-01T19:41:39.7365916+00:00 ContainerStream:     at new Promise (<anonymous>)
+2026-06-01T19:41:39.7365948+00:00 ContainerStream:     at ConnectionPool._poolCreate (/home/site/wwwroot/backend/node_modules/mssql/lib/tedious/connection-pool.js:67:12)
+2026-06-01T19:41:39.7366047+00:00 ContainerStream:     at ConnectionPool._connect (/home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:446:10)
+2026-06-01T19:41:39.7366074+00:00 ContainerStream:     at /home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:418:19
+2026-06-01T19:41:39.7366098+00:00 ContainerStream:     at new Promise (<anonymous>)
+2026-06-01T19:41:39.7366789+00:00 ContainerStream:     at ConnectionPool.connect (/home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:417:12)
+2026-06-01T19:41:39.7366827+00:00 ContainerStream:     at Object.connect (/home/site/wwwroot/backend/node_modules/mssql/lib/global-connection.js:59:27)
+2026-06-01T19:41:39.7366857+00:00 ContainerStream:     at Object.<anonymous> (/home/site/wwwroot/backend/config/db.js:22:25)
+2026-06-01T19:41:39.7746596+00:00 ContainerStream: npm http fetch GET 200 https://registry.npmjs.org/npm 216ms
+2026-06-01T19:41:39.7961201+00:00 ContainerStream: npm notice
+2026-06-01T19:41:39.7961752+00:00 ContainerStream: npm notice New major version of npm available! 10.9.2 -> 11.16.0
+2026-06-01T19:41:39.7961795+00:00 ContainerStream: npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.16.0
+2026-06-01T19:41:39.7961888+00:00 ContainerStream: npm notice To update run: npm install -g npm@11.16.0
+2026-06-01T19:41:39.7961917+00:00 ContainerStream: npm notice
+2026-06-01T19:41:39.8973947+00:00 ContainerStatus: Container has finished running with exit code: 1.
+2026-06-01T19:41:39.8976289+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-06-01T19:41:39.8991734+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-06-01T19:41:39.8994213+00:00 ContainerStatus: Stopping container: 35a0905eb442_orpon-backend-api-sea.
+2026-06-01T19:41:39.9808128+00:00 ContainerStatus: Deleting container: 35a0905eb442_orpon-backend-api-sea. Retry count = 0
+2026-06-01T19:41:40.6972213+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-06-01T19:41:40.6979559+00:00 ContainerStatus: Container is terminated. Total time elapsed: 800 ms.
+2026-06-01T19:41:40.6985198+00:00 ContainerStatus: Site container: orpon-backend-api-sea terminated during site startup.
+2026-06-01T19:41:40.6987190+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:41:40.7050210+00:00 ContainerStatus: Site startup probe failed after 26.8801473 seconds.
+2026-06-01T19:41:40.7911909+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:41:40.7977964+00:00 ContainerStatus: Failed to start site. Revert by stopping site.
+2026-06-01T19:41:40.7979435+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:41:40.7983364+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:41:40.7983608+00:00 ContainerStatus: Site: orpon-backend-api-sea stopped.
+========== New Cold Start Attempt (2026-06-01T19:41:40.8119002+00:00) ==========
+2026-06-01T19:41:40.8119002+00:00 ContainerStatus: State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:41:40.9166249+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:41:41.0206381+00:00 ContainerStatus: Site: orpon-backend-api-sea will be blocked for 1 minutes till 06/01/2026 19:42:41
+2026-06-01T19:41:41.0210080+00:00 ContainerStatus: State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: orpon-backend-api-sea will be blocked for 1 minutes till 06/01/2026 19:42:41, DetailsLevel: WARN
+2026-06-01T19:41:41.0404974+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 06/01/2026 19:41:41 (UTC), DetailsLevel: WARN
+2026-06-01T19:41:41.4474410+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 06/01/2026 19:41:41 (UTC), DetailsLevel: WARN
+2026-06-01T19:41:46.5414911+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:42:41, DetailsLevel: WARN
+2026-06-01T19:41:46.5416520+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:41:51.6910678+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:42:41, DetailsLevel: WARN
+2026-06-01T19:41:51.6911001+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:41:56.8281287+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:42:41, DetailsLevel: WARN
+2026-06-01T19:41:56.8282570+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:42:02.0678126+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:42:41, DetailsLevel: WARN
+2026-06-01T19:42:02.0679829+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:42:08.4455468+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:42:41, DetailsLevel: WARN
+2026-06-01T19:42:08.4455741+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:42:14.2332397+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:42:41, DetailsLevel: WARN
+2026-06-01T19:42:14.2333043+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:42:19.8223755+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:42:41, DetailsLevel: WARN
+2026-06-01T19:42:19.8224131+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:42:26.1035566+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:42:41, DetailsLevel: WARN
+2026-06-01T19:42:26.1037789+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:42:32.1383427+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:42:41, DetailsLevel: WARN
+2026-06-01T19:42:32.1383767+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:42:37.3372764+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:42:41, DetailsLevel: WARN
+2026-06-01T19:42:37.3389687+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:42:41.0373135+00:00 ContainerStatus: Site: orpon-backend-api-sea is unblocked.
+2026-06-01T19:42:42.5105922+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:42:41, DetailsLevel: WARN
+2026-06-01T19:42:43.3793433+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:42:41, DetailsLevel: WARN
+2026-06-01T19:42:43.3797246+00:00 ContainerStatus: Container start method called.
+2026-06-01T19:42:43.3798160+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-01T19:42:43.3852188+00:00 ContainerStatus: Establishing network.
+2026-06-01T19:42:43.3855041+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-06-01T19:42:43.6179146+00:00 ContainerStatus: Container is starting.
+2026-06-01T19:42:43.6233149+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-01T19:42:43.6237210+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-06-01T19:42:43.6240943+00:00 ContainerStatus: Establishing network if not established already.
+2026-06-01T19:42:43.6245675+00:00 ContainerStatus: Mounting volumes.
+2026-06-01T19:42:43.6274412+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:42:43.6325624+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-06-01T19:42:43.6470433+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:42:43.6478076+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:42:43.6606370+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:42:44.0410401+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for orpon-backend-api-sea. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-06-01T19:42:44.0418857+00:00 ContainerStatus: Creating container.
+2026-06-01T19:42:44.0420570+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-06-01T19:42:44.0467859+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/8b072bf12bc6_orpon-backend-api-sea/stdout_bdbd6d79b52345d6ad92aeac60c2aae1.
+2026-06-01T19:42:44.0472515+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/8b072bf12bc6_orpon-backend-api-sea/stdout_bdbd6d79b52345d6ad92aeac60c2aae1.
+2026-06-01T19:42:44.0474056+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/8b072bf12bc6_orpon-backend-api-sea/stdout_bdbd6d79b52345d6ad92aeac60c2aae1 for reading in non-blocking mode.
+2026-06-01T19:42:44.0475679+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/8b072bf12bc6_orpon-backend-api-sea/stdout_bdbd6d79b52345d6ad92aeac60c2aae1.
+2026-06-01T19:42:44.0482502+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/8b072bf12bc6_orpon-backend-api-sea/stdout_bdbd6d79b52345d6ad92aeac60c2aae1.
+2026-06-01T19:42:44.0488528+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/8b072bf12bc6_orpon-backend-api-sea/stderr_45d7ecf9cd22440dadf7dd07dce7e9e0.
+2026-06-01T19:42:44.0494716+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/8b072bf12bc6_orpon-backend-api-sea/stderr_45d7ecf9cd22440dadf7dd07dce7e9e0.
+2026-06-01T19:42:44.0496407+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/8b072bf12bc6_orpon-backend-api-sea/stderr_45d7ecf9cd22440dadf7dd07dce7e9e0 for reading in non-blocking mode.
+2026-06-01T19:42:44.0507473+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/8b072bf12bc6_orpon-backend-api-sea/stderr_45d7ecf9cd22440dadf7dd07dce7e9e0.
+2026-06-01T19:42:44.0509045+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/8b072bf12bc6_orpon-backend-api-sea/stderr_45d7ecf9cd22440dadf7dd07dce7e9e0.
+2026-06-01T19:42:44.0515300+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-06-01T19:42:44.5267765+00:00 ContainerStatus: Starting container: 8b072bf12bc6_orpon-backend-api-sea.
+2026-06-01T19:42:44.6104959+00:00 ContainerStatus: Starting watchers and probes.
+2026-06-01T19:42:44.6107721+00:00 ContainerStatus: Starting metrics collection.
+2026-06-01T19:42:44.6111756+00:00 ContainerStatus: Container is running.
+2026-06-01T19:42:44.6113989+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-01T19:42:44.6868713+00:00 ContainerStatus: Container start method finished after 1306 ms.
+2026-06-01T19:42:44.6871331+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-01T19:42:44.6871935+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-06-01T19:42:44.8739200+00:00 ContainerStream:    _____                               
+2026-06-01T19:42:44.8739678+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-06-01T19:42:44.8739720+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-06-01T19:42:44.8739746+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-06-01T19:42:44.8739772+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-06-01T19:42:44.8739796+00:00 ContainerStream:         \/      \/                  \/ 
+2026-06-01T19:42:44.8739823+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-06-01T19:42:44.8739849+00:00 ContainerStream: 
+2026-06-01T19:42:44.8739876+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-06-01T19:42:44.8739903+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-06-01T19:42:44.8739929+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-06-01T19:42:44.8739953+00:00 ContainerStream: Instance Name    : 10-30-0-149
+2026-06-01T19:42:44.8739987+00:00 ContainerStream: Instance Id      : 40cccdc4058002c7bb4a002ea17c753771e666b3099f0077ceb725e126cc1ecc
+2026-06-01T19:42:44.8740022+00:00 ContainerStream: 
+2026-06-01T19:42:44.8740049+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-06-01T19:42:49.7775551+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-06-01T19:42:49.7850839+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-06-01T19:42:49.8129577+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-06-01T19:42:56.8363671+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-06-01T19:42:56.8368505+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-06-01T19:42:56.8887531+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-06-01T19:42:56.9088932+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-06-01T19:42:56.9090854+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-06-01T19:42:56.9158301+00:00 ContainerStream: done.
+2026-06-01T19:42:56.9314521+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-06-01T19:42:57.0532855+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-06-01T19:42:57.1287385+00:00 ContainerStream: Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2026-06-01T19:42:57.1404950+00:00 ContainerStream: Build Operation ID: efe43efca44a59c9
+2026-06-01T19:42:57.6376321+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-06-01T19:42:57.7359504+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-06-01T19:42:57.8453311+00:00 ContainerStream: Running #!/bin/sh
+2026-06-01T19:42:57.8454020+00:00 ContainerStream: 
+2026-06-01T19:42:57.8454149+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-06-01T19:42:57.8454196+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-06-01T19:42:57.8454222+00:00 ContainerStream: 
+2026-06-01T19:42:57.8454261+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-06-01T19:42:57.8454291+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-06-01T19:42:57.8454325+00:00 ContainerStream: 		export PORT=8080
+2026-06-01T19:42:57.8454351+00:00 ContainerStream: fi
+2026-06-01T19:42:57.8454376+00:00 ContainerStream: 
+2026-06-01T19:42:57.8454403+00:00 ContainerStream: echo Found tar.gz based node_modules.
+2026-06-01T19:42:57.8454430+00:00 ContainerStream: extractionCommand="tar -xzf node_modules.tar.gz -C /node_modules"
+2026-06-01T19:42:57.8454460+00:00 ContainerStream: echo "Removing existing modules directory from root..."
+2026-06-01T19:42:57.8454488+00:00 ContainerStream: rm -fr /node_modules
+2026-06-01T19:42:57.8454532+00:00 ContainerStream: mkdir -p /node_modules
+2026-06-01T19:42:57.8454560+00:00 ContainerStream: echo Extracting modules...
+2026-06-01T19:42:57.8454590+00:00 ContainerStream: $extractionCommand
+2026-06-01T19:42:57.8454621+00:00 ContainerStream: export NODE_PATH="/node_modules":$NODE_PATH
+2026-06-01T19:42:57.8454652+00:00 ContainerStream: export PATH=/node_modules/.bin:$PATH
+2026-06-01T19:42:57.8454682+00:00 ContainerStream: if [ -d node_modules ]; then
+2026-06-01T19:42:57.8454715+00:00 ContainerStream:     mv -f node_modules _del_node_modules || true
+2026-06-01T19:42:57.8454745+00:00 ContainerStream: fi
+2026-06-01T19:42:57.8454774+00:00 ContainerStream: 
+2026-06-01T19:42:57.8454803+00:00 ContainerStream: if [ -d /node_modules ]; then
+2026-06-01T19:42:57.8454836+00:00 ContainerStream:     ln -sfn /node_modules ./node_modules 
+2026-06-01T19:42:57.8454865+00:00 ContainerStream: fi
+2026-06-01T19:42:57.8454905+00:00 ContainerStream: 
+2026-06-01T19:42:57.8454934+00:00 ContainerStream: echo "Done."
+2026-06-01T19:42:57.8454960+00:00 ContainerStream: npm start
+2026-06-01T19:42:57.8511216+00:00 ContainerStream: Found tar.gz based node_modules.
+2026-06-01T19:42:57.8511420+00:00 ContainerStream: Removing existing modules directory from root...
+2026-06-01T19:42:57.8673584+00:00 ContainerStream: Extracting modules...
+2026-06-01T19:42:57.8819417+00:00 ContainerStream: tar (child): node_modules.tar.gz: Cannot open: No such file or directory
+2026-06-01T19:42:57.8819660+00:00 ContainerStream: tar (child): Error is not recoverable: exiting now
+2026-06-01T19:42:57.8909466+00:00 ContainerStream: tar: Child returned status 2
+2026-06-01T19:42:57.8909692+00:00 ContainerStream: tar: Error is not recoverable: exiting now
+2026-06-01T19:42:57.9436555+00:00 ContainerStream: Done.
+2026-06-01T19:42:58.5861711+00:00 ContainerStream: npm info using npm@10.9.2
+2026-06-01T19:42:58.5861952+00:00 ContainerStream: npm info using node@v22.22.2
+2026-06-01T19:42:58.9783485+00:00 ContainerStream: 
+2026-06-01T19:42:58.9783945+00:00 ContainerStream: > orpon@1.0.0 start
+2026-06-01T19:42:58.9783990+00:00 ContainerStream: > node server.js
+2026-06-01T19:42:58.9784087+00:00 ContainerStream: 
+2026-06-01T19:42:59.0878449+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ suppress logs { quiet: true }
+2026-06-01T19:43:04.3322237+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ override existing { override: true }
+2026-06-01T19:43:04.3357534+00:00 ContainerStream: Checking database schema...
+2026-06-01T19:43:08.0351450+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+2026-06-01T19:43:08.0351921+00:00 ContainerStream: Redis not enabled. Operating in local memory fallback Map mode.
+2026-06-01T19:43:08.0415759+00:00 ContainerStream: Database connection failed: TypeError: The "config.server" property is required and must be of type string.
+2026-06-01T19:43:08.0416547+00:00 ContainerStream: Server running on port 8080
+2026-06-01T19:43:08.0417001+00:00 ContainerStream:     at new Connection (/home/site/wwwroot/backend/node_modules/tedious/lib/connection.js:275:13)
+2026-06-01T19:43:08.0417048+00:00 ContainerStream:     at /home/site/wwwroot/backend/node_modules/mssql/lib/tedious/connection-pool.js:78:19
+2026-06-01T19:43:08.0417076+00:00 ContainerStream:     at new Promise (<anonymous>)
+2026-06-01T19:43:08.0417106+00:00 ContainerStream:     at ConnectionPool._poolCreate (/home/site/wwwroot/backend/node_modules/mssql/lib/tedious/connection-pool.js:67:12)
+2026-06-01T19:43:08.0417137+00:00 ContainerStream:     at ConnectionPool._connect (/home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:446:10)
+2026-06-01T19:43:08.0417169+00:00 ContainerStream:     at /home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:418:19
+2026-06-01T19:43:08.0417196+00:00 ContainerStream:     at new Promise (<anonymous>)
+2026-06-01T19:43:08.0417227+00:00 ContainerStream:     at ConnectionPool.connect (/home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:417:12)
+2026-06-01T19:43:08.0417257+00:00 ContainerStream:     at Object.connect (/home/site/wwwroot/backend/node_modules/mssql/lib/global-connection.js:59:27)
+2026-06-01T19:43:08.0417289+00:00 ContainerStream:     at Object.<anonymous> (/home/site/wwwroot/backend/config/db.js:22:25)
+2026-06-01T19:43:08.0593985+00:00 ContainerStream: npm http fetch GET 200 https://registry.npmjs.org/npm 178ms
+2026-06-01T19:43:08.0670496+00:00 ContainerStream: npm notice
+2026-06-01T19:43:08.0671188+00:00 ContainerStream: npm notice New major version of npm available! 10.9.2 -> 11.16.0
+2026-06-01T19:43:08.0671230+00:00 ContainerStream: npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.16.0
+2026-06-01T19:43:08.0671261+00:00 ContainerStream: npm notice To update run: npm install -g npm@11.16.0
+2026-06-01T19:43:08.0671291+00:00 ContainerStream: npm notice
+2026-06-01T19:43:08.1017968+00:00 ContainerStatus: Container has finished running with exit code: 1.
+2026-06-01T19:43:08.1020424+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-06-01T19:43:08.1028821+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-06-01T19:43:08.1050972+00:00 ContainerStatus: Stopping container: 8b072bf12bc6_orpon-backend-api-sea.
+2026-06-01T19:43:08.1269826+00:00 ContainerStatus: Deleting container: 8b072bf12bc6_orpon-backend-api-sea. Retry count = 0
+2026-06-01T19:43:08.2427746+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-06-01T19:43:08.2429729+00:00 ContainerStatus: Container is terminated. Total time elapsed: 140 ms.
+2026-06-01T19:43:08.2431163+00:00 ContainerStatus: Site container: orpon-backend-api-sea terminated during site startup.
+2026-06-01T19:43:08.2432091+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:41:40, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:43:08.2600028+00:00 ContainerStatus: Site startup probe failed after 23.569778 seconds.
+2026-06-01T19:43:08.3235648+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:43:08.3255690+00:00 ContainerStatus: Failed to start site. Revert by stopping site.
+2026-06-01T19:43:08.3256536+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:43:08.3258804+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:43:08.3258983+00:00 ContainerStatus: Site: orpon-backend-api-sea stopped.
+========== New Cold Start Attempt (2026-06-01T19:43:08.3468841+00:00) ==========
+2026-06-01T19:43:08.3468841+00:00 ContainerStatus: State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:43:08.5342462+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:43:08.5829582+00:00 ContainerStatus: Site: orpon-backend-api-sea will be blocked for 1 minutes till 06/01/2026 19:44:08
+2026-06-01T19:43:08.5831792+00:00 ContainerStatus: State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: orpon-backend-api-sea will be blocked for 1 minutes till 06/01/2026 19:44:08, DetailsLevel: WARN
+2026-06-01T19:43:08.5852248+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 06/01/2026 19:43:08 (UTC), DetailsLevel: WARN
+2026-06-01T19:43:08.8057331+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 06/01/2026 19:43:08 (UTC), DetailsLevel: WARN
+2026-06-01T19:43:13.8761083+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:44:08, DetailsLevel: WARN
+2026-06-01T19:43:13.8761408+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:43:18.9681558+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:44:08, DetailsLevel: WARN
+2026-06-01T19:43:18.9681926+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:43:24.0562496+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:44:08, DetailsLevel: WARN
+2026-06-01T19:43:24.0562819+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:43:29.1233988+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:44:08, DetailsLevel: WARN
+2026-06-01T19:43:29.1234269+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:43:34.1771070+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:44:08, DetailsLevel: WARN
+2026-06-01T19:43:34.1771344+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:43:39.2180057+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:44:08, DetailsLevel: WARN
+2026-06-01T19:43:39.2180346+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:43:44.2626921+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:44:08, DetailsLevel: WARN
+2026-06-01T19:43:44.2627208+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:43:49.3404336+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:44:08, DetailsLevel: WARN
+2026-06-01T19:43:49.3437351+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:43:54.4216242+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:44:08, DetailsLevel: WARN
+2026-06-01T19:43:54.4216543+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:43:59.5312159+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:44:08, DetailsLevel: WARN
+2026-06-01T19:43:59.5312527+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:44:04.6016098+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:44:08, DetailsLevel: WARN
+2026-06-01T19:44:04.6016397+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:44:08.5860568+00:00 ContainerStatus: Site: orpon-backend-api-sea is unblocked.
+2026-06-01T19:44:09.6739760+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:44:08, DetailsLevel: WARN
+2026-06-01T19:44:10.0023643+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:44:08, DetailsLevel: WARN
+2026-06-01T19:44:10.0025279+00:00 ContainerStatus: Container start method called.
+2026-06-01T19:44:10.0054151+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-01T19:44:10.0059955+00:00 ContainerStatus: Establishing network.
+2026-06-01T19:44:10.0072429+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-06-01T19:44:10.1046323+00:00 ContainerStatus: Container is starting.
+2026-06-01T19:44:10.1047143+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-01T19:44:10.1049508+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-06-01T19:44:10.1051002+00:00 ContainerStatus: Establishing network if not established already.
+2026-06-01T19:44:10.1052399+00:00 ContainerStatus: Mounting volumes.
+2026-06-01T19:44:10.1054662+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:44:10.1089047+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-06-01T19:44:10.1145975+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:44:10.1206994+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:44:10.1305329+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:44:10.2304260+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for orpon-backend-api-sea. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-06-01T19:44:10.2305862+00:00 ContainerStatus: Creating container.
+2026-06-01T19:44:10.2310447+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-06-01T19:44:10.2312013+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/bca2ed994f5c_orpon-backend-api-sea/stdout_c12903e16c3f4b3c83bff4245d4ed9d6.
+2026-06-01T19:44:10.2314439+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/bca2ed994f5c_orpon-backend-api-sea/stdout_c12903e16c3f4b3c83bff4245d4ed9d6.
+2026-06-01T19:44:10.2315678+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/bca2ed994f5c_orpon-backend-api-sea/stdout_c12903e16c3f4b3c83bff4245d4ed9d6 for reading in non-blocking mode.
+2026-06-01T19:44:10.2317906+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/bca2ed994f5c_orpon-backend-api-sea/stdout_c12903e16c3f4b3c83bff4245d4ed9d6.
+2026-06-01T19:44:10.2319081+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/bca2ed994f5c_orpon-backend-api-sea/stdout_c12903e16c3f4b3c83bff4245d4ed9d6.
+2026-06-01T19:44:10.2325841+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/bca2ed994f5c_orpon-backend-api-sea/stderr_388f6dd4e5c84b368a84b924c1eb1a60.
+2026-06-01T19:44:10.2327712+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/bca2ed994f5c_orpon-backend-api-sea/stderr_388f6dd4e5c84b368a84b924c1eb1a60.
+2026-06-01T19:44:10.2328860+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/bca2ed994f5c_orpon-backend-api-sea/stderr_388f6dd4e5c84b368a84b924c1eb1a60 for reading in non-blocking mode.
+2026-06-01T19:44:10.2330297+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/bca2ed994f5c_orpon-backend-api-sea/stderr_388f6dd4e5c84b368a84b924c1eb1a60.
+2026-06-01T19:44:10.2331542+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/bca2ed994f5c_orpon-backend-api-sea/stderr_388f6dd4e5c84b368a84b924c1eb1a60.
+2026-06-01T19:44:10.2338527+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-06-01T19:44:10.4857478+00:00 ContainerStatus: Starting container: bca2ed994f5c_orpon-backend-api-sea.
+2026-06-01T19:44:10.5080501+00:00 ContainerStatus: Starting watchers and probes.
+2026-06-01T19:44:10.5086520+00:00 ContainerStatus: Starting metrics collection.
+2026-06-01T19:44:10.5122379+00:00 ContainerStatus: Container is running.
+2026-06-01T19:44:10.5124147+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-01T19:44:10.5393180+00:00 ContainerStatus: Container start method finished after 534 ms.
+2026-06-01T19:44:10.5395682+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-01T19:44:10.5396652+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-06-01T19:44:10.5723815+00:00 ContainerStream:    _____                               
+2026-06-01T19:44:10.5724679+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-06-01T19:44:10.5724733+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-06-01T19:44:10.5724771+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-06-01T19:44:10.5724800+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-06-01T19:44:10.5724831+00:00 ContainerStream:         \/      \/                  \/ 
+2026-06-01T19:44:10.5724862+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-06-01T19:44:10.5724890+00:00 ContainerStream: 
+2026-06-01T19:44:10.5724968+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-06-01T19:44:10.5725002+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-06-01T19:44:10.5725030+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-06-01T19:44:10.5725059+00:00 ContainerStream: Instance Name    : 10-30-0-149
+2026-06-01T19:44:10.5725137+00:00 ContainerStream: Instance Id      : 40cccdc4058002c7bb4a002ea17c753771e666b3099f0077ceb725e126cc1ecc
+2026-06-01T19:44:10.5725169+00:00 ContainerStream: 
+2026-06-01T19:44:10.5725201+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-06-01T19:44:11.0745886+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-06-01T19:44:11.0803690+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-06-01T19:44:11.0967799+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-06-01T19:44:16.1131133+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-06-01T19:44:16.1134360+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-06-01T19:44:16.2394312+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-06-01T19:44:16.2566391+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-06-01T19:44:16.2566781+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-06-01T19:44:16.2631532+00:00 ContainerStream: done.
+2026-06-01T19:44:16.2797449+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-06-01T19:44:16.4149829+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-06-01T19:44:16.4866893+00:00 ContainerStream: Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2026-06-01T19:44:16.4948748+00:00 ContainerStream: Build Operation ID: efe43efca44a59c9
+2026-06-01T19:44:16.9062167+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-06-01T19:44:17.0001110+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-06-01T19:44:17.1092349+00:00 ContainerStream: Running #!/bin/sh
+2026-06-01T19:44:17.1093128+00:00 ContainerStream: 
+2026-06-01T19:44:17.1093182+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-06-01T19:44:17.1093214+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-06-01T19:44:17.1093241+00:00 ContainerStream: 
+2026-06-01T19:44:17.1093279+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-06-01T19:44:17.1093307+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-06-01T19:44:17.1093335+00:00 ContainerStream: 		export PORT=8080
+2026-06-01T19:44:17.1093363+00:00 ContainerStream: fi
+2026-06-01T19:44:17.1093452+00:00 ContainerStream: 
+2026-06-01T19:44:17.1093484+00:00 ContainerStream: echo Found tar.gz based node_modules.
+2026-06-01T19:44:17.1093514+00:00 ContainerStream: extractionCommand="tar -xzf node_modules.tar.gz -C /node_modules"
+2026-06-01T19:44:17.1093544+00:00 ContainerStream: echo "Removing existing modules directory from root..."
+2026-06-01T19:44:17.1093574+00:00 ContainerStream: rm -fr /node_modules
+2026-06-01T19:44:17.1093603+00:00 ContainerStream: mkdir -p /node_modules
+2026-06-01T19:44:17.1093630+00:00 ContainerStream: echo Extracting modules...
+2026-06-01T19:44:17.1093658+00:00 ContainerStream: $extractionCommand
+2026-06-01T19:44:17.1093688+00:00 ContainerStream: export NODE_PATH="/node_modules":$NODE_PATH
+2026-06-01T19:44:17.1093720+00:00 ContainerStream: export PATH=/node_modules/.bin:$PATH
+2026-06-01T19:44:17.1093751+00:00 ContainerStream: if [ -d node_modules ]; then
+2026-06-01T19:44:17.1093780+00:00 ContainerStream:     mv -f node_modules _del_node_modules || true
+2026-06-01T19:44:17.1093819+00:00 ContainerStream: fi
+2026-06-01T19:44:17.1093845+00:00 ContainerStream: 
+2026-06-01T19:44:17.1093872+00:00 ContainerStream: if [ -d /node_modules ]; then
+2026-06-01T19:44:17.1093901+00:00 ContainerStream:     ln -sfn /node_modules ./node_modules 
+2026-06-01T19:44:17.1093933+00:00 ContainerStream: fi
+2026-06-01T19:44:17.1093963+00:00 ContainerStream: 
+2026-06-01T19:44:17.1093991+00:00 ContainerStream: echo "Done."
+2026-06-01T19:44:17.1111817+00:00 ContainerStream: npm start
+2026-06-01T19:44:17.1139338+00:00 ContainerStream: Found tar.gz based node_modules.
+2026-06-01T19:44:17.1147807+00:00 ContainerStream: Removing existing modules directory from root...
+2026-06-01T19:44:17.1315184+00:00 ContainerStream: Extracting modules...
+2026-06-01T19:44:17.1385916+00:00 ContainerStream: tar (child): node_modules.tar.gz: Cannot open: No such file or directory
+2026-06-01T19:44:17.1386089+00:00 ContainerStream: tar (child): Error is not recoverable: exiting now
+2026-06-01T19:44:17.1386914+00:00 ContainerStream: tar: Child returned status 2
+2026-06-01T19:44:17.1386954+00:00 ContainerStream: tar: Error is not recoverable: exiting now
+2026-06-01T19:44:17.1730021+00:00 ContainerStream: Done.
+2026-06-01T19:44:17.2959669+00:00 ContainerStream: npm info using npm@10.9.2
+2026-06-01T19:44:17.2963350+00:00 ContainerStream: npm info using node@v22.22.2
+2026-06-01T19:44:17.5873419+00:00 ContainerStream: 
+2026-06-01T19:44:17.5873868+00:00 ContainerStream: > orpon@1.0.0 start
+2026-06-01T19:44:17.5873918+00:00 ContainerStream: > node server.js
+2026-06-01T19:44:17.5873946+00:00 ContainerStream: 
+2026-06-01T19:44:17.6752379+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+2026-06-01T19:44:23.3692067+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+2026-06-01T19:44:23.3709995+00:00 ContainerStream: Checking database schema...
+2026-06-01T19:44:27.2640281+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ enable debugging { debug: true }
+2026-06-01T19:44:27.2640717+00:00 ContainerStream: Redis not enabled. Operating in local memory fallback Map mode.
+2026-06-01T19:44:27.2705129+00:00 ContainerStream: Server running on port 8080
+2026-06-01T19:44:27.2725545+00:00 ContainerStream: Database connection failed: TypeError: The "config.server" property is required and must be of type string.
+2026-06-01T19:44:27.2725797+00:00 ContainerStream:     at new Connection (/home/site/wwwroot/backend/node_modules/tedious/lib/connection.js:275:13)
+2026-06-01T19:44:27.2725835+00:00 ContainerStream:     at /home/site/wwwroot/backend/node_modules/mssql/lib/tedious/connection-pool.js:78:19
+2026-06-01T19:44:27.2725910+00:00 ContainerStream:     at new Promise (<anonymous>)
+2026-06-01T19:44:27.2725948+00:00 ContainerStream:     at ConnectionPool._poolCreate (/home/site/wwwroot/backend/node_modules/mssql/lib/tedious/connection-pool.js:67:12)
+2026-06-01T19:44:27.2725982+00:00 ContainerStream:     at ConnectionPool._connect (/home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:446:10)
+2026-06-01T19:44:27.2726018+00:00 ContainerStream:     at /home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:418:19
+2026-06-01T19:44:27.2733870+00:00 ContainerStream:     at new Promise (<anonymous>)
+2026-06-01T19:44:27.2733916+00:00 ContainerStream:     at ConnectionPool.connect (/home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:417:12)
+2026-06-01T19:44:27.2733951+00:00 ContainerStream:     at Object.connect (/home/site/wwwroot/backend/node_modules/mssql/lib/global-connection.js:59:27)
+2026-06-01T19:44:27.2733982+00:00 ContainerStream:     at Object.<anonymous> (/home/site/wwwroot/backend/config/db.js:22:25)
+2026-06-01T19:44:27.2906813+00:00 ContainerStream: npm http fetch GET 200 https://registry.npmjs.org/npm 95ms
+2026-06-01T19:44:27.2979790+00:00 ContainerStream: npm notice
+2026-06-01T19:44:27.2980215+00:00 ContainerStream: npm notice New major version of npm available! 10.9.2 -> 11.16.0
+2026-06-01T19:44:27.2980259+00:00 ContainerStream: npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.16.0
+2026-06-01T19:44:27.2980293+00:00 ContainerStream: npm notice To update run: npm install -g npm@11.16.0
+2026-06-01T19:44:27.2980323+00:00 ContainerStream: npm notice
+2026-06-01T19:44:27.3468062+00:00 ContainerStatus: Container has finished running with exit code: 1.
+2026-06-01T19:44:27.3469243+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-06-01T19:44:27.3502244+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-06-01T19:44:27.3503617+00:00 ContainerStatus: Stopping container: bca2ed994f5c_orpon-backend-api-sea.
+2026-06-01T19:44:27.3802021+00:00 ContainerStatus: Deleting container: bca2ed994f5c_orpon-backend-api-sea. Retry count = 0
+2026-06-01T19:44:27.5363418+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-06-01T19:44:27.5366398+00:00 ContainerStatus: Container is terminated. Total time elapsed: 189 ms.
+2026-06-01T19:44:27.5367668+00:00 ContainerStatus: Site container: orpon-backend-api-sea terminated during site startup.
+2026-06-01T19:44:27.5368448+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:43:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:44:27.5522490+00:00 ContainerStatus: Site startup probe failed after 17.0120194 seconds.
+2026-06-01T19:44:27.6290444+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:44:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:44:27.6307289+00:00 ContainerStatus: Failed to start site. Revert by stopping site.
+2026-06-01T19:44:27.6308192+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:44:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:44:27.6310537+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:44:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:44:27.6310740+00:00 ContainerStatus: Site: orpon-backend-api-sea stopped.
+========== New Cold Start Attempt (2026-06-01T19:46:19.1435137+00:00) ==========
+2026-06-01T19:46:19.1435137+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:44:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:46:27, DetailsLevel: WARN
+2026-06-01T19:46:19.4734075+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:44:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:46:27, DetailsLevel: WARN
+2026-06-01T19:46:19.4735004+00:00 ContainerStatus: Container start method called.
+2026-06-01T19:46:19.4735378+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:44:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-01T19:46:19.4736098+00:00 ContainerStatus: Establishing network.
+2026-06-01T19:46:19.4736946+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-06-01T19:46:19.6314187+00:00 ContainerStatus: Image appsvc/node:22-lts_20260504.4.tuxprod is pulled from registry 10.1.0.5:13209
+2026-06-01T19:46:19.6325035+00:00 ContainerStatus: Container is starting.
+2026-06-01T19:46:19.6327555+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:44:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-01T19:46:19.6330361+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-06-01T19:46:19.6333131+00:00 ContainerStatus: Establishing network if not established already.
+2026-06-01T19:46:19.6336827+00:00 ContainerStatus: Mounting volumes.
+2026-06-01T19:46:19.6339229+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:46:19.6358112+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-06-01T19:46:19.6384992+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:46:19.6394366+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:46:19.6441550+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:46:19.7189309+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:44:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for orpon-backend-api-sea. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-06-01T19:46:19.7191231+00:00 ContainerStatus: Creating container.
+2026-06-01T19:46:19.7193786+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-06-01T19:46:19.7195154+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/b4158ddd2d7f_orpon-backend-api-sea/stdout_95317505002a48c9a5654886d576d9c1.
+2026-06-01T19:46:19.7199525+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/b4158ddd2d7f_orpon-backend-api-sea/stdout_95317505002a48c9a5654886d576d9c1.
+2026-06-01T19:46:19.7200705+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/b4158ddd2d7f_orpon-backend-api-sea/stdout_95317505002a48c9a5654886d576d9c1 for reading in non-blocking mode.
+2026-06-01T19:46:19.7203073+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/b4158ddd2d7f_orpon-backend-api-sea/stdout_95317505002a48c9a5654886d576d9c1.
+2026-06-01T19:46:19.7205569+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/b4158ddd2d7f_orpon-backend-api-sea/stdout_95317505002a48c9a5654886d576d9c1.
+2026-06-01T19:46:19.7209245+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/b4158ddd2d7f_orpon-backend-api-sea/stderr_2193ca2329c34496a8df992257b7f8f7.
+2026-06-01T19:46:19.7214338+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/b4158ddd2d7f_orpon-backend-api-sea/stderr_2193ca2329c34496a8df992257b7f8f7.
+2026-06-01T19:46:19.7218016+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/b4158ddd2d7f_orpon-backend-api-sea/stderr_2193ca2329c34496a8df992257b7f8f7 for reading in non-blocking mode.
+2026-06-01T19:46:19.7219560+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/b4158ddd2d7f_orpon-backend-api-sea/stderr_2193ca2329c34496a8df992257b7f8f7.
+2026-06-01T19:46:19.7220825+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/b4158ddd2d7f_orpon-backend-api-sea/stderr_2193ca2329c34496a8df992257b7f8f7.
+2026-06-01T19:46:19.7227487+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.5:13209 and fully qualified image name: 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-06-01T19:46:19.9654675+00:00 ContainerStatus: Starting container: b4158ddd2d7f_orpon-backend-api-sea.
+2026-06-01T19:46:19.9813121+00:00 ContainerStatus: Starting watchers and probes.
+2026-06-01T19:46:19.9816887+00:00 ContainerStatus: Starting metrics collection.
+2026-06-01T19:46:19.9820046+00:00 ContainerStatus: Container is running.
+2026-06-01T19:46:19.9820809+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:44:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-01T19:46:20.0234157+00:00 ContainerStatus: Container start method finished after 549 ms.
+2026-06-01T19:46:20.0238288+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:44:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-01T19:46:20.0238670+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:44:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-06-01T19:46:20.1983296+00:00 ContainerStream:    _____                               
+2026-06-01T19:46:20.1984949+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-06-01T19:46:20.1985030+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-06-01T19:46:20.1985068+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-06-01T19:46:20.1985107+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-06-01T19:46:20.1985153+00:00 ContainerStream:         \/      \/                  \/ 
+2026-06-01T19:46:20.1985216+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-06-01T19:46:20.1985252+00:00 ContainerStream: 
+2026-06-01T19:46:20.1985294+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-06-01T19:46:20.1985334+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-06-01T19:46:20.1985370+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-06-01T19:46:20.1985408+00:00 ContainerStream: Instance Name    : 10-30-0-149
+2026-06-01T19:46:20.1985449+00:00 ContainerStream: Instance Id      : 40cccdc4058002c7bb4a002ea17c753771e666b3099f0077ceb725e126cc1ecc
+2026-06-01T19:46:20.1985494+00:00 ContainerStream: 
+2026-06-01T19:46:20.1985529+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-06-01T19:46:21.0095182+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-06-01T19:46:21.0238503+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-06-01T19:46:21.0550421+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-06-01T19:46:26.9315648+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-06-01T19:46:26.9320265+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-06-01T19:46:26.9320525+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-06-01T19:46:26.9320576+00:00 ContainerStream: done.
+2026-06-01T19:46:26.9320945+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-06-01T19:46:26.9321052+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-06-01T19:46:26.9361755+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-06-01T19:46:27.3873216+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-06-01T19:46:27.3873751+00:00 ContainerStream: Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2026-06-01T19:46:27.3873843+00:00 ContainerStream: Build Operation ID: efe43efca44a59c9
+2026-06-01T19:46:27.3873891+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-06-01T19:46:27.8468254+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-06-01T19:46:27.9632368+00:00 ContainerStream: Running #!/bin/sh
+2026-06-01T19:46:27.9633173+00:00 ContainerStream: 
+2026-06-01T19:46:27.9633247+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-06-01T19:46:27.9633301+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-06-01T19:46:27.9633397+00:00 ContainerStream: 
+2026-06-01T19:46:27.9633435+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-06-01T19:46:27.9633473+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-06-01T19:46:27.9633512+00:00 ContainerStream: 		export PORT=8080
+2026-06-01T19:46:27.9633548+00:00 ContainerStream: fi
+2026-06-01T19:46:27.9633581+00:00 ContainerStream: 
+2026-06-01T19:46:27.9633620+00:00 ContainerStream: echo Found tar.gz based node_modules.
+2026-06-01T19:46:27.9633666+00:00 ContainerStream: extractionCommand="tar -xzf node_modules.tar.gz -C /node_modules"
+2026-06-01T19:46:27.9633705+00:00 ContainerStream: echo "Removing existing modules directory from root..."
+2026-06-01T19:46:27.9633742+00:00 ContainerStream: rm -fr /node_modules
+2026-06-01T19:46:27.9633777+00:00 ContainerStream: mkdir -p /node_modules
+2026-06-01T19:46:27.9633812+00:00 ContainerStream: echo Extracting modules...
+2026-06-01T19:46:27.9633847+00:00 ContainerStream: $extractionCommand
+2026-06-01T19:46:27.9633907+00:00 ContainerStream: export NODE_PATH="/node_modules":$NODE_PATH
+2026-06-01T19:46:27.9633962+00:00 ContainerStream: export PATH=/node_modules/.bin:$PATH
+2026-06-01T19:46:27.9633999+00:00 ContainerStream: if [ -d node_modules ]; then
+2026-06-01T19:46:27.9634036+00:00 ContainerStream:     mv -f node_modules _del_node_modules || true
+2026-06-01T19:46:27.9634069+00:00 ContainerStream: fi
+2026-06-01T19:46:27.9634105+00:00 ContainerStream: 
+2026-06-01T19:46:27.9634141+00:00 ContainerStream: if [ -d /node_modules ]; then
+2026-06-01T19:46:27.9634179+00:00 ContainerStream:     ln -sfn /node_modules ./node_modules 
+2026-06-01T19:46:27.9634226+00:00 ContainerStream: fi
+2026-06-01T19:46:27.9634260+00:00 ContainerStream: 
+2026-06-01T19:46:27.9634296+00:00 ContainerStream: echo "Done."
+2026-06-01T19:46:27.9634335+00:00 ContainerStream: PATH="$PATH:/home/site/wwwroot" cd /home/site/wwwroot/backend && node server.js
+2026-06-01T19:46:27.9692089+00:00 ContainerStream: Found tar.gz based node_modules.
+2026-06-01T19:46:27.9699561+00:00 ContainerStream: Removing existing modules directory from root...
+2026-06-01T19:46:28.0003482+00:00 ContainerStream: Extracting modules...
+2026-06-01T19:46:28.0091115+00:00 ContainerStream: tar (child): node_modules.tar.gz: Cannot open: No such file or directory
+2026-06-01T19:46:28.0091706+00:00 ContainerStream: tar (child): Error is not recoverable: exiting now
+2026-06-01T19:46:28.0097071+00:00 ContainerStream: tar: Child returned status 2
+2026-06-01T19:46:28.0097225+00:00 ContainerStream: tar: Error is not recoverable: exiting now
+2026-06-01T19:46:28.0414134+00:00 ContainerStream: Done.
+2026-06-01T19:46:28.4672643+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+2026-06-01T19:46:34.0519455+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+2026-06-01T19:46:34.0540895+00:00 ContainerStream: Checking database schema...
+2026-06-01T19:46:37.3762414+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+2026-06-01T19:46:37.3765063+00:00 ContainerStream: Redis not enabled. Operating in local memory fallback Map mode.
+2026-06-01T19:46:37.3821786+00:00 ContainerStream: Server running on port 8080
+2026-06-01T19:46:37.3837769+00:00 ContainerStream: Database connection failed: TypeError: The "config.server" property is required and must be of type string.
+2026-06-01T19:46:37.3837984+00:00 ContainerStream:     at new Connection (/home/site/wwwroot/backend/node_modules/tedious/lib/connection.js:275:13)
+2026-06-01T19:46:37.3838038+00:00 ContainerStream:     at /home/site/wwwroot/backend/node_modules/mssql/lib/tedious/connection-pool.js:78:19
+2026-06-01T19:46:37.3838076+00:00 ContainerStream:     at new Promise (<anonymous>)
+2026-06-01T19:46:37.3838119+00:00 ContainerStream:     at ConnectionPool._poolCreate (/home/site/wwwroot/backend/node_modules/mssql/lib/tedious/connection-pool.js:67:12)
+2026-06-01T19:46:37.3838159+00:00 ContainerStream:     at ConnectionPool._connect (/home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:446:10)
+2026-06-01T19:46:37.3838210+00:00 ContainerStream:     at /home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:418:19
+2026-06-01T19:46:37.3838248+00:00 ContainerStream:     at new Promise (<anonymous>)
+2026-06-01T19:46:37.3838284+00:00 ContainerStream:     at ConnectionPool.connect (/home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:417:12)
+2026-06-01T19:46:37.3838318+00:00 ContainerStream:     at Object.connect (/home/site/wwwroot/backend/node_modules/mssql/lib/global-connection.js:59:27)
+2026-06-01T19:46:37.3838353+00:00 ContainerStream:     at Object.<anonymous> (/home/site/wwwroot/backend/config/db.js:22:25)
+2026-06-01T19:46:37.4331732+00:00 ContainerStatus: Container has finished running with exit code: 1.
+2026-06-01T19:46:37.4341972+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-06-01T19:46:37.4348603+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-06-01T19:46:37.4350677+00:00 ContainerStatus: Stopping container: b4158ddd2d7f_orpon-backend-api-sea.
+2026-06-01T19:46:37.4553354+00:00 ContainerStatus: Deleting container: b4158ddd2d7f_orpon-backend-api-sea. Retry count = 0
+2026-06-01T19:46:37.5837611+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-06-01T19:46:37.5839560+00:00 ContainerStatus: Container is terminated. Total time elapsed: 149 ms.
+2026-06-01T19:46:37.5840845+00:00 ContainerStatus: Site container: orpon-backend-api-sea terminated during site startup.
+2026-06-01T19:46:37.5841927+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:44:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:46:37.5909573+00:00 ContainerStatus: Site startup probe failed after 17.5660715 seconds.
+2026-06-01T19:46:37.6617318+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:46:37, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:46:37.6714027+00:00 ContainerStatus: Failed to start site. Revert by stopping site.
+2026-06-01T19:46:37.6715364+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:46:37, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:46:37.6733403+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:46:37, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:46:37.6733614+00:00 ContainerStatus: Site: orpon-backend-api-sea stopped.
+========== New Cold Start Attempt (2026-06-01T19:46:58.4858964+00:00) ==========
+2026-06-01T19:46:58.4858964+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:46:37, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 06/01/2026 19:46:37 (UTC), DetailsLevel: ERR
+2026-06-01T19:46:58.8393383+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:46:37, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 06/01/2026 19:46:37 (UTC), DetailsLevel: ERR
+2026-06-01T19:46:58.8404202+00:00 ContainerStatus: Container start method called.
+2026-06-01T19:46:58.8415085+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:46:37, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-01T19:46:58.8418717+00:00 ContainerStatus: Establishing network.
+2026-06-01T19:46:58.8421455+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-06-01T19:46:58.9550180+00:00 ContainerStatus: Container is starting.
+2026-06-01T19:46:58.9552747+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:46:37, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-01T19:46:58.9554572+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-06-01T19:46:58.9559284+00:00 ContainerStatus: Establishing network if not established already.
+2026-06-01T19:46:58.9561504+00:00 ContainerStatus: Mounting volumes.
+2026-06-01T19:46:58.9563521+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:46:58.9576559+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-06-01T19:46:58.9614763+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:46:58.9623556+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:46:58.9640869+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:46:59.0604720+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:46:37, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for orpon-backend-api-sea. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-06-01T19:46:59.0606056+00:00 ContainerStatus: Creating container.
+2026-06-01T19:46:59.0607085+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-06-01T19:46:59.0608168+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/223daccdfeb9_orpon-backend-api-sea/stdout_8dda3429dac94c85a495ad2aab3acbb9.
+2026-06-01T19:46:59.0610158+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/223daccdfeb9_orpon-backend-api-sea/stdout_8dda3429dac94c85a495ad2aab3acbb9.
+2026-06-01T19:46:59.0610867+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/223daccdfeb9_orpon-backend-api-sea/stdout_8dda3429dac94c85a495ad2aab3acbb9 for reading in non-blocking mode.
+2026-06-01T19:46:59.0612165+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/223daccdfeb9_orpon-backend-api-sea/stdout_8dda3429dac94c85a495ad2aab3acbb9.
+2026-06-01T19:46:59.0612964+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/223daccdfeb9_orpon-backend-api-sea/stdout_8dda3429dac94c85a495ad2aab3acbb9.
+2026-06-01T19:46:59.0614530+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/223daccdfeb9_orpon-backend-api-sea/stderr_50e15181e9d64cdfb9dc0be4e949e57b.
+2026-06-01T19:46:59.0615738+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/223daccdfeb9_orpon-backend-api-sea/stderr_50e15181e9d64cdfb9dc0be4e949e57b.
+2026-06-01T19:46:59.0616445+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/223daccdfeb9_orpon-backend-api-sea/stderr_50e15181e9d64cdfb9dc0be4e949e57b for reading in non-blocking mode.
+2026-06-01T19:46:59.0617278+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/223daccdfeb9_orpon-backend-api-sea/stderr_50e15181e9d64cdfb9dc0be4e949e57b.
+2026-06-01T19:46:59.0618501+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/223daccdfeb9_orpon-backend-api-sea/stderr_50e15181e9d64cdfb9dc0be4e949e57b.
+2026-06-01T19:46:59.0664911+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.5:13209 and fully qualified image name: 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-06-01T19:46:59.6835121+00:00 ContainerStatus: Starting container: 223daccdfeb9_orpon-backend-api-sea.
+2026-06-01T19:46:59.7066061+00:00 ContainerStatus: Starting watchers and probes.
+2026-06-01T19:46:59.7068672+00:00 ContainerStatus: Starting metrics collection.
+2026-06-01T19:46:59.7070671+00:00 ContainerStatus: Container is running.
+2026-06-01T19:46:59.7071936+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:46:37, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-01T19:46:59.8560505+00:00 ContainerStream:    _____                               
+2026-06-01T19:46:59.8570408+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-06-01T19:46:59.8570573+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-06-01T19:46:59.8570718+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-06-01T19:46:59.8570761+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-06-01T19:46:59.8570851+00:00 ContainerStream:         \/      \/                  \/ 
+2026-06-01T19:46:59.8570892+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-06-01T19:46:59.8570927+00:00 ContainerStream: 
+2026-06-01T19:46:59.8570969+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-06-01T19:46:59.8571009+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-06-01T19:46:59.8571043+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-06-01T19:46:59.8571087+00:00 ContainerStream: Instance Name    : 10-30-0-149
+2026-06-01T19:46:59.8571129+00:00 ContainerStream: Instance Id      : 40cccdc4058002c7bb4a002ea17c753771e666b3099f0077ceb725e126cc1ecc
+2026-06-01T19:46:59.8571166+00:00 ContainerStream: 
+2026-06-01T19:46:59.8571206+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-06-01T19:46:59.9906699+00:00 ContainerStatus: Container start method finished after 1149 ms.
+2026-06-01T19:46:59.9918569+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:46:37, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-01T19:46:59.9918892+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:46:37, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-06-01T19:47:03.0471968+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-06-01T19:47:03.0497772+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-06-01T19:47:03.0630769+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-06-01T19:47:32.2899085+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-06-01T19:47:32.2899632+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-06-01T19:47:32.4944408+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-06-01T19:47:32.5209806+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-06-01T19:47:32.5224004+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-06-01T19:47:32.5346459+00:00 ContainerStream: done.
+2026-06-01T19:47:32.5711279+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-06-01T19:47:32.9467284+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-06-01T19:47:33.1754073+00:00 ContainerStream: Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2026-06-01T19:47:33.1794911+00:00 ContainerStream: Build Operation ID: efe43efca44a59c9
+2026-06-01T19:47:33.1848630+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-06-01T19:47:33.7806815+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-06-01T19:47:34.1264651+00:00 ContainerStream: Running #!/bin/sh
+2026-06-01T19:47:34.1265178+00:00 ContainerStream: 
+2026-06-01T19:47:34.1265257+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-06-01T19:47:34.1265373+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-06-01T19:47:34.1265412+00:00 ContainerStream: 
+2026-06-01T19:47:34.1265448+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-06-01T19:47:34.1265484+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-06-01T19:47:34.1265518+00:00 ContainerStream: 		export PORT=8080
+2026-06-01T19:47:34.1265551+00:00 ContainerStream: fi
+2026-06-01T19:47:34.1265584+00:00 ContainerStream: 
+2026-06-01T19:47:34.1265620+00:00 ContainerStream: echo Found tar.gz based node_modules.
+2026-06-01T19:47:34.1265669+00:00 ContainerStream: extractionCommand="tar -xzf node_modules.tar.gz -C /node_modules"
+2026-06-01T19:47:34.1265705+00:00 ContainerStream: echo "Removing existing modules directory from root..."
+2026-06-01T19:47:34.1265740+00:00 ContainerStream: rm -fr /node_modules
+2026-06-01T19:47:34.1265776+00:00 ContainerStream: mkdir -p /node_modules
+2026-06-01T19:47:34.1265810+00:00 ContainerStream: echo Extracting modules...
+2026-06-01T19:47:34.1265844+00:00 ContainerStream: $extractionCommand
+2026-06-01T19:47:34.1265912+00:00 ContainerStream: export NODE_PATH="/node_modules":$NODE_PATH
+2026-06-01T19:47:34.1265949+00:00 ContainerStream: export PATH=/node_modules/.bin:$PATH
+2026-06-01T19:47:34.1265983+00:00 ContainerStream: if [ -d node_modules ]; then
+2026-06-01T19:47:34.1266019+00:00 ContainerStream:     mv -f node_modules _del_node_modules || true
+2026-06-01T19:47:34.1266053+00:00 ContainerStream: fi
+2026-06-01T19:47:34.1266085+00:00 ContainerStream: 
+2026-06-01T19:47:34.1266119+00:00 ContainerStream: if [ -d /node_modules ]; then
+2026-06-01T19:47:34.1266164+00:00 ContainerStream:     ln -sfn /node_modules ./node_modules 
+2026-06-01T19:47:34.1266199+00:00 ContainerStream: fi
+2026-06-01T19:47:34.1266230+00:00 ContainerStream: 
+2026-06-01T19:47:34.1266265+00:00 ContainerStream: echo "Done."
+2026-06-01T19:47:34.1364597+00:00 ContainerStream: PATH="$PATH:/home/site/wwwroot" cd /home/site/wwwroot/backend && node server.js
+2026-06-01T19:47:34.1651010+00:00 ContainerStream: Found tar.gz based node_modules.
+2026-06-01T19:47:34.1651575+00:00 ContainerStream: Removing existing modules directory from root...
+2026-06-01T19:47:34.1962480+00:00 ContainerStream: Extracting modules...
+2026-06-01T19:47:34.2014056+00:00 ContainerStream: tar (child): node_modules.tar.gz: Cannot open: No such file or directory
+2026-06-01T19:47:34.2026585+00:00 ContainerStream: tar (child): Error is not recoverable: exiting now
+2026-06-01T19:47:34.2038017+00:00 ContainerStream: tar: Child returned status 2
+2026-06-01T19:47:34.2038254+00:00 ContainerStream: tar: Error is not recoverable: exiting now
+2026-06-01T19:47:34.3692342+00:00 ContainerStream: Done.
+2026-06-01T19:47:34.8520794+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ suppress logs { quiet: true }
+2026-06-01T19:47:43.1584758+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ override existing { override: true }
+2026-06-01T19:47:43.1625203+00:00 ContainerStream: Checking database schema...
+2026-06-01T19:47:48.2191668+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+2026-06-01T19:47:48.2225746+00:00 ContainerStream: Redis not enabled. Operating in local memory fallback Map mode.
+2026-06-01T19:47:48.2332554+00:00 ContainerStream: Server running on port 8080
+2026-06-01T19:47:48.2350765+00:00 ContainerStream: Database connection failed: TypeError: The "config.server" property is required and must be of type string.
+2026-06-01T19:47:48.2350952+00:00 ContainerStream:     at new Connection (/home/site/wwwroot/backend/node_modules/tedious/lib/connection.js:275:13)
+2026-06-01T19:47:48.2351000+00:00 ContainerStream:     at /home/site/wwwroot/backend/node_modules/mssql/lib/tedious/connection-pool.js:78:19
+2026-06-01T19:47:48.2351040+00:00 ContainerStream:     at new Promise (<anonymous>)
+2026-06-01T19:47:48.2351078+00:00 ContainerStream:     at ConnectionPool._poolCreate (/home/site/wwwroot/backend/node_modules/mssql/lib/tedious/connection-pool.js:67:12)
+2026-06-01T19:47:48.2351115+00:00 ContainerStream:     at ConnectionPool._connect (/home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:446:10)
+2026-06-01T19:47:48.2351171+00:00 ContainerStream:     at /home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:418:19
+2026-06-01T19:47:48.2351207+00:00 ContainerStream:     at new Promise (<anonymous>)
+2026-06-01T19:47:48.2351243+00:00 ContainerStream:     at ConnectionPool.connect (/home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:417:12)
+2026-06-01T19:47:48.2351276+00:00 ContainerStream:     at Object.connect (/home/site/wwwroot/backend/node_modules/mssql/lib/global-connection.js:59:27)
+2026-06-01T19:47:48.2351312+00:00 ContainerStream:     at Object.<anonymous> (/home/site/wwwroot/backend/config/db.js:22:25)
+2026-06-01T19:47:48.3014438+00:00 ContainerStatus: Container has finished running with exit code: 1.
+2026-06-01T19:47:48.3016011+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-06-01T19:47:48.3139050+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-06-01T19:47:48.3140745+00:00 ContainerStatus: Stopping container: 223daccdfeb9_orpon-backend-api-sea.
+2026-06-01T19:47:48.3521125+00:00 ContainerStatus: Deleting container: 223daccdfeb9_orpon-backend-api-sea. Retry count = 0
+2026-06-01T19:47:48.4530562+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-06-01T19:47:48.4555524+00:00 ContainerStatus: Container is terminated. Total time elapsed: 151 ms.
+2026-06-01T19:47:48.4565632+00:00 ContainerStatus: Site container: orpon-backend-api-sea terminated during site startup.
+2026-06-01T19:47:48.4567547+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:46:37, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:47:48.4721202+00:00 ContainerStatus: Site startup probe failed after 48.479796 seconds.
+2026-06-01T19:47:48.5569857+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:47:48, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:47:48.5592459+00:00 ContainerStatus: Failed to start site. Revert by stopping site.
+2026-06-01T19:47:48.5668360+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:47:48, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:47:48.5671314+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:47:48, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:47:48.5671505+00:00 ContainerStatus: Site: orpon-backend-api-sea stopped.
+========== New Cold Start Attempt (2026-06-01T19:47:48.5728885+00:00) ==========
+2026-06-01T19:47:48.5728885+00:00 ContainerStatus: State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:47:48, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:47:48.7947615+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:47:48, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:47:48.8570604+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:47:48, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 06/01/2026 19:47:48 (UTC), DetailsLevel: ERR
+2026-06-01T19:47:49.0088763+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:47:48, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 06/01/2026 19:47:48 (UTC), DetailsLevel: ERR
+2026-06-01T19:47:54.0639577+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:47:48, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 06/01/2026 19:47:48 (UTC), DetailsLevel: ERR
+2026-06-01T19:47:54.8513284+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:47:48, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 06/01/2026 19:47:48 (UTC), DetailsLevel: ERR
+2026-06-01T19:47:54.8519899+00:00 ContainerStatus: Container start method called.
+2026-06-01T19:47:54.8521289+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:47:48, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-01T19:47:54.8525868+00:00 ContainerStatus: Establishing network.
+2026-06-01T19:47:54.8537236+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-06-01T19:47:55.0608428+00:00 ContainerStatus: Container is starting.
+2026-06-01T19:47:55.0609289+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:47:48, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-01T19:47:55.0610717+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-06-01T19:47:55.0611709+00:00 ContainerStatus: Establishing network if not established already.
+2026-06-01T19:47:55.0613908+00:00 ContainerStatus: Mounting volumes.
+2026-06-01T19:47:55.0615701+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:47:55.0822843+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-06-01T19:47:55.1090629+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:47:55.1098815+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:47:55.1209728+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:47:55.3687681+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:47:48, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for orpon-backend-api-sea. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-06-01T19:47:55.3690053+00:00 ContainerStatus: Creating container.
+2026-06-01T19:47:55.3692724+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-06-01T19:47:55.3693912+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/3b71d7e94253_orpon-backend-api-sea/stdout_58c553a98e8144af875bfcea00c14ae7.
+2026-06-01T19:47:55.3697349+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/3b71d7e94253_orpon-backend-api-sea/stdout_58c553a98e8144af875bfcea00c14ae7.
+2026-06-01T19:47:55.3700245+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/3b71d7e94253_orpon-backend-api-sea/stdout_58c553a98e8144af875bfcea00c14ae7 for reading in non-blocking mode.
+2026-06-01T19:47:55.3701730+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/3b71d7e94253_orpon-backend-api-sea/stdout_58c553a98e8144af875bfcea00c14ae7.
+2026-06-01T19:47:55.3702858+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/3b71d7e94253_orpon-backend-api-sea/stdout_58c553a98e8144af875bfcea00c14ae7.
+2026-06-01T19:47:55.3812120+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/3b71d7e94253_orpon-backend-api-sea/stderr_9b1b9a2086e84b68add6630eb9c8d62a.
+2026-06-01T19:47:55.3855301+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/3b71d7e94253_orpon-backend-api-sea/stderr_9b1b9a2086e84b68add6630eb9c8d62a.
+2026-06-01T19:47:55.3857167+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/3b71d7e94253_orpon-backend-api-sea/stderr_9b1b9a2086e84b68add6630eb9c8d62a for reading in non-blocking mode.
+2026-06-01T19:47:55.3859906+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/3b71d7e94253_orpon-backend-api-sea/stderr_9b1b9a2086e84b68add6630eb9c8d62a.
+2026-06-01T19:47:55.3861327+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/3b71d7e94253_orpon-backend-api-sea/stderr_9b1b9a2086e84b68add6630eb9c8d62a.
+2026-06-01T19:47:55.3919651+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.5:13209 and fully qualified image name: 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-06-01T19:47:55.6368044+00:00 ContainerStatus: Starting container: 3b71d7e94253_orpon-backend-api-sea.
+2026-06-01T19:47:55.6674030+00:00 ContainerStatus: Starting watchers and probes.
+2026-06-01T19:47:55.6777029+00:00 ContainerStatus: Starting metrics collection.
+2026-06-01T19:47:55.6781308+00:00 ContainerStatus: Container is running.
+2026-06-01T19:47:55.6782110+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:47:48, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-01T19:47:55.7298604+00:00 ContainerStatus: Container start method finished after 877 ms.
+2026-06-01T19:47:55.7302849+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:47:48, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-01T19:47:55.7303115+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:47:48, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-06-01T19:47:55.7555585+00:00 ContainerStream:    _____                               
+2026-06-01T19:47:55.7556523+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-06-01T19:47:55.7556563+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-06-01T19:47:55.7556595+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-06-01T19:47:55.7556624+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-06-01T19:47:55.7556654+00:00 ContainerStream:         \/      \/                  \/ 
+2026-06-01T19:47:55.7556684+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-06-01T19:47:55.7556710+00:00 ContainerStream: 
+2026-06-01T19:47:55.7561896+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-06-01T19:47:55.7561934+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-06-01T19:47:55.7561965+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-06-01T19:47:55.7562017+00:00 ContainerStream: Instance Name    : 10-30-0-149
+2026-06-01T19:47:55.7562056+00:00 ContainerStream: Instance Id      : 40cccdc4058002c7bb4a002ea17c753771e666b3099f0077ceb725e126cc1ecc
+2026-06-01T19:47:55.7562084+00:00 ContainerStream: 
+2026-06-01T19:47:55.7562111+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-06-01T19:47:56.4912959+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-06-01T19:47:56.4969703+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-06-01T19:47:56.5119789+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-06-01T19:48:04.3023559+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-06-01T19:48:04.3026688+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-06-01T19:48:04.3503322+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-06-01T19:48:04.3611946+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-06-01T19:48:04.3612446+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-06-01T19:48:04.3633660+00:00 ContainerStream: done.
+2026-06-01T19:48:04.3711995+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-06-01T19:48:04.4621358+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-06-01T19:48:04.4868934+00:00 ContainerStream: Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2026-06-01T19:48:04.4941668+00:00 ContainerStream: Build Operation ID: efe43efca44a59c9
+2026-06-01T19:48:04.4998607+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-06-01T19:48:04.8923919+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-06-01T19:48:05.0028113+00:00 ContainerStream: Running #!/bin/sh
+2026-06-01T19:48:05.0029937+00:00 ContainerStream: 
+2026-06-01T19:48:05.0029980+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-06-01T19:48:05.0030008+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-06-01T19:48:05.0030036+00:00 ContainerStream: 
+2026-06-01T19:48:05.0030064+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-06-01T19:48:05.0030092+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-06-01T19:48:05.0030118+00:00 ContainerStream: 		export PORT=8080
+2026-06-01T19:48:05.0030145+00:00 ContainerStream: fi
+2026-06-01T19:48:05.0030170+00:00 ContainerStream: 
+2026-06-01T19:48:05.0030199+00:00 ContainerStream: echo Found tar.gz based node_modules.
+2026-06-01T19:48:05.0030228+00:00 ContainerStream: extractionCommand="tar -xzf node_modules.tar.gz -C /node_modules"
+2026-06-01T19:48:05.0030284+00:00 ContainerStream: echo "Removing existing modules directory from root..."
+2026-06-01T19:48:05.0030312+00:00 ContainerStream: rm -fr /node_modules
+2026-06-01T19:48:05.0030342+00:00 ContainerStream: mkdir -p /node_modules
+2026-06-01T19:48:05.0030371+00:00 ContainerStream: echo Extracting modules...
+2026-06-01T19:48:05.0030398+00:00 ContainerStream: $extractionCommand
+2026-06-01T19:48:05.0030425+00:00 ContainerStream: export NODE_PATH="/node_modules":$NODE_PATH
+2026-06-01T19:48:05.0030454+00:00 ContainerStream: export PATH=/node_modules/.bin:$PATH
+2026-06-01T19:48:05.0030481+00:00 ContainerStream: if [ -d node_modules ]; then
+2026-06-01T19:48:05.0030507+00:00 ContainerStream:     mv -f node_modules _del_node_modules || true
+2026-06-01T19:48:05.0030531+00:00 ContainerStream: fi
+2026-06-01T19:48:05.0030554+00:00 ContainerStream: 
+2026-06-01T19:48:05.0030579+00:00 ContainerStream: if [ -d /node_modules ]; then
+2026-06-01T19:48:05.0030617+00:00 ContainerStream:     ln -sfn /node_modules ./node_modules 
+2026-06-01T19:48:05.0030640+00:00 ContainerStream: fi
+2026-06-01T19:48:05.0030664+00:00 ContainerStream: 
+2026-06-01T19:48:05.0030689+00:00 ContainerStream: echo "Done."
+2026-06-01T19:48:05.0030970+00:00 ContainerStream: PATH="$PATH:/home/site/wwwroot" cd /home/site/wwwroot/backend && node server.js
+2026-06-01T19:48:05.0088890+00:00 ContainerStream: Found tar.gz based node_modules.
+2026-06-01T19:48:05.0098868+00:00 ContainerStream: Removing existing modules directory from root...
+2026-06-01T19:48:05.0247400+00:00 ContainerStream: Extracting modules...
+2026-06-01T19:48:05.0390876+00:00 ContainerStream: tar (child): node_modules.tar.gz: Cannot open: No such file or directory
+2026-06-01T19:48:05.0404340+00:00 ContainerStream: tar (child): Error is not recoverable: exiting now
+2026-06-01T19:48:05.0434890+00:00 ContainerStream: tar: Child returned status 2
+2026-06-01T19:48:05.0445299+00:00 ContainerStream: tar: Error is not recoverable: exiting now
+2026-06-01T19:48:05.0942872+00:00 ContainerStream: Done.
+2026-06-01T19:48:05.1905707+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+2026-06-01T19:48:10.8583148+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+2026-06-01T19:48:10.8606701+00:00 ContainerStream: Checking database schema...
+2026-06-01T19:48:15.0910232+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ suppress logs { quiet: true }
+2026-06-01T19:48:15.0914104+00:00 ContainerStream: Redis not enabled. Operating in local memory fallback Map mode.
+2026-06-01T19:48:15.0965044+00:00 ContainerStream: Server running on port 8080
+2026-06-01T19:48:15.0977434+00:00 ContainerStream: Database connection failed: TypeError: The "config.server" property is required and must be of type string.
+2026-06-01T19:48:15.0977607+00:00 ContainerStream:     at new Connection (/home/site/wwwroot/backend/node_modules/tedious/lib/connection.js:275:13)
+2026-06-01T19:48:15.0977645+00:00 ContainerStream:     at /home/site/wwwroot/backend/node_modules/mssql/lib/tedious/connection-pool.js:78:19
+2026-06-01T19:48:15.0977673+00:00 ContainerStream:     at new Promise (<anonymous>)
+2026-06-01T19:48:15.0977707+00:00 ContainerStream:     at ConnectionPool._poolCreate (/home/site/wwwroot/backend/node_modules/mssql/lib/tedious/connection-pool.js:67:12)
+2026-06-01T19:48:15.0977737+00:00 ContainerStream:     at ConnectionPool._connect (/home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:446:10)
+2026-06-01T19:48:15.0977766+00:00 ContainerStream:     at /home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:418:19
+2026-06-01T19:48:15.0977793+00:00 ContainerStream:     at new Promise (<anonymous>)
+2026-06-01T19:48:15.0977825+00:00 ContainerStream:     at ConnectionPool.connect (/home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:417:12)
+2026-06-01T19:48:15.0977856+00:00 ContainerStream:     at Object.connect (/home/site/wwwroot/backend/node_modules/mssql/lib/global-connection.js:59:27)
+2026-06-01T19:48:15.0977897+00:00 ContainerStream:     at Object.<anonymous> (/home/site/wwwroot/backend/config/db.js:22:25)
+2026-06-01T19:48:15.1369877+00:00 ContainerStatus: Container has finished running with exit code: 1.
+2026-06-01T19:48:15.1414015+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-06-01T19:48:15.1429000+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-06-01T19:48:15.1430651+00:00 ContainerStatus: Stopping container: 3b71d7e94253_orpon-backend-api-sea.
+2026-06-01T19:48:15.1804473+00:00 ContainerStatus: Deleting container: 3b71d7e94253_orpon-backend-api-sea. Retry count = 0
+2026-06-01T19:48:15.2855249+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-06-01T19:48:15.2862298+00:00 ContainerStatus: Container is terminated. Total time elapsed: 144 ms.
+2026-06-01T19:48:15.2866239+00:00 ContainerStatus: Site container: orpon-backend-api-sea terminated during site startup.
+2026-06-01T19:48:15.2867669+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:47:48, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:48:15.2905584+00:00 ContainerStatus: Site startup probe failed after 19.5585719 seconds.
+2026-06-01T19:48:15.3960378+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:48:15.3978079+00:00 ContainerStatus: Failed to start site. Revert by stopping site.
+2026-06-01T19:48:15.3979396+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:48:15.3982150+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:48:15.3983256+00:00 ContainerStatus: Site: orpon-backend-api-sea stopped.
+========== New Cold Start Attempt (2026-06-01T19:48:15.4050306+00:00) ==========
+2026-06-01T19:48:15.4050306+00:00 ContainerStatus: State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:48:15.6478948+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:48:15.7102760+00:00 ContainerStatus: Site: orpon-backend-api-sea will be blocked for 1 minutes till 06/01/2026 19:49:15
+2026-06-01T19:48:15.7106002+00:00 ContainerStatus: State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: orpon-backend-api-sea will be blocked for 1 minutes till 06/01/2026 19:49:15, DetailsLevel: WARN
+2026-06-01T19:48:15.7110508+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 06/01/2026 19:48:15 (UTC), DetailsLevel: WARN
+2026-06-01T19:48:15.8461091+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 06/01/2026 19:48:15 (UTC), DetailsLevel: WARN
+2026-06-01T19:48:20.9096340+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:49:15, DetailsLevel: WARN
+2026-06-01T19:48:20.9096761+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:48:25.9707552+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:49:15, DetailsLevel: WARN
+2026-06-01T19:48:25.9707864+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:48:31.0103846+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:49:15, DetailsLevel: WARN
+2026-06-01T19:48:31.0104425+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:48:36.0519575+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:49:15, DetailsLevel: WARN
+2026-06-01T19:48:36.0519947+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:48:41.1022389+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:49:15, DetailsLevel: WARN
+2026-06-01T19:48:41.1022750+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:48:46.1570733+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:49:15, DetailsLevel: WARN
+2026-06-01T19:48:46.1571044+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:48:51.2212981+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:49:15, DetailsLevel: WARN
+2026-06-01T19:48:51.2213749+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:48:56.2757920+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:49:15, DetailsLevel: WARN
+2026-06-01T19:48:56.2758467+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:49:01.7271288+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:49:15, DetailsLevel: WARN
+2026-06-01T19:49:01.7271589+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:49:06.7867727+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:49:15, DetailsLevel: WARN
+2026-06-01T19:49:06.7868043+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:49:11.8591066+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:49:15, DetailsLevel: WARN
+2026-06-01T19:49:11.8592088+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-06-01T19:49:15.7109852+00:00 ContainerStatus: Site: orpon-backend-api-sea is unblocked.
+2026-06-01T19:49:16.9247883+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:49:15, DetailsLevel: WARN
+2026-06-01T19:49:17.3407915+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 06/01/2026 19:49:15, DetailsLevel: WARN
+2026-06-01T19:49:17.3416028+00:00 ContainerStatus: Container start method called.
+2026-06-01T19:49:17.3422652+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-01T19:49:17.3424588+00:00 ContainerStatus: Establishing network.
+2026-06-01T19:49:17.3426180+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-06-01T19:49:17.4163795+00:00 ContainerStatus: Container is starting.
+2026-06-01T19:49:17.4169678+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for orpon-backend-api-sea., DetailsLevel: INFO
+2026-06-01T19:49:17.4171405+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-06-01T19:49:17.4173021+00:00 ContainerStatus: Establishing network if not established already.
+2026-06-01T19:49:17.4174591+00:00 ContainerStatus: Mounting volumes.
+2026-06-01T19:49:17.4178057+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:49:17.4217424+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-06-01T19:49:17.4258152+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:49:17.4265070+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:49:17.4271869+00:00 ContainerStatus: Nested mountpoint 
+2026-06-01T19:49:17.5380822+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for orpon-backend-api-sea. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-06-01T19:49:17.5383221+00:00 ContainerStatus: Creating container.
+2026-06-01T19:49:17.5384649+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-06-01T19:49:17.5385960+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/e87762aaa6c9_orpon-backend-api-sea/stdout_9bc922cdac0d4be39eb49388f0216691.
+2026-06-01T19:49:17.5388232+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/e87762aaa6c9_orpon-backend-api-sea/stdout_9bc922cdac0d4be39eb49388f0216691.
+2026-06-01T19:49:17.5389655+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/e87762aaa6c9_orpon-backend-api-sea/stdout_9bc922cdac0d4be39eb49388f0216691 for reading in non-blocking mode.
+2026-06-01T19:49:17.5392090+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/e87762aaa6c9_orpon-backend-api-sea/stdout_9bc922cdac0d4be39eb49388f0216691.
+2026-06-01T19:49:17.5393329+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/e87762aaa6c9_orpon-backend-api-sea/stdout_9bc922cdac0d4be39eb49388f0216691.
+2026-06-01T19:49:17.5395557+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/e87762aaa6c9_orpon-backend-api-sea/stderr_dbf1fe3b269643599af5b20b8cb253bf.
+2026-06-01T19:49:17.5409733+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/e87762aaa6c9_orpon-backend-api-sea/stderr_dbf1fe3b269643599af5b20b8cb253bf.
+2026-06-01T19:49:17.5411174+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/e87762aaa6c9_orpon-backend-api-sea/stderr_dbf1fe3b269643599af5b20b8cb253bf for reading in non-blocking mode.
+2026-06-01T19:49:17.5412655+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/e87762aaa6c9_orpon-backend-api-sea/stderr_dbf1fe3b269643599af5b20b8cb253bf.
+2026-06-01T19:49:17.5415216+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/e87762aaa6c9_orpon-backend-api-sea/stderr_dbf1fe3b269643599af5b20b8cb253bf.
+2026-06-01T19:49:17.5417023+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.5:13209 and fully qualified image name: 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-06-01T19:49:17.7791237+00:00 ContainerStatus: Starting container: e87762aaa6c9_orpon-backend-api-sea.
+2026-06-01T19:49:17.8083260+00:00 ContainerStatus: Starting watchers and probes.
+2026-06-01T19:49:17.8097434+00:00 ContainerStatus: Starting metrics collection.
+2026-06-01T19:49:17.8253025+00:00 ContainerStatus: Container is running.
+2026-06-01T19:49:17.8261649+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-01T19:49:17.8627690+00:00 ContainerStream:    _____                               
+2026-06-01T19:49:17.8627990+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-06-01T19:49:17.8628032+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-06-01T19:49:17.8628083+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-06-01T19:49:17.8628111+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-06-01T19:49:17.8628138+00:00 ContainerStream:         \/      \/                  \/ 
+2026-06-01T19:49:17.8628168+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-06-01T19:49:17.8628193+00:00 ContainerStream: 
+2026-06-01T19:49:17.8628222+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-06-01T19:49:17.8628250+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-06-01T19:49:17.8628276+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-06-01T19:49:17.8628303+00:00 ContainerStream: Instance Name    : 10-30-0-149
+2026-06-01T19:49:17.8628332+00:00 ContainerStream: Instance Id      : 40cccdc4058002c7bb4a002ea17c753771e666b3099f0077ceb725e126cc1ecc
+2026-06-01T19:49:17.8628358+00:00 ContainerStream: 
+2026-06-01T19:49:17.8628398+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-06-01T19:49:17.8719846+00:00 ContainerStatus: Container start method finished after 528 ms.
+2026-06-01T19:49:17.8722608+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container orpon-backend-api-sea successfully created and is running., DetailsLevel: INFO
+2026-06-01T19:49:17.8722898+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-06-01T19:49:18.5161996+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-06-01T19:49:18.5204646+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-06-01T19:49:18.5363998+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-06-01T19:49:23.7878710+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-06-01T19:49:23.7884042+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-06-01T19:49:23.8891882+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-06-01T19:49:23.9042717+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-06-01T19:49:23.9043400+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-06-01T19:49:23.9067936+00:00 ContainerStream: done.
+2026-06-01T19:49:23.9145446+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-06-01T19:49:23.9833253+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-06-01T19:49:24.0060367+00:00 ContainerStream: Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2026-06-01T19:49:24.0134923+00:00 ContainerStream: Build Operation ID: efe43efca44a59c9
+2026-06-01T19:49:24.0170896+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-06-01T19:49:24.3673083+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-06-01T19:49:24.4707953+00:00 ContainerStream: Running #!/bin/sh
+2026-06-01T19:49:24.4708368+00:00 ContainerStream: 
+2026-06-01T19:49:24.4708464+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-06-01T19:49:24.4708495+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-06-01T19:49:24.4708521+00:00 ContainerStream: 
+2026-06-01T19:49:24.4708548+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-06-01T19:49:24.4708573+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-06-01T19:49:24.4708600+00:00 ContainerStream: 		export PORT=8080
+2026-06-01T19:49:24.4708626+00:00 ContainerStream: fi
+2026-06-01T19:49:24.4708651+00:00 ContainerStream: 
+2026-06-01T19:49:24.4708679+00:00 ContainerStream: echo Found tar.gz based node_modules.
+2026-06-01T19:49:24.4708707+00:00 ContainerStream: extractionCommand="tar -xzf node_modules.tar.gz -C /node_modules"
+2026-06-01T19:49:24.4708737+00:00 ContainerStream: echo "Removing existing modules directory from root..."
+2026-06-01T19:49:24.4708763+00:00 ContainerStream: rm -fr /node_modules
+2026-06-01T19:49:24.4708805+00:00 ContainerStream: mkdir -p /node_modules
+2026-06-01T19:49:24.4708834+00:00 ContainerStream: echo Extracting modules...
+2026-06-01T19:49:24.4708862+00:00 ContainerStream: $extractionCommand
+2026-06-01T19:49:24.4708889+00:00 ContainerStream: export NODE_PATH="/node_modules":$NODE_PATH
+2026-06-01T19:49:24.4708916+00:00 ContainerStream: export PATH=/node_modules/.bin:$PATH
+2026-06-01T19:49:24.4708944+00:00 ContainerStream: if [ -d node_modules ]; then
+2026-06-01T19:49:24.4708971+00:00 ContainerStream:     mv -f node_modules _del_node_modules || true
+2026-06-01T19:49:24.4708996+00:00 ContainerStream: fi
+2026-06-01T19:49:24.4709022+00:00 ContainerStream: 
+2026-06-01T19:49:24.4709049+00:00 ContainerStream: if [ -d /node_modules ]; then
+2026-06-01T19:49:24.4709078+00:00 ContainerStream:     ln -sfn /node_modules ./node_modules 
+2026-06-01T19:49:24.4709103+00:00 ContainerStream: fi
+2026-06-01T19:49:24.4709138+00:00 ContainerStream: 
+2026-06-01T19:49:24.4709161+00:00 ContainerStream: echo "Done."
+2026-06-01T19:49:24.4724174+00:00 ContainerStream: PATH="$PATH:/home/site/wwwroot" cd /home/site/wwwroot/backend && node server.js
+2026-06-01T19:49:24.4747880+00:00 ContainerStream: Found tar.gz based node_modules.
+2026-06-01T19:49:24.4748090+00:00 ContainerStream: Removing existing modules directory from root...
+2026-06-01T19:49:24.4811210+00:00 ContainerStream: Extracting modules...
+2026-06-01T19:49:24.4869821+00:00 ContainerStream: tar (child): node_modules.tar.gz: Cannot open: No such file or directory
+2026-06-01T19:49:24.4870021+00:00 ContainerStream: tar (child): Error is not recoverable: exiting now
+2026-06-01T19:49:24.4877316+00:00 ContainerStream: tar: Child returned status 2
+2026-06-01T19:49:24.4877409+00:00 ContainerStream: tar: Error is not recoverable: exiting now
+2026-06-01T19:49:24.5106390+00:00 ContainerStream: Done.
+2026-06-01T19:49:24.5677376+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+2026-06-01T19:49:29.4419385+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ enable debugging { debug: true }
+2026-06-01T19:49:29.4420029+00:00 ContainerStream: Checking database schema...
+2026-06-01T19:49:33.0226250+00:00 ContainerStream: ◇ injected env (0) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+2026-06-01T19:49:33.0227140+00:00 ContainerStream: Redis not enabled. Operating in local memory fallback Map mode.
+2026-06-01T19:49:33.0273912+00:00 ContainerStream: Server running on port 8080
+2026-06-01T19:49:33.0302539+00:00 ContainerStream: Database connection failed: TypeError: The "config.server" property is required and must be of type string.
+2026-06-01T19:49:33.0302767+00:00 ContainerStream:     at new Connection (/home/site/wwwroot/backend/node_modules/tedious/lib/connection.js:275:13)
+2026-06-01T19:49:33.0302803+00:00 ContainerStream:     at /home/site/wwwroot/backend/node_modules/mssql/lib/tedious/connection-pool.js:78:19
+2026-06-01T19:49:33.0302834+00:00 ContainerStream:     at new Promise (<anonymous>)
+2026-06-01T19:49:33.0302867+00:00 ContainerStream:     at ConnectionPool._poolCreate (/home/site/wwwroot/backend/node_modules/mssql/lib/tedious/connection-pool.js:67:12)
+2026-06-01T19:49:33.0302947+00:00 ContainerStream:     at ConnectionPool._connect (/home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:446:10)
+2026-06-01T19:49:33.0302977+00:00 ContainerStream:     at /home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:418:19
+2026-06-01T19:49:33.0303005+00:00 ContainerStream:     at new Promise (<anonymous>)
+2026-06-01T19:49:33.0303034+00:00 ContainerStream:     at ConnectionPool.connect (/home/site/wwwroot/backend/node_modules/mssql/lib/base/connection-pool.js:417:12)
+2026-06-01T19:49:33.0303070+00:00 ContainerStream:     at Object.connect (/home/site/wwwroot/backend/node_modules/mssql/lib/global-connection.js:59:27)
+2026-06-01T19:49:33.0303103+00:00 ContainerStream:     at Object.<anonymous> (/home/site/wwwroot/backend/config/db.js:22:25)
+2026-06-01T19:49:33.0716557+00:00 ContainerStatus: Container has finished running with exit code: 1.
+2026-06-01T19:49:33.0718208+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-06-01T19:49:33.0722535+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-06-01T19:49:33.0723588+00:00 ContainerStatus: Stopping container: e87762aaa6c9_orpon-backend-api-sea.
+2026-06-01T19:49:33.1154021+00:00 ContainerStatus: Deleting container: e87762aaa6c9_orpon-backend-api-sea. Retry count = 0
+2026-06-01T19:49:33.2449820+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-06-01T19:49:33.2456150+00:00 ContainerStatus: Container is terminated. Total time elapsed: 173 ms.
+2026-06-01T19:49:33.2464106+00:00 ContainerStatus: Site container: orpon-backend-api-sea terminated during site startup.
+2026-06-01T19:49:33.2471088+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:48:15, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:49:33.2625183+00:00 ContainerStatus: Site startup probe failed after 15.3897449 seconds.
+2026-06-01T19:49:33.3460584+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:49:33, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:49:33.3472052+00:00 ContainerStatus: Failed to start site. Revert by stopping site.
+2026-06-01T19:49:33.3472814+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:49:33, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:49:33.3555561+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 06/01/2026 19:49:33, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: orpon-backend-api-sea terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-06-01T19:49:33.3556669+00:00 ContainerStatus: Site: orpon-backend-api-sea stopped.

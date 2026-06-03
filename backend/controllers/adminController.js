@@ -111,6 +111,8 @@ const getAdminLogs = async (req, res) => {
 // 5. Verify cryptographic integrity of completed donations
 const verifyIntegrity = async (req, res) => {
     try {
+        console.log("[verifyIntegrity] Starting integrity verification...");
+        
         const [donations] = await pool.query(`
             SELECT id, display_name, amount, created_at, previous_hash, current_hash
             FROM donations
@@ -118,33 +120,60 @@ const verifyIntegrity = async (req, res) => {
             ORDER BY created_at ASC
         `);
 
+        console.log(`[verifyIntegrity] Found ${donations.length} completed donations to verify`);
+
         let valid = true;
         let lastHash = "GENESIS";
         let mismatchDetails = null;
+        let verificationLog = [];
 
         for (let i = 0; i < donations.length; i++) {
             const donation = donations[i];
             const timestampStr = new Date(donation.created_at).toISOString();
             
-            // Recalculate hash chain
-            const calculatedHash = generateHash(
-                donation.amount,
-                donation.display_name,
-                timestampStr,
-                donation.previous_hash
-            );
-
-            // Check previous hash matches the previous donation block's current hash
-            if (donation.previous_hash !== lastHash) {
+            console.log(`[verifyIntegrity] Block ${i + 1}: Donation ID ${donation.id}, Amount: ${donation.amount}, Donor: ${donation.display_name}`);
+            
+            // Validate required fields
+            if (!donation.display_name || donation.amount === null || donation.amount === undefined) {
+                console.error(`[verifyIntegrity] VALIDATION ERROR: Missing required fields for donation ${donation.id}`);
                 valid = false;
-                mismatchDetails = `Chain link broken at donation ID: ${donation.id}. Previous hash: ${donation.previous_hash}, Expected last hash: ${lastHash}`;
+                mismatchDetails = `Missing required fields in donation ID: ${donation.id}`;
                 break;
             }
+            
+            // Recalculate hash chain
+            try {
+                const calculatedHash = generateHash(
+                    donation.amount,
+                    donation.display_name,
+                    timestampStr,
+                    donation.previous_hash
+                );
+                console.log(`[verifyIntegrity] Block ${i + 1}: Calculated hash = ${calculatedHash.substring(0, 16)}...`);
+                console.log(`[verifyIntegrity] Block ${i + 1}: Stored hash = ${donation.current_hash ? donation.current_hash.substring(0, 16) : 'NULL'}...`);
 
-            // Check current hash matches calculated current hash
-            if (donation.current_hash !== calculatedHash) {
+                // Check previous hash matches the previous donation block's current hash
+                if (donation.previous_hash !== lastHash) {
+                    console.error(`[verifyIntegrity] CHAIN LINK BROKEN at Block ${i + 1}: Expected previous_hash = ${lastHash.substring(0, 16)}..., Got ${donation.previous_hash ? donation.previous_hash.substring(0, 16) : 'NULL'}...`);
+                    valid = false;
+                    mismatchDetails = `Chain link broken at donation ID: ${donation.id}. Previous hash: ${donation.previous_hash}, Expected last hash: ${lastHash}`;
+                    break;
+                }
+
+                // Check current hash matches calculated current hash
+                if (donation.current_hash !== calculatedHash) {
+                    console.error(`[verifyIntegrity] HASH MISMATCH at Block ${i + 1}: Stored = ${donation.current_hash}, Calculated = ${calculatedHash}`);
+                    valid = false;
+                    mismatchDetails = `Hash mismatch at donation ID: ${donation.id}. Current hash: ${donation.current_hash}, Recalculated: ${calculatedHash}`;
+                    break;
+                }
+
+                console.log(`[verifyIntegrity] Block ${i + 1}: ✓ Hash verified successfully`);
+                verificationLog.push(`Block ${i + 1}: VERIFIED`);
+            } catch (hashError) {
+                console.error(`[verifyIntegrity] HASH CALCULATION ERROR for block ${i + 1}:`, hashError);
                 valid = false;
-                mismatchDetails = `Hash mismatch at donation ID: ${donation.id}. Current hash: ${donation.current_hash}, Recalculated: ${calculatedHash}`;
+                mismatchDetails = `Hash calculation failed for donation ID: ${donation.id}. Error: ${hashError.message}`;
                 break;
             }
 
@@ -152,6 +181,12 @@ const verifyIntegrity = async (req, res) => {
         }
 
         const status = valid ? "VALID" : "INVALID";
+        const message = valid 
+            ? `Ledger integrity verified successfully. Total blocks verified: ${donations.length}`
+            : `Integrity verification failed. ${mismatchDetails}`;
+        
+        console.log(`[verifyIntegrity] FINAL RESULT: ${status}. ${message}`);
+        
         await logAction(
             "Integrity check run",
             `Result: ${status}. Total blocks verified: ${donations.length}.${mismatchDetails ? " Error: " + mismatchDetails : ""}`
@@ -159,11 +194,23 @@ const verifyIntegrity = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            status
+            valid: status === "VALID",
+            status,
+            message,
+            blocksVerified: donations.length
         });
     } catch (error) {
-        console.error("verifyIntegrity error:", error);
-        res.status(500).json({ message: "Server Error" });
+        console.error("[verifyIntegrity] CRITICAL ERROR:", error);
+        console.error("[verifyIntegrity] Error stack:", error.stack);
+        
+        const errorMessage = error.message || "Database query failed";
+        res.status(200).json({
+            success: false,
+            valid: false,
+            status: "ERROR",
+            message: `Integrity verification failed: ${errorMessage}`,
+            blocksVerified: 0
+        });
     }
 };
 

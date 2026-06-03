@@ -31,15 +31,21 @@ export const apiCall = async (endpoint, method = "GET", data = null) => {
   }
 
   try {
+    console.log(`[apiCall] ${method} ${endpoint}`);
     const response = await fetch(`${API_URL}${endpoint}`, config);
     const responseData = await response.json();
 
+    console.log(`[apiCall] Response status: ${response.status} for ${endpoint}`);
+    
     if (!response.ok) {
+      console.error(`[apiCall] Error response for ${endpoint}:`, responseData);
       throw new Error(responseData.message || "API request failed");
     }
 
+    console.log(`[apiCall] Success response for ${endpoint}`);
     return responseData;
   } catch (error) {
+    console.error(`[apiCall] Exception for ${endpoint}:`, error.message);
     throw error;
   }
 };
