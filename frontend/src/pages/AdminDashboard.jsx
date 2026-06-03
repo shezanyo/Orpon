@@ -5,7 +5,9 @@ import {
   getAdminCampaigns,
   getAdminDonations,
   getAdminLogs,
-  verifyIntegrity
+  verifyIntegrity,
+  getAdminUsers,
+  makeUserAdmin
 } from "../utils/api";
 import { fmt } from "../utils/format";
 import { Loader2 } from "lucide-react";
@@ -30,6 +32,14 @@ export default function AdminDashboard() {
   const [logs, setLogs] = useState([]);
   const [loadingLogs, setLoadingLogs] = useState(true);
 
+  // State for user management (super_admin only)
+  const [users, setUsers] = useState([]);
+  const [loadingUsers, setLoadingUsers] = useState(true);
+  const [promoteEmail, setPromoteEmail] = useState("");
+  const [promoteMsg, setPromoteMsg] = useState("");
+  const [promoteError, setPromoteError] = useState("");
+  const [promoting, setPromoting] = useState(false);
+
   // State for integrity check
   const [integrityStatus, setIntegrityStatus] = useState("NOT RUN"); // NOT RUN, RUNNING, VALID, INVALID
   const [verifying, setVerifying] = useState(false);
@@ -37,7 +47,7 @@ export default function AdminDashboard() {
 
   // Fetch stats and overview logs initially
   useEffect(() => {
-    if (user?.role !== "admin") return;
+    if (user?.role !== "admin" && user?.role !== "super_admin") return;
     
     const fetchStats = async () => {
       try {
@@ -56,7 +66,7 @@ export default function AdminDashboard() {
 
   // Fetch lists based on active tab
   useEffect(() => {
-    if (user?.role !== "admin") return;
+    if (user?.role !== "admin" && user?.role !== "super_admin") return;
 
     const fetchTabContent = async () => {
       try {
@@ -72,6 +82,10 @@ export default function AdminDashboard() {
           setLoadingLogs(true);
           const res = await getAdminLogs();
           if (res.success) setLogs(res.logs);
+        } else if (activeTab === "users" && user?.role === "super_admin") {
+          setLoadingUsers(true);
+          const res = await getAdminUsers();
+          if (res.success) setUsers(res.users);
         }
       } catch (err) {
         console.error(`Failed to load ${activeTab} data:`, err);
@@ -79,11 +93,37 @@ export default function AdminDashboard() {
         setLoadingCampaigns(false);
         setLoadingDonations(false);
         setLoadingLogs(false);
+        setLoadingUsers(false);
       }
     };
 
     fetchTabContent();
   }, [activeTab, user]);
+
+  const handlePromoteAdmin = async (e) => {
+    e.preventDefault();
+    if (!promoteEmail.trim()) return;
+    try {
+      setPromoting(true);
+      setPromoteMsg("");
+      setPromoteError("");
+      const res = await makeUserAdmin(promoteEmail.trim());
+      if (res.success) {
+        setPromoteMsg(res.message || "User promoted to admin successfully!");
+        setPromoteEmail("");
+        // Reload user list
+        const usersRes = await getAdminUsers();
+        if (usersRes.success) setUsers(usersRes.users);
+      } else {
+        setPromoteError(res.message || "Failed to promote user to admin.");
+      }
+    } catch (err) {
+      console.error("Failed to promote user:", err);
+      setPromoteError(err.message || "An error occurred while promoting user.");
+    } finally {
+      setPromoting(false);
+    }
+  };
 
   const handleVerifyIntegrity = async () => {
     try {
@@ -131,7 +171,7 @@ export default function AdminDashboard() {
   };
 
   // Access check
-  if (user?.role !== "admin") {
+  if (user?.role !== "admin" && user?.role !== "super_admin") {
     return (
       <div style={{ textAlign: "center", padding: "120px 5%", animation: "fadeUp 0.5s ease" }}>
         <div style={{ fontSize: 64, marginBottom: 20 }}>🛑</div>
@@ -203,7 +243,8 @@ export default function AdminDashboard() {
               { id: "overview", label: "Overview" },
               { id: "campaigns", label: "Campaigns Management" },
               { id: "donations", label: "Donations Ledger" },
-              { id: "logs", label: "System Logs" }
+              { id: "logs", label: "System Logs" },
+              ...(user?.role === "super_admin" ? [{ id: "users", label: "User Management" }] : [])
             ].map(tab => (
               <button
                 key={tab.id}
@@ -378,6 +419,126 @@ export default function AdminDashboard() {
                             </td>
                             <td style={{ padding: "16px", color: "#555", fontSize: 13, wordBreak: "break-word" }}>{log.details}</td>
                             <td style={{ padding: "16px", color: "#888", fontSize: 12 }}>{formatDate(log.created_at)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* 5. Tab User Management (super_admin only) */}
+            {activeTab === "users" && user?.role === "super_admin" && (
+              <div>
+                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, fontWeight: 700, color: "#1A1A2E", marginBottom: 24 }}>
+                  User & Admin Management
+                </h3>
+                
+                {/* Promote to Admin Form */}
+                <div style={{
+                  background: "#F8F6F0",
+                  borderRadius: 16,
+                  padding: 24,
+                  border: "1px solid #EDE9E0",
+                  marginBottom: 32
+                }}>
+                  <h4 style={{ fontSize: 16, fontWeight: 700, color: "#1B4332", marginBottom: 12 }}>Promote User to Admin</h4>
+                  <p style={{ color: "#666", fontSize: 13, marginBottom: 16 }}>
+                    Enter a registered user's email address to promote them to the Admin role. Promoted admins will have access to logs, campaigns, and donation integrity verification.
+                  </p>
+                  
+                  <form onSubmit={handlePromoteAdmin} style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+                    <input
+                      type="email"
+                      placeholder="user@example.com"
+                      value={promoteEmail}
+                      onChange={(e) => setPromoteEmail(e.target.value)}
+                      required
+                      style={{
+                        flex: "1 1 300px",
+                        padding: "12px 16px",
+                        borderRadius: 10,
+                        border: "1px solid #EDE9E0",
+                        fontSize: 14,
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        outline: "none"
+                      }}
+                    />
+                    <button
+                      type="submit"
+                      disabled={promoting}
+                      style={{
+                        background: promoting ? "#888" : "#1B4332",
+                        color: "#fff",
+                        border: "none",
+                        padding: "12px 24px",
+                        borderRadius: 10,
+                        fontWeight: 600,
+                        fontSize: 14,
+                        cursor: promoting ? "not-allowed" : "pointer",
+                        transition: "background 0.2s"
+                      }}
+                    >
+                      {promoting ? "Promoting..." : "Make Admin"}
+                    </button>
+                  </form>
+
+                  {promoteMsg && (
+                    <div style={{ marginTop: 12, color: "#047857", fontSize: 13, fontWeight: 600 }}>
+                      ✓ {promoteMsg}
+                    </div>
+                  )}
+                  {promoteError && (
+                    <div style={{ marginTop: 12, color: "#B91C1C", fontSize: 13, fontWeight: 600 }}>
+                      ✗ {promoteError}
+                    </div>
+                  )}
+                </div>
+
+                {/* Users List Table */}
+                <h4 style={{ fontSize: 18, fontWeight: 700, color: "#1A1A2E", marginBottom: 16 }}>Registered Users Directory</h4>
+                {loadingUsers ? (
+                  <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: 200 }}>
+                    <Loader2 className="animate-spin" style={{ color: "#2D6A4F" }} />
+                  </div>
+                ) : users.length === 0 ? (
+                  <p style={{ color: "#888", textAlign: "center", padding: "40px 0" }}>No registered users found.</p>
+                ) : (
+                  <div style={{ overflowX: "auto" }}>
+                    <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
+                      <thead>
+                        <tr style={{ borderBottom: "1px solid #EDE9E0" }}>
+                          <th style={{ padding: "12px 16px", color: "#888", fontSize: 13, fontWeight: 600 }}>FULL NAME</th>
+                          <th style={{ padding: "12px 16px", color: "#888", fontSize: 13, fontWeight: 600 }}>EMAIL</th>
+                          <th style={{ padding: "12px 16px", color: "#888", fontSize: 13, fontWeight: 600 }}>ROLE</th>
+                          <th style={{ padding: "12px 16px", color: "#888", fontSize: 13, fontWeight: 600 }}>JOINED DATE</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {users.map((u) => (
+                          <tr key={u.id} style={{ borderBottom: "1px solid #F5F3ED" }}>
+                            <td style={{ padding: "16px", color: "#1A1A2E", fontWeight: 600, fontSize: 14 }}>
+                              {u.full_name}
+                            </td>
+                            <td style={{ padding: "16px", color: "#555", fontSize: 13 }}>
+                              {u.email}
+                            </td>
+                            <td style={{ padding: "16px", fontSize: 13 }}>
+                              <span style={{
+                                background: u.role === "super_admin" ? "#FEF3C7" : u.role === "admin" ? "#E2ECE9" : "#F3F4F6",
+                                color: u.role === "super_admin" ? "#92400E" : u.role === "admin" ? "#1B4332" : "#4B5563",
+                                padding: "4px 10px",
+                                borderRadius: 8,
+                                fontSize: 12,
+                                fontWeight: 700
+                              }}>
+                                {u.role === "super_admin" ? "Super Admin" : u.role === "admin" ? "Admin" : "User"}
+                              </span>
+                            </td>
+                            <td style={{ padding: "16px", color: "#888", fontSize: 12 }}>
+                              {formatDate(u.created_at)}
+                            </td>
                           </tr>
                         ))}
                       </tbody>
