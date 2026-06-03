@@ -111,3 +111,11 @@ export const getAdminLogs = () => {
 export const verifyIntegrity = () => {
   return apiCall("/verify", "GET");
 };
+
+export const getAdminUsers = () => {
+  return apiCall("/admin/users", "GET");
+};
+
+export const makeUserAdmin = (email) => {
+  return apiCall("/admin/make-admin", "POST", { email });
+};
