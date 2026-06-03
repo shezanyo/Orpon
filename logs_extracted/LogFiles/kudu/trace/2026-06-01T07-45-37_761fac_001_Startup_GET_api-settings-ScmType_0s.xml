@@ -1,1 +1,0 @@
-<step title="Startup Request" date="2026-06-01T07:45:37.931" instance="761fac" url="/api/settings/ScmType" method="GET" type="request" pid="851,1,15" SCM_DO_BUILD_DURING_DEPLOYMENT="true" ScmType="ExternalGit" /><!-- duration: 7ms -->
