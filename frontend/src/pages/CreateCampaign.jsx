@@ -73,7 +73,7 @@ export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampa
   };
 
   if (submitted) {
-    const shareUrl = `https://orpon.com.bd/campaign/${slug}`;
+    const shareUrl = `${window.location.origin}/campaign/${slug}`;
     return (
       <div style={{ maxWidth: 600, margin: "0 auto", padding: "80px 5%", textAlign: "center", animation: "fadeUp 0.5s ease" }}>
         <div style={{ fontSize: 64, marginBottom: 20 }}>🚀</div>
