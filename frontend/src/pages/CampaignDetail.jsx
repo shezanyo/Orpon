@@ -8,10 +8,10 @@ import {
   Loader2, 
   Heart, 
   Share2, 
-  Calendar, 
   ShieldCheck, 
   Users, 
-  ArrowLeft
+  ArrowLeft,
+  X
 } from "lucide-react";
 
 const formatDate = (dateStr) => {
@@ -48,6 +48,7 @@ export default function CampaignDetail({ c, nav }) {
   const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
   const [showQR, setShowQR] = useState(false);
+  const [showAllDonors, setShowAllDonors] = useState(false);
   const [transactions, setTransactions] = useState([]);
   const [loadingTx, setLoadingTx] = useState(true);
   const [errorTx, setErrorTx] = useState("");
@@ -85,6 +86,16 @@ export default function CampaignDetail({ c, nav }) {
     };
   }, [c.id]);
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (showAllDonors) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [showAllDonors]);
+
   const shareUrl = `${window.location.origin}/campaign/${c.slug}`;
   const p = pct(c.raised, c.goal);
 
@@ -105,7 +116,7 @@ export default function CampaignDetail({ c, nav }) {
       {/* Back Button */}
       <button
         onClick={() => nav("campaigns")}
-        style={{ background: "none", border: "none", color: "#888", fontSize: 14, cursor: "pointer", marginBottom: 24, padding: 0, display: "inline-flex", alignItems: "center", gap: 6 }}
+        style={{ background: "none", border: "none", color: "#888", fontSize: 14, cursor: "pointer", marginBottom: 24, padding: 0, display: "inline-flex", alignItems: "center", gap: 6, transition: "all 0.2s" }}
         onMouseEnter={e => { e.currentTarget.style.color = "#1A1A2E"; e.currentTarget.style.transform = "translateX(-3px)"; }}
         onMouseLeave={e => { e.currentTarget.style.color = "#888"; e.currentTarget.style.transform = "translateX(0)"; }}
       >
@@ -162,83 +173,13 @@ export default function CampaignDetail({ c, nav }) {
 
           {/* Story */}
           <div style={{ marginBottom: 36 }}>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, fontWeight: 700, marginBottom: 16, color: "#1A1A2E" }}>About this fundraiser</h2>
             {c.story.split("\n\n").map((para, i) => (
               <p key={i} style={{ color: "#444", fontSize: 15, lineHeight: 1.8, marginBottom: 14 }}>{para}</p>
             ))}
           </div>
 
-          {/* Donations Feed */}
-          <div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, fontWeight: 700, margin: "0 0 16px 0", color: "#1A1A2E", display: "flex", alignItems: "center", gap: 8 }}>
-              <Users size={20} style={{ color: c.color }} /> Donations ({completedTx.length})
-            </h2>
-
-            {loadingTx ? (
-              <div style={{ display: "flex", justifyContent: "center", padding: "28px 0", color: "#888", gap: 8 }}>
-                <Loader2 className="animate-spin" style={{ width: 18, height: 18, color: c.color }} />
-                <span style={{ fontSize: 14 }}>Loading donations...</span>
-              </div>
-            ) : errorTx ? (
-              <div style={{ textAlign: "center", padding: "20px", color: "#EF4444", fontSize: 14 }}>
-                {errorTx}
-              </div>
-            ) : completedTx.length === 0 ? (
-              <div style={{ textAlign: "center", padding: "28px", color: "#888", fontSize: 14, background: "#F8F6F0", borderRadius: 16, border: "1px solid #EDE9E0" }}>
-                No donations yet. Be the first to support this campaign!
-              </div>
-            ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: 10, maxHeight: 360, overflowY: "auto", paddingRight: 4 }}>
-                {completedTx.map(t => {
-                  const initials = getInitials(t.display_name);
-                  const bgColor = getHashColor(t.display_name);
-                  return (
-                    <div key={t.id} style={{
-                      display: "flex", alignItems: "center", gap: 14,
-                      padding: "14px 16px", background: "#fff", border: "1px solid #EDE9E0",
-                      borderRadius: 14, transition: "all 0.2s ease"
-                    }}
-                      onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.04)"; e.currentTarget.style.borderColor = "#D3CCBE"; }}
-                      onMouseLeave={e => { e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = "#EDE9E0"; }}
-                    >
-                      <div style={{
-                        width: 42, height: 42, borderRadius: "50%", background: bgColor,
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                        fontWeight: 700, fontSize: 13, color: "#fff", flexShrink: 0
-                      }}>
-                        {initials}
-                      </div>
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 3 }}>
-                          <span style={{ fontSize: 14, fontWeight: 700, color: "#1A1A2E", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                            {t.display_name || "Anonymous"}
-                          </span>
-                          <span style={{ fontSize: 14, fontWeight: 700, color: c.color, flexShrink: 0, marginLeft: 8 }}>
-                            {fmt(parseFloat(t.amount || 0))}
-                          </span>
-                        </div>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 12, color: "#888" }}>
-                          <span style={{ display: "inline-flex", gap: 5, alignItems: "center" }}>
-                            <span style={{
-                              padding: "1px 6px", borderRadius: 5, fontSize: 9, fontWeight: 700,
-                              background: t.payment_method === "bKash" ? "#E2136E12" : t.payment_method === "Nagad" ? "#F5822012" : t.payment_method === "Card" ? "#1E3A8A12" : "#F8F6F0",
-                              color: t.payment_method === "bKash" ? "#E2136E" : t.payment_method === "Nagad" ? "#F58220" : t.payment_method === "Card" ? "#1E3A8A" : "#888"
-                            }}>
-                              {t.payment_method || "Direct"}
-                            </span>
-                          </span>
-                          <span>{formatDate(t.created_at)}</span>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
           {/* Share */}
-          <div style={{ background: "#F8F6F0", border: "1px solid #EDE9E0", borderRadius: 18, padding: 24, marginTop: 36 }}>
+          <div style={{ background: "#F8F6F0", border: "1px solid #EDE9E0", borderRadius: 18, padding: 24 }}>
             <h3 style={{ fontSize: 15, fontWeight: 700, marginBottom: 14, color: "#1A1A2E", display: "flex", alignItems: "center", gap: 6 }}>
               <Share2 size={16} style={{ color: c.color }} /> Share this fundraiser
             </h3>
@@ -277,17 +218,13 @@ export default function CampaignDetail({ c, nav }) {
 
             {/* Stats */}
             <div style={{ display: "flex", gap: 20, marginTop: 16, marginBottom: 20, fontSize: 14, color: "#555" }}>
-              <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
-                <strong style={{ color: "#1A1A2E", fontSize: 17 }}>{c.donors}</strong> donors
-              </span>
-              <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
-                <strong style={{ color: "#1A1A2E", fontSize: 17 }}>{c.daysLeft}</strong> days left
-              </span>
+              <span><strong style={{ color: "#1A1A2E", fontSize: 17 }}>{c.donors}</strong> donors</span>
+              <span><strong style={{ color: "#1A1A2E", fontSize: 17 }}>{c.daysLeft}</strong> days left</span>
             </div>
 
             <div style={{ height: 1, background: "#EDE9E0", margin: "0 0 20px 0" }} />
 
-            {/* Primary CTA: Donate Now */}
+            {/* Donate Now */}
             <button
               onClick={handleDonate}
               style={{
@@ -329,31 +266,158 @@ export default function CampaignDetail({ c, nav }) {
               </div>
             </div>
 
-            {/* Top Donors Quick Peek */}
-            {completedTx.length > 0 && (
-              <div style={{ marginTop: 20 }}>
-                <div style={{ height: 1, background: "#EDE9E0", marginBottom: 16 }} />
-                <p style={{ fontSize: 12, fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 10 }}>Recent donors</p>
-                {completedTx.slice(0, 3).map(t => (
-                  <div key={t.id} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
-                    <div style={{
-                      width: 32, height: 32, borderRadius: "50%", background: getHashColor(t.display_name),
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      fontWeight: 700, fontSize: 11, color: "#fff", flexShrink: 0
-                    }}>
-                      {getInitials(t.display_name)}
+            {/* Recent Donors */}
+            <div style={{ marginTop: 20 }}>
+              <div style={{ height: 1, background: "#EDE9E0", marginBottom: 16 }} />
+              <p style={{ fontSize: 12, fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 12 }}>
+                Recent donors
+              </p>
+
+              {loadingTx ? (
+                <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 0", color: "#888" }}>
+                  <Loader2 className="animate-spin" style={{ width: 14, height: 14, color: c.color }} />
+                  <span style={{ fontSize: 13 }}>Loading...</span>
+                </div>
+              ) : completedTx.length === 0 ? (
+                <p style={{ fontSize: 13, color: "#888", margin: 0 }}>No donations yet. Be the first!</p>
+              ) : (
+                <>
+                  {completedTx.slice(0, 3).map(t => (
+                    <div key={t.id} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
+                      <div style={{
+                        width: 34, height: 34, borderRadius: "50%", background: getHashColor(t.display_name),
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        fontWeight: 700, fontSize: 11, color: "#fff", flexShrink: 0
+                      }}>
+                        {getInitials(t.display_name)}
+                      </div>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ fontSize: 13, fontWeight: 600, color: "#1A1A2E", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                          {t.display_name || "Anonymous"}
+                        </div>
+                        <div style={{ fontSize: 12, color: "#888" }}>{fmt(parseFloat(t.amount || 0))}</div>
+                      </div>
                     </div>
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <span style={{ fontSize: 13, fontWeight: 600, color: "#1A1A2E" }}>{t.display_name || "Anonymous"}</span>
-                      <span style={{ fontSize: 12, color: "#888", marginLeft: 6 }}>{fmt(parseFloat(t.amount || 0))}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
+                  ))}
+
+                  {/* See all donors button */}
+                  <button
+                    onClick={() => setShowAllDonors(true)}
+                    style={{
+                      width: "100%", background: "#F8F6F0", color: "#1A1A2E", border: "1px solid #EDE9E0",
+                      padding: "10px 0", borderRadius: 10, fontSize: 13, fontWeight: 700,
+                      cursor: "pointer", marginTop: 4, transition: "all 0.2s ease",
+                      display: "flex", alignItems: "center", justifyContent: "center", gap: 6
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.background = "#EDE9E0"; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = "#F8F6F0"; }}
+                  >
+                    <Users size={14} /> See all {completedTx.length} donors
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>
+
+      {/* ===== ALL DONORS MODAL OVERLAY ===== */}
+      {showAllDonors && (
+        <div
+          style={{
+            position: "fixed", inset: 0, zIndex: 9999,
+            background: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            animation: "fadeUp 0.25s ease both", padding: 20
+          }}
+          onClick={(e) => { if (e.target === e.currentTarget) setShowAllDonors(false); }}
+        >
+          <div style={{
+            background: "#fff", borderRadius: 20, width: "100%", maxWidth: 520,
+            maxHeight: "80vh", display: "flex", flexDirection: "column",
+            boxShadow: "0 20px 60px rgba(0,0,0,0.15)", overflow: "hidden"
+          }}>
+            {/* Modal Header */}
+            <div style={{
+              padding: "20px 24px", borderBottom: "1px solid #EDE9E0",
+              display: "flex", justifyContent: "space-between", alignItems: "center", flexShrink: 0
+            }}>
+              <div>
+                <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 24, fontWeight: 700, color: "#1A1A2E", margin: 0 }}>
+                  All Donors ({completedTx.length})
+                </h2>
+                <p style={{ fontSize: 13, color: "#888", margin: "4px 0 0 0" }}>
+                  Total raised: {fmt(completedTx.reduce((sum, t) => sum + parseFloat(t.amount || 0), 0))}
+                </p>
+              </div>
+              <button
+                onClick={() => setShowAllDonors(false)}
+                style={{
+                  background: "#F8F6F0", border: "none", borderRadius: "50%",
+                  width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center",
+                  cursor: "pointer", color: "#555", transition: "all 0.2s"
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = "#EDE9E0"}
+                onMouseLeave={e => e.currentTarget.style.background = "#F8F6F0"}
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Donor List */}
+            <div style={{ overflowY: "auto", padding: "16px 24px 24px", flex: 1 }}>
+              {completedTx.length === 0 ? (
+                <p style={{ textAlign: "center", color: "#888", padding: "30px 0", fontSize: 14 }}>
+                  No donations yet.
+                </p>
+              ) : (
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  {completedTx.map((t, idx) => (
+                    <div key={t.id} style={{
+                      display: "flex", alignItems: "center", gap: 14,
+                      padding: "14px 16px", background: "#fff", border: "1px solid #EDE9E0",
+                      borderRadius: 14, transition: "all 0.15s ease"
+                    }}
+                      onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.04)"; e.currentTarget.style.borderColor = "#D3CCBE"; }}
+                      onMouseLeave={e => { e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = "#EDE9E0"; }}
+                    >
+                      {/* Rank / Avatar */}
+                      <div style={{
+                        width: 42, height: 42, borderRadius: "50%", background: getHashColor(t.display_name),
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        fontWeight: 700, fontSize: 13, color: "#fff", flexShrink: 0
+                      }}>
+                        {getInitials(t.display_name)}
+                      </div>
+
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 3 }}>
+                          <span style={{ fontSize: 14, fontWeight: 700, color: "#1A1A2E", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                            {t.display_name || "Anonymous"}
+                          </span>
+                          <span style={{ fontSize: 14, fontWeight: 700, color: c.color, flexShrink: 0, marginLeft: 8 }}>
+                            {fmt(parseFloat(t.amount || 0))}
+                          </span>
+                        </div>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 12, color: "#888" }}>
+                          <span style={{
+                            padding: "1px 6px", borderRadius: 5, fontSize: 9, fontWeight: 700,
+                            background: t.payment_method === "bKash" ? "#E2136E12" : t.payment_method === "Nagad" ? "#F5822012" : t.payment_method === "Card" ? "#1E3A8A12" : "#F8F6F0",
+                            color: t.payment_method === "bKash" ? "#E2136E" : t.payment_method === "Nagad" ? "#F58220" : t.payment_method === "Card" ? "#1E3A8A" : "#888"
+                          }}>
+                            {t.payment_method || "Direct"}
+                          </span>
+                          <span>{formatDate(t.created_at)}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
