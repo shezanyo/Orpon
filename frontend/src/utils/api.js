@@ -91,3 +91,23 @@ export const initiateDirectDonation = (payload) => {
 export const getTransactions = () => {
   return apiCall("/transactions");
 };
+
+export const getAdminStats = () => {
+  return apiCall("/admin/stats", "GET");
+};
+
+export const getAdminCampaigns = () => {
+  return apiCall("/admin/campaigns", "GET");
+};
+
+export const getAdminDonations = () => {
+  return apiCall("/admin/donations", "GET");
+};
+
+export const getAdminLogs = () => {
+  return apiCall("/admin/logs", "GET");
+};
+
+export const verifyIntegrity = () => {
+  return apiCall("/verify", "GET");
+};

@@ -109,11 +109,17 @@ export default function Navbar({ page, nav, setShowLogin }) {
                   flexDirection: "column",
                   animation: "fadeUp 0.2s ease both"
                 }}>
-                  {[
-                    { label: "Profile", key: "profile", icon: "👤" },
-                    { label: "My Campaigns", key: "my-campaigns", icon: "📣" },
-                    { label: "Campaign Analytics", key: "analytics", icon: "📊" }
-                  ].map((item) => (
+                   {(() => {
+                    const menuItems = [
+                      { label: "Profile", key: "profile", icon: "👤" },
+                      { label: "My Campaigns", key: "my-campaigns", icon: "📣" },
+                      { label: "Campaign Analytics", key: "analytics", icon: "📊" }
+                    ];
+                    if (user?.role === "admin") {
+                      menuItems.push({ label: "Admin Panel", key: "admin", icon: "🛡️" });
+                    }
+                    return menuItems;
+                  })().map((item) => (
                     <button
                       key={item.key}
                       onClick={() => {
