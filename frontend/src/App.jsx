@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
+import { Loader2 } from "lucide-react";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Home from "./pages/Home";
@@ -50,27 +51,34 @@ const normalizeCampaign = (campaign) => {
   };
 };
 
-function CampaignDetailDirect({ campaigns, setActiveCampaign, setPage }) {
+function CampaignDetailWrapper({ campaigns, campaignsLoaded, nav }) {
   const { id } = useParams();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!campaigns || campaigns.length === 0) return;
-    const campaign = campaigns.find(
-      (x) => String(x.id) === String(id) || x.slug === id
+  if (!campaignsLoaded) {
+    return (
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh", color: "#888", gap: 10 }}>
+        <Loader2 style={{ animation: "spin 1s linear infinite", color: "#2D6A4F" }} />
+        <span>Loading campaign details...</span>
+      </div>
     );
-    if (campaign) {
-      setActiveCampaign(campaign);
-      setPage("detail");
-    }
-    navigate("/");
-  }, [id, campaigns, navigate, setActiveCampaign, setPage]);
+  }
 
-  return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh", color: "#888" }}>
-      Loading campaign details...
-    </div>
+  const campaign = campaigns.find(
+    (x) => String(x.id) === String(id) || x.slug === id
   );
+
+  if (!campaign) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", minHeight: "50vh", gap: 16 }}>
+        <h3 style={{ fontSize: 20, color: "#1A1A2E" }}>Campaign not found</h3>
+        <button onClick={() => nav("home")} style={{ background: "#1B4332", border: "none", padding: "10px 20px", color: "#fff", borderRadius: 8, fontWeight: 600 }}>
+          Back to Home
+        </button>
+      </div>
+    );
+  }
+
+  return <CampaignDetail c={campaign} nav={nav} />;
 }
 
 export default function App() {
@@ -79,7 +87,9 @@ export default function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [loginTab, setLoginTab] = useState("login");
   const [campaigns, setCampaigns] = useState(CAMPAIGNS);
+  const [campaignsLoaded, setCampaignsLoaded] = useState(false);
   const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const link = document.createElement("link");
@@ -95,6 +105,8 @@ export default function App() {
         }
       } catch (error) {
         console.error("Unable to load campaigns from backend", error);
+      } finally {
+        setCampaignsLoaded(true);
       }
     };
 
@@ -106,12 +118,12 @@ export default function App() {
   const nav = (p) => {
     setPage(p);
     if (p !== "detail") setActiveCampaign(null);
+    navigate("/");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const openCampaign = (c) => {
-    setActiveCampaign(c);
-    setPage("detail");
+    navigate(`/campaign/${c.slug}`);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -119,6 +131,7 @@ export default function App() {
     <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", background: "#F8F6F0", minHeight: "100vh", color: "#1A1A2E" }}>
       <style>{`
         @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         button { cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; }
         input, textarea { font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -138,13 +151,12 @@ export default function App() {
           <>
             {page === "home" && <Home nav={nav} campaigns={campaigns} openCampaign={openCampaign} setShowLogin={setShowLogin} isLoggedIn={isLoggedIn} />}
             {page === "campaigns" && <Explore campaigns={campaigns} openCampaign={openCampaign} />}
-            {page === "detail" && activeCampaign && <CampaignDetail c={activeCampaign} nav={nav} />}
             {page === "create" && <CreateCampaign nav={nav} isLoggedIn={isLoggedIn} setShowLogin={setShowLogin} setCampaigns={setCampaigns} />}
           </>
         } />
         <Route path="/donate/:id" element={<Donate />} />
         <Route path="/donate/nagad-sandbox" element={<NagadSandbox />} />
-        <Route path="/campaign/:id" element={<CampaignDetailDirect campaigns={campaigns} setActiveCampaign={setActiveCampaign} setPage={setPage} />} />
+        <Route path="/campaign/:id" element={<CampaignDetailWrapper campaigns={campaigns} campaignsLoaded={campaignsLoaded} nav={nav} />} />
         <Route path="/payment/success" element={<PaymentSuccess />} />
         <Route path="/payment/fail" element={<PaymentFail />} />
         <Route path="/payment/cancel" element={<PaymentCancel />} />
