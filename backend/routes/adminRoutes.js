@@ -9,7 +9,9 @@ const {
     getAdminCampaigns,
     getAdminDonations,
     getAdminLogs,
-    verifyIntegrity
+    verifyIntegrity,
+    getAdminUsers,
+    makeUserAdmin
 } = require("../controllers/adminController");
 
 // Mount all admin endpoints behind auth + admin checks
@@ -18,5 +20,7 @@ router.get("/admin/campaigns", authMiddleware, adminMiddleware, getAdminCampaign
 router.get("/admin/donations", authMiddleware, adminMiddleware, getAdminDonations);
 router.get("/admin/logs", authMiddleware, adminMiddleware, getAdminLogs);
 router.get("/verify", authMiddleware, adminMiddleware, verifyIntegrity);
+router.get("/admin/users", authMiddleware, adminMiddleware, getAdminUsers);
+router.post("/admin/make-admin", authMiddleware, adminMiddleware, makeUserAdmin);
 
 module.exports = router;
