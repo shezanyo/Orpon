@@ -61,7 +61,7 @@ export default function CampaignDetail({ c, nav }) {
     };
   }, [c.id]);
 
-  const shareUrl = `https://orpon.com.bd/campaign/${c.slug}`;
+  const shareUrl = `${window.location.origin}/campaign/${c.slug}`;
   const p = pct(c.raised, c.goal);
 
   const copyLink = () => {

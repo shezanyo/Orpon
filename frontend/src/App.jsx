@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Home from "./pages/Home";
@@ -49,6 +49,29 @@ const normalizeCampaign = (campaign) => {
     emoji: campaign.emoji || CAMPAIGN_EMOJIS[category] || "🤲",
   };
 };
+
+function CampaignDetailDirect({ campaigns, setActiveCampaign, setPage }) {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!campaigns || campaigns.length === 0) return;
+    const campaign = campaigns.find(
+      (x) => String(x.id) === String(id) || x.slug === id
+    );
+    if (campaign) {
+      setActiveCampaign(campaign);
+      setPage("detail");
+    }
+    navigate("/");
+  }, [id, campaigns, navigate, setActiveCampaign, setPage]);
+
+  return (
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh", color: "#888" }}>
+      Loading campaign details...
+    </div>
+  );
+}
 
 export default function App() {
   const [page, setPage] = useState("home");
@@ -121,6 +144,7 @@ export default function App() {
         } />
         <Route path="/donate/:id" element={<Donate />} />
         <Route path="/donate/nagad-sandbox" element={<NagadSandbox />} />
+        <Route path="/campaign/:id" element={<CampaignDetailDirect campaigns={campaigns} setActiveCampaign={setActiveCampaign} setPage={setPage} />} />
         <Route path="/payment/success" element={<PaymentSuccess />} />
         <Route path="/payment/fail" element={<PaymentFail />} />
         <Route path="/payment/cancel" element={<PaymentCancel />} />
