@@ -36,7 +36,7 @@ export default function Navbar({ page, nav, setShowLogin }) {
       </div>
 
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        {[{ label: "Campaigns", key: "campaigns" }, { label: "How it works", key: "how" }].map((item) => (
+        {[{ label: "Campaigns", key: "campaigns" }, { label: "Leaderboard", key: "leaderboard" }].map((item) => (
           <button key={item.key} onClick={() => nav(item.key)} style={{ background: "none", border: "none", padding: "8px 14px", fontSize: 14, fontWeight: 500, color: page === item.key ? "#1B4332" : "#555", borderRadius: 8, cursor: "pointer" }}>
             {item.label}
           </button>

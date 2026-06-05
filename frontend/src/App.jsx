@@ -17,6 +17,7 @@ import Profile from "./pages/Profile";
 import MyCampaigns from "./pages/MyCampaigns";
 import CampaignAnalytics from "./pages/CampaignAnalytics";
 import AdminDashboard from "./pages/AdminDashboard";
+import Leaderboard from "./pages/Leaderboard";
 import { CAMPAIGNS, CAMPAIGN_COLORS, CAMPAIGN_EMOJIS } from "./data/mockData";
 import { getCampaigns } from "./utils/api";
 import { slugify } from "./utils/format";
@@ -124,6 +125,8 @@ export default function App() {
     if (p !== "detail") setActiveCampaign(null);
     if (p === "admin") {
       navigate("/admin");
+    } else if (p === "leaderboard") {
+      navigate("/leaderboard");
     } else {
       setPage(p);
       navigate("/");
@@ -170,6 +173,7 @@ export default function App() {
         <Route path="/donate/nagad-sandbox" element={<NagadSandbox />} />
         <Route path="/campaign/:id" element={<CampaignDetailWrapper campaigns={campaigns} campaignsLoaded={campaignsLoaded} nav={nav} />} />
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/payment/success" element={<PaymentSuccess />} />
         <Route path="/payment/fail" element={<PaymentFail />} />
         <Route path="/payment/cancel" element={<PaymentCancel />} />
