@@ -1,5 +1,0 @@
-<step title="Incoming Request" date="2026-06-02T11:36:27.627" instance="7c5d95" url="/logstream" method="GET" type="request" pid="832,1,5" Host="orpon-backend-api-sea.scm.azurewebsites.net" User-Agent="AZURECLI/2.86.0 (DEB)" Accept-Encoding="identity" Authorization="Bea..." x-ms-client-request-id="487469b6-5e77-11f1-b05c-b42e9908cfed" X-ARR-LOG-ID="487469b6-5e77-11f1-b05c-b42e9908cfed" CLIENT-IP="103.25.122.20:37674" X-SITE-DEPLOYMENT-ID="orpon-backend-api-sea" WAS-DEFAULT-HOSTNAME="orpon-backend-api-sea.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/logstream" X-Client-IP="103.25.122.20" X-Client-Port="37674" >
-  <step title="LogStreamHandlerMiddleware.Invoke" date="2026-06-02T11:36:27.634" /><!-- duration: 98ms -->
-  <step title="Error occurred" date="2026-06-02T11:37:28.113" type="error" text="LogStreamManager: ProcessRequest end" /><!-- duration: 68ms -->
-  <step title="Outgoing response" date="2026-06-02T11:37:28.369" type="response" statusCode="200" statusText="OK" /><!-- duration: 12ms -->
-</step><!-- duration: 60829ms -->
