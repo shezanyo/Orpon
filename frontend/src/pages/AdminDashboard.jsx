@@ -550,12 +550,14 @@ export default function AdminDashboard() {
                             </td>
                             <td style={{ padding: "16px", fontSize: 13 }}>
                               <span style={{
-                                background: u.role === "super_admin" ? "#FEF3C7" : u.role === "admin" ? "#E2ECE9" : "#F3F4F6",
-                                color: u.role === "super_admin" ? "#92400E" : u.role === "admin" ? "#1B4332" : "#4B5563",
+                                background: u.role === "super_admin" ? "#FFFBEB" : u.role === "admin" ? "#E2ECE9" : "#F3F4F6",
+                                color: u.role === "super_admin" ? "#B45309" : u.role === "admin" ? "#1B4332" : "#4B5563",
+                                border: u.role === "super_admin" ? "1px solid #FDE68A" : u.role === "admin" ? "1px solid #C2DFD3" : "1px solid #E5E7EB",
                                 padding: "4px 10px",
                                 borderRadius: 8,
                                 fontSize: 12,
-                                fontWeight: 700
+                                fontWeight: 700,
+                                display: "inline-block"
                               }}>
                                 {u.role === "super_admin" ? "Super Admin" : u.role === "admin" ? "Admin" : "User"}
                               </span>
