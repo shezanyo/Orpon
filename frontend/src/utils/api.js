@@ -125,3 +125,7 @@ export const getAdminUsers = () => {
 export const makeUserAdmin = (email) => {
   return apiCall("/admin/make-admin", "POST", { email });
 };
+
+export const getLeaderboard = () => {
+  return apiCall("/leaderboard", "GET");
+};

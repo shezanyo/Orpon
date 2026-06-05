@@ -19,7 +19,7 @@ export default function Footer() {
             </p>
           </div>
           {[
-            { title: "Platform", links: ["Browse Campaigns", "Start a Campaign", "How it Works", "Verification"] },
+            { title: "Platform", links: ["Browse Campaigns", "Start a Campaign", "Leaderboard", "Verification"] },
             { title: "Support", links: ["Help Center", "Contact Us", "Report Abuse", "FAQs"] },
             { title: "Legal", links: ["Privacy Policy", "Terms of Service", "Cookie Policy"] },
           ].map(col => (
