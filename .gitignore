@@ -17,3 +17,17 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# Deployment logs & artifacts (Azure / Kudu)
+logs_temp/
+logs_temp2/
+logs_extracted/
+webapp_logs*.zip
+backend.zip
+*.zip
+
+# Temporary debug / AI-generated artifacts
+POST_DEPLOYMENT*
+PROMPT_SUMMARY*
+WORK_SUMMARY*
+zip_check/
