@@ -25,21 +25,23 @@ export default function CampaignCard({ c, openCampaign }) {
     >
       <div
         style={{
-          background: `linear-gradient(135deg, ${c.color}22 0%, ${c.color}44 100%)`,
+          background: c.images && c.images.length > 0 
+            ? `url(${c.images[0]}) center/cover no-repeat` 
+            : `linear-gradient(135deg, ${c.color}22 0%, ${c.color}44 100%)`,
           height: 140,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontSize: 48,
+          fontSize: (c.images && c.images.length > 0) ? 0 : 48,
           position: "relative",
         }}
       >
-        {c.emoji}
-        <span style={{ position: "absolute", top: 12, left: 12, background: c.color, color: "#fff", fontSize: 11, fontWeight: 600, padding: "3px 10px", borderRadius: 99, letterSpacing: "0.04em", textTransform: "uppercase" }}>
+        {(!c.images || c.images.length === 0) && c.emoji}
+        <span style={{ position: "absolute", top: 12, left: 12, background: c.color, color: "#fff", fontSize: 11, fontWeight: 600, padding: "3px 10px", borderRadius: 99, letterSpacing: "0.04em", textTransform: "uppercase", zIndex: 1 }}>
           {c.category}
         </span>
         {c.daysLeft <= 7 && (
-          <span style={{ position: "absolute", top: 12, right: 12, background: "#C0392B", color: "#fff", fontSize: 11, fontWeight: 700, padding: "3px 10px", borderRadius: 99 }}>
+          <span style={{ position: "absolute", top: 12, right: 12, background: "#C0392B", color: "#fff", fontSize: 11, fontWeight: 700, padding: "3px 10px", borderRadius: 99, zIndex: 1 }}>
             ⚡ {c.daysLeft}d left
           </span>
         )}

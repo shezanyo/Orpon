@@ -128,14 +128,17 @@ export default function MyCampaigns({ campaigns, campaignsLoaded, openCampaign, 
                   e.currentTarget.style.boxShadow = "0 4px 15px rgba(0,0,0,0.02)";
                 }}
               >
-                {/* Emoji Thumbnail */}
+                {/* Emoji / Image Thumbnail */}
                 <div style={{
-                  background: `linear-gradient(135deg, ${c.color}22, ${c.color}55)`,
+                  background: c.images && c.images.length > 0 
+                    ? `url(${c.images[0]}) center/cover no-repeat`
+                    : `linear-gradient(135deg, ${c.color}22, ${c.color}55)`,
                   width: 60, height: 60, borderRadius: 16,
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 28, flexShrink: 0
+                  fontSize: (c.images && c.images.length > 0) ? 0 : 28, 
+                  flexShrink: 0
                 }}>
-                  {c.emoji}
+                  {(!c.images || c.images.length === 0) && c.emoji}
                 </div>
 
                 {/* Details */}

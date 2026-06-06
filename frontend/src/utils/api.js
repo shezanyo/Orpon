@@ -12,9 +12,12 @@ export const API_URL = import.meta.env.VITE_API_URL || `${defaultOrigin}/api`;
  * @returns {Promise<object>} - Response data
  */
 export const apiCall = async (endpoint, method = "GET", data = null) => {
-  const headers = {
-    "Content-Type": "application/json",
-  };
+  const headers = {};
+
+  const isFormData = typeof FormData !== "undefined" && data instanceof FormData;
+  if (!isFormData) {
+    headers["Content-Type"] = "application/json";
+  }
 
   const token = localStorage.getItem("authToken");
   if (token) {
@@ -27,7 +30,7 @@ export const apiCall = async (endpoint, method = "GET", data = null) => {
   };
 
   if (data) {
-    config.body = JSON.stringify(data);
+    config.body = isFormData ? data : JSON.stringify(data);
   }
 
   try {

@@ -59,6 +59,7 @@ export default function CampaignDetail({ c, nav, setShowLogin }) {
   const [transactions, setTransactions] = useState([]);
   const [loadingTx, setLoadingTx] = useState(true);
   const [errorTx, setErrorTx] = useState("");
+  const [activeImageIdx, setActiveImageIdx] = useState(0);
 
   useEffect(() => {
     let active = true;
@@ -340,22 +341,102 @@ export default function CampaignDetail({ c, nav, setShowLogin }) {
 
         {/* ===== LEFT COLUMN ===== */}
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          {/* Hero Image */}
-          <div style={{
-            background: `linear-gradient(135deg, ${c.color}22, ${c.color}55)`,
-            borderRadius: 20, height: 340, display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: 88, border: `1px solid ${c.color}33`,
-            position: "relative", overflow: "hidden", boxShadow: "0 8px 30px rgba(0,0,0,0.04)"
-          }}>
-            {c.emoji}
-            <div style={{
-              position: "absolute", bottom: 14, left: 14,
-              background: "rgba(255,255,255,0.85)", backdropFilter: "blur(6px)",
-              padding: "5px 12px", borderRadius: 10, fontSize: 11, fontWeight: 600, color: "#1A1A2E"
-            }}>
-              🔒 Blockchain-Verified Ledger
+          {/* Hero Image / Carousel */}
+          {c.images && c.images.length > 0 ? (
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <div style={{ 
+                position: "relative", 
+                borderRadius: 20, 
+                height: 380, 
+                overflow: "hidden", 
+                border: "1px solid #EDE9E0", 
+                boxShadow: "0 8px 30px rgba(0,0,0,0.04)",
+                background: "#fdfdfd"
+              }}>
+                <img 
+                  src={c.images[activeImageIdx]} 
+                  alt={c.title} 
+                  style={{ width: "100%", height: "100%", objectFit: "cover", transition: "all 0.3s ease" }} 
+                />
+                
+                <div style={{
+                  position: "absolute", bottom: 14, left: 14,
+                  background: "rgba(255,255,255,0.85)", backdropFilter: "blur(6px)",
+                  padding: "5px 12px", borderRadius: 10, fontSize: 11, fontWeight: 600, color: "#1A1A2E",
+                  zIndex: 2
+                }}>
+                  🔒 Blockchain-Verified Ledger
+                </div>
+
+                {c.images.length > 1 && (
+                  <>
+                    <button 
+                      type="button"
+                      onClick={() => setActiveImageIdx(prev => (prev === 0 ? c.images.length - 1 : prev - 1))}
+                      style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", background: "rgba(255,255,255,0.85)", border: "1px solid #EDE9E0", width: 40, height: 40, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "#1B4332", fontSize: 22, fontWeight: "bold", zIndex: 2, boxShadow: "0 2px 10px rgba(0,0,0,0.08)" }}
+                    >
+                      ‹
+                    </button>
+                    <button 
+                      type="button"
+                      onClick={() => setActiveImageIdx(prev => (prev === c.images.length - 1 ? 0 : prev + 1))}
+                      style={{ position: "absolute", right: 14, top: "50%", transform: "translateY(-50%)", background: "rgba(255,255,255,0.85)", border: "1px solid #EDE9E0", width: 40, height: 40, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "#1B4332", fontSize: 22, fontWeight: "bold", zIndex: 2, boxShadow: "0 2px 10px rgba(0,0,0,0.08)" }}
+                    >
+                      ›
+                    </button>
+                    <div style={{ position: "absolute", bottom: 14, right: 14, display: "flex", gap: 6, background: "rgba(0,0,0,0.45)", padding: "6px 12px", borderRadius: 99, zIndex: 2 }}>
+                      {c.images.map((_, dotIdx) => (
+                        <div 
+                          key={dotIdx} 
+                          onClick={() => setActiveImageIdx(dotIdx)}
+                          style={{ width: 8, height: 8, borderRadius: "50%", background: activeImageIdx === dotIdx ? "#fff" : "rgba(255,255,255,0.5)", cursor: "pointer", transition: "background-color 0.2s" }}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+
+              {c.images.length > 1 && (
+                <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                  {c.images.map((imgUrl, thumbIdx) => (
+                    <div 
+                      key={thumbIdx}
+                      onClick={() => setActiveImageIdx(thumbIdx)}
+                      style={{ 
+                        width: 72, 
+                        height: 54, 
+                        borderRadius: 10, 
+                        overflow: "hidden", 
+                        cursor: "pointer", 
+                        border: activeImageIdx === thumbIdx ? "2.5px solid #1B4332" : "1.5px solid #EDE9E0",
+                        transition: "all 0.15s ease",
+                        opacity: activeImageIdx === thumbIdx ? 1 : 0.75
+                      }}
+                    >
+                      <img src={imgUrl} alt={`Thumbnail ${thumbIdx + 1}`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
+          ) : (
+            <div style={{
+              background: `linear-gradient(135deg, ${c.color}22, ${c.color}55)`,
+              borderRadius: 20, height: 340, display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: 88, border: `1px solid ${c.color}33`,
+              position: "relative", overflow: "hidden", boxShadow: "0 8px 30px rgba(0,0,0,0.04)"
+            }}>
+              {c.emoji}
+              <div style={{
+                position: "absolute", bottom: 14, left: 14,
+                background: "rgba(255,255,255,0.85)", backdropFilter: "blur(6px)",
+                padding: "5px 12px", borderRadius: 10, fontSize: 11, fontWeight: 600, color: "#1A1A2E"
+              }}>
+                🔒 Blockchain-Verified Ledger
+              </div>
+            </div>
+          )}
 
           {/* Mobile-only Donate Panel (Visible under cover image on mobile) */}
           <div className="block lg:hidden">
