@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import ProgressBar from "../components/ui/ProgressBar";
 import QRCodeSVG from "../components/ui/QRCodeSVG";
 import { fmt, pct } from "../utils/format";
-import { getTransactions } from "../utils/api";
+import { getTransactions, getComments, createComment, updateComment, deleteComment } from "../utils/api";
+import { useAuth } from "../context/AuthContext";
 import { 
   Loader2, 
   Heart, 
@@ -11,8 +12,14 @@ import {
   ShieldCheck, 
   Users, 
   ArrowLeft,
-  X
+  X,
+  MessageSquare,
+  Trash2,
+  Edit2,
+  Check,
+  AlertCircle
 } from "lucide-react";
+
 
 const formatDate = (dateStr) => {
   if (!dateStr) return "";
@@ -44,7 +51,7 @@ const getHashColor = (name) => {
   return colors[Math.abs(hash) % colors.length];
 };
 
-export default function CampaignDetail({ c, nav }) {
+export default function CampaignDetail({ c, nav, setShowLogin }) {
   const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
   const [showQR, setShowQR] = useState(false);
@@ -379,6 +386,10 @@ export default function CampaignDetail({ c, nav }) {
             ))}
           </div>
 
+          {/* Comments Section */}
+          <CommentsSection campaignId={c.id} campaignOwnerId={c.user_id} campaignColor={c.color} setShowLogin={setShowLogin} />
+
+
           {/* Mobile-only Recent Donors (Visible under story on mobile) */}
           <div className="block lg:hidden" style={{
             background: "#fff", border: "1px solid #EDE9E0", borderRadius: 22, padding: 24,
@@ -434,12 +445,482 @@ export default function CampaignDetail({ c, nav }) {
           </div>
         </div>
 
-        {/* ===== RIGHT COLUMN: Desktop Sticky Donate Panel (Hidden on mobile) ===== */}
-        <div className="hidden lg:block sticky" style={{ top: 80 }}>
-          {renderDonatePanel(false)}
-        </div>
-
       </div>
+    </div>
+  );
+}
+
+function CommentsSection({ campaignId, campaignOwnerId, campaignColor, setShowLogin }) {
+  const { isLoggedIn, user } = useAuth();
+  const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [newCommentText, setNewCommentText] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  
+  // Edit state
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [editingText, setEditingText] = useState("");
+  const [editError, setEditError] = useState("");
+  const [updatingCommentId, setUpdatingCommentId] = useState(null);
+
+  // Delete confirm state
+  const [confirmDeleteId, setConfirmDeleteId] = useState(null);
+
+  useEffect(() => {
+    let active = true;
+    const fetchComments = async () => {
+      try {
+        setLoading(true);
+        const data = await getComments(campaignId);
+        if (active) {
+          if (data?.success && Array.isArray(data.comments)) {
+            setComments(data.comments);
+          } else {
+            setError("Failed to load comments.");
+          }
+        }
+      } catch (err) {
+        console.error("Error fetching comments:", err);
+        if (active) {
+          setError("Failed to load comments.");
+        }
+      } finally {
+        if (active) {
+          setLoading(false);
+        }
+      }
+    };
+    fetchComments();
+    return () => {
+      active = false;
+    };
+  }, [campaignId]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitError("");
+
+    if (!newCommentText.trim()) {
+      setSubmitError("Comment cannot be empty.");
+      return;
+    }
+
+    if (newCommentText.trim().length > 1000) {
+      setSubmitError("Comment cannot exceed 1000 characters.");
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const res = await createComment(campaignId, newCommentText);
+      if (res.success && res.comment) {
+        setComments(prev => [res.comment, ...prev]);
+        setNewCommentText("");
+      } else {
+        setSubmitError("Failed to post comment.");
+      }
+    } catch (err) {
+      setSubmitError(err.message || "Failed to post comment.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleUpdate = async (commentId) => {
+    setEditError("");
+    if (!editingText.trim()) {
+      setEditError("Comment cannot be empty.");
+      return;
+    }
+
+    if (editingText.trim().length > 1000) {
+      setEditError("Comment cannot exceed 1000 characters.");
+      return;
+    }
+
+    setUpdatingCommentId(commentId);
+    try {
+      const res = await updateComment(commentId, editingText);
+      if (res.success && res.comment) {
+        setComments(prev => prev.map(c => c.id === commentId ? res.comment : c));
+        setEditingCommentId(null);
+        setEditingText("");
+      } else {
+        setEditError("Failed to update comment.");
+      }
+    } catch (err) {
+      setEditError(err.message || "Failed to update comment.");
+    } finally {
+      setUpdatingCommentId(null);
+    }
+  };
+
+  const handleDelete = async (commentId) => {
+    try {
+      const res = await deleteComment(commentId);
+      if (res.success) {
+        setComments(prev => prev.filter(c => c.id !== commentId));
+        setConfirmDeleteId(null);
+      }
+    } catch (err) {
+      console.error("Error deleting comment:", err);
+      alert(err.message || "Failed to delete comment.");
+    }
+  };
+
+  return (
+    <div style={{ marginTop: 32, borderTop: "1px solid #EDE9E0", paddingTop: 32, marginBottom: 32 }}>
+      <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 700, color: "#1A1A2E", marginBottom: 20, display: "flex", alignItems: "center", gap: 10 }}>
+        <MessageSquare size={22} style={{ color: campaignColor }} /> Comments ({comments.length})
+      </h3>
+
+      {/* Add Comment Input or Login CTA */}
+      {isLoggedIn ? (
+        <form onSubmit={handleSubmit} style={{ marginBottom: 28 }}>
+          <div style={{ position: "relative" }}>
+            <textarea
+              value={newCommentText}
+              onChange={e => { setNewCommentText(e.target.value); setSubmitError(""); }}
+              placeholder="Leave a message of support..."
+              rows={3}
+              style={{
+                width: "100%",
+                padding: "14px 16px",
+                border: "1px solid #EDE9E0",
+                borderRadius: 14,
+                fontSize: 14,
+                outline: "none",
+                resize: "vertical",
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                background: "#fff",
+                transition: "border-color 0.2s ease",
+                boxShadow: "0 2px 6px rgba(0,0,0,0.01)"
+              }}
+              onFocus={e => e.target.style.borderColor = campaignColor}
+              onBlur={e => e.target.style.borderColor = "#EDE9E0"}
+            />
+            {submitError && (
+              <div style={{ color: "#d93838", fontSize: 13, marginTop: 6, display: "flex", alignItems: "center", gap: 6 }}>
+                <AlertCircle size={14} /> {submitError}
+              </div>
+            )}
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 10 }}>
+              <span style={{ fontSize: 12, color: newCommentText.length > 900 ? "#d93838" : "#888" }}>
+                {newCommentText.length} / 1000 characters
+              </span>
+              <button
+                type="submit"
+                disabled={submitting || !newCommentText.trim()}
+                style={{
+                  background: !newCommentText.trim() || submitting ? "#EDE9E0" : campaignColor,
+                  color: !newCommentText.trim() || submitting ? "#aaa" : "#fff",
+                  border: "none",
+                  padding: "10px 20px",
+                  borderRadius: 10,
+                  fontSize: 14,
+                  fontWeight: 700,
+                  cursor: !newCommentText.trim() || submitting ? "not-allowed" : "pointer",
+                  transition: "all 0.2s ease",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6
+                }}
+              >
+                {submitting ? (
+                  <>
+                    <Loader2 className="animate-spin" size={14} /> Posting...
+                  </>
+                ) : (
+                  "Add Comment"
+                )}
+              </button>
+            </div>
+          </div>
+        </form>
+      ) : (
+        <div style={{
+          background: "#F8F6F0",
+          border: "1.5px dashed #D3CCBE",
+          borderRadius: 18,
+          padding: "24px 20px",
+          textAlign: "center",
+          marginBottom: 28,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 12
+        }}>
+          <p style={{ fontSize: 14, color: "#555", margin: 0, fontWeight: 500 }}>
+            Join the conversation. Only authenticated supporters can post comments.
+          </p>
+          <button
+            type="button"
+            onClick={() => setShowLogin(true)}
+            style={{
+              background: campaignColor,
+              color: "#fff",
+              border: "none",
+              padding: "10px 22px",
+              borderRadius: 10,
+              fontSize: 14,
+              fontWeight: 700,
+              cursor: "pointer",
+              transition: "transform 0.15s ease",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.05)"
+            }}
+            onMouseEnter={e => e.currentTarget.style.transform = "translateY(-1px)"}
+            onMouseLeave={e => e.currentTarget.style.transform = "translateY(0)"}
+          >
+            Log in to post comments
+          </button>
+        </div>
+      )}
+
+      {/* Loading state */}
+      {loading ? (
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "40px 0", gap: 10, color: "#888" }}>
+          <Loader2 className="animate-spin" style={{ color: campaignColor }} />
+          <span>Loading comments...</span>
+        </div>
+      ) : error ? (
+        <div style={{ textAlign: "center", padding: "20px 0", color: "#d93838", fontSize: 14 }}>
+          {error}
+        </div>
+      ) : comments.length === 0 ? (
+        /* Empty state */
+        <div style={{
+          textAlign: "center",
+          padding: "40px 20px",
+          background: "#fff",
+          borderRadius: 18,
+          border: "1px solid #EDE9E0",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.01)"
+        }}>
+          <p style={{ color: "#888", fontSize: 14, margin: 0 }}>No comments yet on this fundraiser. Be the first to share support!</p>
+        </div>
+      ) : (
+        /* Comments list */
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          {comments.map(comment => {
+            const isCommentOwner = user && String(user.id) === String(comment.user_id);
+            const isCampaignOwner = user && String(campaignOwnerId) === String(user.id);
+            const isAdmin = user && (user.role === "admin" || user.role === "super_admin");
+            const canDelete = isCommentOwner || isCampaignOwner || isAdmin;
+            const canEdit = isCommentOwner;
+
+            return (
+              <div key={comment.id} style={{
+                display: "flex",
+                gap: 14,
+                padding: "18px 20px",
+                background: "#fff",
+                border: "1px solid #EDE9E0",
+                borderRadius: 16,
+                boxShadow: "0 2px 8px rgba(0,0,0,0.01)"
+              }}>
+                {/* Avatar */}
+                <div style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: "50%",
+                  background: getHashColor(comment.user_name),
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontWeight: 700,
+                  fontSize: 13,
+                  color: "#fff",
+                  flexShrink: 0,
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.05)"
+                }}>
+                  {getInitials(comment.user_name)}
+                </div>
+
+                {/* Content Area */}
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 8, marginBottom: 6 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+                      <span style={{ fontSize: 14, fontWeight: 700, color: "#1A1A2E" }}>
+                        {comment.user_name}
+                      </span>
+                      {String(comment.user_id) === String(campaignOwnerId) && (
+                        <span style={{
+                          background: `${campaignColor}15`,
+                          color: campaignColor,
+                          fontSize: 10,
+                          fontWeight: 700,
+                          padding: "2px 8px",
+                          borderRadius: 6,
+                          letterSpacing: 0.3,
+                          textTransform: "uppercase"
+                        }}>
+                          Organizer
+                        </span>
+                      )}
+                    </div>
+                    <span style={{ fontSize: 12, color: "#888" }}>
+                      {formatDate(comment.created_at)}
+                    </span>
+                  </div>
+
+                  {editingCommentId === comment.id ? (
+                    /* Edit Mode */
+                    <div style={{ marginTop: 8 }}>
+                      <textarea
+                        value={editingText}
+                        onChange={e => { setEditingText(e.target.value); setEditError(""); }}
+                        rows={2}
+                        style={{
+                          width: "100%",
+                          padding: "10px 12px",
+                          border: `1px solid ${campaignColor}`,
+                          borderRadius: 10,
+                          fontSize: 14,
+                          outline: "none",
+                          fontFamily: "'Plus Jakarta Sans', sans-serif"
+                        }}
+                      />
+                      {editError && (
+                        <div style={{ color: "#d93838", fontSize: 12, marginTop: 4 }}>{editError}</div>
+                      )}
+                      <div style={{ display: "flex", gap: 8, marginTop: 8, justifyContent: "flex-end" }}>
+                        <button
+                          onClick={() => { setEditingCommentId(null); setEditingText(""); setEditError(""); }}
+                          style={{
+                            background: "#F8F6F0",
+                            border: "1px solid #EDE9E0",
+                            color: "#555",
+                            padding: "6px 12px",
+                            borderRadius: 8,
+                            fontSize: 12,
+                            fontWeight: 600,
+                            cursor: "pointer"
+                          }}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          onClick={() => handleUpdate(comment.id)}
+                          disabled={updatingCommentId === comment.id || !editingText.trim()}
+                          style={{
+                            background: campaignColor,
+                            color: "#fff",
+                            border: "none",
+                            padding: "6px 12px",
+                            borderRadius: 8,
+                            fontSize: 12,
+                            fontWeight: 600,
+                            cursor: updatingCommentId === comment.id || !editingText.trim() ? "not-allowed" : "pointer",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 4
+                          }}
+                        >
+                          {updatingCommentId === comment.id ? <Loader2 size={12} className="animate-spin" /> : <Check size={12} />} Save
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    /* Display Mode */
+                    <>
+                      <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6, margin: 0, wordBreak: "break-word", whiteSpace: "pre-wrap" }}>
+                        {comment.comment_text}
+                      </p>
+
+                      {/* Comment Actions */}
+                      {(canEdit || canDelete) && (
+                        <div style={{ display: "flex", gap: 12, marginTop: 10, justifyContent: "flex-end" }}>
+                          {canEdit && (
+                            <button
+                              onClick={() => { setEditingCommentId(comment.id); setEditingText(comment.comment_text); setConfirmDeleteId(null); }}
+                              style={{
+                                background: "none",
+                                border: "none",
+                                color: "#888",
+                                fontSize: 12,
+                                fontWeight: 500,
+                                cursor: "pointer",
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 4,
+                                padding: 0
+                              }}
+                              onMouseEnter={e => e.currentTarget.style.color = campaignColor}
+                              onMouseLeave={e => e.currentTarget.style.color = "#888"}
+                            >
+                              <Edit2 size={12} /> Edit
+                            </button>
+                          )}
+
+                          {canDelete && (
+                            confirmDeleteId === comment.id ? (
+                              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                                <span style={{ fontSize: 11, color: "#d93838", fontWeight: 600 }}>Sure?</span>
+                                <button
+                                  onClick={() => handleDelete(comment.id)}
+                                  style={{
+                                    background: "#d93838",
+                                    color: "#fff",
+                                    border: "none",
+                                    padding: "2px 8px",
+                                    borderRadius: 4,
+                                    fontSize: 11,
+                                    fontWeight: 600,
+                                    cursor: "pointer"
+                                  }}
+                                >
+                                  Yes
+                                </button>
+                                <button
+                                  onClick={() => setConfirmDeleteId(null)}
+                                  style={{
+                                    background: "#F8F6F0",
+                                    color: "#555",
+                                    border: "1px solid #EDE9E0",
+                                    padding: "2px 8px",
+                                    borderRadius: 4,
+                                    fontSize: 11,
+                                    fontWeight: 600,
+                                    cursor: "pointer"
+                                  }}
+                                >
+                                  No
+                                </button>
+                              </div>
+                            ) : (
+                              <button
+                                onClick={() => { setConfirmDeleteId(comment.id); setEditingCommentId(null); }}
+                                style={{
+                                  background: "none",
+                                  border: "none",
+                                  color: "#888",
+                                  fontSize: 12,
+                                  fontWeight: 500,
+                                  cursor: "pointer",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: 4,
+                                  padding: 0
+                                }}
+                                onMouseEnter={e => e.currentTarget.style.color = "#d93838"}
+                                onMouseLeave={e => e.currentTarget.style.color = "#888"}
+                              >
+                                <Trash2 size={12} /> Delete
+                              </button>
+                            )
+                          )}
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

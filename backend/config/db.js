@@ -191,6 +191,25 @@ const runMigrations = async () => {
             `);
         }
 
+        // Check and create comments table
+        const [commentTables] = await query(
+            "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'comments'"
+        );
+        if (commentTables.length === 0) {
+            console.log("Creating comments table...");
+            await query(`
+                CREATE TABLE comments (
+                    id INT IDENTITY(1,1) PRIMARY KEY,
+                    campaign_id NVARCHAR(36) NOT NULL,
+                    user_id INT NOT NULL,
+                    comment_text NVARCHAR(MAX) NOT NULL,
+                    created_at DATETIME2 DEFAULT GETDATE(),
+                    FOREIGN KEY (campaign_id) REFERENCES campaigns(id),
+                    FOREIGN KEY (user_id) REFERENCES users(id)
+                )
+            `);
+        }
+
         console.log("Database migrations checked & completed successfully!");
     } catch (err) {
         console.error("Database migrations error:", err);

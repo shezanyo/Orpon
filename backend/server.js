@@ -11,6 +11,7 @@ const donationRoutes =
 require("./routes/donationRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const leaderboardRoutes = require("./routes/leaderboardRoutes");
+const commentRoutes = require("./routes/commentRoutes");
 
 // Validate required environment variables before starting
 validateEnv();
@@ -31,6 +32,8 @@ app.use("/api", campaignRoutes);
 app.use("/api", donationRoutes);
 app.use("/api", adminRoutes);
 app.use("/api", leaderboardRoutes);
+app.use("/api", commentRoutes);
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

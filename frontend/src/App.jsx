@@ -57,7 +57,7 @@ const normalizeCampaign = (campaign) => {
   };
 };
 
-function CampaignDetailWrapper({ campaigns, campaignsLoaded, nav }) {
+function CampaignDetailWrapper({ campaigns, campaignsLoaded, nav, setShowLogin }) {
   const { id } = useParams();
 
   if (!campaignsLoaded) {
@@ -84,7 +84,7 @@ function CampaignDetailWrapper({ campaigns, campaignsLoaded, nav }) {
     );
   }
 
-  return <CampaignDetail c={campaign} nav={nav} />;
+  return <CampaignDetail c={campaign} nav={nav} setShowLogin={setShowLogin} />;
 }
 
 export default function App() {
@@ -176,7 +176,7 @@ export default function App() {
         } />
         <Route path="/donate/:id" element={<Donate />} />
         <Route path="/donate/nagad-sandbox" element={<NagadSandbox />} />
-        <Route path="/campaign/:id" element={<CampaignDetailWrapper campaigns={campaigns} campaignsLoaded={campaignsLoaded} nav={nav} />} />
+        <Route path="/campaign/:id" element={<CampaignDetailWrapper campaigns={campaigns} campaignsLoaded={campaignsLoaded} nav={nav} setShowLogin={setShowLogin} />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/payment/success" element={<PaymentSuccess />} />
