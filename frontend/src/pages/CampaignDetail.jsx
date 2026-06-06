@@ -593,18 +593,26 @@ function CommentsSection({ campaignId, campaignOwnerId, campaignColor, setShowLo
               style={{
                 width: "100%",
                 padding: "14px 16px",
-                border: "1px solid #EDE9E0",
+                border: "1.5px solid #EDE9E0",
                 borderRadius: 14,
                 fontSize: 14,
                 outline: "none",
                 resize: "vertical",
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                background: "#fff",
-                transition: "border-color 0.2s ease",
+                background: `${campaignColor}04`,
+                transition: "all 0.25s ease",
                 boxShadow: "0 2px 6px rgba(0,0,0,0.01)"
               }}
-              onFocus={e => e.target.style.borderColor = campaignColor}
-              onBlur={e => e.target.style.borderColor = "#EDE9E0"}
+              onFocus={e => {
+                e.target.style.borderColor = campaignColor;
+                e.target.style.background = "#fff";
+                e.target.style.boxShadow = `0 0 0 3px ${campaignColor}18`;
+              }}
+              onBlur={e => {
+                e.target.style.borderColor = "#EDE9E0";
+                e.target.style.background = `${campaignColor}04`;
+                e.target.style.boxShadow = "none";
+              }}
             />
             {submitError && (
               <div style={{ color: "#d93838", fontSize: 13, marginTop: 6, display: "flex", alignItems: "center", gap: 6 }}>
@@ -619,10 +627,10 @@ function CommentsSection({ campaignId, campaignOwnerId, campaignColor, setShowLo
                 type="submit"
                 disabled={submitting || !newCommentText.trim()}
                 style={{
-                  background: !newCommentText.trim() || submitting ? "#EDE9E0" : campaignColor,
-                  color: !newCommentText.trim() || submitting ? "#aaa" : "#fff",
+                  background: !newCommentText.trim() || submitting ? `${campaignColor}18` : campaignColor,
+                  color: !newCommentText.trim() || submitting ? `${campaignColor}50` : "#fff",
                   border: "none",
-                  padding: "10px 20px",
+                  padding: "10px 22px",
                   borderRadius: 10,
                   fontSize: 14,
                   fontWeight: 700,
@@ -630,7 +638,20 @@ function CommentsSection({ campaignId, campaignOwnerId, campaignColor, setShowLo
                   transition: "all 0.2s ease",
                   display: "flex",
                   alignItems: "center",
-                  gap: 6
+                  gap: 6,
+                  boxShadow: !newCommentText.trim() || submitting ? "none" : `0 4px 12px ${campaignColor}22`
+                }}
+                onMouseEnter={e => {
+                  if (newCommentText.trim() && !submitting) {
+                    e.currentTarget.style.transform = "translateY(-1px)";
+                    e.currentTarget.style.boxShadow = `0 6px 16px ${campaignColor}35`;
+                  }
+                }}
+                onMouseLeave={e => {
+                  if (newCommentText.trim() && !submitting) {
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = `0 4px 12px ${campaignColor}22`;
+                  }
                 }}
               >
                 {submitting ? (
