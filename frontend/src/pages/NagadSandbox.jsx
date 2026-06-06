@@ -100,7 +100,7 @@ export default function NagadSandbox() {
 
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", background: "#F5F5F5", fontFamily: "Arial, sans-serif" }}>
-      <div style={{ width: 380, background: "#fff", borderRadius: 12, overflow: "hidden", boxShadow: "0 8px 30px rgba(0,0,0,0.12)" }}>
+      <div style={{ width: "100%", maxWidth: 380, background: "#fff", borderRadius: 12, overflow: "hidden", boxShadow: "0 8px 30px rgba(0,0,0,0.12)" }}>
         {/* HEADER */}
         <div style={{ background: "linear-gradient(135deg, #EC1C24 0%, #F58220 100%)", padding: "24px 20px", color: "#fff", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>

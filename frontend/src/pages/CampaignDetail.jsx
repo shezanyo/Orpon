@@ -181,6 +181,132 @@ export default function CampaignDetail({ c, nav }) {
     );
   }
 
+  const renderDonatePanel = (isMobile = false) => {
+    return (
+      <div style={{
+        background: "#fff", border: "1px solid #EDE9E0", borderRadius: 22, padding: 28,
+        boxShadow: "0 8px 40px rgba(0,0,0,0.08)",
+        ...(isMobile ? { marginBottom: 12, marginTop: 12 } : {})
+      }}>
+        {/* Raised Amount */}
+        <div style={{ marginBottom: 6 }}>
+          <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 800, color: c.color }}>{fmt(c.raised)}</span>
+        </div>
+        <p style={{ color: "#888", fontSize: 14, marginBottom: 16 }}>raised of {fmt(c.goal)} goal</p>
+
+        {/* Progress */}
+        <ProgressBar value={p} color={c.color} />
+
+        {/* Stats */}
+        <div style={{ display: "flex", gap: 20, marginTop: 16, marginBottom: 20, fontSize: 14, color: "#555" }}>
+          <span><strong style={{ color: "#1A1A2E", fontSize: 17 }}>{c.donors}</strong> donors</span>
+          <span><strong style={{ color: "#1A1A2E", fontSize: 17 }}>{c.daysLeft}</strong> days left</span>
+        </div>
+
+        <div style={{ height: 1, background: "#EDE9E0", margin: "0 0 20px 0" }} />
+
+        {/* Donate Now */}
+        <button
+          onClick={handleDonate}
+          style={{
+            width: "100%", background: "#1B4332", color: "#fff", border: "none",
+            padding: "16px 0", borderRadius: 12, fontSize: 16, fontWeight: 700,
+            cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+            boxShadow: "0 4px 14px rgba(27,67,50,0.2)", transition: "all 0.2s ease"
+          }}
+          onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(27,67,50,0.3)"; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 14px rgba(27,67,50,0.2)"; }}
+        >
+          <Heart size={18} fill="#fff" /> Donate now
+        </button>
+
+        {/* Share Button */}
+        <button
+          onClick={copyLink}
+          style={{
+            width: "100%", background: "#fff", color: "#1B4332", border: "1.5px solid #1B4332",
+            padding: "13px 0", borderRadius: 12, fontSize: 14, fontWeight: 700,
+            cursor: "pointer", marginTop: 10, display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+            transition: "all 0.2s ease"
+          }}
+          onMouseEnter={e => e.currentTarget.style.background = "rgba(27,67,50,0.04)"}
+          onMouseLeave={e => e.currentTarget.style.background = "#fff"}
+        >
+          <Share2 size={16} /> {copied ? "Link Copied!" : "Share"}
+        </button>
+
+        {/* Trust Badge */}
+        <div style={{
+          display: "flex", gap: 10, alignItems: "flex-start", marginTop: 20,
+          fontSize: 11, color: "#888", lineHeight: 1.5, background: "#F8F6F0",
+          padding: "12px 14px", borderRadius: 12, border: "1px solid #EDE9E0"
+        }}>
+          <ShieldCheck size={18} style={{ color: "#52B788", flexShrink: 0, marginTop: 1 }} />
+          <div>
+            <strong style={{ color: "#555" }}>Orpon Guarantee.</strong> Every donation is tracked on our blockchain ledger. Zero platform fees.
+          </div>
+        </div>
+
+        {/* Recent Donors (Only show on Desktop side card) */}
+        {!isMobile && (
+          <div style={{ marginTop: 20 }}>
+            <div style={{ height: 1, background: "#EDE9E0", marginBottom: 16 }} />
+            <p style={{ fontSize: 12, fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 12 }}>
+              Recent donors
+            </p>
+
+            {loadingTx ? (
+              <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 0", color: "#888" }}>
+                <Loader2 className="animate-spin" style={{ width: 14, height: 14, color: c.color }} />
+                <span style={{ fontSize: 13 }}>Loading...</span>
+              </div>
+            ) : completedTx.length === 0 ? (
+              <p style={{ fontSize: 13, color: "#888", margin: 0 }}>No donations yet. Be the first!</p>
+            ) : (
+              <>
+                {completedTx.slice(0, 3).map(t => (
+                  <div key={t.id} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
+                    <div style={{
+                      width: 34, height: 34, borderRadius: "50%", background: getHashColor(t.display_name),
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      fontWeight: 700, fontSize: 11, color: "#fff", flexShrink: 0
+                    }}>
+                      {getInitials(t.display_name)}
+                    </div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: 13, fontWeight: 600, color: "#1A1A2E", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        {t.display_name || "Anonymous"}
+                      </div>
+                      <div style={{ fontSize: 12, color: "#888" }}>{fmt(parseFloat(t.amount || 0))}</div>
+                    </div>
+                  </div>
+                ))}
+
+                {/* See all donors button */}
+                <button
+                  onClick={() => {
+                    setShowAllDonors(true);
+                    window.scrollTo({ top: 0, behavior: "instant" });
+                  }}
+                  style={{
+                    width: "100%", background: "#F8F6F0", color: "#1A1A2E", border: "1px solid #EDE9E0",
+                    padding: "10px 0", borderRadius: 10, fontSize: 13, fontWeight: 700,
+                    cursor: "pointer", marginTop: 4, transition: "all 0.2s ease",
+                    display: "flex", alignItems: "center", justifyContent: "center", gap: 6
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "#EDE9E0"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "#F8F6F0"; }}
+                >
+                  <Users size={14} /> See all {completedTx.length} donors
+                </button>
+              </>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <div style={{ maxWidth: 1100, margin: "0 auto", padding: "30px 5% 80px", animation: "fadeUp 0.5s ease both" }}>
       {/* Back Button */}
@@ -202,16 +328,16 @@ export default function CampaignDetail({ c, nav }) {
       {/* Title */}
       <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 40, fontWeight: 700, lineHeight: 1.15, color: "#1A1A2E", margin: "0 0 28px 0" }}>{c.title}</h1>
 
-      {/* 2-Column Grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 380px", gap: 40, alignItems: "start" }}>
+      {/* Responsive Grid / Stack */}
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-10 items-start">
 
         {/* ===== LEFT COLUMN ===== */}
-        <div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           {/* Hero Image */}
           <div style={{
             background: `linear-gradient(135deg, ${c.color}22, ${c.color}55)`,
             borderRadius: 20, height: 340, display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: 88, marginBottom: 24, border: `1px solid ${c.color}33`,
+            fontSize: 88, border: `1px solid ${c.color}33`,
             position: "relative", overflow: "hidden", boxShadow: "0 8px 30px rgba(0,0,0,0.04)"
           }}>
             {c.emoji}
@@ -224,8 +350,13 @@ export default function CampaignDetail({ c, nav }) {
             </div>
           </div>
 
+          {/* Mobile-only Donate Panel (Visible under cover image on mobile) */}
+          <div className="block lg:hidden">
+            {renderDonatePanel(true)}
+          </div>
+
           {/* Organizer */}
-          <div style={{ display: "flex", alignItems: "center", gap: 14, padding: "18px 0", borderTop: "1px solid #EDE9E0", borderBottom: "1px solid #EDE9E0", marginBottom: 28 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 14, padding: "18px 0", borderTop: "1px solid #EDE9E0", borderBottom: "1px solid #EDE9E0", margin: "12px 0" }}>
             <div style={{
               width: 48, height: 48, borderRadius: "50%", background: c.color,
               color: "#fff", display: "flex", alignItems: "center", justifyContent: "center",
@@ -242,136 +373,72 @@ export default function CampaignDetail({ c, nav }) {
           </div>
 
           {/* Story */}
-          <div style={{ marginBottom: 36 }}>
+          <div style={{ marginBottom: 20 }}>
             {c.story.split("\n\n").map((para, i) => (
               <p key={i} style={{ color: "#444", fontSize: 15, lineHeight: 1.8, marginBottom: 14 }}>{para}</p>
             ))}
           </div>
 
-
-        </div>
-
-        {/* ===== RIGHT COLUMN: Sticky Donate Panel ===== */}
-        <div style={{ position: "sticky", top: 80 }}>
-          <div style={{
-            background: "#fff", border: "1px solid #EDE9E0", borderRadius: 22, padding: 28,
-            boxShadow: "0 8px 40px rgba(0,0,0,0.08)", animation: "fadeUp 0.5s 0.15s ease both"
+          {/* Mobile-only Recent Donors (Visible under story on mobile) */}
+          <div className="block lg:hidden" style={{
+            background: "#fff", border: "1px solid #EDE9E0", borderRadius: 22, padding: 24,
+            boxShadow: "0 4px 15px rgba(0,0,0,0.02)", marginBottom: 20
           }}>
-            {/* Raised Amount */}
-            <div style={{ marginBottom: 6 }}>
-              <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 800, color: c.color }}>{fmt(c.raised)}</span>
-            </div>
-            <p style={{ color: "#888", fontSize: 14, marginBottom: 16 }}>raised of {fmt(c.goal)} goal</p>
+            <p style={{ fontSize: 12, fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 16 }}>
+              Recent donors
+            </p>
 
-            {/* Progress */}
-            <ProgressBar value={p} color={c.color} />
-
-            {/* Stats */}
-            <div style={{ display: "flex", gap: 20, marginTop: 16, marginBottom: 20, fontSize: 14, color: "#555" }}>
-              <span><strong style={{ color: "#1A1A2E", fontSize: 17 }}>{c.donors}</strong> donors</span>
-              <span><strong style={{ color: "#1A1A2E", fontSize: 17 }}>{c.daysLeft}</strong> days left</span>
-            </div>
-
-            <div style={{ height: 1, background: "#EDE9E0", margin: "0 0 20px 0" }} />
-
-            {/* Donate Now */}
-            <button
-              onClick={handleDonate}
-              style={{
-                width: "100%", background: "#1B4332", color: "#fff", border: "none",
-                padding: "16px 0", borderRadius: 12, fontSize: 16, fontWeight: 700,
-                cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-                boxShadow: "0 4px 14px rgba(27,67,50,0.2)", transition: "all 0.2s ease"
-              }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(27,67,50,0.3)"; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 14px rgba(27,67,50,0.2)"; }}
-            >
-              <Heart size={18} fill="#fff" /> Donate now
-            </button>
-
-            {/* Share Button */}
-            <button
-              onClick={copyLink}
-              style={{
-                width: "100%", background: "#fff", color: "#1B4332", border: "1.5px solid #1B4332",
-                padding: "13px 0", borderRadius: 12, fontSize: 14, fontWeight: 700,
-                cursor: "pointer", marginTop: 10, display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-                transition: "all 0.2s ease"
-              }}
-              onMouseEnter={e => e.currentTarget.style.background = "rgba(27,67,50,0.04)"}
-              onMouseLeave={e => e.currentTarget.style.background = "#fff"}
-            >
-              <Share2 size={16} /> {copied ? "Link Copied!" : "Share"}
-            </button>
-
-            {/* Trust Badge */}
-            <div style={{
-              display: "flex", gap: 10, alignItems: "flex-start", marginTop: 20,
-              fontSize: 11, color: "#888", lineHeight: 1.5, background: "#F8F6F0",
-              padding: "12px 14px", borderRadius: 12, border: "1px solid #EDE9E0"
-            }}>
-              <ShieldCheck size={18} style={{ color: "#52B788", flexShrink: 0, marginTop: 1 }} />
-              <div>
-                <strong style={{ color: "#555" }}>Orpon Guarantee.</strong> Every donation is tracked on our blockchain ledger. Zero platform fees.
+            {loadingTx ? (
+              <div style={{ display: "flex", alignItems: "center", gap: 6, color: "#888" }}>
+                <Loader2 className="animate-spin" style={{ width: 14, height: 14, color: c.color }} />
+                <span style={{ fontSize: 13 }}>Loading...</span>
               </div>
-            </div>
-
-            {/* Recent Donors */}
-            <div style={{ marginTop: 20 }}>
-              <div style={{ height: 1, background: "#EDE9E0", marginBottom: 16 }} />
-              <p style={{ fontSize: 12, fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 12 }}>
-                Recent donors
-              </p>
-
-              {loadingTx ? (
-                <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 0", color: "#888" }}>
-                  <Loader2 className="animate-spin" style={{ width: 14, height: 14, color: c.color }} />
-                  <span style={{ fontSize: 13 }}>Loading...</span>
-                </div>
-              ) : completedTx.length === 0 ? (
-                <p style={{ fontSize: 13, color: "#888", margin: 0 }}>No donations yet. Be the first!</p>
-              ) : (
-                <>
-                  {completedTx.slice(0, 3).map(t => (
-                    <div key={t.id} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
-                      <div style={{
-                        width: 34, height: 34, borderRadius: "50%", background: getHashColor(t.display_name),
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                        fontWeight: 700, fontSize: 11, color: "#fff", flexShrink: 0
-                      }}>
-                        {getInitials(t.display_name)}
-                      </div>
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ fontSize: 13, fontWeight: 600, color: "#1A1A2E", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                          {t.display_name || "Anonymous"}
-                        </div>
-                        <div style={{ fontSize: 12, color: "#888" }}>{fmt(parseFloat(t.amount || 0))}</div>
-                      </div>
+            ) : completedTx.length === 0 ? (
+              <p style={{ fontSize: 13, color: "#888", margin: 0 }}>No donations yet. Be the first!</p>
+            ) : (
+              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                {completedTx.slice(0, 3).map(t => (
+                  <div key={t.id} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <div style={{
+                      width: 34, height: 34, borderRadius: "50%", background: getHashColor(t.display_name),
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      fontWeight: 700, fontSize: 11, color: "#fff", flexShrink: 0
+                    }}>
+                      {getInitials(t.display_name)}
                     </div>
-                  ))}
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: 13, fontWeight: 600, color: "#1A1A2E", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        {t.display_name || "Anonymous"}
+                      </div>
+                      <div style={{ fontSize: 12, color: "#888" }}>{fmt(parseFloat(t.amount || 0))}</div>
+                    </div>
+                  </div>
+                ))}
 
-                  {/* See all donors button */}
-                  <button
-                    onClick={() => {
-                      setShowAllDonors(true);
-                      window.scrollTo({ top: 0, behavior: "instant" });
-                    }}
-                    style={{
-                      width: "100%", background: "#F8F6F0", color: "#1A1A2E", border: "1px solid #EDE9E0",
-                      padding: "10px 0", borderRadius: 10, fontSize: 13, fontWeight: 700,
-                      cursor: "pointer", marginTop: 4, transition: "all 0.2s ease",
-                      display: "flex", alignItems: "center", justifyContent: "center", gap: 6
-                    }}
-                    onMouseEnter={e => { e.currentTarget.style.background = "#EDE9E0"; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = "#F8F6F0"; }}
-                  >
-                    <Users size={14} /> See all {completedTx.length} donors
-                  </button>
-                </>
-              )}
-            </div>
+                <button
+                  onClick={() => {
+                    setShowAllDonors(true);
+                    window.scrollTo({ top: 0, behavior: "instant" });
+                  }}
+                  style={{
+                    width: "100%", background: "#F8F6F0", color: "#1A1A2E", border: "1px solid #EDE9E0",
+                    padding: "10px 0", borderRadius: 10, fontSize: 13, fontWeight: 700,
+                    cursor: "pointer", marginTop: 4, transition: "all 0.2s ease",
+                    display: "flex", alignItems: "center", justifyContent: "center", gap: 6
+                  }}
+                >
+                  <Users size={14} /> See all {completedTx.length} donors
+                </button>
+              </div>
+            )}
           </div>
         </div>
+
+        {/* ===== RIGHT COLUMN: Desktop Sticky Donate Panel (Hidden on mobile) ===== */}
+        <div className="hidden lg:block sticky" style={{ top: 80 }}>
+          {renderDonatePanel(false)}
+        </div>
+
       </div>
     </div>
   );
