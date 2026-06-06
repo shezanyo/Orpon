@@ -133,3 +133,20 @@ export const getLeaderboard = () => {
 export const deleteCampaign = (campaignId) => {
   return apiCall(`/campaign/${campaignId}`, "DELETE");
 };
+
+export const getComments = (campaignId) => {
+  return apiCall(`/campaign/${campaignId}/comments`);
+};
+
+export const createComment = (campaignId, comment_text) => {
+  return apiCall(`/campaign/${campaignId}/comments`, "POST", { comment_text });
+};
+
+export const updateComment = (commentId, comment_text) => {
+  return apiCall(`/comment/${commentId}`, "PUT", { comment_text });
+};
+
+export const deleteComment = (commentId) => {
+  return apiCall(`/comment/${commentId}`, "DELETE");
+};
+

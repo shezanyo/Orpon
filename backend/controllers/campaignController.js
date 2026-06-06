@@ -215,6 +215,12 @@ const deleteCampaign = async (req, res) => {
         }
 
         // 3. Perform delete in sequential queries
+        // Delete campaign comments first
+        await pool.query(
+            "DELETE FROM comments WHERE campaign_id = ?",
+            [campaignId]
+        );
+
         // Update donations to set campaign_id to NULL to satisfy foreign key constraints
         await pool.query(
             "UPDATE donations SET campaign_id = NULL WHERE campaign_id = ?",
@@ -226,6 +232,7 @@ const deleteCampaign = async (req, res) => {
             "DELETE FROM campaigns WHERE id = ?",
             [campaignId]
         );
+
 
         // 4. Log action
         await logAction(
