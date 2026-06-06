@@ -43,10 +43,11 @@ export default function Home({ nav, campaigns, openCampaign, setShowLogin, isLog
           .stat-card {
             border-left: none !important;
             border-bottom: 1px solid #EDE9E0;
-            padding: 16px 0 !important;
+            padding: 24px 0 !important;
           }
           .stat-card:last-child {
             border-bottom: none !important;
+            padding-bottom: 0 !important;
           }
         }
       `}</style>
@@ -125,11 +126,11 @@ export default function Home({ nav, campaigns, openCampaign, setShowLogin, isLog
             background: "#fff", 
             borderRadius: 24, 
             border: "1px solid #EDE9E0",
-            boxShadow: "0 10px 30px rgba(27,67,50,0.04)",
-            padding: "24px",
+            boxShadow: "0 10px 30px rgba(27,67,50,0.03)",
+            padding: "32px 24px",
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: 20
+            gap: 24
           }}
         >
           {[
@@ -142,33 +143,28 @@ export default function Home({ nav, campaigns, openCampaign, setShowLogin, isLog
               <div 
                 key={i} 
                 style={{ 
-                  padding: "16px 20px", 
-                  textAlign: "left",
+                  padding: "12px 20px", 
+                  textAlign: "center",
                   borderLeft: i > 0 ? "1px solid #EDE9E0" : "none",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 16
                 }}
                 className="stat-card"
               >
                 <div style={{ 
                   width: 48, 
                   height: 48, 
-                  borderRadius: 14, 
+                  borderRadius: "50%", 
                   backgroundColor: `${s.color}12`, 
                   display: "flex", 
                   alignItems: "center", 
                   justifyContent: "center", 
                   color: s.color,
-                  flexShrink: 0
+                  margin: "0 auto 16px"
                 }}>
                   <StatIcon size={24} />
                 </div>
-                <div>
-                  <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 26, fontWeight: 800, color: "#1A1A2E", lineHeight: 1.1 }}>{s.val}</div>
-                  <div style={{ color: "#1B4332", fontSize: 13, fontWeight: 600, marginTop: 4 }}>{s.label}</div>
-                  <div style={{ color: "#888", fontSize: 11, marginTop: 2 }}>{s.desc}</div>
-                </div>
+                <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 32, fontWeight: 800, color: "#1A1A2E", lineHeight: 1.1 }}>{s.val}</div>
+                <div style={{ color: "#1B4332", fontSize: 14, fontWeight: 600, marginTop: 8 }}>{s.label}</div>
+                <div style={{ color: "#888", fontSize: 12, marginTop: 4, lineHeight: 1.4 }}>{s.desc}</div>
               </div>
             );
           })}
