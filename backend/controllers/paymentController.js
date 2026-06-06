@@ -82,6 +82,7 @@ const initiateBkash = async (req, res) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json",
                 "username": process.env.BKASH_USERNAME,
                 "password": process.env.BKASH_PASSWORD
             },
@@ -93,7 +94,7 @@ const initiateBkash = async (req, res) => {
 
         const tokenData = await tokenResponse.json();
         if (!tokenResponse.ok || !tokenData.id_token) {
-            console.error("bKash token grant failure:", tokenData);
+            console.error("bKash token grant failure [HTTP %d]:", tokenResponse.status, JSON.stringify(tokenData));
             await failDonationRecord(pendingDonation.id);
             return res.status(502).json({ message: "Failed to authenticate with bKash Sandbox" });
         }
@@ -106,6 +107,7 @@ const initiateBkash = async (req, res) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json",
                 "Authorization": idToken,
                 "X-APP-Key": process.env.BKASH_APP_KEY
             },
@@ -122,7 +124,7 @@ const initiateBkash = async (req, res) => {
 
         const paymentData = await createPaymentResponse.json();
         if (!createPaymentResponse.ok || !paymentData.paymentID) {
-            console.error("bKash payment creation failure:", paymentData);
+            console.error("bKash payment creation failure [HTTP %d]:", createPaymentResponse.status, JSON.stringify(paymentData));
             await failDonationRecord(pendingDonation.id);
             return res.status(502).json({ message: "Failed to create payment session with bKash" });
         }
@@ -183,6 +185,7 @@ const bkashCallback = async (req, res) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json",
                 "Authorization": pending.idToken,
                 "X-APP-Key": process.env.BKASH_APP_KEY
             },
@@ -192,7 +195,7 @@ const bkashCallback = async (req, res) => {
         const executeData = await executeResponse.json();
 
         if (!executeResponse.ok || executeData.transactionStatus !== "Completed") {
-            console.error("bKash payment execution failure:", executeData);
+            console.error("bKash payment execution failure [HTTP %d]:", executeResponse.status, JSON.stringify(executeData));
             await failDonationRecord(pending.donationId);
             const failUrl = getRedirectUrl("/payment/fail", { message: "Failed to execute bKash payment" });
             return res.redirect(failUrl);
