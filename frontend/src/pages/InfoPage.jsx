@@ -494,7 +494,7 @@ export default function InfoPage({ nav }) {
         </span>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr", lg: "260px 1fr", gap: 40, alignItems: "start" }} className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-10 items-start">
         
         {/* Sidebar Nav */}
         <div style={{ background: "#fff", border: "1px solid #EDE9E0", borderRadius: 20, padding: "20px 16px", boxShadow: "0 4px 20px rgba(0,0,0,0.02)" }}>
