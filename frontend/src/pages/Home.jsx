@@ -213,9 +213,9 @@ export default function Home({ nav, campaigns, openCampaign, setShowLogin, isLog
 
       {/* WHY TRUST ORPON SECTION */}
       <section style={{ padding: "100px 5%", background: "#F8F6F0", borderTop: "1px solid #EDE9E0" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }} className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-12 items-center">
-          {/* Left Panel */}
-          <div style={{ textAlign: "left" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          {/* Header */}
+          <div style={{ textAlign: "center", marginBottom: 56 }}>
             <div style={{ 
               display: "inline-flex", 
               alignItems: "center", 
@@ -235,40 +235,16 @@ export default function Home({ nav, campaigns, openCampaign, setShowLogin, isLog
               <ShieldCheck size={14} />
               <span>Trust & Security</span>
             </div>
-            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(32px, 4vw, 42px)", fontWeight: 800, color: "#1A1A2E", lineHeight: 1.2, letterSpacing: "-0.02em", marginBottom: 20 }}>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(32px, 4.5vw, 42px)", fontWeight: 800, color: "#1A1A2E", lineHeight: 1.2, letterSpacing: "-0.02em", marginBottom: 16 }}>
               Why donors trust Orpon
             </h2>
-            <p style={{ color: "#555", fontSize: 16, lineHeight: 1.7, marginBottom: 28 }}>
+            <p style={{ color: "#555", fontSize: 16, lineHeight: 1.7, maxWidth: 640, margin: "0 auto" }}>
               We've built Bangladesh's first transparent platform designed to secure and verify every single donation. Give with absolute confidence.
             </p>
-            <button 
-              onClick={() => nav("info/verification")}
-              style={{
-                background: "transparent",
-                color: "#1B4332",
-                border: "1px solid #1B4332",
-                padding: "12px 24px",
-                borderRadius: 10,
-                fontSize: 14,
-                fontWeight: 600,
-                cursor: "pointer",
-                transition: "all 0.2s"
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "#1B4332";
-                e.currentTarget.style.color = "#fff";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "transparent";
-                e.currentTarget.style.color = "#1B4332";
-              }}
-            >
-              Learn about verification
-            </button>
           </div>
 
-          {/* Right Cards Grid */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 24 }}>
+          {/* Cards Grid */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 28 }}>
             {[
               {
                 icon: ShieldCheck,
@@ -303,9 +279,13 @@ export default function Home({ nav, campaigns, openCampaign, setShowLogin, isLog
                     background: "#fff", 
                     border: "1px solid #EDE9E0", 
                     borderRadius: 24, 
-                    padding: "32px 24px",
+                    padding: "36px 28px",
                     boxShadow: "0 8px 30px rgba(0,0,0,0.015)",
-                    transition: "transform 0.25s, box-shadow 0.25s"
+                    transition: "transform 0.25s, box-shadow 0.25s",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    textAlign: "left"
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "translateY(-4px)";
