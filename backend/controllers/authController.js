@@ -136,7 +136,8 @@ const registerUser = async (req, res) => {
                 phone: normalizedPhone,
                 nid,
                 address,
-                role: "user"
+                role: "user",
+                created_at: new Date().toISOString()
             }
         });
 
@@ -218,7 +219,8 @@ const loginUser = async (req, res) => {
                 phone: user.phone,
                 nid: user.nid,
                 address: user.address,
-                role: user.role
+                role: user.role,
+                created_at: user.created_at
             }
         });
 
