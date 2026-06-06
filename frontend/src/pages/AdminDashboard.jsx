@@ -221,7 +221,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Main Grid Layout: left dashboard + right integrity auditor */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: 32, alignItems: "start" }}>
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-8 items-start">
         
         {/* Left Dashboard Area */}
         <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>

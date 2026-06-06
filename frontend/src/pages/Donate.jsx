@@ -119,7 +119,7 @@ export default function Donate() {
         ← Back to campaign
       </button>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, alignItems: "start" }} className="flex flex-col md:grid">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         {/* LEFT: Info & Summary */}
         <div style={{ background: "#1B4332", color: "#fff", borderRadius: 24, padding: 32, border: "1px solid #2D6A4F" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
