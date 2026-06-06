@@ -39,7 +39,7 @@ export default function Profile() {
             {user.full_name?.charAt(0).toUpperCase()}
           </div>
           <div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 700, color: "#1A1A2E" }}>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 32, fontWeight: 700, color: "#1A1A2E" }}>
               {user.full_name}
             </h2>
             <p style={{ color: "#888", fontSize: 14 }}>Registered Supporter</p>

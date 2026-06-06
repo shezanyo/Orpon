@@ -34,7 +34,7 @@ export default function Navbar({ page, nav, setShowLogin }) {
           alt="logo"
           style={{ width: 42, height: 42 }}
         />
-        <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 24, fontWeight: 700, color: "#1B4332", letterSpacing: "-0.02em" }}>
+        <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 700, color: "#1B4332", letterSpacing: "-0.02em" }}>
           Orpon
         </span>
       </div>

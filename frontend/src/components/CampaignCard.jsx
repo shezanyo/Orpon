@@ -49,7 +49,7 @@ export default function CampaignCard({ c, openCampaign }) {
         <p style={{ fontSize: 12, color: "#888", marginBottom: 6, fontWeight: 500 }}>
           by {c.organizer} {c.orgVerified && "✓"}
         </p>
-        <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 18, fontWeight: 700, lineHeight: 1.3, marginBottom: 14, color: "#1A1A2E" }}>
+        <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 18, fontWeight: 700, lineHeight: 1.3, marginBottom: 14, color: "#1A1A2E" }}>
           {c.title}
         </h3>
         <ProgressBar value={p} color={c.color} />

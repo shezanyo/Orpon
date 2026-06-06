@@ -30,7 +30,7 @@ export default function Footer({ nav }) {
                   style={{ width: 42, height: 42 }}
                 />
               </div>
-              <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 24, fontWeight: 700, color: "#fff" }}>Orpon</span>
+              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 700, color: "#fff" }}>Orpon</span>
             </div>
             <p style={{ fontSize: 14, lineHeight: 1.7, maxWidth: 260 }}>
               Bangladesh's transparent donation platform. Every taka tracked. Every story verified.

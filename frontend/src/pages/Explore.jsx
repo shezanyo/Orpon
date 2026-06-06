@@ -14,7 +14,7 @@ export default function Explore({ campaigns, openCampaign }) {
 
   return (
     <div style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 5% 80px" }}>
-      <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 48, fontWeight: 700, color: "#1A1A2E", marginBottom: 8, animation: "fadeUp 0.5s ease both" }}>
+      <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 48, fontWeight: 700, color: "#1A1A2E", marginBottom: 8, animation: "fadeUp 0.5s ease both" }}>
         All Campaigns
       </h1>
       <p style={{ color: "#888", marginBottom: 36, animation: "fadeUp 0.5s 0.1s ease both" }}>
