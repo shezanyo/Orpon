@@ -165,20 +165,6 @@ export default function Leaderboard() {
 
       {/* Hero Section */}
       <div style={{ textAlign: "center", marginBottom: 48, animation: "fadeUp 0.5s both" }}>
-        <div style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: 8,
-          padding: "8px 20px",
-          background: "linear-gradient(135deg, #FEF3C7, #FDE68A)",
-          borderRadius: 99,
-          marginBottom: 16,
-        }}>
-          <Sparkles size={16} color="#D4A017" />
-          <span style={{ fontSize: 13, fontWeight: 700, color: "#92400E", textTransform: "uppercase", letterSpacing: "0.08em" }}>
-            Live Rankings
-          </span>
-        </div>
         <h1 style={{
           fontFamily: "'Cormorant Garamond', serif",
           fontSize: "clamp(32px, 5vw, 52px)",

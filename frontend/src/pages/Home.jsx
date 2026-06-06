@@ -28,9 +28,6 @@ export default function Home({ nav, campaigns, openCampaign, setShowLogin, isLog
     <div>
       {/* HERO */}
       <section style={{ padding: "80px 5% 100px", maxWidth: 1200, margin: "0 auto", textAlign: "center", animation: "fadeUp 0.7s ease both" }}>
-        <div style={{ display: "inline-block", background: "#1B433211", color: "#1B4332", padding: "6px 18px", borderRadius: 99, fontSize: 13, fontWeight: 600, marginBottom: 24, letterSpacing: "0.05em" }}>
-          🇧🇩 Bangladesh's Transparent Donation Platform
-        </div>
         <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 700, lineHeight: 1.1, color: "#1A1A2E", marginBottom: 24, letterSpacing: "-0.02em" }}>
           Give with <em style={{ color: "#1B4332", fontStyle: "italic" }}>trust.</em>
           <br />
