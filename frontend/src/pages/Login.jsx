@@ -105,7 +105,7 @@ export default function LoginModal({ loginTab, setLoginTab, setShowLogin, setIsL
       onClick={e => e.target === e.currentTarget && setShowLogin(false)}
       style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)", zIndex: 200, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}
     >
-      <div style={{ background: "#fff", borderRadius: 28, padding: "40px 36px", width: "100%", maxWidth: 420, animation: "fadeUp 0.3s ease", transition: "all 0.35s cubic-bezier(0.4, 0, 0.2, 1)", boxShadow: "0 40px 100px rgba(0,0,0,0.2)" }}>
+      <div style={{ background: "#fff", borderRadius: 28, padding: "40px 36px", width: "100%", maxWidth: 420, animation: "fadeUp 0.3s ease", transition: "all 0.35s cubic-bezier(0.4, 0, 0.2, 1)", boxShadow: "0 40px 100px rgba(0,0,0,0.2)", maxHeight: "90vh", overflowY: "auto" }}>
         <div style={{ textAlign: "center", marginBottom: 28 }}>
           <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 700, color: "#1B4332", marginBottom: 4 }}>অ Orpon</div>
           <div style={{ display: "flex", background: "#F8F6F0", borderRadius: 12, padding: 4, marginTop: 20 }}>
