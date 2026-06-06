@@ -89,10 +89,11 @@ export default function MyCampaigns({ campaigns, campaignsLoaded, openCampaign, 
                 key={c.id}
                 style={{
                   background: "#fff", borderRadius: 20, border: "1px solid #EDE9E0",
-                  padding: 24, display: "grid", gridTemplateColumns: "auto 1fr auto",
+                  padding: 24,
                   alignItems: "center", gap: 24, boxShadow: "0 4px 15px rgba(0,0,0,0.02)",
                   transition: "transform 0.2s, box-shadow 0.2s", cursor: "pointer"
                 }}
+                className="flex flex-col md:grid md:grid-cols-[auto_1fr_auto]"
                 onClick={() => openCampaign(c)}
                 onMouseEnter={e => {
                   e.currentTarget.style.transform = "translateY(-2px)";
@@ -108,13 +109,13 @@ export default function MyCampaigns({ campaigns, campaignsLoaded, openCampaign, 
                   background: `linear-gradient(135deg, ${c.color}22, ${c.color}55)`,
                   width: 60, height: 60, borderRadius: 16,
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 28
+                  fontSize: 28, flexShrink: 0
                 }}>
                   {c.emoji}
                 </div>
 
                 {/* Details */}
-                <div style={{ minWidth: 0 }}>
+                <div style={{ minWidth: 0 }} className="w-full">
                   <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 6, flexWrap: "wrap" }}>
                     <span style={{ fontSize: 11, background: c.color, color: "#fff", padding: "2px 8px", borderRadius: 99, fontWeight: 600 }}>
                       {c.category}
@@ -142,7 +143,7 @@ export default function MyCampaigns({ campaigns, campaignsLoaded, openCampaign, 
                 </div>
 
                 {/* Right side stats & action */}
-                <div style={{ textAlign: "right", display: "flex", flexDirection: "column", gap: 4, minWidth: 150 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 4, minWidth: 150 }} className="text-left md:text-right w-full md:w-auto">
                   <span style={{ fontSize: 18, fontWeight: 700, color: "#1A1A2E" }}>
                     {fmt(c.raised)}
                   </span>

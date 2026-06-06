@@ -49,7 +49,7 @@ export default function Home({ nav, campaigns, openCampaign, setShowLogin, isLog
         </div>
 
         {/* Stats */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 2, maxWidth: 640, margin: "64px auto 0", background: "#1B4332", borderRadius: 20, overflow: "hidden" }}>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-[2px]" style={{ maxWidth: 640, margin: "64px auto 0", background: "#1B4332", borderRadius: 20, overflow: "hidden" }}>
           {[
             { val: "৳" + (count1 / 1000000).toFixed(1) + "Cr+", label: "Raised" },
             { val: count2.toLocaleString() + "+", label: "Donors" },

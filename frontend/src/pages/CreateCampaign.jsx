@@ -121,7 +121,7 @@ export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampa
             </div>
             <div>
               <label style={{ fontSize: 13, fontWeight: 600, color: "#555", display: "block", marginBottom: 8 }}>Category *</label>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {CATEGORIES.filter(c => c !== "All").map(cat => (
                   <button key={cat} onClick={() => setCategory(cat)} style={{ padding: "12px 0", border: "1px solid " + (category === cat ? "#1B4332" : "#EDE9E0"), borderRadius: 10, background: category === cat ? "#1B433211" : "#fff", color: category === cat ? "#1B4332" : "#555", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
                     {cat}
