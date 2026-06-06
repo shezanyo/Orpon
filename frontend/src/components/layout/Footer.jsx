@@ -1,4 +1,22 @@
-export default function Footer() {
+import { useNavigate } from "react-router-dom";
+
+export default function Footer({ nav }) {
+  const navigate = useNavigate();
+
+  const handleLinkClick = (link) => {
+    if (link === "Browse Campaigns") {
+      if (nav) nav("campaigns");
+    } else if (link === "Start a Campaign") {
+      if (nav) nav("create");
+    } else if (link === "Leaderboard") {
+      if (nav) nav("leaderboard");
+    } else {
+      const slug = link.toLowerCase().replace(/\s+/g, "-");
+      navigate(`/info/${slug}`);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <footer style={{ background: "#1A1A2E", padding: "60px 5% 32px", color: "#ffffff88" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
@@ -26,7 +44,21 @@ export default function Footer() {
             <div key={col.title}>
               <h4 style={{ color: "#fff", fontSize: 13, fontWeight: 700, marginBottom: 14, letterSpacing: "0.05em", textTransform: "uppercase" }}>{col.title}</h4>
               {col.links.map(link => (
-                <div key={link} style={{ fontSize: 14, marginBottom: 8, cursor: "pointer", color: "#ffffff66" }}>{link}</div>
+                <div 
+                  key={link} 
+                  onClick={() => handleLinkClick(link)}
+                  style={{ 
+                    fontSize: 14, 
+                    marginBottom: 8, 
+                    cursor: "pointer", 
+                    color: "#ffffff66",
+                    transition: "color 0.2s ease" 
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.color = "#ffffffaa"}
+                  onMouseLeave={e => e.currentTarget.style.color = "#ffffff66"}
+                >
+                  {link}
+                </div>
               ))}
             </div>
           ))}

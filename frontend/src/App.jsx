@@ -18,6 +18,7 @@ import MyCampaigns from "./pages/MyCampaigns";
 import CampaignAnalytics from "./pages/CampaignAnalytics";
 import AdminDashboard from "./pages/AdminDashboard";
 import Leaderboard from "./pages/Leaderboard";
+import InfoPage from "./pages/InfoPage";
 import { CAMPAIGNS, CAMPAIGN_COLORS, CAMPAIGN_EMOJIS } from "./data/mockData";
 import { getCampaigns } from "./utils/api";
 import { slugify } from "./utils/format";
@@ -179,6 +180,7 @@ export default function App() {
         <Route path="/campaign/:id" element={<CampaignDetailWrapper campaigns={campaigns} campaignsLoaded={campaignsLoaded} nav={nav} setShowLogin={setShowLogin} />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/info/:tab" element={<InfoPage nav={nav} />} />
         <Route path="/payment/success" element={<PaymentSuccess />} />
         <Route path="/payment/fail" element={<PaymentFail />} />
         <Route path="/payment/cancel" element={<PaymentCancel />} />
@@ -186,7 +188,7 @@ export default function App() {
 
       {showLogin && <LoginModal loginTab={loginTab} setLoginTab={setLoginTab} setShowLogin={setShowLogin} />}
 
-      <Footer />
+      <Footer nav={nav} />
     </div>
   );
 }
