@@ -210,6 +210,25 @@ const runMigrations = async () => {
             `);
         }
 
+        // Check and alter campaigns table for image columns
+        const [campaignColumns] = await query(
+            "SELECT COLUMN_NAME AS Field FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'campaigns'"
+        );
+        const campaignColumnNames = campaignColumns.map(c => c.Field);
+
+        if (!campaignColumnNames.includes("image_url_1")) {
+            console.log("Adding image_url_1 column to campaigns...");
+            await query("ALTER TABLE campaigns ADD image_url_1 NVARCHAR(MAX) NULL");
+        }
+        if (!campaignColumnNames.includes("image_url_2")) {
+            console.log("Adding image_url_2 column to campaigns...");
+            await query("ALTER TABLE campaigns ADD image_url_2 NVARCHAR(MAX) NULL");
+        }
+        if (!campaignColumnNames.includes("image_url_3")) {
+            console.log("Adding image_url_3 column to campaigns...");
+            await query("ALTER TABLE campaigns ADD image_url_3 NVARCHAR(MAX) NULL");
+        }
+
         console.log("Database migrations checked & completed successfully!");
     } catch (err) {
         console.error("Database migrations error:", err);

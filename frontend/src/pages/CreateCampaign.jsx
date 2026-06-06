@@ -13,6 +13,8 @@ export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampa
   const [goal, setGoal] = useState("");
   const [story, setStory] = useState("");
   const [duration, setDuration] = useState("30");
+  const [images, setImages] = useState([]);
+  const [imagePreviews, setImagePreviews] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [slug, setSlug] = useState("");
   const [loading, setLoading] = useState(false);
@@ -31,21 +33,39 @@ export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampa
     );
   }
 
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files || []);
+    const nextImages = [...images, ...files].slice(0, 3);
+    setImages(nextImages);
+    setImagePreviews(nextImages.map(f => URL.createObjectURL(f)));
+  };
+
+  const removeImage = (index) => {
+    const nextImages = images.filter((_, i) => i !== index);
+    setImages(nextImages);
+    setImagePreviews(nextImages.map(f => URL.createObjectURL(f)));
+  };
+
   const handleSubmit = async () => {
     setError("");
     setLoading(true);
 
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("story", story);
+    formData.append("description", story);
+    formData.append("category", category);
+    formData.append("target_amount", Number(goal));
+    formData.append("days_left", Number(duration));
+    formData.append("organizer_name", user?.full_name || "Community Organizer");
+    formData.append("is_verified", false);
+    
+    images.forEach(img => {
+      formData.append("images", img);
+    });
+
     try {
-      const response = await createCampaign({
-        title,
-        story,
-        description: story,
-        category,
-        target_amount: Number(goal),
-        days_left: Number(duration),
-        organizer_name: user?.full_name || "Community Organizer",
-        is_verified: false,
-      });
+      const response = await createCampaign(formData);
 
       const newCampaign = response?.campaign || {
         id: String(Date.now()),
@@ -62,6 +82,7 @@ export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampa
         daysLeft: Number(duration),
         color: "#1B4332",
         emoji: "🤲",
+        images: []
       };
 
       setCampaigns(prev => [newCampaign, ...prev]);
@@ -86,7 +107,7 @@ export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampa
         <div style={{ background: "#fff", border: "1px solid #EDE9E0", borderRadius: 20, padding: 28, marginBottom: 24 }}>
           <p style={{ fontSize: 13, color: "#888", marginBottom: 10 }}>Your campaign link</p>
           <div style={{ background: "#F8F6F0", padding: "10px 14px", borderRadius: 10, fontSize: 13, color: "#555", wordBreak: "break-all", marginBottom: 14 }}>{shareUrl}</div>
-          <div style={{ display: "flex", justifyContent: "center", marginBottom: 12 }}>
+          <div style={{ display: "flex", justify: "center", marginBottom: 12 }}>
             <QRCodeSVG value={shareUrl} size={150} />
           </div>
           <p style={{ fontSize: 12, color: "#aaa" }}>Share this QR code on posters, banners, or social media</p>
@@ -104,7 +125,7 @@ export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampa
       <p style={{ color: "#888", marginBottom: 36, fontSize: 15 }}>Create your campaign in minutes. It's free.</p>
 
       <div style={{ display: "flex", gap: 6, marginBottom: 36 }}>
-        {["Basics", "Story", "Goal"].map((label, i) => (
+        {["Basics", "Story", "Photos", "Goal"].map((label, i) => (
           <div key={i} style={{ flex: 1 }}>
             <div style={{ height: 4, borderRadius: 99, background: formStep > i + 1 ? "#1B4332" : formStep === i + 1 ? "#D4A017" : "#EDE9E0", marginBottom: 6 }} />
             <span style={{ fontSize: 12, color: formStep === i + 1 ? "#1B4332" : "#aaa", fontWeight: formStep === i + 1 ? 600 : 400 }}>{label}</span>
@@ -142,6 +163,51 @@ export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampa
         )}
 
         {formStep === 3 && (
+          <div>
+            <label style={{ fontSize: 13, fontWeight: 600, color: "#555", display: "block", marginBottom: 8 }}>Campaign photos (Up to 3)</label>
+            <p style={{ fontSize: 12, color: "#aaa", marginBottom: 16 }}>Upload high-quality images to help tell your story and build donor trust.</p>
+            
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12, marginBottom: 20 }}>
+              {imagePreviews.map((preview, index) => (
+                <div key={index} style={{ position: "relative", aspectRatio: "4/3", borderRadius: 12, overflow: "hidden", border: "1px solid #EDE9E0" }}>
+                  <img src={preview} alt={`Preview ${index + 1}`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  <button 
+                    type="button"
+                    onClick={() => removeImage(index)}
+                    style={{ position: "absolute", top: 6, right: 6, background: "rgba(0,0,0,0.6)", color: "#fff", border: "none", borderRadius: "50%", width: 24, height: 24, fontSize: 12, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+              
+              {imagePreviews.length < 3 && (
+                <label style={{ 
+                  aspectRatio: "4/3", 
+                  borderRadius: 12, 
+                  border: "2px dashed #EDE9E0", 
+                  display: "flex", 
+                  flexDirection: "column", 
+                  alignItems: "center", 
+                  justifyContent: "center", 
+                  cursor: "pointer",
+                  color: "#888",
+                  transition: "border-color 0.2s"
+                }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = "#1B4332"}
+                onMouseLeave={e => e.currentTarget.style.borderColor = "#EDE9E0"}
+                >
+                  <span style={{ fontSize: 24, marginBottom: 4 }}>📷</span>
+                  <span style={{ fontSize: 11, fontWeight: 600 }}>Add photo</span>
+                  <input type="file" accept="image/*" multiple onChange={handleImageChange} style={{ display: "none" }} />
+                </label>
+              )}
+            </div>
+            <p style={{ fontSize: 12, color: "#aaa" }}>Formats: JPG, PNG. Max 5MB per file.</p>
+          </div>
+        )}
+
+        {formStep === 4 && (
           <>
             <div style={{ marginBottom: 20 }}>
               <label style={{ fontSize: 13, fontWeight: 600, color: "#555", display: "block", marginBottom: 8 }}>Fundraising goal (BDT) *</label>
@@ -174,8 +240,8 @@ export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampa
             ← Back
           </button>
         )}
-        <button onClick={() => formStep < 3 ? setFormStep(s => s + 1) : handleSubmit()} disabled={loading || (formStep === 1 && !title)} style={{ flex: 2, background: loading || (formStep === 1 && !title) ? "#EDE9E0" : "#1B4332", color: loading || (formStep === 1 && !title) ? "#aaa" : "#fff", border: "none", padding: "14px 0", borderRadius: 12, fontSize: 15, fontWeight: 700, cursor: loading || (formStep === 1 && !title) ? "not-allowed" : "pointer" }}>
-          {loading ? "⏳ Creating..." : formStep < 3 ? "Continue →" : "🚀 Launch Campaign"}
+        <button onClick={() => formStep < 4 ? setFormStep(s => s + 1) : handleSubmit()} disabled={loading || (formStep === 1 && !title)} style={{ flex: 2, background: loading || (formStep === 1 && !title) ? "#EDE9E0" : "#1B4332", color: loading || (formStep === 1 && !title) ? "#aaa" : "#fff", border: "none", padding: "14px 0", borderRadius: 12, fontSize: 15, fontWeight: 700, cursor: loading || (formStep === 1 && !title) ? "not-allowed" : "pointer" }}>
+          {loading ? "⏳ Creating..." : formStep < 4 ? "Continue →" : "🚀 Launch Campaign"}
         </button>
       </div>
     </div>

@@ -1,6 +1,14 @@
 const pool = require("../config/db");
 const { v4: uuidv4 } = require("uuid");
 const { logAction } = require("./adminController");
+const cloudinary = require("cloudinary").v2;
+
+// Configure Cloudinary
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME || "daosf3vmn",
+    api_key: process.env.CLOUDINARY_API_KEY || "783888329164824",
+    api_secret: process.env.CLOUDINARY_API_SECRET || "XdupKGAeMtM_HvIU2Qm6RUga1Kk"
+});
 
 const DEFAULT_CATEGORY = "Community";
 const DEFAULT_COLOR = "#1B4332";
@@ -65,6 +73,37 @@ const createCampaign = async (req, res) => {
         const campaignColor = color || CATEGORY_COLORS[campaignCategory] || DEFAULT_COLOR;
         const campaignEmoji = emoji || CATEGORY_EMOJIS[campaignCategory] || DEFAULT_EMOJI;
 
+        // Cloudinary file upload in-memory streaming
+        let imageUrls = [null, null, null];
+        if (req.files && Array.isArray(req.files) && req.files.length > 0) {
+            const uploadPromises = req.files.slice(0, 3).map((file, index) => {
+                return new Promise((resolve) => {
+                    const stream = cloudinary.uploader.upload_stream({
+                        folder: "orpon_campaigns"
+                    }, (error, result) => {
+                        if (result) {
+                            resolve({ index, url: result.secure_url });
+                        } else {
+                            console.error("Cloudinary upload error:", error);
+                            resolve({ index, url: null });
+                        }
+                    });
+                    stream.end(file.buffer);
+                });
+            });
+
+            const results = await Promise.all(uploadPromises);
+            results.forEach(res => {
+                if (res.url) {
+                    imageUrls[res.index] = res.url;
+                }
+            });
+        }
+
+        const img1 = imageUrls[0] || req.body.image_url_1 || null;
+        const img2 = imageUrls[1] || req.body.image_url_2 || null;
+        const img3 = imageUrls[2] || req.body.image_url_3 || null;
+
         await pool.query(`
             INSERT INTO campaigns (
                 id,
@@ -81,9 +120,12 @@ const createCampaign = async (req, res) => {
                 organizer_name,
                 is_verified,
                 color,
-                emoji
+                emoji,
+                image_url_1,
+                image_url_2,
+                image_url_3
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `, [
             id,
             user_id,
@@ -99,7 +141,10 @@ const createCampaign = async (req, res) => {
             finalOrganizerName,
             Boolean(is_verified ?? false) ? 1 : 0,
             campaignColor,
-            campaignEmoji
+            campaignEmoji,
+            img1,
+            img2,
+            img3
         ]);
 
         await logAction("Campaign Creation", `Campaign "${title}" created by User ID ${user_id}. Target goal: ${target_amount} BDT.`);
@@ -121,7 +166,8 @@ const createCampaign = async (req, res) => {
                 donors: 0,
                 daysLeft: Number(days_left || 30),
                 color: campaignColor,
-                emoji: campaignEmoji
+                emoji: campaignEmoji,
+                images: [img1, img2, img3].filter(Boolean)
             }
         });
     } catch (error) {
@@ -150,7 +196,10 @@ const getCampaigns = async (req, res) => {
                 organizer_name AS organizer,
                 is_verified AS orgVerified,
                 color,
-                emoji
+                emoji,
+                image_url_1,
+                image_url_2,
+                image_url_3
             FROM campaigns
         `);
 
@@ -169,7 +218,8 @@ const getCampaigns = async (req, res) => {
             donors: Number(campaign.donors || 0),
             daysLeft: Number(campaign.daysLeft || 30),
             color: campaign.color || CATEGORY_COLORS[campaign.category] || DEFAULT_COLOR,
-            emoji: campaign.emoji || CATEGORY_EMOJIS[campaign.category] || DEFAULT_EMOJI
+            emoji: campaign.emoji || CATEGORY_EMOJIS[campaign.category] || DEFAULT_EMOJI,
+            images: [campaign.image_url_1, campaign.image_url_2, campaign.image_url_3].filter(Boolean)
         }));
 
         res.status(200).json({
