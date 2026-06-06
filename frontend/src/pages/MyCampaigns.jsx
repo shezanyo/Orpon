@@ -1,10 +1,34 @@
 import { useAuth } from "../context/AuthContext";
 import { fmt, pct } from "../utils/format";
 import ProgressBar from "../components/ui/ProgressBar";
-import { Loader2 } from "lucide-react";
+import { Loader2, Trash2 } from "lucide-react";
+import { deleteCampaign } from "../utils/api";
 
-export default function MyCampaigns({ campaigns, campaignsLoaded, openCampaign, nav }) {
+export default function MyCampaigns({ campaigns, campaignsLoaded, openCampaign, nav, setCampaigns }) {
   const { user } = useAuth();
+
+  const handleDelete = async (e, c) => {
+    e.stopPropagation(); // Prevent card click
+    
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete "${c.title}"?\n\nThis will permanently delete the campaign and dissociate any completed donations (they will remain in the secure ledger but no longer show on this campaign). This action cannot be undone.`
+    );
+    
+    if (!confirmDelete) return;
+    
+    try {
+      const result = await deleteCampaign(c.id);
+      if (result.success) {
+        setCampaigns(prev => prev.filter(x => x.id !== c.id));
+        alert("Campaign deleted successfully.");
+      } else {
+        alert(result.message || "Failed to delete campaign.");
+      }
+    } catch (err) {
+      console.error("Delete campaign error:", err);
+      alert(err.message || "An error occurred while deleting the campaign.");
+    }
+  };
 
   if (!user) {
     return (
@@ -143,16 +167,39 @@ export default function MyCampaigns({ campaigns, campaignsLoaded, openCampaign, 
                 </div>
 
                 {/* Right side stats & action */}
-                <div style={{ display: "flex", flexDirection: "column", gap: 4, minWidth: 150 }} className="text-left md:text-right w-full md:w-auto">
-                  <span style={{ fontSize: 18, fontWeight: 700, color: "#1A1A2E" }}>
-                    {fmt(c.raised)}
-                  </span>
-                  <span style={{ fontSize: 12, color: "#888" }}>
-                    of {fmt(c.goal)}
-                  </span>
-                  <span style={{ fontSize: 11, color: "#aaa", marginTop: 4 }}>
-                    {c.donors} donors · {c.daysLeft} days left
-                  </span>
+                <div style={{ display: "flex", alignItems: "center", gap: 20 }} className="w-full md:w-auto justify-between md:justify-end" onClick={e => e.stopPropagation()}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 4, minWidth: 150 }} className="text-left md:text-right">
+                    <span style={{ fontSize: 18, fontWeight: 700, color: "#1A1A2E" }}>
+                      {fmt(c.raised)}
+                    </span>
+                    <span style={{ fontSize: 12, color: "#888" }}>
+                      of {fmt(c.goal)}
+                    </span>
+                    <span style={{ fontSize: 11, color: "#aaa", marginTop: 4 }}>
+                      {c.donors} donors · {c.daysLeft} days left
+                    </span>
+                  </div>
+
+                  <button
+                    onClick={(e) => handleDelete(e, c)}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      color: "#922B21",
+                      cursor: "pointer",
+                      padding: "8px",
+                      borderRadius: "8px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transition: "background 0.2s",
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.background = "#FDF2F2"}
+                    onMouseLeave={e => e.currentTarget.style.background = "none"}
+                    title="Delete Campaign"
+                  >
+                    <Trash2 size={18} />
+                  </button>
                 </div>
               </div>
             );

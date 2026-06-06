@@ -170,7 +170,7 @@ export default function App() {
             {page === "campaigns" && <Explore campaigns={campaigns} openCampaign={openCampaign} />}
             {page === "create" && <CreateCampaign nav={nav} isLoggedIn={isLoggedIn} setShowLogin={setShowLogin} setCampaigns={setCampaigns} />}
             {page === "profile" && <Profile />}
-            {page === "my-campaigns" && <MyCampaigns campaigns={campaigns} campaignsLoaded={campaignsLoaded} openCampaign={openCampaign} nav={nav} />}
+            {page === "my-campaigns" && <MyCampaigns campaigns={campaigns} campaignsLoaded={campaignsLoaded} openCampaign={openCampaign} nav={nav} setCampaigns={setCampaigns} />}
             {page === "analytics" && <CampaignAnalytics campaigns={campaigns} campaignsLoaded={campaignsLoaded} nav={nav} />}
           </>
         } />

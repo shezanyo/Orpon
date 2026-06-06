@@ -184,7 +184,69 @@ const getCampaigns = async (req, res) => {
     }
 };
 
+const deleteCampaign = async (req, res) => {
+    try {
+        const campaignId = req.params.id;
+        const userId = req.user.id;
+        const userRole = req.user.role;
+
+        // 1. Fetch campaign to verify ownership/existence
+        const [campaigns] = await pool.query(
+            "SELECT id, user_id, title FROM campaigns WHERE id = ?",
+            [campaignId]
+        );
+
+        if (campaigns.length === 0) {
+            return res.status(404).json({
+                message: "Campaign not found"
+            });
+        }
+
+        const campaign = campaigns[0];
+
+        // 2. Authorization check: Owner, Admin, or Super Admin
+        const isOwner = String(campaign.user_id) === String(userId);
+        const isAdmin = userRole === "admin" || userRole === "super_admin";
+
+        if (!isOwner && !isAdmin) {
+            return res.status(403).json({
+                message: "You do not have permission to delete this campaign"
+            });
+        }
+
+        // 3. Perform delete in sequential queries
+        // Update donations to set campaign_id to NULL to satisfy foreign key constraints
+        await pool.query(
+            "UPDATE donations SET campaign_id = NULL WHERE campaign_id = ?",
+            [campaignId]
+        );
+
+        // Delete the campaign
+        await pool.query(
+            "DELETE FROM campaigns WHERE id = ?",
+            [campaignId]
+        );
+
+        // 4. Log action
+        await logAction(
+            "Campaign Deletion",
+            `Campaign "${campaign.title}" (ID: ${campaignId}) deleted by User ID ${userId} (Role: ${userRole}).`
+        );
+
+        res.status(200).json({
+            success: true,
+            message: "Campaign deleted successfully"
+        });
+    } catch (error) {
+        console.error("[deleteCampaign] Error deleting campaign:", error);
+        res.status(500).json({
+            message: "Server Error"
+        });
+    }
+};
+
 module.exports = {
     createCampaign,
-    getCampaigns
+    getCampaigns,
+    deleteCampaign
 };
