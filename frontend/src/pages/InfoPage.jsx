@@ -93,7 +93,7 @@ export default function InfoPage({ nav }) {
       case "verification":
         return (
           <div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, color: "#1B4332", marginBottom: 16 }}>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 36, fontWeight: 700, color: "#1B4332", marginBottom: 16 }}>
               Campaign & Identity Verification Framework
             </h2>
             <p style={{ fontSize: 15, color: "#555", lineHeight: 1.7, marginBottom: 24 }}>
@@ -137,7 +137,7 @@ export default function InfoPage({ nav }) {
       case "help-center":
         return (
           <div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, color: "#1B4332", marginBottom: 16 }}>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 36, fontWeight: 700, color: "#1B4332", marginBottom: 16 }}>
               Help Center & User Guides
             </h2>
             <p style={{ fontSize: 15, color: "#555", lineHeight: 1.7, marginBottom: 24 }}>
@@ -169,7 +169,7 @@ export default function InfoPage({ nav }) {
       case "contact-us":
         return (
           <div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, color: "#1B4332", marginBottom: 16 }}>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 36, fontWeight: 700, color: "#1B4332", marginBottom: 16 }}>
               Contact Us
             </h2>
             <p style={{ fontSize: 15, color: "#555", lineHeight: 1.7, marginBottom: 24 }}>
@@ -266,7 +266,7 @@ export default function InfoPage({ nav }) {
       case "report-abuse":
         return (
           <div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, color: "#d93838", marginBottom: 16 }}>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 36, fontWeight: 700, color: "#d93838", marginBottom: 16 }}>
               Report Campaign Abuse or Fraud
             </h2>
             <p style={{ fontSize: 15, color: "#555", lineHeight: 1.7, marginBottom: 24 }}>
@@ -347,7 +347,7 @@ export default function InfoPage({ nav }) {
       case "faqs":
         return (
           <div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, color: "#1B4332", marginBottom: 16 }}>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 36, fontWeight: 700, color: "#1B4332", marginBottom: 16 }}>
               Frequently Asked Questions (FAQs)
             </h2>
             <p style={{ fontSize: 15, color: "#555", lineHeight: 1.7, marginBottom: 24 }}>
@@ -393,7 +393,7 @@ export default function InfoPage({ nav }) {
       case "privacy-policy":
         return (
           <div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, color: "#1B4332", marginBottom: 16 }}>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 36, fontWeight: 700, color: "#1B4332", marginBottom: 16 }}>
               Privacy Policy
             </h2>
             <p style={{ fontSize: 13, color: "#888", marginBottom: 20 }}>Last updated: June 7, 2026</p>
@@ -424,7 +424,7 @@ export default function InfoPage({ nav }) {
       case "terms-of-service":
         return (
           <div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, color: "#1B4332", marginBottom: 16 }}>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 36, fontWeight: 700, color: "#1B4332", marginBottom: 16 }}>
               Terms of Service
             </h2>
             <p style={{ fontSize: 13, color: "#888", marginBottom: 20 }}>Last updated: June 7, 2026</p>
@@ -455,7 +455,7 @@ export default function InfoPage({ nav }) {
       case "cookie-policy":
         return (
           <div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, color: "#1B4332", marginBottom: 16 }}>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 36, fontWeight: 700, color: "#1B4332", marginBottom: 16 }}>
               Cookie Policy
             </h2>
             <p style={{ fontSize: 13, color: "#888", marginBottom: 20 }}>Last updated: June 7, 2026</p>

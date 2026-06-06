@@ -129,7 +129,7 @@ export default function Donate() {
             </span>
           </div>
 
-          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 700, lineHeight: 1.2, marginBottom: 12 }}>
+          <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 28, fontWeight: 700, lineHeight: 1.2, marginBottom: 12 }}>
             {campaign ? campaign.title : "Supporting a Cause"}
           </h2>
           <p style={{ color: "#D8F3DC", fontSize: 14, lineHeight: 1.6, marginBottom: 28, opacity: 0.9 }}>
@@ -159,7 +159,7 @@ export default function Donate() {
 
         {/* RIGHT: Payment Form */}
         <Card style={{ padding: 28 }}>
-          <h1 className="text-xl font-bold text-slate-800" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, fontWeight: 700 }}>
+          <h1 className="text-xl font-bold text-slate-800" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 26, fontWeight: 700 }}>
             Configure Donation
           </h1>
           <p className="text-slate-500 text-sm mt-1 mb-6">Select your payment method and donation preferences below.</p>

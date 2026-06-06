@@ -78,7 +78,7 @@ export default function CampaignAnalytics({ campaigns, campaignsLoaded, nav }) {
   if (myCampaigns.length === 0) {
     return (
       <div style={{ maxWidth: 1100, margin: "40px auto 80px", padding: "0 5%" }}>
-        <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, color: "#1A1A2E", marginBottom: 32 }}>
+        <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 36, fontWeight: 700, color: "#1A1A2E", marginBottom: 32 }}>
           Campaign Analytics
         </h2>
         <div style={{
@@ -146,7 +146,7 @@ export default function CampaignAnalytics({ campaigns, campaignsLoaded, nav }) {
       {/* Header & Selector */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32, flexWrap: "wrap", gap: 16 }}>
         <div>
-          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, color: "#1A1A2E" }}>
+          <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 36, fontWeight: 700, color: "#1A1A2E" }}>
             Campaign Analytics
           </h2>
           <p style={{ color: "#888", marginTop: 4 }}>Detailed donation reports and insights</p>
@@ -201,7 +201,7 @@ export default function CampaignAnalytics({ campaigns, campaignsLoaded, nav }) {
         background: "#fff", borderRadius: 24, border: "1px solid #EDE9E0",
         padding: 32, boxShadow: "0 10px 30px rgba(0,0,0,0.02)"
       }}>
-        <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 24, fontWeight: 700, color: "#1A1A2E", marginBottom: 24 }}>
+        <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 700, color: "#1A1A2E", marginBottom: 24 }}>
           Donation Ledger
         </h3>
 

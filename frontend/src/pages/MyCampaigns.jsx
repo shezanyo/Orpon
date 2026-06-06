@@ -63,7 +63,7 @@ export default function MyCampaigns({ campaigns, campaignsLoaded, openCampaign, 
     <div style={{ maxWidth: 1100, margin: "40px auto 80px", padding: "0 5%" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32, flexWrap: "wrap", gap: 16 }}>
         <div>
-          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, color: "#1A1A2E" }}>
+          <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 36, fontWeight: 700, color: "#1A1A2E" }}>
             My Campaigns
           </h2>
           <p style={{ color: "#888", marginTop: 4 }}>Manage and track your fundraising campaigns</p>
@@ -151,7 +151,7 @@ export default function MyCampaigns({ campaigns, campaignsLoaded, openCampaign, 
                       {status.label}
                     </span>
                   </div>
-                  <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 20, fontWeight: 700, color: "#1A1A2E", marginBottom: 8, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                  <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 20, fontWeight: 700, color: "#1A1A2E", marginBottom: 8, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                     {c.title}
                   </h3>
                   

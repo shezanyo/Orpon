@@ -126,7 +126,7 @@ export default function CampaignDetail({ c, nav, setShowLogin }) {
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 24, borderBottom: "1px solid #EDE9E0", paddingBottom: 16 }}>
           <div>
-            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 700, color: "#1A1A2E", margin: 0 }}>
+            <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 32, fontWeight: 700, color: "#1A1A2E", margin: 0 }}>
               Donors ({completedTx.length})
             </h1>
             <p style={{ fontSize: 14, color: "#888", margin: "4px 0 0 0" }}>
@@ -197,7 +197,7 @@ export default function CampaignDetail({ c, nav, setShowLogin }) {
       }}>
         {/* Raised Amount */}
         <div style={{ marginBottom: 6 }}>
-          <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 800, color: c.color }}>{fmt(c.raised)}</span>
+          <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 32, fontWeight: 800, color: c.color }}>{fmt(c.raised)}</span>
         </div>
         <p style={{ color: "#888", fontSize: 14, marginBottom: 16 }}>raised of {fmt(c.goal)} goal</p>
 
@@ -333,7 +333,7 @@ export default function CampaignDetail({ c, nav, setShowLogin }) {
       </div>
 
       {/* Title */}
-      <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 40, fontWeight: 700, lineHeight: 1.15, color: "#1A1A2E", margin: "0 0 28px 0" }}>{c.title}</h1>
+      <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 40, fontWeight: 700, lineHeight: 1.15, color: "#1A1A2E", margin: "0 0 28px 0" }}>{c.title}</h1>
 
       {/* Responsive Grid / Stack */}
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-10 items-start">
@@ -577,7 +577,7 @@ function CommentsSection({ campaignId, campaignOwnerId, campaignColor, setShowLo
 
   return (
     <div style={{ marginTop: 32, borderTop: "1px solid #EDE9E0", paddingTop: 32, marginBottom: 32 }}>
-      <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 700, color: "#1A1A2E", marginBottom: 20, display: "flex", alignItems: "center", gap: 10 }}>
+      <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 28, fontWeight: 700, color: "#1A1A2E", marginBottom: 20, display: "flex", alignItems: "center", gap: 10 }}>
         <MessageSquare size={22} style={{ color: campaignColor }} /> Comments ({comments.length})
       </h3>
 

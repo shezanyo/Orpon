@@ -22,7 +22,7 @@ export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampa
     return (
       <div style={{ textAlign: "center", padding: "120px 5%", animation: "fadeUp 0.5s ease" }}>
         <div style={{ fontSize: 64, marginBottom: 20 }}>🔒</div>
-        <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, marginBottom: 12, color: "#1A1A2E" }}>Login to start a campaign</h2>
+        <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 36, fontWeight: 700, marginBottom: 12, color: "#1A1A2E" }}>Login to start a campaign</h2>
         <p style={{ color: "#888", marginBottom: 32, fontSize: 16 }}>You need an account to create and manage campaigns.</p>
         <button onClick={() => setShowLogin(true)} style={{ background: "#1B4332", color: "#fff", border: "none", padding: "14px 36px", borderRadius: 12, fontSize: 15, fontWeight: 600, cursor: "pointer" }}>
           Log in / Sign up
@@ -79,7 +79,7 @@ export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampa
     return (
       <div style={{ maxWidth: 600, margin: "0 auto", padding: "80px 5%", textAlign: "center", animation: "fadeUp 0.5s ease" }}>
         <div style={{ fontSize: 64, marginBottom: 20 }}>🚀</div>
-        <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 38, fontWeight: 700, marginBottom: 12, color: "#1B4332" }}>Campaign is live!</h2>
+        <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 38, fontWeight: 700, marginBottom: 12, color: "#1B4332" }}>Campaign is live!</h2>
         <p style={{ color: "#555", fontSize: 15, lineHeight: 1.7, marginBottom: 28 }}>
           Your campaign <strong>"{title}"</strong> is now live. Share your link to start receiving donations.
         </p>
@@ -100,7 +100,7 @@ export default function CreateCampaign({ nav, isLoggedIn, setShowLogin, setCampa
 
   return (
     <div style={{ maxWidth: 680, margin: "0 auto", padding: "48px 5% 80px", animation: "fadeUp 0.5s ease" }}>
-      <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 44, fontWeight: 700, color: "#1A1A2E", marginBottom: 6 }}>Start a campaign</h1>
+      <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 44, fontWeight: 700, color: "#1A1A2E", marginBottom: 6 }}>Start a campaign</h1>
       <p style={{ color: "#888", marginBottom: 36, fontSize: 15 }}>Create your campaign in minutes. It's free.</p>
 
       <div style={{ display: "flex", gap: 6, marginBottom: 36 }}>

@@ -199,7 +199,7 @@ export default function AdminDashboard() {
     return (
       <div style={{ textAlign: "center", padding: "120px 5%", animation: "fadeUp 0.5s ease" }}>
         <div style={{ fontSize: 64, marginBottom: 20 }}>🛑</div>
-        <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, marginBottom: 12, color: "#1A1A2E" }}>Access Denied</h2>
+        <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 36, fontWeight: 700, marginBottom: 12, color: "#1A1A2E" }}>Access Denied</h2>
         <p style={{ color: "#888", marginBottom: 32, fontSize: 16 }}>This page requires administrative permissions.</p>
         <a href="/" style={{ background: "#1B4332", color: "#fff", textDecoration: "none", padding: "14px 36px", borderRadius: 12, fontSize: 15, fontWeight: 600 }}>
           Go back home
@@ -213,7 +213,7 @@ export default function AdminDashboard() {
       {/* Title */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32, flexWrap: "wrap", gap: 16 }}>
         <div>
-          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 38, fontWeight: 700, color: "#1A1A2E" }}>
+          <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 38, fontWeight: 700, color: "#1A1A2E" }}>
             Admin Management Portal
           </h2>
           <p style={{ color: "#888", marginTop: 4 }}>Donation ledger supervision, campaign management, and blockchain integrity audits</p>
@@ -294,7 +294,7 @@ export default function AdminDashboard() {
             {/* 1. Tab Overview */}
             {activeTab === "overview" && (
               <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, fontWeight: 700, color: "#1A1A2E" }}>
+                <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 26, fontWeight: 700, color: "#1A1A2E" }}>
                   Supervision Portal Overview
                 </h3>
                 <p style={{ color: "#666", fontSize: 14, lineHeight: 1.6 }}>
@@ -315,7 +315,7 @@ export default function AdminDashboard() {
             {/* 2. Tab Campaigns */}
             {activeTab === "campaigns" && (
               <div>
-                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, fontWeight: 700, color: "#1A1A2E", marginBottom: 24 }}>
+                <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 26, fontWeight: 700, color: "#1A1A2E", marginBottom: 24 }}>
                   Campaigns Directory
                 </h3>
                 {loadingCampaigns ? (
@@ -356,7 +356,7 @@ export default function AdminDashboard() {
             {/* 3. Tab Donations */}
             {activeTab === "donations" && (
               <div>
-                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, fontWeight: 700, color: "#1A1A2E", marginBottom: 24 }}>
+                <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 26, fontWeight: 700, color: "#1A1A2E", marginBottom: 24 }}>
                   Donations Ledger Audit log
                 </h3>
                 {loadingDonations ? (
@@ -410,7 +410,7 @@ export default function AdminDashboard() {
             {/* 4. Tab Logs */}
             {activeTab === "logs" && (
               <div>
-                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, fontWeight: 700, color: "#1A1A2E", marginBottom: 24 }}>
+                <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 26, fontWeight: 700, color: "#1A1A2E", marginBottom: 24 }}>
                   System Audit Logs
                 </h3>
                 {loadingLogs ? (
@@ -455,7 +455,7 @@ export default function AdminDashboard() {
             {/* 5. Tab User Management (super_admin only) */}
             {activeTab === "users" && user?.role === "super_admin" && (
               <div>
-                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, fontWeight: 700, color: "#1A1A2E", marginBottom: 24 }}>
+                <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 26, fontWeight: 700, color: "#1A1A2E", marginBottom: 24 }}>
                   User & Admin Management
                 </h3>
                 
@@ -585,7 +585,7 @@ export default function AdminDashboard() {
           display: "flex", flexDirection: "column", gap: 24
         }}>
           <div>
-            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 24, fontWeight: 700, color: "#1A1A2E" }}>
+            <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 700, color: "#1A1A2E" }}>
               Ledger Integrity Audit
             </h3>
             <p style={{ color: "#888", fontSize: 13, marginTop: 4 }}>Verify the cryptographic chain consistency of all donations in the ledger.</p>

@@ -166,7 +166,7 @@ export default function Leaderboard() {
       {/* Hero Section */}
       <div style={{ textAlign: "center", marginBottom: 48, animation: "fadeUp 0.5s both" }}>
         <h1 style={{
-          fontFamily: "'Cormorant Garamond', serif",
+          fontFamily: "'Plus Jakarta Sans', sans-serif",
           fontSize: "clamp(32px, 5vw, 52px)",
           fontWeight: 700,
           color: "#1A1A2E",
