@@ -172,49 +172,47 @@ export default function Home({ nav, campaigns, openCampaign, setShowLogin, isLog
       </section>
 
       {/* FEATURED CAMPAIGNS */}
-      <section style={{ background: "#ffffff", borderTop: "1px solid #EDE9E0", borderBottom: "1px solid #EDE9E0", padding: "80px 5% 100px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 32 }}>
-            <div>
-              <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 38, fontWeight: 700, color: "#1A1A2E", letterSpacing: "-0.02em" }}>
-                Urgent campaigns
-              </h2>
-              <p style={{ color: "#666", fontSize: 14, marginTop: 4 }}>Verified, transparent, and time-sensitive</p>
-            </div>
-            <button 
-              onClick={() => nav("campaigns")} 
-              style={{ 
-                background: "#fff", 
-                border: "1px solid #EDE9E0", 
-                padding: "10px 22px", 
-                borderRadius: 10, 
-                fontSize: 14, 
-                fontWeight: 600,
-                color: "#1B4332", 
-                cursor: "pointer",
-                transition: "border-color 0.2s, transform 0.2s",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.02)"
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "#1B4332";
-                e.currentTarget.style.transform = "translateY(-1px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "#EDE9E0";
-                e.currentTarget.style.transform = "none";
-              }}
-            >
-              See all campaigns →
-            </button>
+      <section style={{ padding: "40px 5% 80px", maxWidth: 1200, margin: "0 auto" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 32 }}>
+          <div>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 38, fontWeight: 700, color: "#1A1A2E", letterSpacing: "-0.02em" }}>
+              Urgent campaigns
+            </h2>
+            <p style={{ color: "#666", fontSize: 14, marginTop: 4 }}>Verified, transparent, and time-sensitive</p>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 24 }}>
-            {campaigns.slice(0, 3).map(c => <CampaignCard key={c.id} c={c} openCampaign={openCampaign} />)}
-          </div>
+          <button 
+            onClick={() => nav("campaigns")} 
+            style={{ 
+              background: "#fff", 
+              border: "1px solid #EDE9E0", 
+              padding: "10px 22px", 
+              borderRadius: 10, 
+              fontSize: 14, 
+              fontWeight: 600,
+              color: "#1B4332", 
+              cursor: "pointer",
+              transition: "border-color 0.2s, transform 0.2s",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.02)"
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "#1B4332";
+              e.currentTarget.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "#EDE9E0";
+              e.currentTarget.style.transform = "none";
+            }}
+          >
+            See all campaigns →
+          </button>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 24 }}>
+          {campaigns.slice(0, 3).map(c => <CampaignCard key={c.id} c={c} openCampaign={openCampaign} />)}
         </div>
       </section>
 
       {/* WHY TRUST ORPON SECTION */}
-      <section style={{ padding: "100px 5%", background: "#F8F6F0", borderTop: "1px solid #EDE9E0" }}>
+      <section style={{ padding: "80px 5%", background: "#F8F6F0" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           {/* Header */}
           <div style={{ textAlign: "center", marginBottom: 56 }}>
@@ -379,7 +377,7 @@ export default function Home({ nav, campaigns, openCampaign, setShowLogin, isLog
       </section>
 
       {/* CTA */}
-      <section style={{ padding: "100px 5%", textAlign: "center", background: "#ffffff", borderTop: "1px solid #EDE9E0" }}>
+      <section style={{ padding: "80px 5%", textAlign: "center", background: "#F8F6F0" }}>
         <div 
           style={{ 
             background: "linear-gradient(135deg, rgba(212, 160, 23, 0.05) 0%, rgba(27, 67, 50, 0.05) 100%)", 
