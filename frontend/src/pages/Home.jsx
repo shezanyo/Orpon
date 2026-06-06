@@ -53,25 +53,6 @@ export default function Home({ nav, campaigns, openCampaign, setShowLogin, isLog
 
       {/* HERO */}
       <section style={{ padding: "80px 5% 60px", maxWidth: 1200, margin: "0 auto", textAlign: "center", animation: "fadeUp 0.7s ease both" }}>
-        {/* Trust Pill Badge */}
-        <div style={{ 
-          display: "inline-flex", 
-          alignItems: "center", 
-          gap: 8, 
-          background: "rgba(27,67,50,0.06)", 
-          color: "#1B4332", 
-          fontSize: 13, 
-          fontWeight: 600, 
-          padding: "8px 18px", 
-          borderRadius: 99, 
-          marginBottom: 28, 
-          border: "1px solid rgba(27,67,50,0.12)",
-          fontFamily: "'Plus Jakarta Sans', sans-serif"
-        }}>
-          <ShieldCheck size={16} />
-          <span>Bangladesh's First Transparent Crowdfunding Platform</span>
-        </div>
-
         <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(42px, 6.5vw, 76px)", fontWeight: 800, lineHeight: 1.15, color: "#1A1A2E", marginBottom: 24, letterSpacing: "-0.03em" }}>
           Give with <em style={{ color: "#1B4332", fontStyle: "normal", backgroundImage: "linear-gradient(120deg, #1B4332 0%, #2D6A4F 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>trust.</em>
           <br />
