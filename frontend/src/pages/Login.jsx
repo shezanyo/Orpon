@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { loginUser, registerUser } from "../utils/api";
 import { useAuth } from "../context/AuthContext";
+import { ShieldCheck } from "lucide-react";
 
 export default function LoginModal({ loginTab, setLoginTab, setShowLogin, setIsLoggedIn }) {
   const [email, setEmail] = useState("");
@@ -194,14 +195,51 @@ export default function LoginModal({ loginTab, setLoginTab, setShowLogin, setIsL
           </button>
         </div>
 
-        <div style={{ position: "relative", margin: "20px 0", textAlign: "center" }}>
-          <div style={{ height: 1, background: "#EDE9E0" }} />
-          <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", background: "#fff", padding: "0 12px", fontSize: 12, color: "#aaa" }}>or</span>
+        <div style={{
+          marginTop: 24,
+          padding: 16,
+          background: "#F8F6F0",
+          borderRadius: 16,
+          border: "1px solid #EDE9E0"
+        }}>
+          <h4 style={{ 
+            fontSize: 12, 
+            fontWeight: 700, 
+            color: "#1B4332", 
+            textTransform: "uppercase", 
+            letterSpacing: 0.5, 
+            marginBottom: 10,
+            display: "flex",
+            alignItems: "center",
+            gap: 6
+          }}>
+            <ShieldCheck size={14} /> Why Trust Orpon?
+          </h4>
+          <ul style={{ 
+            listStyleType: "none", 
+            padding: 0, 
+            margin: 0, 
+            display: "flex", 
+            flexDirection: "column", 
+            gap: 8,
+            fontSize: 11,
+            color: "#555",
+            lineHeight: 1.4
+          }}>
+            <li style={{ display: "flex", alignItems: "flex-start", gap: 6 }}>
+              <span style={{ color: "#2D6A4F", fontWeight: "bold" }}>✓</span>
+              <span><strong>Verified Campaigns:</strong> strict Smart NID & documentation audit.</span>
+            </li>
+            <li style={{ display: "flex", alignItems: "flex-start", gap: 6 }}>
+              <span style={{ color: "#2D6A4F", fontWeight: "bold" }}>✓</span>
+              <span><strong>Transparent Tracking:</strong> every donation is stored on an immutable ledger.</span>
+            </li>
+            <li style={{ display: "flex", alignItems: "flex-start", gap: 6 }}>
+              <span style={{ color: "#2D6A4F", fontWeight: "bold" }}>✓</span>
+              <span><strong>Secure Payments:</strong> server-side verified sandbox checkout flows.</span>
+            </li>
+          </ul>
         </div>
-
-        <button style={{ width: "100%", border: "1px solid #EDE9E0", background: "#fff", padding: "12px 0", borderRadius: 12, fontSize: 14, color: "#555", cursor: "pointer", fontWeight: 500 }}>
-          📱 Continue with Google
-        </button>
 
         <p style={{ textAlign: "center", color: "#aaa", fontSize: 12, marginTop: 20 }}>
           By continuing, you agree to Orpon's Terms & Privacy Policy
