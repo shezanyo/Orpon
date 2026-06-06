@@ -235,62 +235,125 @@ export default function Home({ nav, campaigns, openCampaign, setShowLogin, isLog
       </section>
 
       {/* WHY TRUST ORPON SECTION */}
-      <section style={{ padding: "80px 5%", backgroundColor: "#fff", borderTop: "1px solid #EDE9E0", borderBottom: "1px solid #EDE9E0" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: 56 }}>
-            <span style={{ color: "#1B4332", background: "rgba(27,67,50,0.06)", fontSize: 13, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", padding: "6px 16px", borderRadius: 99 }}>
-              Trust & Security
-            </span>
-            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 38, fontWeight: 800, color: "#1A1A2E", marginTop: 16, letterSpacing: "-0.02em" }}>
+      <section style={{ padding: "100px 5%", background: "#F8F6F0", borderTop: "1px solid #EDE9E0" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }} className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-12 items-center">
+          {/* Left Panel */}
+          <div style={{ textAlign: "left" }}>
+            <div style={{ 
+              display: "inline-flex", 
+              alignItems: "center", 
+              gap: 8, 
+              background: "rgba(27,67,50,0.06)", 
+              color: "#1B4332", 
+              fontSize: 12, 
+              fontWeight: 700, 
+              textTransform: "uppercase", 
+              letterSpacing: "0.05em", 
+              padding: "6px 14px", 
+              borderRadius: 99, 
+              marginBottom: 16,
+              border: "1px solid rgba(27,67,50,0.1)",
+              fontFamily: "'Plus Jakarta Sans', sans-serif"
+            }}>
+              <ShieldCheck size={14} />
+              <span>Trust & Security</span>
+            </div>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(32px, 4vw, 42px)", fontWeight: 800, color: "#1A1A2E", lineHeight: 1.2, letterSpacing: "-0.02em", marginBottom: 20 }}>
               Why donors trust Orpon
             </h2>
-            <p style={{ color: "#666", fontSize: 16, marginTop: 12, maxWidth: 500, margin: "12px auto 0", lineHeight: 1.6 }}>
-              We've built Bangladesh's first transparent platform designed to secure and verify every donation.
+            <p style={{ color: "#555", fontSize: 16, lineHeight: 1.7, marginBottom: 28 }}>
+              We've built Bangladesh's first transparent platform designed to secure and verify every single donation. Give with absolute confidence.
             </p>
+            <button 
+              onClick={() => nav("info/verification")}
+              style={{
+                background: "transparent",
+                color: "#1B4332",
+                border: "1px solid #1B4332",
+                padding: "12px 24px",
+                borderRadius: 10,
+                fontSize: 14,
+                fontWeight: 600,
+                cursor: "pointer",
+                transition: "all 0.2s"
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#1B4332";
+                e.currentTarget.style.color = "#fff";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = "#1B4332";
+              }}
+            >
+              Learn about verification
+            </button>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 40 }}>
+
+          {/* Right Cards Grid */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 24 }}>
             {[
               {
                 icon: ShieldCheck,
                 title: "Vetted & Verified",
-                desc: "Every campaign undergoes strict validation of identity, medical documents, and organization status before going live."
+                desc: "Every campaign undergoes strict validation of identity, medical documents, and organization status before going live.",
+                color: "#1B4332"
               },
               {
                 icon: TrendingUp,
                 title: "Real-Time Tracking",
-                desc: "Follow the money. See direct logs of all donations and distributions, with complete bank and mobile wallet ledger transparency."
+                desc: "Follow the money. See direct logs of all donations and distributions, with complete bank and mobile wallet ledger transparency.",
+                color: "#D4A017"
               },
               {
                 icon: Users,
                 title: "Community Accountability",
-                desc: "Donors and community members can comment, report anomalies, and request updates directly on the campaign page."
+                desc: "Donors and community members can comment, report anomalies, and request updates directly on the campaign page.",
+                color: "#1B4332"
               },
               {
                 icon: Heart,
                 title: "Zero Middleware Delays",
-                desc: "Donations are processed directly to the organizers' validated accounts, ensuring urgent help reaches them without delay."
+                desc: "Donations are processed directly to the organizers' validated accounts, ensuring urgent help reaches them without delay.",
+                color: "#922B21"
               }
             ].map((item, idx) => {
               const ItemIcon = item.icon;
               return (
-                <div key={idx} style={{ display: "flex", gap: 20 }}>
+                <div 
+                  key={idx} 
+                  style={{ 
+                    background: "#fff", 
+                    border: "1px solid #EDE9E0", 
+                    borderRadius: 24, 
+                    padding: "32px 24px",
+                    boxShadow: "0 8px 30px rgba(0,0,0,0.015)",
+                    transition: "transform 0.25s, box-shadow 0.25s"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "translateY(-4px)";
+                    e.currentTarget.style.boxShadow = "0 16px 40px rgba(27,67,50,0.06)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "none";
+                    e.currentTarget.style.boxShadow = "0 8px 30px rgba(0,0,0,0.015)";
+                  }}
+                >
                   <div style={{ 
-                    flexShrink: 0, 
                     width: 48, 
                     height: 48, 
                     borderRadius: 12, 
-                    backgroundColor: "rgba(27,67,50,0.06)", 
+                    backgroundColor: `${item.color}12`, 
                     display: "flex", 
                     alignItems: "center", 
                     justifyContent: "center", 
-                    color: "#1B4332" 
+                    color: item.color,
+                    marginBottom: 20
                   }}>
                     <ItemIcon size={24} />
                   </div>
-                  <div>
-                    <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 18, fontWeight: 700, color: "#1A1A2E", marginBottom: 8 }}>{item.title}</h3>
-                    <p style={{ color: "#555", fontSize: 14, lineHeight: 1.6 }}>{item.desc}</p>
-                  </div>
+                  <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 18, fontWeight: 700, color: "#1A1A2E", marginBottom: 10 }}>{item.title}</h3>
+                  <p style={{ color: "#555", fontSize: 14, lineHeight: 1.6 }}>{item.desc}</p>
                 </div>
               );
             })}
