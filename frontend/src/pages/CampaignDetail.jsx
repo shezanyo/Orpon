@@ -445,6 +445,11 @@ export default function CampaignDetail({ c, nav, setShowLogin }) {
           </div>
         </div>
 
+        {/* ===== RIGHT COLUMN: Desktop Sticky Donate Panel (Hidden on mobile) ===== */}
+        <div className="hidden lg:block sticky" style={{ top: 80 }}>
+          {renderDonatePanel(false)}
+        </div>
+
       </div>
     </div>
   );
