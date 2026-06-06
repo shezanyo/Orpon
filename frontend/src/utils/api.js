@@ -129,3 +129,7 @@ export const makeUserAdmin = (email) => {
 export const getLeaderboard = () => {
   return apiCall("/leaderboard", "GET");
 };
+
+export const deleteCampaign = (campaignId) => {
+  return apiCall(`/campaign/${campaignId}`, "DELETE");
+};
