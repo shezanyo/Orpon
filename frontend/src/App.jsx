@@ -55,8 +55,10 @@ const normalizeCampaign = (campaign) => {
     daysLeft: Number(campaign.daysLeft ?? campaign.days_left ?? 30),
     color: campaign.color || CAMPAIGN_COLORS[category] || "#1B4332",
     emoji: campaign.emoji || CAMPAIGN_EMOJIS[category] || "🤲",
+    images: campaign.images || [],
   };
 };
+
 
 function CampaignDetailWrapper({ campaigns, campaignsLoaded, nav, setShowLogin }) {
   const { id } = useParams();
