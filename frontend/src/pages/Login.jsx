@@ -215,30 +215,10 @@ export default function LoginModal({ loginTab, setLoginTab, setShowLogin, setIsL
           }}>
             <ShieldCheck size={14} /> Why Trust Orpon?
           </h4>
-          <ul style={{ 
-            listStyleType: "none", 
-            padding: 0, 
-            margin: 0, 
-            display: "flex", 
-            flexDirection: "column", 
-            gap: 8,
-            fontSize: 11,
-            color: "#555",
-            lineHeight: 1.4
-          }}>
-            <li style={{ display: "flex", alignItems: "flex-start", gap: 6 }}>
-              <span style={{ color: "#2D6A4F", fontWeight: "bold" }}>✓</span>
-              <span><strong>Verified Campaigns:</strong> strict Smart NID & documentation audit.</span>
-            </li>
-            <li style={{ display: "flex", alignItems: "flex-start", gap: 6 }}>
-              <span style={{ color: "#2D6A4F", fontWeight: "bold" }}>✓</span>
-              <span><strong>Transparent Tracking:</strong> every donation is stored on an immutable ledger.</span>
-            </li>
-            <li style={{ display: "flex", alignItems: "flex-start", gap: 6 }}>
-              <span style={{ color: "#2D6A4F", fontWeight: "bold" }}>✓</span>
-              <span><strong>Secure Payments:</strong> server-side verified sandbox checkout flows.</span>
-            </li>
-          </ul>
+          <div style={{ display: "flex", alignItems: "flex-start", gap: 6, fontSize: 11, color: "#555", lineHeight: 1.45 }}>
+            <span style={{ color: "#2D6A4F", fontWeight: "bold" }}>✓</span>
+            <span>NID-verified campaigns, transparent ledger tracking, and secure sandbox checkouts.</span>
+          </div>
         </div>
 
         <p style={{ textAlign: "center", color: "#aaa", fontSize: 12, marginTop: 20 }}>
