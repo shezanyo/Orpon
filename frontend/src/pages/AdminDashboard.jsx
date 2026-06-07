@@ -7,7 +7,9 @@ import {
   getAdminLogs,
   verifyIntegrity,
   getAdminUsers,
-  makeUserAdmin
+  makeUserAdmin,
+  getBlockchainStatus,
+  manualAnchor
 } from "../utils/api";
 import { fmt } from "../utils/format";
 import { Loader2 } from "lucide-react";
@@ -45,6 +47,11 @@ export default function AdminDashboard() {
   const [verifying, setVerifying] = useState(false);
   const [copiedHashId, setCopiedHashId] = useState(null);
 
+  // Blockchain Status
+  const [blockchainData, setBlockchainData] = useState(null);
+  const [loadingBlockchain, setLoadingBlockchain] = useState(true);
+  const [anchoring, setAnchoring] = useState(false);
+
   // Fetch stats and overview logs initially
   useEffect(() => {
     if (user?.role !== "admin" && user?.role !== "super_admin") return;
@@ -61,7 +68,20 @@ export default function AdminDashboard() {
       }
     };
 
+    const fetchBlockchain = async () => {
+      try {
+        setLoadingBlockchain(true);
+        const res = await getBlockchainStatus();
+        if (res.success) setBlockchainData(res);
+      } catch (err) {
+        console.error("Failed to load blockchain stats:", err);
+      } finally {
+        setLoadingBlockchain(false);
+      }
+    };
+
     fetchStats();
+    fetchBlockchain();
   }, [user]);
 
   // Fetch lists based on active tab
@@ -122,6 +142,29 @@ export default function AdminDashboard() {
       setPromoteError(err.message || "An error occurred while promoting user.");
     } finally {
       setPromoting(false);
+    }
+  };
+
+  const handleManualAnchor = async () => {
+    try {
+      setAnchoring(true);
+      const res = await manualAnchor();
+      if (res.success) {
+        alert("Anchored successfully! TX: " + res.tx_hash);
+        // Refresh blockchain status and logs
+        const bRes = await getBlockchainStatus();
+        if (bRes.success) setBlockchainData(bRes);
+        if (activeTab === "logs") {
+          const logsRes = await getAdminLogs();
+          if (logsRes.success) setLogs(logsRes.logs);
+        }
+      } else {
+        alert(res.message || "Failed to anchor");
+      }
+    } catch (err) {
+      alert("Error: " + err.message);
+    } finally {
+      setAnchoring(false);
     }
   };
 
@@ -648,6 +691,55 @@ export default function AdminDashboard() {
               </>
             )}
           </button>
+
+          {/* BLOCKCHAIN STATUS PANEL */}
+          <div style={{ borderTop: "1px solid #EDE9E0", paddingTop: "20px", marginTop: "10px" }}>
+            <h4 style={{ fontSize: 16, fontWeight: 700, color: "#1A1A2E", marginBottom: 12 }}>Polygon Amoy Anchor</h4>
+            {loadingBlockchain ? (
+              <Loader2 className="animate-spin" style={{ color: "#2D6A4F" }} />
+            ) : (
+              <div style={{ fontSize: 13, color: "#555", display: "flex", flexDirection: "column", gap: 10 }}>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <span>Status:</span>
+                  <span style={{ fontWeight: 600, color: blockchainData?.last_anchor ? "#047857" : "#888" }}>
+                    {blockchainData?.last_anchor ? "Active" : "Not Anchored"}
+                  </span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <span>Last Batch ID:</span>
+                  <span style={{ fontWeight: 600 }}>{blockchainData?.last_anchor?.batch_id || "None"}</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <span>Pending Donations:</span>
+                  <span style={{ fontWeight: 600, color: blockchainData?.pending_donations > 0 ? "#B91C1C" : "#555" }}>
+                    {blockchainData?.pending_donations || 0}
+                  </span>
+                </div>
+                
+                {blockchainData?.last_anchor && (
+                  <div style={{ background: "#F3F4F6", padding: "10px", borderRadius: "8px", wordBreak: "break-all", fontSize: 11 }}>
+                    <div style={{ marginBottom: 4, color: "#888", fontWeight: 600 }}>LAST TX HASH:</div>
+                    <a href={`https://amoy.polygonscan.com/tx/${blockchainData.last_anchor.tx_hash}`} target="_blank" rel="noopener noreferrer" style={{ color: "#2D6A4F", textDecoration: "underline" }}>
+                      {blockchainData.last_anchor.tx_hash}
+                    </a>
+                  </div>
+                )}
+
+                <button
+                  onClick={handleManualAnchor}
+                  disabled={anchoring || !blockchainData?.pending_donations}
+                  style={{
+                    background: anchoring || !blockchainData?.pending_donations ? "#888" : "#8B5CF6",
+                    color: "#fff", border: "none", padding: "12px", borderRadius: "10px",
+                    fontWeight: 600, fontSize: 13, cursor: anchoring || !blockchainData?.pending_donations ? "not-allowed" : "pointer",
+                    marginTop: 8, transition: "background 0.2s"
+                  }}
+                >
+                  {anchoring ? "Anchoring..." : "Anchor Now"}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
       </div>
