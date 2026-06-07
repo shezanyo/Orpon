@@ -175,22 +175,6 @@ const runMigrations = async () => {
             await query("ALTER TABLE donations ADD status NVARCHAR(50) DEFAULT 'Completed'");
         }
 
-        // Check and create system_logs table
-        const [tables] = await query(
-            "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'system_logs'"
-        );
-        if (tables.length === 0) {
-            console.log("Creating system_logs table...");
-            await query(`
-                CREATE TABLE system_logs (
-                    id INT IDENTITY(1,1) PRIMARY KEY,
-                    action NVARCHAR(255) NOT NULL,
-                    details NVARCHAR(MAX) NULL,
-                    created_at DATETIME2 DEFAULT GETDATE()
-                )
-            `);
-        }
-
         // Check and create comments table
         const [commentTables] = await query(
             "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'comments'"
@@ -209,6 +193,40 @@ const runMigrations = async () => {
                 )
             `);
         }
+
+        // Check and create blockchain_anchors table
+        const [anchorTables] = await query(
+            "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'blockchain_anchors'"
+        );
+        if (anchorTables.length === 0) {
+            console.log("Creating blockchain_anchors table...");
+            await query(`
+                CREATE TABLE blockchain_anchors (
+                    id INT IDENTITY(1,1) PRIMARY KEY,
+                    batch_id INT NOT NULL,
+                    final_hash NVARCHAR(255) NOT NULL,
+                    tx_hash NVARCHAR(255) NOT NULL,
+                    created_at DATETIME2 DEFAULT GETDATE()
+                )
+            `);
+        }
+
+        // Check and create system_logs table
+        const [tables] = await query(
+            "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'system_logs'"
+        );
+        if (tables.length === 0) {
+            console.log("Creating system_logs table...");
+            await query(`
+                CREATE TABLE system_logs (
+                    id INT IDENTITY(1,1) PRIMARY KEY,
+                    action NVARCHAR(255) NOT NULL,
+                    details NVARCHAR(MAX) NULL,
+                    created_at DATETIME2 DEFAULT GETDATE()
+                )
+            `);
+        }
+
 
         // Check and alter campaigns table for image columns
         const [campaignColumns] = await query(

@@ -153,3 +153,10 @@ export const deleteComment = (commentId) => {
   return apiCall(`/comment/${commentId}`, "DELETE");
 };
 
+export const getBlockchainStatus = () => {
+  return apiCall("/anchors/status", "GET");
+};
+
+export const manualAnchor = () => {
+  return apiCall("/anchors/manual", "POST");
+};
