@@ -28,12 +28,13 @@ export default function CampaignCard({ c, openCampaign }) {
           background: c.images && c.images.length > 0 
             ? `url(${c.images[0]}) center/cover no-repeat` 
             : `linear-gradient(135deg, ${c.color}22 0%, ${c.color}44 100%)`,
-          height: 140,
+          height: 180,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           fontSize: (c.images && c.images.length > 0) ? 0 : 48,
           position: "relative",
+
         }}
       >
         {(!c.images || c.images.length === 0) && c.emoji}
