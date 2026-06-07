@@ -133,3 +133,11 @@ export const getLeaderboard = () => {
 export const deleteCampaign = (campaignId) => {
   return apiCall(`/campaign/${campaignId}`, "DELETE");
 };
+
+export const getBlockchainStatus = () => {
+  return apiCall("/anchors/status", "GET");
+};
+
+export const manualAnchor = () => {
+  return apiCall("/anchors/manual", "POST");
+};

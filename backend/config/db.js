@@ -175,6 +175,42 @@ const runMigrations = async () => {
             await query("ALTER TABLE donations ADD status NVARCHAR(50) DEFAULT 'Completed'");
         }
 
+        // Check and create comments table
+        const [commentTables] = await query(
+            "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'comments'"
+        );
+        if (commentTables.length === 0) {
+            console.log("Creating comments table...");
+            await query(`
+                CREATE TABLE comments (
+                    id INT IDENTITY(1,1) PRIMARY KEY,
+                    campaign_id NVARCHAR(36) NOT NULL,
+                    user_id INT NOT NULL,
+                    comment_text NVARCHAR(MAX) NOT NULL,
+                    created_at DATETIME2 DEFAULT GETDATE(),
+                    FOREIGN KEY (campaign_id) REFERENCES campaigns(id),
+                    FOREIGN KEY (user_id) REFERENCES users(id)
+                )
+            `);
+        }
+
+        // Check and create blockchain_anchors table
+        const [anchorTables] = await query(
+            "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'blockchain_anchors'"
+        );
+        if (anchorTables.length === 0) {
+            console.log("Creating blockchain_anchors table...");
+            await query(`
+                CREATE TABLE blockchain_anchors (
+                    id INT IDENTITY(1,1) PRIMARY KEY,
+                    batch_id INT NOT NULL,
+                    final_hash NVARCHAR(255) NOT NULL,
+                    tx_hash NVARCHAR(255) NOT NULL,
+                    created_at DATETIME2 DEFAULT GETDATE()
+                )
+            `);
+        }
+
         // Check and create system_logs table
         const [tables] = await query(
             "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'system_logs'"
@@ -189,6 +225,25 @@ const runMigrations = async () => {
                     created_at DATETIME2 DEFAULT GETDATE()
                 )
             `);
+        }
+
+        // Check and alter campaigns table for image columns
+        const [campaignColumns] = await query(
+            "SELECT COLUMN_NAME AS Field FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'campaigns'"
+        );
+        const campaignColumnNames = campaignColumns.map(c => c.Field);
+
+        if (!campaignColumnNames.includes("image_url_1")) {
+            console.log("Adding image_url_1 column to campaigns...");
+            await query("ALTER TABLE campaigns ADD image_url_1 NVARCHAR(MAX) NULL");
+        }
+        if (!campaignColumnNames.includes("image_url_2")) {
+            console.log("Adding image_url_2 column to campaigns...");
+            await query("ALTER TABLE campaigns ADD image_url_2 NVARCHAR(MAX) NULL");
+        }
+        if (!campaignColumnNames.includes("image_url_3")) {
+            console.log("Adding image_url_3 column to campaigns...");
+            await query("ALTER TABLE campaigns ADD image_url_3 NVARCHAR(MAX) NULL");
         }
 
         console.log("Database migrations checked & completed successfully!");
