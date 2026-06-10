@@ -141,7 +141,7 @@ const runMigrations = async () => {
         const [allColumns] = await query(`
             SELECT TABLE_NAME AS tableName, COLUMN_NAME AS columnName 
             FROM INFORMATION_SCHEMA.COLUMNS 
-            WHERE TABLE_NAME IN ('users', 'donations', 'comments', 'blockchain_anchors', 'system_logs', 'campaigns')
+            WHERE TABLE_NAME IN ('users', 'donations', 'comments', 'blockchain_anchors', 'system_logs', 'campaigns', 'password_resets')
         `);
 
         // Group columns by table name
@@ -227,6 +227,22 @@ const runMigrations = async () => {
                     action NVARCHAR(255) NOT NULL,
                     details NVARCHAR(MAX) NULL,
                     created_at DATETIME2 DEFAULT GETDATE()
+                )
+            `);
+        }
+
+        // 5b. Check and create password_resets table
+        if (!schemaMap['password_resets']) {
+            console.log("Creating password_resets table...");
+            await query(`
+                CREATE TABLE password_resets (
+                    id INT IDENTITY(1,1) PRIMARY KEY,
+                    user_id INT NOT NULL,
+                    token_hash NVARCHAR(255) NOT NULL,
+                    expires_at DATETIME2 NOT NULL,
+                    used BIT DEFAULT 0,
+                    created_at DATETIME2 DEFAULT GETDATE(),
+                    FOREIGN KEY (user_id) REFERENCES users(id)
                 )
             `);
         }

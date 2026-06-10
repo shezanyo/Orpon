@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { loginUser, registerUser } from "../utils/api";
 import { useAuth } from "../context/AuthContext";
 import { ShieldCheck } from "lucide-react";
@@ -15,6 +16,7 @@ export default function LoginModal({ loginTab, setLoginTab, setShowLogin, setIsL
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
   const { login } = useAuth();
 
   const handleSubmit = async () => {
@@ -172,6 +174,32 @@ export default function LoginModal({ loginTab, setLoginTab, setShowLogin, setIsL
               {showPass ? "👁️" : "👁️‍🗨️"}
             </button>
           </div>
+
+          {loginTab === "login" && (
+            <div style={{ textAlign: "right", marginTop: -4 }}>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowLogin(false);
+                  navigate("/forgot-password");
+                }}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "#2D6A4F",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  padding: "4px 0",
+                  transition: "color 0.2s"
+                }}
+                onMouseOver={(e) => e.target.style.color = "#1B4332"}
+                onMouseOut={(e) => e.target.style.color = "#2D6A4F"}
+              >
+                Forgot Password?
+              </button>
+            </div>
+          )}
 
           <div style={{
             maxHeight: loginTab === "signup" ? "60px" : "0px",
