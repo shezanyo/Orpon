@@ -2,6 +2,7 @@ const pool = require("../config/db");
 const { v4: uuidv4 } = require("uuid");
 const { generateHash } = require("../services/hashService");
 const { logAction } = require("./adminController");
+const blockchainService = require("../services/blockchainService");
 
 const createPendingDonationRecord = async ({ donor_name, amount, privacy_type, campaign_id, payment_method }) => {
     const connection = await pool.getConnection();
@@ -136,6 +137,35 @@ const completeDonationRecord = async (id) => {
 
         // Write to system logs after successful transaction commit
         await logAction("Donation Received", `Donation of ${donation.amount} BDT received via ${donation.payment_method} from ${donation.display_name} for Campaign ID ${donation.campaign_id}.`);
+
+        // 6. Automatic Blockchain Anchoring (Every 10 donations)
+        try {
+            const [countData] = await pool.query(`
+                SELECT COUNT(*) AS total FROM donations WHERE status = 'Completed'
+            `);
+            const totalCompleted = countData[0].total;
+
+            if (totalCompleted > 0 && totalCompleted % 10 === 0) {
+                // Background async anchoring so we don't delay the response
+                (async () => {
+                    try {
+                        const batchId = totalCompleted / 10;
+                        const txHash = await blockchainService.anchorHash(batchId, current_hash);
+                        if (txHash) {
+                            await pool.query(`
+                                INSERT INTO blockchain_anchors (batch_id, final_hash, tx_hash)
+                                VALUES (?, ?, ?)
+                            `, [batchId, current_hash, txHash]);
+                            await logAction("Automatic Blockchain Anchor", `Anchored batch ${batchId}. TX: ${txHash}`);
+                        }
+                    } catch (anchorErr) {
+                        console.error("Auto-anchoring failed:", anchorErr);
+                    }
+                })();
+            }
+        } catch (err) {
+            console.error("Failed to check for auto-anchoring:", err);
+        }
 
         return {
             success: true,

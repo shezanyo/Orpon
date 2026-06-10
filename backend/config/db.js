@@ -135,37 +135,50 @@ async function getConnection() {
 const runMigrations = async () => {
     try {
         console.log("Checking database schema...");
-        const [columns] = await query(
-            "SELECT COLUMN_NAME AS Field FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'users'"
-        );
-        const columnNames = columns.map(c => c.Field);
+        const startTime = Date.now();
 
-        if (!columnNames.includes("phone")) {
+        // Single consolidated query to fetch existing columns for all relevant tables
+        const [allColumns] = await query(`
+            SELECT TABLE_NAME AS tableName, COLUMN_NAME AS columnName 
+            FROM INFORMATION_SCHEMA.COLUMNS 
+            WHERE TABLE_NAME IN ('users', 'donations', 'comments', 'blockchain_anchors', 'system_logs', 'campaigns', 'password_resets')
+        `);
+
+        // Group columns by table name
+        const schemaMap = {};
+        allColumns.forEach(row => {
+            const tableName = row.tableName.toLowerCase();
+            const columnName = row.columnName.toLowerCase();
+            if (!schemaMap[tableName]) {
+                schemaMap[tableName] = [];
+            }
+            schemaMap[tableName].push(columnName);
+        });
+
+        // 1. Migration for users table
+        const userColumnNames = schemaMap['users'] || [];
+        if (!userColumnNames.includes("phone")) {
             console.log("Adding phone column to users...");
             await query("ALTER TABLE users ADD phone NVARCHAR(20) NULL");
             await query("ALTER TABLE users ADD CONSTRAINT unique_phone UNIQUE (phone)");
         }
-        if (!columnNames.includes("nid")) {
+        if (!userColumnNames.includes("nid")) {
             console.log("Adding nid column to users...");
             await query("ALTER TABLE users ADD nid NVARCHAR(20) NULL");
             await query("ALTER TABLE users ADD CONSTRAINT unique_nid UNIQUE (nid)");
         }
-        if (!columnNames.includes("address")) {
+        if (!userColumnNames.includes("address")) {
             console.log("Adding address column to users...");
             await query("ALTER TABLE users ADD address NVARCHAR(MAX) NULL");
         }
-        if (!columnNames.includes("role")) {
+        if (!userColumnNames.includes("role")) {
             console.log("Adding role column to users...");
             await query("ALTER TABLE users ADD role NVARCHAR(50) DEFAULT 'user'");
             await query("UPDATE users SET role = 'user' WHERE role IS NULL");
         }
 
-        // Migration for donations table columns
-        const [donationColumns] = await query(
-            "SELECT COLUMN_NAME AS Field FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'donations'"
-        );
-        const donationColumnNames = donationColumns.map(c => c.Field);
-
+        // 2. Migration for donations table
+        const donationColumnNames = schemaMap['donations'] || [];
         if (!donationColumnNames.includes("payment_method")) {
             console.log("Adding payment_method column to donations...");
             await query("ALTER TABLE donations ADD payment_method NVARCHAR(50) DEFAULT 'Direct'");
@@ -175,11 +188,38 @@ const runMigrations = async () => {
             await query("ALTER TABLE donations ADD status NVARCHAR(50) DEFAULT 'Completed'");
         }
 
-        // Check and create system_logs table
-        const [tables] = await query(
-            "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'system_logs'"
-        );
-        if (tables.length === 0) {
+        // 3. Check and create comments table
+        if (!schemaMap['comments']) {
+            console.log("Creating comments table...");
+            await query(`
+                CREATE TABLE comments (
+                    id INT IDENTITY(1,1) PRIMARY KEY,
+                    campaign_id NVARCHAR(36) NOT NULL,
+                    user_id INT NOT NULL,
+                    comment_text NVARCHAR(MAX) NOT NULL,
+                    created_at DATETIME2 DEFAULT GETDATE(),
+                    FOREIGN KEY (campaign_id) REFERENCES campaigns(id),
+                    FOREIGN KEY (user_id) REFERENCES users(id)
+                )
+            `);
+        }
+
+        // 4. Check and create blockchain_anchors table
+        if (!schemaMap['blockchain_anchors']) {
+            console.log("Creating blockchain_anchors table...");
+            await query(`
+                CREATE TABLE blockchain_anchors (
+                    id INT IDENTITY(1,1) PRIMARY KEY,
+                    batch_id INT NOT NULL,
+                    final_hash NVARCHAR(255) NOT NULL,
+                    tx_hash NVARCHAR(255) NOT NULL,
+                    created_at DATETIME2 DEFAULT GETDATE()
+                )
+            `);
+        }
+
+        // 5. Check and create system_logs table
+        if (!schemaMap['system_logs']) {
             console.log("Creating system_logs table...");
             await query(`
                 CREATE TABLE system_logs (
@@ -191,7 +231,39 @@ const runMigrations = async () => {
             `);
         }
 
-        console.log("Database migrations checked & completed successfully!");
+        // 5b. Check and create password_resets table
+        if (!schemaMap['password_resets']) {
+            console.log("Creating password_resets table...");
+            await query(`
+                CREATE TABLE password_resets (
+                    id INT IDENTITY(1,1) PRIMARY KEY,
+                    user_id INT NOT NULL,
+                    token_hash NVARCHAR(255) NOT NULL,
+                    expires_at DATETIME2 NOT NULL,
+                    used BIT DEFAULT 0,
+                    created_at DATETIME2 DEFAULT GETDATE(),
+                    FOREIGN KEY (user_id) REFERENCES users(id)
+                )
+            `);
+        }
+
+        // 6. Check and alter campaigns table for image columns
+        const campaignColumnNames = schemaMap['campaigns'] || [];
+        if (!campaignColumnNames.includes("image_url_1")) {
+            console.log("Adding image_url_1 column to campaigns...");
+            await query("ALTER TABLE campaigns ADD image_url_1 NVARCHAR(MAX) NULL");
+        }
+        if (!campaignColumnNames.includes("image_url_2")) {
+            console.log("Adding image_url_2 column to campaigns...");
+            await query("ALTER TABLE campaigns ADD image_url_2 NVARCHAR(MAX) NULL");
+        }
+        if (!campaignColumnNames.includes("image_url_3")) {
+            console.log("Adding image_url_3 column to campaigns...");
+            await query("ALTER TABLE campaigns ADD image_url_3 NVARCHAR(MAX) NULL");
+        }
+
+        const duration = Date.now() - startTime;
+        console.log(`Database migrations checked & completed successfully in ${duration}ms!`);
     } catch (err) {
         console.error("Database migrations error:", err);
     }

@@ -34,6 +34,9 @@ CREATE TABLE campaigns (
     is_verified BIT DEFAULT 0,
     color NVARCHAR(20) DEFAULT '#1B4332',
     emoji NVARCHAR(10) DEFAULT N'🤲',
+    image_url_1 NVARCHAR(MAX) NULL,
+    image_url_2 NVARCHAR(MAX) NULL,
+    image_url_3 NVARCHAR(MAX) NULL,
     created_at DATETIME2 DEFAULT GETDATE(),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
@@ -53,3 +56,15 @@ CREATE TABLE donations (
     status NVARCHAR(50) DEFAULT 'Completed',
     FOREIGN KEY (campaign_id) REFERENCES campaigns(id)
 );
+
+-- Comments table
+CREATE TABLE comments (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    campaign_id NVARCHAR(36) NOT NULL,
+    user_id INT NOT NULL,
+    comment_text NVARCHAR(MAX) NOT NULL,
+    created_at DATETIME2 DEFAULT GETDATE(),
+    FOREIGN KEY (campaign_id) REFERENCES campaigns(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+

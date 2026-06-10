@@ -2,6 +2,8 @@ const pool = require("../config/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { logAction } = require("./adminController");
+const crypto = require("crypto");
+const { sendResetEmail } = require("../services/emailService");
 
 const registerUser = async (req, res) => {
     try {
@@ -259,8 +261,188 @@ const getMe = async (req, res) => {
     }
 };
 
+const forgotPassword = async (req, res) => {
+    try {
+        let { email } = req.body;
+
+        if (!email) {
+            return res.status(400).json({
+                message: "Email is required."
+            });
+        }
+
+        email = email.trim().toLowerCase();
+
+        // 1. Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({
+                message: "Please enter a valid email address."
+            });
+        }
+
+        // 2. Query user by email
+        const [users] = await pool.query("SELECT id, full_name FROM users WHERE email = ?", [email]);
+
+        // Prevent User Enumeration: if user doesn't exist, still return generic success response
+        if (users.length === 0) {
+            return res.status(200).json({
+                success: true,
+                message: "If that email is registered, we have sent a reset link to it."
+            });
+        }
+
+        const user = users[0];
+
+        // 3. Generate secure random token
+        const token = crypto.randomBytes(32).toString("hex");
+
+        // 4. Hash the token for DB storage
+        const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
+
+        // 5. Expiration time: 15 minutes
+        const expiresAt = new Date(Date.now() + 15 * 60 * 1000);
+
+        // 6. Save token to DB
+        await pool.query(`
+            INSERT INTO password_resets (user_id, token_hash, expires_at, used)
+            VALUES (?, ?, ?, 0)
+        `, [user.id, tokenHash, expiresAt]);
+
+        // 7. Send email
+        const resetLink = `${process.env.FRONTEND_URL || "http://localhost:5173"}/reset-password?token=${token}`;
+        await sendResetEmail(email, resetLink);
+
+        res.status(200).json({
+            success: true,
+            message: "If that email is registered, we have sent a reset link to it."
+        });
+
+    } catch (error) {
+        console.error("Forgot Password Error:", error);
+        res.status(500).json({
+            message: "Server Error"
+        });
+    }
+};
+
+const verifyResetToken = async (req, res) => {
+    try {
+        const { token } = req.query;
+
+        if (!token) {
+            return res.status(400).json({
+                message: "Token is required."
+            });
+        }
+
+        // 1. Hash the token
+        const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
+
+        // 2. Query password_resets table
+        const [resets] = await pool.query(`
+            SELECT id, user_id FROM password_resets
+            WHERE token_hash = ? AND used = 0 AND expires_at > GETDATE()
+        `, [tokenHash]);
+
+        if (resets.length === 0) {
+            return res.status(400).json({
+                message: "Invalid or expired password reset token."
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Token is valid."
+        });
+
+    } catch (error) {
+        console.error("Verify Reset Token Error:", error);
+        res.status(500).json({
+            message: "Server Error"
+        });
+    }
+};
+
+const resetPassword = async (req, res) => {
+    try {
+        const { token, password } = req.body;
+
+        if (!token || !password) {
+            return res.status(400).json({
+                message: "Token and password are required."
+            });
+        }
+
+        // 1. Validate password strength
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (!passwordRegex.test(password)) {
+            return res.status(400).json({
+                message: "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character."
+            });
+        }
+
+        // 2. Hash the token
+        const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
+
+        // 3. Query the token record
+        const [resets] = await pool.query(`
+            SELECT id, user_id FROM password_resets
+            WHERE token_hash = ? AND used = 0 AND expires_at > GETDATE()
+        `, [tokenHash]);
+
+        if (resets.length === 0) {
+            return res.status(400).json({
+                message: "Invalid or expired password reset token."
+            });
+        }
+
+        const resetRecord = resets[0];
+        const userId = resetRecord.user_id;
+
+        // 4. Hash the new password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // 5. Update user password and invalidate tokens in transaction
+        const conn = await pool.getConnection();
+        try {
+            await conn.beginTransaction();
+
+            // Update user password
+            await conn.query("UPDATE users SET password = ? WHERE id = ?", [hashedPassword, userId]);
+
+            // Mark all tokens for this user as used
+            await conn.query("UPDATE password_resets SET used = 1 WHERE user_id = ?", [userId]);
+
+            await conn.commit();
+        } catch (txError) {
+            await conn.rollback();
+            throw txError;
+        } finally {
+            conn.release();
+        }
+
+        // 6. Log security action
+        await logAction("Password Reset", `Password reset successfully for user ID ${userId}.`);
+
+        res.status(200).json({
+            success: true,
+            message: "Your password has been successfully reset. You can now log in."
+        });
+
+    } catch (error) {
+        console.error("Reset Password Error:", error);
+        res.status(500).json({
+            message: "Server Error"
+        });
+    }
+};
+
 module.exports = {
     registerUser,
     loginUser,
-    getMe
+    getMe,
+    forgotPassword,
+    verifyResetToken,
+    resetPassword
 };

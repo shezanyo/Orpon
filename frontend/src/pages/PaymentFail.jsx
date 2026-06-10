@@ -8,7 +8,7 @@ export default function PaymentFail() {
     <div style={{ maxWidth: 600, margin: "80px auto", padding: "0 24px", textAlign: "center" }}>
       <div style={{ background: "#fff", border: "1px solid #EDE9E0", borderRadius: 24, padding: "48px 32px", boxShadow: "0 10px 40px rgba(0,0,0,0.04)", animation: "fadeUp 0.6s ease both" }}>
         <div style={{ fontSize: 64, marginBottom: 16 }}>⚠️</div>
-        <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, color: "#991B1B", marginBottom: 8 }}>
+        <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 36, fontWeight: 700, color: "#991B1B", marginBottom: 8 }}>
           Payment Failed
         </h1>
         <p style={{ color: "#555", fontSize: 16, lineHeight: 1.6, marginBottom: 28 }}>

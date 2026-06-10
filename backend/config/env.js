@@ -17,8 +17,10 @@ const requiredVars = [
   'BKASH_PASSWORD',
   'BKASH_APP_KEY',
   'BKASH_APP_SECRET',
+  'BKASH_BASE_URL',
   'SSLCOMMERZ_STORE_ID',
-  'SSLCOMMERZ_STORE_PASSWORD'
+  'SSLCOMMERZ_STORE_PASSWORD',
+  'SSLCOMMERZ_BASE_URL'
 ];
 
 const validateEnv = () => {
@@ -55,6 +57,17 @@ const validateEnv = () => {
   }
 
   console.log('✅ All required environment variables are set');
+  
+  // Check optional SMTP variables for email service
+  const optionalSMTPVars = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS', 'SMTP_FROM'];
+  const missingSMTP = optionalSMTPVars.filter(v => !process.env[v]);
+  if (missingSMTP.length > 0) {
+    console.warn('⚠️ WARNING: Optional SMTP configuration variables are missing:');
+    missingSMTP.forEach(v => console.warn(`   - ${v}`));
+    console.warn('   Email sending will be simulated, and password reset links will be printed to the server console.\n');
+  } else {
+    console.log('✉️ SMTP Email Service configuration is fully set.\n');
+  }
   
   // Log important configuration (without secrets)
   console.log('\n📍 Current Configuration:');
