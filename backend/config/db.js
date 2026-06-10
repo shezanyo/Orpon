@@ -262,6 +262,30 @@ const runMigrations = async () => {
             await query("ALTER TABLE campaigns ADD image_url_3 NVARCHAR(MAX) NULL");
         }
 
+        // 7. Create indexes if they don't exist to improve performance
+        console.log("Checking database indexes...");
+        try {
+            await query(`
+                IF NOT EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_donations_status_created' AND object_id = OBJECT_ID('donations'))
+                CREATE NONCLUSTERED INDEX IX_donations_status_created ON donations(status, created_at DESC)
+            `);
+            await query(`
+                IF NOT EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_donations_campaign_id' AND object_id = OBJECT_ID('donations'))
+                CREATE NONCLUSTERED INDEX IX_donations_campaign_id ON donations(campaign_id)
+            `);
+            await query(`
+                IF NOT EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_comments_campaign_id' AND object_id = OBJECT_ID('comments'))
+                CREATE NONCLUSTERED INDEX IX_comments_campaign_id ON comments(campaign_id)
+            `);
+            await query(`
+                IF NOT EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_campaigns_user_id' AND object_id = OBJECT_ID('campaigns'))
+                CREATE NONCLUSTERED INDEX IX_campaigns_user_id ON campaigns(user_id)
+            `);
+            console.log("Database indexes verified/created successfully!");
+        } catch (idxErr) {
+            console.error("Index creation error (non-fatal):", idxErr);
+        }
+
         const duration = Date.now() - startTime;
         console.log(`Database migrations checked & completed successfully in ${duration}ms!`);
     } catch (err) {

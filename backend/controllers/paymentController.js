@@ -341,6 +341,14 @@ const cardSuccess = async (req, res) => {
             return res.redirect(failUrl);
         }
 
+        // Validate that the paid amount matches the expected donation amount
+        if (parseFloat(valData.amount) !== parseFloat(pending.amount)) {
+            console.error(`SSLCommerz amount mismatch: expected ${pending.amount}, got ${valData.amount}`);
+            await failDonationRecord(pending.donationId);
+            const failUrl = getRedirectUrl("/payment/fail", { message: "Payment verification failed: amount mismatch" });
+            return res.redirect(failUrl);
+        }
+
         // B. Persist donation inside our secure MySQL db & block chain ledger
         const donation = await completeDonationRecord(pending.donationId);
 

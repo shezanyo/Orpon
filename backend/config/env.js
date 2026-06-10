@@ -20,7 +20,14 @@ const requiredVars = [
   'BKASH_BASE_URL',
   'SSLCOMMERZ_STORE_ID',
   'SSLCOMMERZ_STORE_PASSWORD',
-  'SSLCOMMERZ_BASE_URL'
+  'SSLCOMMERZ_BASE_URL',
+];
+
+// Optional – image upload will be disabled if absent
+const optionalCloudinaryVars = [
+  'CLOUDINARY_CLOUD_NAME',
+  'CLOUDINARY_API_KEY',
+  'CLOUDINARY_API_SECRET',
 ];
 
 const validateEnv = () => {
@@ -57,7 +64,17 @@ const validateEnv = () => {
   }
 
   console.log('✅ All required environment variables are set');
-  
+
+  // Check optional Cloudinary variables for image upload
+  const missingCloudinary = optionalCloudinaryVars.filter(v => !process.env[v]);
+  if (missingCloudinary.length > 0) {
+    console.warn('⚠️ WARNING: Cloudinary configuration variables are missing:');
+    missingCloudinary.forEach(v => console.warn(`   - ${v}`));
+    console.warn('   Image uploads via Cloudinary will be disabled. Set CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET to enable.\n');
+  } else {
+    console.log('🖼️  Cloudinary image upload service is configured.\n');
+  }
+
   // Check optional SMTP variables for email service
   const optionalSMTPVars = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS', 'SMTP_FROM'];
   const missingSMTP = optionalSMTPVars.filter(v => !process.env[v]);

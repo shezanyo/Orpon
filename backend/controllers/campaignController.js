@@ -5,9 +5,9 @@ const cloudinary = require("cloudinary").v2;
 
 // Configure Cloudinary
 cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME || "daosf3vmn",
-    api_key: process.env.CLOUDINARY_API_KEY || "783888329164824",
-    api_secret: process.env.CLOUDINARY_API_SECRET || "XdupKGAeMtM_HvIU2Qm6RUga1Kk"
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
 const DEFAULT_CATEGORY = "Community";
@@ -49,7 +49,6 @@ const createCampaign = async (req, res) => {
             target_amount,
             days_left,
             organizer_name,
-            is_verified,
             color,
             emoji,
             slug
@@ -139,7 +138,7 @@ const createCampaign = async (req, res) => {
             Number(days_left || 30),
             campaignSlug,
             finalOrganizerName,
-            Boolean(is_verified ?? false) ? 1 : 0,
+            0, // Campaigns must start as unverified; toggled by admin only
             campaignColor,
             campaignEmoji,
             img1,
@@ -157,7 +156,7 @@ const createCampaign = async (req, res) => {
                 slug: campaignSlug,
                 title,
                 organizer: finalOrganizerName,
-                orgVerified: Boolean(is_verified ?? false),
+                orgVerified: false,
                 category: campaignCategory,
                 description: campaignDescription,
                 story,

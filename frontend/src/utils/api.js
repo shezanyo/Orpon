@@ -118,7 +118,7 @@ export const getAdminLogs = () => {
 };
 
 export const verifyIntegrity = () => {
-  return apiCall("/verify", "GET");
+  return apiCall("/admin/verify", "GET");
 };
 
 export const getAdminUsers = () => {
