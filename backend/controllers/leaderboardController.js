@@ -18,6 +18,7 @@ const getLeaderboard = async (req, res) => {
             FROM donations d
             WHERE d.status = 'Completed'
               AND d.display_name IS NOT NULL
+              AND d.privacy_type != 'anonymous'
             GROUP BY d.display_name, d.privacy_type
             ORDER BY total_donated DESC
         `);
