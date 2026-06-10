@@ -19,9 +19,26 @@ validateEnv();
 
 const app = express();
 
+// Build the list of allowed CORS origins:
+// 1. The primary FRONTEND_URL (Azure Static Web Apps default URL)
+// 2. Any additional origins from CORS_ORIGINS (comma-separated)
+// 3. The custom domain orpon.me (both www and apex)
+const allowedOrigins = new Set([
+    process.env.FRONTEND_URL || "http://localhost:5173",
+    "http://localhost:5173",
+    "https://orpon.me",
+    "https://www.orpon.me",
+    ...(process.env.CORS_ORIGINS || "").split(",").map(o => o.trim()).filter(Boolean),
+]);
+
 app.use(helmet());
 app.use(cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    origin: (origin, callback) => {
+        // Allow requests with no origin (curl, mobile apps, server-to-server)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.has(origin)) return callback(null, true);
+        callback(new Error(`CORS: origin '${origin}' not allowed`));
+    },
     credentials: true
 }));
 app.use(express.json());
