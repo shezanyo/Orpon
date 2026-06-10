@@ -19,7 +19,7 @@ router.get("/admin/stats", authMiddleware, adminMiddleware, getAdminStats);
 router.get("/admin/campaigns", authMiddleware, adminMiddleware, getAdminCampaigns);
 router.get("/admin/donations", authMiddleware, adminMiddleware, getAdminDonations);
 router.get("/admin/logs", authMiddleware, adminMiddleware, getAdminLogs);
-router.get("/verify", verifyIntegrity);
+router.get("/admin/verify", authMiddleware, adminMiddleware, verifyIntegrity);
 router.get("/admin/users", authMiddleware, adminMiddleware, getAdminUsers);
 router.post("/admin/make-admin", authMiddleware, adminMiddleware, makeUserAdmin);
 
