@@ -99,7 +99,7 @@ export default function App() {
   const [loginTab, setLoginTab] = useState("login");
   const [campaigns, setCampaigns] = useState(CAMPAIGNS);
   const [campaignsLoaded, setCampaignsLoaded] = useState(false);
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -182,7 +182,20 @@ export default function App() {
         <Route path="/donate/:id" element={<Donate />} />
         <Route path="/donate/nagad-sandbox" element={<NagadSandbox />} />
         <Route path="/campaign/:id" element={<CampaignDetailWrapper campaigns={campaigns} campaignsLoaded={campaignsLoaded} nav={nav} setShowLogin={setShowLogin} />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin" element={
+          isLoggedIn && (user?.role === "admin" || user?.role === "super_admin") ? (
+            <AdminDashboard />
+          ) : (
+            <div style={{ textAlign: "center", padding: "120px 20px" }}>
+              <div style={{ fontSize: 64, marginBottom: 20 }}>🔒</div>
+              <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 32, fontWeight: 700, marginBottom: 12, color: "#1A1A2E" }}>Access Denied</h2>
+              <p style={{ color: "#888", marginBottom: 24, fontSize: 16 }}>You do not have permission to view the Admin Dashboard.</p>
+              <button onClick={() => navigate("/")} style={{ background: "#1B4332", color: "#fff", border: "none", padding: "12px 28px", borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: "pointer" }}>
+                Back to Home
+              </button>
+            </div>
+          )
+        } />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/info/:tab" element={<InfoPage nav={nav} />} />
         <Route path="/payment/success" element={<PaymentSuccess />} />
