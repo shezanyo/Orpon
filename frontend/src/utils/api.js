@@ -160,3 +160,15 @@ export const getBlockchainStatus = () => {
 export const manualAnchor = () => {
   return apiCall("/anchors/manual", "POST");
 };
+
+export const forgotPassword = (email) => {
+  return apiCall("/forgot-password", "POST", { email });
+};
+
+export const verifyResetToken = (token) => {
+  return apiCall(`/reset-password/verify?token=${token}`, "GET");
+};
+
+export const resetPassword = (token, password) => {
+  return apiCall("/reset-password", "POST", { token, password });
+};
