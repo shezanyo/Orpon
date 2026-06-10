@@ -1,31 +1,15 @@
-const sql = require("mssql");
+const { query } = require("./config/db");
 const { generateHash } = require("./services/hashService");
-
-const config = {
-    user: "orponadmin",
-    password: "01716984561A@a",
-    server: "orpon-sql-server.database.windows.net",
-    database: "donation_system",
-    port: 1433,
-    options: {
-        encrypt: true,
-        trustServerCertificate: false
-    }
-};
-
-const poolPromise = sql.connect(config);
 
 async function main() {
     try {
         console.log("Fetching completed donations...");
-        const pool = await poolPromise;
-        const result = await pool.request().query(`
+        const [donations] = await query(`
             SELECT id, display_name, amount, created_at, previous_hash, current_hash
             FROM donations
             WHERE status = 'Completed'
             ORDER BY created_at ASC
         `);
-        const donations = result.recordset;
 
         console.log(`Found ${donations.length} completed donations.\n`);
 
