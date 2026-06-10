@@ -58,7 +58,7 @@ const manualAnchor = async (req, res) => {
             VALUES (?, ?, ?)
         `, [nextBatchId, finalHash, txHash]);
 
-        await logAction("Manual Blockchain Anchor", \`Forced anchor of batch \${nextBatchId}. TX: \${txHash}\`);
+        await logAction("Manual Blockchain Anchor", `Forced anchor of batch ${nextBatchId}. TX: ${txHash}`);
 
         return res.status(200).json({
             success: true,

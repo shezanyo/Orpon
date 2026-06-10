@@ -203,17 +203,17 @@ const verifyIntegrity = async (req, res) => {
                     
                     if (!anchoredData) {
                         blockchainStatus = "UNVERIFIABLE";
-                        blockchainMessage = \`Could not fetch data from Polygon for batch \${batchId}. Network may be down.\`;
+                        blockchainMessage = `Could not fetch data from Polygon for batch ${batchId}. Network may be down.`;
                     } else if (anchoredData.finalHash !== localFinalHash) {
                         valid = false;
                         status = "INVALID";
                         blockchainStatus = "TAMPERED";
-                        blockchainMessage = \`CRITICAL ALERT: Blockchain hash mismatch! Local: \${localFinalHash}, Polygon: \${anchoredData.finalHash}\`;
+                        blockchainMessage = `CRITICAL ALERT: Blockchain hash mismatch! Local: ${localFinalHash}, Polygon: ${anchoredData.finalHash}`;
                         mismatchDetails = (mismatchDetails ? mismatchDetails + " | " : "") + blockchainMessage;
                         console.error("[verifyIntegrity] " + blockchainMessage);
                     } else {
                         blockchainStatus = "VERIFIED";
-                        blockchainMessage = \`Blockchain anchor for batch \${batchId} matches local hash perfectly.\`;
+                        blockchainMessage = `Blockchain anchor for batch ${batchId} matches local hash perfectly.`;
                     }
                 }
             } catch (err) {
@@ -224,14 +224,14 @@ const verifyIntegrity = async (req, res) => {
         }
 
         const message = valid 
-            ? \`Ledger integrity verified successfully. Total blocks verified: \${donations.length}. \${blockchainMessage}\`
-            : \`Integrity verification failed. \${mismatchDetails}\`;
+            ? `Ledger integrity verified successfully. Total blocks verified: ${donations.length}. ${blockchainMessage}`
+            : `Integrity verification failed. ${mismatchDetails}`;
         
-        console.log(\`[verifyIntegrity] FINAL RESULT: \${status}. \${message}\`);
+        console.log(`[verifyIntegrity] FINAL RESULT: ${status}. ${message}`);
         
         await logAction(
             "Integrity check run",
-            \`Result: \${status}. Total blocks verified: \${donations.length}.\${mismatchDetails ? " Error: " + mismatchDetails : ""}\`
+            `Result: ${status}. Total blocks verified: ${donations.length}.${mismatchDetails ? " Error: " + mismatchDetails : ""}`
         );
 
         res.status(200).json({

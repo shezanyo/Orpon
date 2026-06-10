@@ -156,7 +156,7 @@ const completeDonationRecord = async (id) => {
                                 INSERT INTO blockchain_anchors (batch_id, final_hash, tx_hash)
                                 VALUES (?, ?, ?)
                             `, [batchId, current_hash, txHash]);
-                            await logAction("Automatic Blockchain Anchor", \`Anchored batch \${batchId}. TX: \${txHash}\`);
+                            await logAction("Automatic Blockchain Anchor", `Anchored batch ${batchId}. TX: ${txHash}`);
                         }
                     } catch (anchorErr) {
                         console.error("Auto-anchoring failed:", anchorErr);

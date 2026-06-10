@@ -1,4 +1,3 @@
-const { ethers } = require("ethers");
 require("dotenv").config();
 
 // Contract ABI (Only the functions we need)
@@ -13,13 +12,15 @@ class BlockchainService {
         this.privateKey = process.env.WALLET_PRIVATE_KEY;
         this.contractAddress = process.env.CONTRACT_ADDRESS;
 
-        if (!this.rpcUrl || !this.privateKey || !this.contractAddress) {
-            console.warn("⚠️ Blockchain anchoring is disabled. Missing environment variables.");
+        const hexRegex = /^(0x)?[0-9a-fA-F]{64}$/;
+        if (!this.rpcUrl || !this.privateKey || !this.contractAddress || !hexRegex.test(this.privateKey)) {
+            console.warn("⚠️ Blockchain anchoring is disabled. Missing or invalid environment variables (e.g. placeholder private key).");
             this.isConfigured = false;
             return;
         }
 
         try {
+            const { ethers } = require("ethers");
             this.provider = new ethers.JsonRpcProvider(this.rpcUrl);
             this.wallet = new ethers.Wallet(this.privateKey, this.provider);
             this.contract = new ethers.Contract(this.contractAddress, contractABI, this.wallet);
