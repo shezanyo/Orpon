@@ -83,7 +83,7 @@ const sendResetEmail = async (toEmail, resetLink) => {
             secure: parseInt(SMTP_PORT, 10) === 465,
             auth: {
                 user: SMTP_USER,
-                pass: SMTP_PASS,
+                pass: SMTP_PASS.replace(/\s/g, ''), // strip spaces from Gmail App Passwords
             },
         });
         fromAddress = `"${SMTP_FROM.split("@")[0]}" <${SMTP_FROM}>`;
