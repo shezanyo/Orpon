@@ -12,9 +12,12 @@ export const API_URL = import.meta.env.VITE_API_URL || `${defaultOrigin}/api`;
  * @returns {Promise<object>} - Response data
  */
 export const apiCall = async (endpoint, method = "GET", data = null) => {
-  const headers = {
-    "Content-Type": "application/json",
-  };
+  const headers = {};
+
+  const isFormData = typeof FormData !== "undefined" && data instanceof FormData;
+  if (!isFormData) {
+    headers["Content-Type"] = "application/json";
+  }
 
   const token = localStorage.getItem("authToken");
   if (token) {
@@ -27,7 +30,7 @@ export const apiCall = async (endpoint, method = "GET", data = null) => {
   };
 
   if (data) {
-    config.body = JSON.stringify(data);
+    config.body = isFormData ? data : JSON.stringify(data);
   }
 
   try {
@@ -132,4 +135,40 @@ export const getLeaderboard = () => {
 
 export const deleteCampaign = (campaignId) => {
   return apiCall(`/campaign/${campaignId}`, "DELETE");
+};
+
+export const getComments = (campaignId) => {
+  return apiCall(`/campaign/${campaignId}/comments`);
+};
+
+export const createComment = (campaignId, comment_text) => {
+  return apiCall(`/campaign/${campaignId}/comments`, "POST", { comment_text });
+};
+
+export const updateComment = (commentId, comment_text) => {
+  return apiCall(`/comment/${commentId}`, "PUT", { comment_text });
+};
+
+export const deleteComment = (commentId) => {
+  return apiCall(`/comment/${commentId}`, "DELETE");
+};
+
+export const getBlockchainStatus = () => {
+  return apiCall("/anchors/status", "GET");
+};
+
+export const manualAnchor = () => {
+  return apiCall("/anchors/manual", "POST");
+};
+
+export const forgotPassword = (email) => {
+  return apiCall("/forgot-password", "POST", { email });
+};
+
+export const verifyResetToken = (token) => {
+  return apiCall(`/reset-password/verify?token=${token}`, "GET");
+};
+
+export const resetPassword = (token, password) => {
+  return apiCall("/reset-password", "POST", { token, password });
 };

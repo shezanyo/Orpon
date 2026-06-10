@@ -1,5 +1,6 @@
 const pool = require("../config/db");
 const { generateHash } = require("../services/hashService");
+const blockchainService = require("../services/blockchainService");
 
 // Helper to log system actions
 const logAction = async (action, details = null) => {
@@ -180,9 +181,50 @@ const verifyIntegrity = async (req, res) => {
             lastHash = donation.current_hash;
         }
 
-        const status = valid ? "VALID" : "INVALID";
+        let status = valid ? "VALID" : "INVALID";
+
+        // Blockchain Verification
+        let blockchainStatus = "NOT_ANCHORED";
+        let blockchainMessage = "No blockchain anchors found.";
+
+        if (valid) {
+            try {
+                // Fetch latest local anchor
+                const [lastAnchor] = await pool.query(`
+                    SELECT TOP 1 * FROM blockchain_anchors ORDER BY batch_id DESC
+                `);
+
+                if (lastAnchor.length > 0) {
+                    const localFinalHash = lastAnchor[0].final_hash;
+                    const batchId = lastAnchor[0].batch_id;
+
+                    // Verify against blockchain
+                    const anchoredData = await blockchainService.getAnchoredHash(batchId);
+                    
+                    if (!anchoredData) {
+                        blockchainStatus = "UNVERIFIABLE";
+                        blockchainMessage = `Could not fetch data from Polygon for batch ${batchId}. Network may be down.`;
+                    } else if (anchoredData.finalHash !== localFinalHash) {
+                        valid = false;
+                        status = "INVALID";
+                        blockchainStatus = "TAMPERED";
+                        blockchainMessage = `CRITICAL ALERT: Blockchain hash mismatch! Local: ${localFinalHash}, Polygon: ${anchoredData.finalHash}`;
+                        mismatchDetails = (mismatchDetails ? mismatchDetails + " | " : "") + blockchainMessage;
+                        console.error("[verifyIntegrity] " + blockchainMessage);
+                    } else {
+                        blockchainStatus = "VERIFIED";
+                        blockchainMessage = `Blockchain anchor for batch ${batchId} matches local hash perfectly.`;
+                    }
+                }
+            } catch (err) {
+                console.error("[verifyIntegrity] Failed to check blockchain:", err);
+                blockchainStatus = "ERROR";
+                blockchainMessage = "Error connecting to Polygon for verification.";
+            }
+        }
+
         const message = valid 
-            ? `Ledger integrity verified successfully. Total blocks verified: ${donations.length}`
+            ? `Ledger integrity verified successfully. Total blocks verified: ${donations.length}. ${blockchainMessage}`
             : `Integrity verification failed. ${mismatchDetails}`;
         
         console.log(`[verifyIntegrity] FINAL RESULT: ${status}. ${message}`);
@@ -197,7 +239,11 @@ const verifyIntegrity = async (req, res) => {
             valid: status === "VALID",
             status,
             message,
-            blocksVerified: donations.length
+            blocksVerified: donations.length,
+            blockchain: {
+                status: blockchainStatus,
+                message: blockchainMessage
+            }
         });
     } catch (error) {
         console.error("[verifyIntegrity] CRITICAL ERROR:", error);

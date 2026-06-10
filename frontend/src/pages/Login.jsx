@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { loginUser, registerUser } from "../utils/api";
 import { useAuth } from "../context/AuthContext";
+import { ShieldCheck } from "lucide-react";
 
 export default function LoginModal({ loginTab, setLoginTab, setShowLogin, setIsLoggedIn }) {
   const [email, setEmail] = useState("");
@@ -14,6 +16,7 @@ export default function LoginModal({ loginTab, setLoginTab, setShowLogin, setIsL
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
   const { login } = useAuth();
 
   const handleSubmit = async () => {
@@ -107,7 +110,7 @@ export default function LoginModal({ loginTab, setLoginTab, setShowLogin, setIsL
     >
       <div style={{ background: "#fff", borderRadius: 28, padding: "40px 36px", width: "100%", maxWidth: 420, animation: "fadeUp 0.3s ease", transition: "all 0.35s cubic-bezier(0.4, 0, 0.2, 1)", boxShadow: "0 40px 100px rgba(0,0,0,0.2)", maxHeight: "90vh", overflowY: "auto" }}>
         <div style={{ textAlign: "center", marginBottom: 28 }}>
-          <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 700, color: "#1B4332", marginBottom: 4 }}>অ Orpon</div>
+          <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 28, fontWeight: 700, color: "#1B4332", marginBottom: 4 }}>অ Orpon</div>
           <div style={{ display: "flex", background: "#F8F6F0", borderRadius: 12, padding: 4, marginTop: 20 }}>
             {["login", "signup"].map(tab => (
               <button key={tab} onClick={() => { setLoginTab(tab); setError(""); setConfirmPass(""); setShowPass(false); }} style={{ flex: 1, padding: "10px 0", borderRadius: 8, border: "none", background: loginTab === tab ? "#fff" : "transparent", color: loginTab === tab ? "#1A1A2E" : "#888", fontSize: 14, fontWeight: loginTab === tab ? 600 : 400, cursor: "pointer", boxShadow: loginTab === tab ? "0 2px 8px rgba(0,0,0,0.08)" : "none", transition: "all 0.2s" }}>
@@ -172,6 +175,32 @@ export default function LoginModal({ loginTab, setLoginTab, setShowLogin, setIsL
             </button>
           </div>
 
+          {loginTab === "login" && (
+            <div style={{ textAlign: "right", marginTop: -4 }}>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowLogin(false);
+                  navigate("/forgot-password");
+                }}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "#2D6A4F",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  padding: "4px 0",
+                  transition: "color 0.2s"
+                }}
+                onMouseOver={(e) => e.target.style.color = "#1B4332"}
+                onMouseOut={(e) => e.target.style.color = "#2D6A4F"}
+              >
+                Forgot Password?
+              </button>
+            </div>
+          )}
+
           <div style={{
             maxHeight: loginTab === "signup" ? "60px" : "0px",
             opacity: loginTab === "signup" ? 1 : 0,
@@ -194,14 +223,31 @@ export default function LoginModal({ loginTab, setLoginTab, setShowLogin, setIsL
           </button>
         </div>
 
-        <div style={{ position: "relative", margin: "20px 0", textAlign: "center" }}>
-          <div style={{ height: 1, background: "#EDE9E0" }} />
-          <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", background: "#fff", padding: "0 12px", fontSize: 12, color: "#aaa" }}>or</span>
+        <div style={{
+          marginTop: 24,
+          padding: 16,
+          background: "#F8F6F0",
+          borderRadius: 16,
+          border: "1px solid #EDE9E0"
+        }}>
+          <h4 style={{ 
+            fontSize: 12, 
+            fontWeight: 700, 
+            color: "#1B4332", 
+            textTransform: "uppercase", 
+            letterSpacing: 0.5, 
+            marginBottom: 10,
+            display: "flex",
+            alignItems: "center",
+            gap: 6
+          }}>
+            <ShieldCheck size={14} /> Why Trust Orpon?
+          </h4>
+          <div style={{ display: "flex", alignItems: "flex-start", gap: 6, fontSize: 11, color: "#555", lineHeight: 1.45 }}>
+            <span style={{ color: "#2D6A4F", fontWeight: "bold" }}>✓</span>
+            <span>NID-verified campaigns, transparent ledger tracking, and secure sandbox checkouts.</span>
+          </div>
         </div>
-
-        <button style={{ width: "100%", border: "1px solid #EDE9E0", background: "#fff", padding: "12px 0", borderRadius: 12, fontSize: 14, color: "#555", cursor: "pointer", fontWeight: 500 }}>
-          📱 Continue with Google
-        </button>
 
         <p style={{ textAlign: "center", color: "#aaa", fontSize: 12, marginTop: 20 }}>
           By continuing, you agree to Orpon's Terms & Privacy Policy

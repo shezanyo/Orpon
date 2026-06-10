@@ -28,7 +28,7 @@ export default function Home({ nav, campaigns, openCampaign, setShowLogin, isLog
     <div>
       {/* HERO */}
       <section style={{ padding: "80px 5% 100px", maxWidth: 1200, margin: "0 auto", textAlign: "center", animation: "fadeUp 0.7s ease both" }}>
-        <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 700, lineHeight: 1.1, color: "#1A1A2E", marginBottom: 24, letterSpacing: "-0.02em" }}>
+        <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 700, lineHeight: 1.1, color: "#1A1A2E", marginBottom: 24, letterSpacing: "-0.02em" }}>
           Give with <em style={{ color: "#1B4332", fontStyle: "italic" }}>trust.</em>
           <br />
           Change lives with <em style={{ color: "#D4A017", fontStyle: "italic" }}>proof.</em>
@@ -53,7 +53,7 @@ export default function Home({ nav, campaigns, openCampaign, setShowLogin, isLog
             { val: count3 + "+", label: "Campaigns" },
           ].map((s, i) => (
             <div key={i} style={{ padding: "28px 20px", textAlign: "center", background: i === 1 ? "#D4A017" : "#1B4332" }}>
-              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 700, color: "#fff", lineHeight: 1 }}>{s.val}</div>
+              <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 32, fontWeight: 700, color: "#fff", lineHeight: 1 }}>{s.val}</div>
               <div style={{ color: i === 1 ? "#fff9" : "#95D5B2", fontSize: 13, marginTop: 6 }}>{s.label}</div>
             </div>
           ))}
@@ -64,7 +64,7 @@ export default function Home({ nav, campaigns, openCampaign, setShowLogin, isLog
       <section style={{ padding: "0 5% 80px", maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 32 }}>
           <div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 38, fontWeight: 700, color: "#1A1A2E", letterSpacing: "-0.02em" }}>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 38, fontWeight: 700, color: "#1A1A2E", letterSpacing: "-0.02em" }}>
               Urgent campaigns
             </h2>
             <p style={{ color: "#888", fontSize: 14, marginTop: 4 }}>Verified, transparent, and time-sensitive</p>
@@ -81,7 +81,7 @@ export default function Home({ nav, campaigns, openCampaign, setShowLogin, isLog
       {/* HOW IT WORKS */}
       <section style={{ background: "#1B4332", padding: "80px 5%", textAlign: "center" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 42, fontWeight: 700, color: "#fff", marginBottom: 12 }}>How Orpon works</h2>
+          <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 42, fontWeight: 700, color: "#fff", marginBottom: 12 }}>How Orpon works</h2>
           <p style={{ color: "#95D5B2", marginBottom: 56, fontSize: 15 }}>Simple for donors. Powerful for organizers.</p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 32 }}>
             {[
@@ -105,7 +105,7 @@ export default function Home({ nav, campaigns, openCampaign, setShowLogin, isLog
       <section style={{ padding: "80px 5%", textAlign: "center", background: "#F8F6F0" }}>
         <div style={{ background: "linear-gradient(135deg, #D4A01711 0%, #1B433211 100%)", border: "1px solid #EDE9E0", borderRadius: 28, padding: "64px 40px", maxWidth: 700, margin: "0 auto" }}>
           <div style={{ fontSize: 48, marginBottom: 20 }}>🤲</div>
-          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 38, fontWeight: 700, color: "#1A1A2E", marginBottom: 16 }}>
+          <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 38, fontWeight: 700, color: "#1A1A2E", marginBottom: 16 }}>
             Start giving today
           </h2>
           <p style={{ color: "#666", fontSize: 16, lineHeight: 1.7, marginBottom: 32 }}>

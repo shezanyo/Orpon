@@ -18,6 +18,9 @@ import MyCampaigns from "./pages/MyCampaigns";
 import CampaignAnalytics from "./pages/CampaignAnalytics";
 import AdminDashboard from "./pages/AdminDashboard";
 import Leaderboard from "./pages/Leaderboard";
+import InfoPage from "./pages/InfoPage";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import { CAMPAIGNS, CAMPAIGN_COLORS, CAMPAIGN_EMOJIS } from "./data/mockData";
 import { getCampaigns } from "./utils/api";
 import { slugify } from "./utils/format";
@@ -54,10 +57,12 @@ const normalizeCampaign = (campaign) => {
     daysLeft: Number(campaign.daysLeft ?? campaign.days_left ?? 30),
     color: campaign.color || CAMPAIGN_COLORS[category] || "#1B4332",
     emoji: campaign.emoji || CAMPAIGN_EMOJIS[category] || "🤲",
+    images: campaign.images || [],
   };
 };
 
-function CampaignDetailWrapper({ campaigns, campaignsLoaded, nav }) {
+
+function CampaignDetailWrapper({ campaigns, campaignsLoaded, nav, setShowLogin }) {
   const { id } = useParams();
 
   if (!campaignsLoaded) {
@@ -84,7 +89,7 @@ function CampaignDetailWrapper({ campaigns, campaignsLoaded, nav }) {
     );
   }
 
-  return <CampaignDetail c={campaign} nav={nav} />;
+  return <CampaignDetail c={campaign} nav={nav} setShowLogin={setShowLogin} />;
 }
 
 export default function App() {
@@ -105,7 +110,7 @@ export default function App() {
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap";
+    link.href = "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap";
     document.head.appendChild(link);
 
     const loadCampaigns = async () => {
@@ -176,17 +181,20 @@ export default function App() {
         } />
         <Route path="/donate/:id" element={<Donate />} />
         <Route path="/donate/nagad-sandbox" element={<NagadSandbox />} />
-        <Route path="/campaign/:id" element={<CampaignDetailWrapper campaigns={campaigns} campaignsLoaded={campaignsLoaded} nav={nav} />} />
+        <Route path="/campaign/:id" element={<CampaignDetailWrapper campaigns={campaigns} campaignsLoaded={campaignsLoaded} nav={nav} setShowLogin={setShowLogin} />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/info/:tab" element={<InfoPage nav={nav} />} />
         <Route path="/payment/success" element={<PaymentSuccess />} />
         <Route path="/payment/fail" element={<PaymentFail />} />
         <Route path="/payment/cancel" element={<PaymentCancel />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>
 
       {showLogin && <LoginModal loginTab={loginTab} setLoginTab={setLoginTab} setShowLogin={setShowLogin} />}
 
-      <Footer />
+      <Footer nav={nav} />
     </div>
   );
 }
