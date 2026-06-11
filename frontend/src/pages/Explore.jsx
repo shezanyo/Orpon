@@ -38,9 +38,9 @@ export default function Explore({ campaigns, openCampaign }) {
       {filtered.length === 0 ? (
         <div style={{ textAlign: "center", padding: "80px 0", color: "#888" }}>No campaigns found. Try a different search.</div>
       ) : (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 24 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 24, alignItems: "stretch" }}>
           {filtered.map((c, i) => (
-            <div key={c.id} style={{ animation: `fadeUp 0.5s ${i * 0.07}s ease both` }}>
+            <div key={c.id} style={{ animation: `fadeUp 0.5s ${i * 0.07}s ease both`, display: "flex" }}>
               <CampaignCard c={c} openCampaign={openCampaign} />
             </div>
           ))}

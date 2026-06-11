@@ -21,6 +21,9 @@ export default function CampaignCard({ c, openCampaign }) {
         transition: "all 0.25s ease",
         border: "1px solid #EDE9E0",
         animation: "fadeUp 0.5s ease both",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
       }}
     >
       <div
@@ -48,25 +51,39 @@ export default function CampaignCard({ c, openCampaign }) {
         )}
       </div>
 
-      <div style={{ padding: "20px 20px 24px" }}>
+      <div style={{ padding: "20px 20px 24px", display: "flex", flexDirection: "column", flex: 1 }}>
         <p style={{ fontSize: 12, color: "#888", marginBottom: 6, fontWeight: 500 }}>
           by {c.organizer} {c.orgVerified && "✓"}
         </p>
-        <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 18, fontWeight: 700, lineHeight: 1.3, marginBottom: 14, color: "#1A1A2E" }}>
+        <h3 style={{
+          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontSize: 16,
+          fontWeight: 700,
+          lineHeight: 1.4,
+          marginBottom: 0,
+          color: "#1A1A2E",
+          flex: 1,
+          display: "-webkit-box",
+          WebkitLineClamp: 3,
+          WebkitBoxOrient: "vertical",
+          overflow: "hidden",
+        }}>
           {c.title}
         </h3>
-        <ProgressBar value={p} color={c.color} />
-        <div style={{ display: "flex", justifyContent: "space-between", marginTop: 12, fontSize: 13 }}>
-          <span>
-            <strong style={{ color: c.color, fontSize: 16 }}>{fmt(c.raised)}</strong>
-            <span style={{ color: "#888" }}> raised</span>
-          </span>
-          <span style={{ color: "#888" }}>
-            <strong style={{ color: "#1A1A2E" }}>{p}%</strong> of {fmt(c.goal)}
-          </span>
-        </div>
-        <div style={{ marginTop: 8, fontSize: 12, color: "#888" }}>
-          👥 {c.donors} donors · {c.daysLeft} days left
+        <div style={{ marginTop: 14 }}>
+          <ProgressBar value={p} color={c.color} />
+          <div style={{ display: "flex", justifyContent: "space-between", marginTop: 12, fontSize: 13 }}>
+            <span>
+              <strong style={{ color: c.color, fontSize: 16 }}>{fmt(c.raised)}</strong>
+              <span style={{ color: "#888" }}> raised</span>
+            </span>
+            <span style={{ color: "#888" }}>
+              <strong style={{ color: "#1A1A2E" }}>{p}%</strong> of {fmt(c.goal)}
+            </span>
+          </div>
+          <div style={{ marginTop: 8, fontSize: 12, color: "#888" }}>
+            👥 {c.donors} donors · {c.daysLeft} days left
+          </div>
         </div>
       </div>
     </div>
