@@ -40,7 +40,7 @@ export default function Explore({ campaigns, openCampaign }) {
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 24 }}>
           {filtered.map((c, i) => (
-            <div key={c.id} style={{ animation: `fadeUp 0.5s ${i * 0.07}s ease both` }}>
+            <div key={c.id} style={{ display: "flex", flexDirection: "column", height: "100%", animation: `fadeUp 0.5s ${i * 0.07}s ease both` }}>
               <CampaignCard c={c} openCampaign={openCampaign} />
             </div>
           ))}

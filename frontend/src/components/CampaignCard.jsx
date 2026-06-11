@@ -24,6 +24,7 @@ export default function CampaignCard({ c, openCampaign }) {
         display: "flex",
         flexDirection: "column",
         width: "100%",
+        height: "100%",
       }}
     >
       {/* Image / Banner — fixed height */}
