@@ -118,26 +118,6 @@ export default function InfoPage({ nav }) {
               <li><strong>Local Cryptographic Ledger:</strong> Every donation is linked to the previous one using SHA-256 hash chains, making any alteration of historical data immediately detectable.</li>
               <li><strong>Immutable Blockchain Anchoring:</strong> Batches of donation hashes are periodically anchored to the <strong>Polygon Amoy</strong> public blockchain network, providing absolute cryptographic proof of platform integrity.</li>
             </ul>
-
-            <h3 style={{ fontSize: 20, fontWeight: 700, color: "#1A1A2E", marginTop: 28, marginBottom: 12 }}>
-              The Team
-            </h3>
-            <p style={{ fontSize: 14, color: "#555", lineHeight: 1.6, marginBottom: 16 }}>
-              Orpon was engineered by a team of student developers dedicated to building secure, impactful software solutions for community problems:
-            </p>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
-              {[
-                { name: "Sanjuna", role: "Frontend Lead & Security Integration" },
-                { name: "Anik", role: "Frontend UI & Asset Management" },
-                { name: "Ibon", role: "Backend & Database Architect" },
-                { name: "Rumi", role: "QA, Testing & Documentation" }
-              ].map(member => (
-                <div key={member.name} style={{ padding: 16, background: "#F8F6F0", borderRadius: 14, border: "1px solid #EDE9E0" }}>
-                  <strong style={{ fontSize: 15, color: "#1B4332", display: "block" }}>{member.name}</strong>
-                  <span style={{ fontSize: 12, color: "#666" }}>{member.role}</span>
-                </div>
-              ))}
-            </div>
           </div>
         );
 
