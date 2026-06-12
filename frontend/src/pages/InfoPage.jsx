@@ -20,7 +20,7 @@ import {
 export default function InfoPage({ nav }) {
   const { tab } = useParams();
   const navigate = useNavigate();
-  const activeTab = tab || "help-center";
+  const activeTab = tab || "about";
 
   // Contact Form State
   const [contactForm, setContactForm] = useState({ name: "", email: "", subject: "", message: "" });
@@ -62,6 +62,7 @@ export default function InfoPage({ nav }) {
     {
       title: "Platform",
       items: [
+        { label: "About Orpon", slug: "about", icon: FileText },
         { label: "Verification Guide", slug: "verification", icon: ShieldCheck }
       ]
     },
@@ -90,6 +91,56 @@ export default function InfoPage({ nav }) {
 
   const renderContent = () => {
     switch (activeTab) {
+      case "about":
+        return (
+          <div>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 36, fontWeight: 700, color: "#1B4332", marginBottom: 16 }}>
+              About Orpon
+            </h2>
+            <p style={{ fontSize: 16, color: "#555", lineHeight: 1.7, marginBottom: 24, fontWeight: 500 }}>
+              Orpon (অর্পণ) means <em>offering</em> or <em>dedication</em> in Bengali. We are Bangladesh's first cryptographic crowdfunding platform, built to rebuild trust in charitable giving through technology.
+            </p>
+
+            <h3 style={{ fontSize: 20, fontWeight: 700, color: "#1A1A2E", marginTop: 28, marginBottom: 12 }}>
+              The Problem We Solve
+            </h3>
+            <p style={{ fontSize: 14, color: "#555", lineHeight: 1.6, marginBottom: 16 }}>
+              Trust is the single biggest bottleneck to online giving in Bangladesh. Donors want to support local causes—such as medical emergencies, flood relief, or community libraries—but have no reliable way to verify that their donations aren't altered, deleted, or misused.
+            </p>
+
+            <h3 style={{ fontSize: 20, fontWeight: 700, color: "#1A1A2E", marginTop: 28, marginBottom: 12 }}>
+              Our Trust Mechanism
+            </h3>
+            <p style={{ fontSize: 14, color: "#555", lineHeight: 1.6, marginBottom: 16 }}>
+              Orpon secures transparency through two layers of modern technology:
+            </p>
+            <ul style={{ display: "flex", flexDirection: "column", gap: 12, fontSize: 14, color: "#555", paddingLeft: 20, marginBottom: 24 }}>
+              <li><strong>Local Cryptographic Ledger:</strong> Every donation is linked to the previous one using SHA-256 hash chains, making any alteration of historical data immediately detectable.</li>
+              <li><strong>Immutable Blockchain Anchoring:</strong> Batches of donation hashes are periodically anchored to the <strong>Polygon Amoy</strong> public blockchain network, providing absolute cryptographic proof of platform integrity.</li>
+            </ul>
+
+            <h3 style={{ fontSize: 20, fontWeight: 700, color: "#1A1A2E", marginTop: 28, marginBottom: 12 }}>
+              The Team
+            </h3>
+            <p style={{ fontSize: 14, color: "#555", lineHeight: 1.6, marginBottom: 16 }}>
+              Orpon was engineered by a team of student developers dedicated to building secure, impactful software solutions for community problems:
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
+              {[
+                { name: "Sanjuna", role: "Frontend Lead & Security Integration" },
+                { name: "Anik", role: "Frontend UI & Asset Management" },
+                { name: "Ibon", role: "Backend & Database Architect" },
+                { name: "Rumi", role: "QA, Testing & Documentation" }
+              ].map(member => (
+                <div key={member.name} style={{ padding: 16, background: "#F8F6F0", borderRadius: 14, border: "1px solid #EDE9E0" }}>
+                  <strong style={{ fontSize: 15, color: "#1B4332", display: "block" }}>{member.name}</strong>
+                  <span style={{ fontSize: 12, color: "#666" }}>{member.role}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
       case "verification":
         return (
           <div>
