@@ -22,12 +22,13 @@ const {
  * @returns {string} Full redirect URL
  * @throws {Error} If FRONTEND_URL is not configured
  */
-const getRedirectUrl = (path, params = {}) => {
-  if (!process.env.FRONTEND_URL) {
+const getRedirectUrl = (path, params = {}, originUrl = null) => {
+  const base = originUrl || process.env.FRONTEND_URL;
+  if (!base) {
     throw new Error('FRONTEND_URL environment variable is not set. Payment redirects will fail. Check your Azure App Service Settings.');
   }
   
-  const baseUrl = process.env.FRONTEND_URL.replace(/\/$/, ''); // Remove trailing slash
+  const baseUrl = base.replace(/\/$/, ''); // Remove trailing slash
   const queryString = new URLSearchParams(params).toString();
   const url = queryString ? `${baseUrl}${path}?${queryString}` : `${baseUrl}${path}`;
   
@@ -133,7 +134,8 @@ const initiateBkash = async (req, res) => {
         await setPendingPayment(paymentData.paymentID, {
             donationId: pendingDonation.id,
             amount: parseFloat(amount),
-            idToken // Preserve token for payment execute step
+            idToken, // Preserve token for payment execute step
+            frontendUrl: req.headers.origin || process.env.FRONTEND_URL
         });
 
         // E. Return the redirection URL to the client
@@ -151,6 +153,7 @@ const initiateBkash = async (req, res) => {
  * Handle bKash Sandbox callback redirect from checkout
  */
 const bkashCallback = async (req, res) => {
+    let pending = null;
     try {
         const { paymentID, status } = req.query;
 
@@ -159,24 +162,26 @@ const bkashCallback = async (req, res) => {
             return res.redirect(failUrl);
         }
 
-        const pending = await getPendingPayment(paymentID);
+        pending = await getPendingPayment(paymentID);
         if (!pending) {
             const failUrl = getRedirectUrl("/payment/fail", { message: "Transaction not found or expired" });
             return res.redirect(failUrl);
         }
+
+        const frontendUrl = pending.frontendUrl || process.env.FRONTEND_URL;
 
         // Clean up session immediately to avoid double execution
         await deletePendingPayment(paymentID);
 
         if (status === "cancel") {
             await cancelDonationRecord(pending.donationId);
-            const cancelUrl = getRedirectUrl("/payment/cancel");
+            const cancelUrl = getRedirectUrl("/payment/cancel", {}, frontendUrl);
             return res.redirect(cancelUrl);
         }
 
         if (status !== "success") {
             await failDonationRecord(pending.donationId);
-            const failUrl = getRedirectUrl("/payment/fail", { message: "Payment cancelled or failed" });
+            const failUrl = getRedirectUrl("/payment/fail", { message: "Payment cancelled or failed" }, frontendUrl);
             return res.redirect(failUrl);
         }
 
@@ -197,7 +202,7 @@ const bkashCallback = async (req, res) => {
         if (!executeResponse.ok || executeData.transactionStatus !== "Completed") {
             console.error("bKash payment execution failure [HTTP %d]:", executeResponse.status, JSON.stringify(executeData));
             await failDonationRecord(pending.donationId);
-            const failUrl = getRedirectUrl("/payment/fail", { message: "Failed to execute bKash payment" });
+            const failUrl = getRedirectUrl("/payment/fail", { message: "Failed to execute bKash payment" }, frontendUrl);
             return res.redirect(failUrl);
         }
 
@@ -208,11 +213,12 @@ const bkashCallback = async (req, res) => {
         const successUrl = getRedirectUrl("/payment/success", { 
             donationId: donation.id, 
             amount: pending.amount 
-        });
+        }, frontendUrl);
         return res.redirect(successUrl);
     } catch (error) {
         console.error("bKash callback exception:", error);
-        const failUrl = getRedirectUrl("/payment/fail", { message: "System error verifying bKash payment" });
+        const frontendUrl = pending?.frontendUrl || process.env.FRONTEND_URL;
+        const failUrl = getRedirectUrl("/payment/fail", { message: "System error verifying bKash payment" }, frontendUrl);
         return res.redirect(failUrl);
     }
 };
@@ -249,7 +255,8 @@ const initiateCard = async (req, res) => {
         // B. Store metadata in cache keyed by transaction ID
         await setPendingPayment(transactionId, {
             donationId: pendingDonation.id,
-            amount: parseFloat(amount)
+            amount: parseFloat(amount),
+            frontendUrl: req.headers.origin || process.env.FRONTEND_URL
         });
 
         // Set up SSLCommerz payload
@@ -313,6 +320,7 @@ const initiateCard = async (req, res) => {
  * Handle Card Payment Success Callback (POST)
  */
 const cardSuccess = async (req, res) => {
+    let pending = null;
     try {
         const { tran_id, val_id, status } = req.body;
 
@@ -321,11 +329,13 @@ const cardSuccess = async (req, res) => {
             return res.redirect(failUrl);
         }
 
-        const pending = await getPendingPayment(tran_id);
+        pending = await getPendingPayment(tran_id);
         if (!pending) {
             const failUrl = getRedirectUrl("/payment/fail", { message: "Transaction session expired" });
             return res.redirect(failUrl);
         }
+
+        const frontendUrl = pending.frontendUrl || process.env.FRONTEND_URL;
 
         await deletePendingPayment(tran_id);
 
@@ -337,7 +347,7 @@ const cardSuccess = async (req, res) => {
         if (!valResponse.ok || (valData.status !== "VALID" && valData.status !== "VALIDATED")) {
             console.error("SSLCommerz validation failure:", valData);
             await failDonationRecord(pending.donationId);
-            const failUrl = getRedirectUrl("/payment/fail", { message: "Payment verification failed" });
+            const failUrl = getRedirectUrl("/payment/fail", { message: "Payment verification failed" }, frontendUrl);
             return res.redirect(failUrl);
         }
 
@@ -345,7 +355,7 @@ const cardSuccess = async (req, res) => {
         if (parseFloat(valData.amount) !== parseFloat(pending.amount)) {
             console.error(`SSLCommerz amount mismatch: expected ${pending.amount}, got ${valData.amount}`);
             await failDonationRecord(pending.donationId);
-            const failUrl = getRedirectUrl("/payment/fail", { message: "Payment verification failed: amount mismatch" });
+            const failUrl = getRedirectUrl("/payment/fail", { message: "Payment verification failed: amount mismatch" }, frontendUrl);
             return res.redirect(failUrl);
         }
 
@@ -355,11 +365,12 @@ const cardSuccess = async (req, res) => {
         const successUrl = getRedirectUrl("/payment/success", { 
             donationId: donation.id, 
             amount: pending.amount 
-        });
+        }, frontendUrl);
         return res.redirect(successUrl);
     } catch (error) {
         console.error("SSLCommerz success callback exception:", error);
-        const failUrl = getRedirectUrl("/payment/fail", { message: "System error handling card callback" });
+        const frontendUrl = pending?.frontendUrl || process.env.FRONTEND_URL;
+        const failUrl = getRedirectUrl("/payment/fail", { message: "System error handling card callback" }, frontendUrl);
         return res.redirect(failUrl);
     }
 };
@@ -370,11 +381,12 @@ const cardSuccess = async (req, res) => {
 const cardFail = async (req, res) => {
     const { tran_id } = req.body;
     const pending = await getPendingPayment(tran_id);
+    const frontendUrl = pending?.frontendUrl || process.env.FRONTEND_URL;
     if (pending) {
         await failDonationRecord(pending.donationId);
         await deletePendingPayment(tran_id);
     }
-    const failUrl = getRedirectUrl("/payment/fail", { message: "Card payment failed" });
+    const failUrl = getRedirectUrl("/payment/fail", { message: "Card payment failed" }, frontendUrl);
     return res.redirect(failUrl);
 };
 
@@ -384,11 +396,12 @@ const cardFail = async (req, res) => {
 const cardCancel = async (req, res) => {
     const { tran_id } = req.body;
     const pending = await getPendingPayment(tran_id);
+    const frontendUrl = pending?.frontendUrl || process.env.FRONTEND_URL;
     if (pending) {
         await cancelDonationRecord(pending.donationId);
         await deletePendingPayment(tran_id);
     }
-    const cancelUrl = getRedirectUrl("/payment/cancel");
+    const cancelUrl = getRedirectUrl("/payment/cancel", {}, frontendUrl);
     return res.redirect(cancelUrl);
 };
 
@@ -424,11 +437,12 @@ const initiateNagad = async (req, res) => {
         // B. Cache transaction metadata in Redis/Memory
         await setPendingPayment(sessionId, {
             donationId: pendingDonation.id,
-            amount: parseFloat(amount)
+            amount: parseFloat(amount),
+            frontendUrl: req.headers.origin || process.env.FRONTEND_URL
         });
 
         // Return URL to frontend simulated Nagad checkout page
-        const redirectUrl = getRedirectUrl("/donate/nagad-sandbox", { sessionId });
+        const redirectUrl = getRedirectUrl("/donate/nagad-sandbox", { sessionId }, req.headers.origin || process.env.FRONTEND_URL);
         return res.status(200).json({
             success: true,
             redirectUrl
