@@ -509,13 +509,13 @@ Orpon is deployed on **Microsoft Azure** using GitHub Actions CI/CD.
 
 ## Contributors
 
-| Contributor | Commits |
-|---|---|
-| shezanyo | 76 |
-| mibon201101 | 24 |
-| ssunjana | 6 |
-| Shahrier Azad Shezan | 3 |
-| rrumi25800 | 3 |
+| Contributor |
+|---|
+| shezanyo |
+| mibon201101 | 
+| ssunjana |
+| aanik |
+| rrumi25800 | 
 
 > Want to contribute? Open a pull request against the `development` branch.
 
