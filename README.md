@@ -160,24 +160,22 @@ Trust is the biggest barrier to online giving in Bangladesh. Donors often have n
 
 ## Screenshots
 
-> 📸 **Add screenshots here.** Recommended sections to capture:
->
-> | Page | Description |
-> |---|---|
-> | `Home` | Hero section, featured campaigns, trust highlights |
-> | `Explore` | Campaign listing with category filters |
-> | `Campaign Detail` | Image carousel, donation progress bar, comment section |
-> | `Create Campaign` | Multi-image upload form |
-> | `Donate` | Payment gateway selection screen |
-> | `Payment Success/Fail` | Redirect pages |
-> | `Admin Dashboard` | Stats, tables, integrity check |
-> | `Leaderboard` | Ranked donors |
-> | `Forgot/Reset Password` | Email-based flow |
->
-> Place images in a `docs/screenshots/` folder and embed with:
-> ```markdown
-> ![Home Page](docs/screenshots/home.png)
-> ```
+Here are some screenshots showcasing the Orpon platform's UI/UX, transparent donation flows, and administrative integrity verifiers.
+
+### 🏠 Home Page
+*Features a high-impact hero banner, verified urgent campaigns grid, live platform statistics count-up, and trust highlight explainers.*
+
+![Home Page](docs/screenshots/home.png)
+
+### 🔍 Explore Campaigns
+*Grid layout of active campaigns with search and responsive category-based filters (All, Medical, Education, Disaster Relief, Community).*
+
+![Explore Page](docs/screenshots/explore.png)
+
+### 🛡️ Administrative Control Panel & Integrity Verification
+*Allows platform admins to review statistics, inspect system activity logs, manage users, and run real-time audits on the local SHA-256 hash chain ledger compared with Polygon blockchain anchors.*
+
+![Admin Dashboard](docs/screenshots/admin.png)
 
 ---
 
